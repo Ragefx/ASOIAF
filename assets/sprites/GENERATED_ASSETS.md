@@ -1,31 +1,61 @@
 # Generated Assets — SpriteCook
 
-Assets generated into the project's SpriteCook account. **The bytes are not in this repo yet**:
-this session's egress policy denies `api.spritecook.ai`, so the files must be downloaded from the
-SpriteCook web app and dropped into the paths below.
+Assets generated into the project's SpriteCook account. **The bytes are not in this repo yet.**
+This session's egress policy denies `api.spritecook.ai`, so generation works but downloading does
+not — every result comes back as a signed URL on that blocked host.
 
-Record every generation here at the time it is made, so an asset id is never lost to a scrollback.
+**The loop that does work:** Claude generates → you download from the SpriteCook web app in your
+own browser → you drag the file into the chat → Claude prepares, commits and wires it.
 
-## Base characters
+Record every generation here at the time it is made, so an asset id is never lost to scrollback.
 
-| Asset ID | Character | Size | Colours | Goes to |
-|---|---|---|---|---|
-| `ee4b3f23-1d49-45a5-89c3-679e20b44548` | Ser Torren Slate — base idle, top-down | 166×166 | 3029 | `assets/sprites/torren/torren_base.png` |
-| `062acbc2-bd27-47d1-8276-772083b5c432` | Nyra — base idle, top-down | 84×84 | — | `assets/sprites/nyra/nyra_base.png` |
+---
 
-Both were generated with `gemini-3.1-flash-image`, `perspective: topdown`, 12 credits each.
-The exact prompts are stored on the assets and are reproduced in `docs/ASSET_SOURCING.md`.
+## Current — style-matched to `docs/STYLE_GUIDE.md`
 
-## Before these are usable
+| Asset ID | What | Size | Goes to |
+|---|---|---|---|
+| `fd7937d5-e43e-4e48-b64e-0e3e939d7ba7` | **Ser Torren Slate** — base idle, top-down | 80×80 | `assets/sprites/torren/torren_base.png` |
+| `e7cb78f6-617f-44d0-852e-b1f46c093d5d` | **Nyra** — base idle, top-down | 170×170 | `assets/sprites/nyra/nyra_base.png` |
+| `84003171-f998-46cf-bbd1-21a317d6254c` | **Grass + dirt path** — 15-piece autotile, 16px, two-surface | 64×64 (4×4) | `assets/tilesets/grass_dirt.png` |
 
-Neither base is shippable as-is. 166×166 at 3,029 colours is an illustration, not a sprite — the
-project's spec is **16×24 frames on a tight palette** (`docs/TECHNICAL_DESIGN.md` §1). Run
-`tools/prepare_sprite.py` on each downloaded file before importing.
+The tileset is already the right shape for Godot: a 16px 15-piece atlas at 64×64, 4 columns by
+4 rows, generated with the §4 palette locked via `force_colors`. It should need no preparation.
 
-## Animation sets — not yet generated
+The two characters will need `tools/prepare_sprite.py` before import — see below.
 
-Deferred deliberately: a full top-down set is ~250 credits per character and is derived from the
-base above, so the base has to be looked at and approved first. Generating animations from a bad
-base wastes the lot.
+## Superseded — do not use
 
-When approved, the set the engine needs is in `docs/ASSET_SOURCING.md` under "Animation contract".
+Generated before the style reference arrived, with prompts that asked for a muted, grim, cold
+palette. They are competent and they are the wrong game. Kept only so the ids are not reused.
+
+| Asset ID | What | Why dropped |
+|---|---|---|
+| `ee4b3f23-1d49-45a5-89c3-679e20b44548` | Torren, first attempt | 166×166, 3029 colours, muted palette |
+| `062acbc2-bd27-47d1-8276-772083b5c432` | Nyra, first attempt | Muted palette |
+
+---
+
+## Before the characters are usable
+
+Neither base is a sprite yet — they are illustrations at illustration scale. The spec is 16×24
+frames on the §4 palette. After downloading:
+
+```bash
+python3 tools/prepare_sprite.py assets/sprites/torren/torren_base.png --height 24 --colors 24
+python3 tools/prepare_sprite.py assets/sprites/nyra/nyra_base.png   --height 24 --colors 24
+```
+
+Check the first output by eye. `prepare_sprite.py` has never been run against a real SpriteCook
+file, because no asset could be downloaded in the session that wrote it.
+
+## Animation sets — deliberately not generated
+
+A full top-down set is ~550 credits per character and every frame is derived from the base sprite
+above. The base has to be **seen and approved** first; generating animations from a base that is
+off-style wastes the entire spend.
+
+Tier 1 is 8 animations plus 7 preps, ~244 credits per character, and is the whole of what Nyra
+ever needs. The tier table is in `docs/ASSET_SOURCING.md` under "Animation contract".
+
+**Credits:** 2,886 remaining of 2,946 at the start. 60 spent (5 generations, 2 superseded).

@@ -2,6 +2,10 @@
 
 Covers the two protagonists: naming, voice, mechanical identity, and the romance arc's rules.
 
+**Art direction for both protagonists is in [`STYLE_GUIDE.md`](STYLE_GUIDE.md).** The game is
+drawn bright — saturated greens, thick outlines, cartoon proportions — and the story is not. That
+contrast is deliberate; see §1 there before writing anything that assumes a grim palette.
+
 **On the names.** The brief left the Knight's name, his house, the Girl's name, and her specific
 backstory undecided. Leaving them undecided blocks every scene file, so this document **commits to
 a recommended default** and shows its work. Alternates are listed. Both names live in exactly one

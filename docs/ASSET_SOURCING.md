@@ -139,13 +139,11 @@ the quieter reasons the design gives her stealth instead of a sword.
 **Prompt anchors** (keep these identical across every generation for one character, or the identity
 drifts):
 
-- **Torren** — 16×24, 4-directional top-down RPG sprite, dark hair, grey-green wool and dull mail,
-  no heraldry (House Slate is too minor to have a device anyone would paint), muddy boots. Should
-  look *cheaply equipped* next to any southron knight in frame.
-- **Nyra** — 16×24, plain grey servant's dress, **grey coif that does not quite cover the hair**.
-  Silver-blonde hair, violet eyes. At 16px the eye colour will not read — that is fine and
-  intentional; it reads in the **portrait**, which is where the three "your hair / your eyes"
-  scenes land.
+Character direction lives in [`STYLE_GUIDE.md`](STYLE_GUIDE.md) §5. The short version: lead every
+prompt with the style block, not the character — prompts that led with the character produced
+166×166 illustrations at 3,000 colours, prompts that led with the style produced 80×80. Torren is
+cheaply equipped but *bright* steel, not rust; Nyra's hair carries her silhouette and her eye
+colour is not meant to read at 16px.
 
 **Portraits** are the higher-value generation: 32×32 or 48×48, one neutral plus 3–5 moods per
 character, matching the `portrait_set` keys in `data/npcs/npcs.json` (e.g. `nyra_blank`,
@@ -186,10 +184,15 @@ Non-negotiable, because getting it wrong costs a full re-import pass later:
 - `assets/ATTRIBUTION.md` gets a row **at import time**: pack name, author, URL, licence, and which
   directory it landed in.
 
-## Palette
+## Palette and style
 
-The brief asks for a vibrant palette (greens, browns, stone greys) and a spring→autumn arc across
-the chapter. Mixing four free packs will otherwise look like mixing four free packs, so run every
-imported tileset through a single shared palette before it goes in — an existing curated ramp such
-as **AAP-64** or **Endesga-32** works, or extract one from whichever pack does most of the heavy
-lifting. This one step does more for visual coherence than any amount of commissioned art.
+**See [`STYLE_GUIDE.md`](STYLE_GUIDE.md).** It carries the hard rules, the scale, and the exact
+hex palette read off the project's reference image, and it overrides anything in this document.
+
+Mixing four free packs looks like mixing four free packs, so every imported tileset gets run
+through that one palette before it goes in. That single step does more for visual coherence than
+any amount of commissioned art.
+
+Note that the style is **bright** — vivid saturated greens, thick dark outlines, flat fills. An
+earlier draft of this document described the target as muted and cold. That was wrong; the words
+*muted* and *grim* should not appear in a generation prompt for this project.
