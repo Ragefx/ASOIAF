@@ -70,7 +70,30 @@ For characters the free packs cannot give you: the two protagonists, and the nam
 faces the story depends on (Ned, Robb, Cersei, Littlefinger, the Greatjon, Jory, Mabb, Hune).
 
 **This session has the `spritecook` MCP server attached**, which is a game-asset generation service
-with a Godot-shaped pipeline:
+with a Godot-shaped pipeline. Measured costs and behaviour, from an actual run:
+
+| | |
+|---|---|
+| Tier / balance | `adventurer`, 2,946 credits at the start of the first run, 5 concurrent jobs |
+| Base character | **12 credits** (`generate_character`, `perspective: topdown`) |
+| One animation | **20 credits** basic background removal, 36-44 with photoroom |
+| Pose prep | **12 credits** each, shared by every animation using that source view |
+| Default model | `gemini-3.1-flash-image` (12 cr/image at 1K); `gpt-image-2` at `low` is 2 cr/image |
+| Full top-down set | 24 animations + 6 preps ≈ **550 credits per character** |
+
+**The output is not pixel art in this project's sense.** The Torren base came back **166×166 with
+3,029 colours** — an illustration with a pixel filter, against a spec of 16×24 on a tight palette.
+Every asset must go through `tools/prepare_sprite.py` (trim → nearest-neighbour downscale →
+quantise → hard alpha threshold) before it is imported. Budget for that step; it is not optional
+and it changes how the art reads.
+
+**Network caveat.** In a Claude Code web session, `api.spritecook.ai` may be denied by the
+environment's egress policy, in which case assets can be *generated* but not *downloaded* — every
+result is a signed URL on that host. The assets still land in the SpriteCook account and can be
+fetched from the web app. To download them from inside a session, the environment's network policy
+has to allow that host; see https://code.claude.com/docs/en/claude-code-on-the-web.
+
+The tools:
 
 | Tool | What it does |
 |---|---|
@@ -84,13 +107,31 @@ That last pair matters more than it sounds: consistency across the 4 directions 
 `scripts/actors/player.gd` expects is the hard part of AI sprite work, and a per-character workflow
 handles it far better than generating frames one at a time.
 
-**Animation set each protagonist needs**, matching `_update_animation()`:
+### Animation contract
 
-```
-idle_{down,up,left,right}      walk_{down,up,left,right}
-attack1/2/3_{down,up,left,right}   (Torren only)
-dodge_{...}   hurt_{...}   dead_{...}   (Torren only)
-```
+`player.gd` asks for `<action>_<direction>` and resolves misses through a fallback chain
+(`_resolve_animation`), so **a partial art set runs correctly** — a missing `attack2` uses
+`attack1`, a missing `dodge` uses `walk`, a missing direction falls back to the undirected
+animation. Build the set in priority order and the game is playable from the first tier.
+
+SpriteCook's `topdown` preset ids do not match the engine's names. Rename on import:
+
+| SpriteCook preset | Engine animation | Tier |
+|---|---|---|
+| `idle` | `idle_down` | 1 — minimum playable |
+| `idle_back` | `idle_up` | 1 |
+| `idle_right` / `idle_left` | `idle_right` / `idle_left` | 1 |
+| `walk_down` / `walk_up` | `walk_down` / `walk_up` | 1 |
+| `walk_right` / `walk_left` | `walk_right` / `walk_left` | 1 |
+| `attack` | `attack1_down` | 2 — Torren only |
+| `attack_back` / `attack_right` / `attack_left` | `attack1_up` / `attack1_right` / `attack1_left` | 2 |
+| `hurt` (+ `_back`/`_right`/`_left`) | `hurt_down` / `hurt_up` / … | 3 — Torren only |
+| `death` (+ directions) | `dead_down` / … | 3 — Torren only |
+| *(no preset)* | `attack2_*`, `attack3_*`, `dodge_*` | 4 — custom animations, or leave to fallback |
+
+**Tier 1 is 8 animations and 7 preps: ~244 credits per character, and it is the whole of what Nyra
+ever needs** — she has no combat kit in Chapter 1, which halves her art budget and is one of the
+quieter reasons the design gave her stealth instead of a sword.
 
 Nyra needs `idle` and `walk` only — she has no combat kit, which halves her art budget and is one of
 the quieter reasons the design gives her stealth instead of a sword.

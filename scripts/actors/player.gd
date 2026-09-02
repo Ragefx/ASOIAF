@@ -138,10 +138,24 @@ func _try_interact() -> void:
 			return
 
 
+## Fallback chains, most specific first. A character who has no dodge animation
+## uses their walk; a one-swing attack covers all three chain steps. This is what
+## lets the game run on a partial art set instead of silently drawing nothing.
+const ANIM_FALLBACKS := {
+	"attack1": ["attack1", "attack"],
+	"attack2": ["attack2", "attack1", "attack"],
+	"attack3": ["attack3", "attack1", "attack"],
+	"dodge": ["dodge", "walk"],
+	"hurt": ["hurt", "idle"],
+	"dead": ["dead", "death", "hurt", "idle"],
+	"walk": ["walk", "idle"],
+	"idle": ["idle"],
+}
+
+
 func _update_animation() -> void:
-	if sprite == null:
+	if sprite == null or sprite.sprite_frames == null:
 		return
-	var dir := _facing_name()
 	var anim := "idle"
 	match state:
 		State.MOVE:
@@ -154,10 +168,23 @@ func _update_animation() -> void:
 			anim = "hurt"
 		State.DEAD:
 			anim = "dead"
-	var wanted := "%s_%s" % [anim, dir]
-	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(wanted):
-		if sprite.animation != wanted:
-			sprite.play(wanted)
+
+	var wanted := _resolve_animation(anim, _facing_name())
+	if wanted != "" and sprite.animation != wanted:
+		sprite.play(wanted)
+
+
+## Walks the fallback chain for the action, then drops the direction suffix, then
+## gives up. Returns "" rather than playing a missing animation and erroring.
+func _resolve_animation(anim: String, dir: String) -> String:
+	for candidate in ANIM_FALLBACKS.get(anim, [anim]):
+		var directional := "%s_%s" % [candidate, dir]
+		if sprite.sprite_frames.has_animation(directional):
+			return directional
+	for candidate in ANIM_FALLBACKS.get(anim, [anim]):
+		if sprite.sprite_frames.has_animation(candidate):
+			return candidate
+	return ""
 
 
 func _facing_name() -> String:
