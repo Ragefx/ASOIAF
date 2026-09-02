@@ -187,8 +187,26 @@ Canon characters are canon; these are the invented few needed to make the househ
 | **Old Mabb** | Head laundress, Red Keep. Sixty years in the castle. Nyra's only friend and her source of gossip. | Acts 2, 4 |
 | **Pate of the Kitchens** | Kitchen boy, fourteen, talks too much. Nyra's information network and her liability. | Acts 2, 4 |
 | **Ser Emmon Wells** | Southron knight in the royal party. Contemptuous of Northern hedge-knighting. Torren's foil. | Acts 1, 5 |
+| **Ser Cley Stout of Goldgrass** | Torren's own age and rank and unbothered by both. Jokes first, works last, sees more than he lets on. The one person Torren is not performing for. House Stout is canon, exactly like House Slate — two minor Northern houses whose sons ended up in the same yard. Goes south with Bolton's foot at the Twins; after the Green Fork there is **no word of him either way**, and Chapter 1 never resolves it. | Acts 1, 3, 5 |
 
 ---
+
+## 4a. Two Settled Decisions
+
+Both came up when the original Act 1 draft was merged in, and both are now binding on every
+future scene file.
+
+**The word is never spoken.** Neither *Targaryen* nor *Valyrian* is said about Nyra by anybody, in
+any act of Chapter 1. The single appearance of "Targaryen" in the chapter is a stable boy in Act 1
+retelling the Trident as a war story about a dead man, with no connection to her. Torren gets two
+words out at the feast — "Her eyes." — and Cley steps on the third. What the player supplies in that
+gap is the whole effect, and it costs nothing to withhold and a great deal to spend.
+
+**Torren never sees who was in the tower.** After Bran's fall he sees a *shuttered window in a
+tower nobody enters* and nothing else. He never connects it, never suspects the Lannisters, and no
+character in the North learns Bran was pushed. The player watched it happen from the yard and
+carries it alone through Acts 3 and 5, which is the chapter's oldest and best piece of dramatic
+irony. Do not write a scene that gives it away.
 
 ## 5. Canonical Characters — Voice Guardrails
 
@@ -200,4 +218,5 @@ weight. If a line could be a t-shirt, cut it.
 Named canon speakers used in Chapter 1: Eddard, Catelyn, Robb, Bran, Theon, Jory Cassel, Robert,
 Cersei, Joffrey, Sandor Clegane, Petyr Baelish, Varys, Pycelle, Sansa, Arya, Septa Mordane,
 Greatjon Umber, Rickard Karstark, Galbart Glover, Wyman Manderly, Maege Mormont, Walder Frey,
-Ilyn Payne, Meryn Trant, Tobho Mott, Gendry.
+Ilyn Payne, Meryn Trant, Tobho Mott, Gendry, Ser Rodrik Cassel, Maester Luwin, Benjen Stark,
+Tyrion Lannister, Hodor.

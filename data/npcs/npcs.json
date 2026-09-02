@@ -1,37 +1,285 @@
 {
   "_comment": "NPC definitions. 'origin' is canon | invented. 'voice' is a one-line guardrail for writers. Portrait keys used in scene files are '<portrait_set>_<mood>'.",
   "npcs": {
-    "eddard_stark":      { "name": "Eddard Stark",        "origin": "canon",    "house": "Stark",       "portrait_set": "ned",       "voice": "Says the fewest words that will do. Never explains himself twice. Never says 'winter is coming'." },
-    "catelyn_stark":     { "name": "Catelyn Stark",       "origin": "canon",    "house": "Tully",       "portrait_set": "catelyn",   "voice": "Southern manners over northern iron. Politest when most dangerous." },
-    "robb_stark":        { "name": "Robb Stark",          "origin": "canon",    "house": "Stark",       "portrait_set": "robb",      "voice": "Fifteen. Learns to sound certain about three weeks before he is." },
-    "bran_stark":        { "name": "Bran Stark",          "origin": "canon",    "house": "Stark",       "portrait_set": "bran",      "voice": "Repeats things when frightened. 'I don't fall.'" },
-    "arya_stark":        { "name": "Arya Stark",          "origin": "canon",    "house": "Stark",       "portrait_set": "arya",      "voice": "Never speaks on screen in Chapter 1. Seen twice, at a run." },
-    "sansa_stark":       { "name": "Sansa Stark",         "origin": "canon",    "house": "Stark",       "portrait_set": "sansa",     "voice": "Everything she says has been taught to her. That is the tragedy, not a flaw." },
-    "jon_snow":          { "name": "Jon Snow",            "origin": "canon",    "house": "Stark",       "portrait_set": "jon",       "voice": "Act 1 only. Two lines. Leaves the frame." },
-    "theon_greyjoy":     { "name": "Theon Greyjoy",       "origin": "canon",    "house": "Greyjoy",     "portrait_set": "theon",     "voice": "Jokes first, and one beat too early, every time." },
-    "jory_cassel":       { "name": "Jory Cassel",         "origin": "canon",    "house": "Cassel",      "portrait_set": "jory",      "voice": "Practical kindness with no sentiment on it. The player must like him; Act 2 depends on it." },
-    "robert_baratheon":  { "name": "Robert Baratheon",    "origin": "canon",    "house": "Baratheon",  "portrait_set": "robert",    "voice": "Enormous and grieving and never introduced with a fat joke." },
-    "cersei_lannister":  { "name": "Cersei Lannister",    "origin": "canon",    "house": "Lannister",  "portrait_set": "cersei",    "voice": "Bored. Boredom is the threat. She is never shrill." },
-    "joffrey_baratheon": { "name": "Joffrey Baratheon",   "origin": "canon",    "house": "Baratheon",  "portrait_set": "joffrey",   "voice": "Delighted. Twelve. Not evil so much as unsupervised." },
-    "petyr_baelish":     { "name": "Petyr Baelish",       "origin": "canon",    "house": "Baelish",    "portrait_set": "baelish",   "voice": "Tells the truth in a tone that makes it sound like a joke." },
-    "varys":             { "name": "Varys",              "origin": "canon",    "house": null,          "portrait_set": "varys",     "voice": "Speaks to the room while addressing one person in it." },
-    "grand_maester_pycelle": { "name": "Grand Maester Pycelle", "origin": "canon", "house": null,      "portrait_set": "pycelle",   "voice": "Doddering on purpose. His hands give him away, not his voice." },
-    "sandor_clegane":    { "name": "Sandor Clegane",      "origin": "canon",    "house": "Clegane",    "portrait_set": "hound",     "voice": "Silent in Chapter 1. Acts instead." },
-    "meryn_trant":       { "name": "Ser Meryn Trant",     "origin": "canon",    "house": "Trant",      "portrait_set": "trant",     "voice": "Flat, incurious, unhurried. Frightening because he is not interested." },
-    "ilyn_payne":        { "name": "Ser Ilyn Payne",      "origin": "canon",    "house": "Payne",      "portrait_set": "payne",     "voice": "Mute. Never given a line." },
-    "greatjon_umber":    { "name": "Greatjon Umber",      "origin": "canon",    "house": "Umber",      "portrait_set": "greatjon",  "voice": "Volume as a personality. Quiet exactly once, in the wood." },
-    "rickard_karstark":  { "name": "Rickard Karstark",    "origin": "canon",    "house": "Karstark",   "portrait_set": "karstark",  "voice": "Counts his sons. Do not write him as a villain; he has not become one yet." },
-    "galbart_glover":    { "name": "Galbart Glover",      "origin": "canon",    "house": "Glover",     "portrait_set": "glover",    "voice": "Dry. Deals in numbers. The chapter's realist." },
-    "wyman_manderly":    { "name": "Wyman Manderly",      "origin": "canon",    "house": "Manderly",   "portrait_set": "manderly",  "voice": "Jovial and shrewd, in that order, and never only the first." },
-    "maege_mormont":     { "name": "Maege Mormont",       "origin": "canon",    "house": "Mormont",    "portrait_set": "maege",     "voice": "Corrects your grip mid-sentence." },
-    "walder_frey":       { "name": "Walder Frey",         "origin": "canon",    "house": "Frey",       "portrait_set": "frey",      "voice": "Enjoying himself. Ninety and finally necessary." },
-    "tobho_mott":        { "name": "Tobho Mott",          "origin": "canon",    "house": null,          "portrait_set": "mott",      "voice": "Busy. Everyone is in his light." },
-    "gendry":            { "name": "Gendry",             "origin": "canon",    "house": null,          "portrait_set": "gendry",    "voice": "Sixteen, blunt, apologetic about his own work. Do not hint. Just show his face." },
-    "ondrew_slate":      { "name": "Lord Ondrew Slate",   "origin": "canon-name, invented character", "house": "Slate", "portrait_set": "ondrew", "voice": "Tired and practical. Unimpressed by his fourth son and not unkind about it." },
-    "hune":              { "name": "Serjeant Hune",       "origin": "invented", "house": null,          "portrait_set": "hune",      "voice": "Blunt, fair, never sentimental. Dies in the Whispering Wood with no cutscene." },
-    "mabb":              { "name": "Old Mabb",            "origin": "invented", "house": null,          "portrait_set": "mabb",      "voice": "Seventy-one. Fourth king. Talks about flour at the worst moment and means it." },
-    "pate":              { "name": "Pate of the Kitchens", "origin": "invented", "house": null,         "portrait_set": "pate",      "voice": "Fourteen and cannot hold a secret for one afternoon." },
-    "wells":             { "name": "Ser Emmon Wells",     "origin": "invented", "house": "Wells",      "portrait_set": "wells",     "voice": "Southron contempt that slowly turns into respect he is embarrassed about." },
-    "stranger":          { "name": "An old man",          "origin": "invented", "house": null,          "portrait_set": "stranger",  "voice": "One scene, three lines, never explained. Chapter 2 hook." }
+    "eddard_stark": {
+      "name": "Eddard Stark",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "ned",
+      "voice": "Says the fewest words that will do. Never explains himself twice. Never says 'winter is coming'."
+    },
+    "catelyn_stark": {
+      "name": "Catelyn Stark",
+      "origin": "canon",
+      "house": "Tully",
+      "portrait_set": "catelyn",
+      "voice": "Southern manners over northern iron. Politest when most dangerous."
+    },
+    "robb_stark": {
+      "name": "Robb Stark",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "robb",
+      "voice": "Fifteen. Learns to sound certain about three weeks before he is."
+    },
+    "bran_stark": {
+      "name": "Bran Stark",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "bran",
+      "voice": "Repeats things when frightened. 'I don't fall.'"
+    },
+    "arya_stark": {
+      "name": "Arya Stark",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "arya",
+      "voice": "Never speaks on screen in Chapter 1. Seen twice, at a run."
+    },
+    "sansa_stark": {
+      "name": "Sansa Stark",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "sansa",
+      "voice": "Everything she says has been taught to her. That is the tragedy, not a flaw."
+    },
+    "jon_snow": {
+      "name": "Jon Snow",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "jon",
+      "voice": "Act 1 only. Two lines. Leaves the frame."
+    },
+    "theon_greyjoy": {
+      "name": "Theon Greyjoy",
+      "origin": "canon",
+      "house": "Greyjoy",
+      "portrait_set": "theon",
+      "voice": "Jokes first, and one beat too early, every time."
+    },
+    "jory_cassel": {
+      "name": "Jory Cassel",
+      "origin": "canon",
+      "house": "Cassel",
+      "portrait_set": "jory",
+      "voice": "Practical kindness with no sentiment on it. The player must like him; Act 2 depends on it."
+    },
+    "robert_baratheon": {
+      "name": "Robert Baratheon",
+      "origin": "canon",
+      "house": "Baratheon",
+      "portrait_set": "robert",
+      "voice": "Enormous and grieving and never introduced with a fat joke."
+    },
+    "cersei_lannister": {
+      "name": "Cersei Lannister",
+      "origin": "canon",
+      "house": "Lannister",
+      "portrait_set": "cersei",
+      "voice": "Bored. Boredom is the threat. She is never shrill."
+    },
+    "joffrey_baratheon": {
+      "name": "Joffrey Baratheon",
+      "origin": "canon",
+      "house": "Baratheon",
+      "portrait_set": "joffrey",
+      "voice": "Delighted. Twelve. Not evil so much as unsupervised."
+    },
+    "petyr_baelish": {
+      "name": "Petyr Baelish",
+      "origin": "canon",
+      "house": "Baelish",
+      "portrait_set": "baelish",
+      "voice": "Tells the truth in a tone that makes it sound like a joke."
+    },
+    "varys": {
+      "name": "Varys",
+      "origin": "canon",
+      "house": null,
+      "portrait_set": "varys",
+      "voice": "Speaks to the room while addressing one person in it."
+    },
+    "grand_maester_pycelle": {
+      "name": "Grand Maester Pycelle",
+      "origin": "canon",
+      "house": null,
+      "portrait_set": "pycelle",
+      "voice": "Doddering on purpose. His hands give him away, not his voice."
+    },
+    "sandor_clegane": {
+      "name": "Sandor Clegane",
+      "origin": "canon",
+      "house": "Clegane",
+      "portrait_set": "hound",
+      "voice": "Silent in Chapter 1. Acts instead."
+    },
+    "meryn_trant": {
+      "name": "Ser Meryn Trant",
+      "origin": "canon",
+      "house": "Trant",
+      "portrait_set": "trant",
+      "voice": "Flat, incurious, unhurried. Frightening because he is not interested."
+    },
+    "ilyn_payne": {
+      "name": "Ser Ilyn Payne",
+      "origin": "canon",
+      "house": "Payne",
+      "portrait_set": "payne",
+      "voice": "Mute. Never given a line."
+    },
+    "greatjon_umber": {
+      "name": "Greatjon Umber",
+      "origin": "canon",
+      "house": "Umber",
+      "portrait_set": "greatjon",
+      "voice": "Volume as a personality. Quiet exactly once, in the wood."
+    },
+    "rickard_karstark": {
+      "name": "Rickard Karstark",
+      "origin": "canon",
+      "house": "Karstark",
+      "portrait_set": "karstark",
+      "voice": "Counts his sons. Do not write him as a villain; he has not become one yet."
+    },
+    "galbart_glover": {
+      "name": "Galbart Glover",
+      "origin": "canon",
+      "house": "Glover",
+      "portrait_set": "glover",
+      "voice": "Dry. Deals in numbers. The chapter's realist."
+    },
+    "wyman_manderly": {
+      "name": "Wyman Manderly",
+      "origin": "canon",
+      "house": "Manderly",
+      "portrait_set": "manderly",
+      "voice": "Jovial and shrewd, in that order, and never only the first."
+    },
+    "maege_mormont": {
+      "name": "Maege Mormont",
+      "origin": "canon",
+      "house": "Mormont",
+      "portrait_set": "maege",
+      "voice": "Corrects your grip mid-sentence."
+    },
+    "walder_frey": {
+      "name": "Walder Frey",
+      "origin": "canon",
+      "house": "Frey",
+      "portrait_set": "frey",
+      "voice": "Enjoying himself. Ninety and finally necessary."
+    },
+    "tobho_mott": {
+      "name": "Tobho Mott",
+      "origin": "canon",
+      "house": null,
+      "portrait_set": "mott",
+      "voice": "Busy. Everyone is in his light."
+    },
+    "gendry": {
+      "name": "Gendry",
+      "origin": "canon",
+      "house": null,
+      "portrait_set": "gendry",
+      "voice": "Sixteen, blunt, apologetic about his own work. Do not hint. Just show his face."
+    },
+    "ondrew_slate": {
+      "name": "Lord Ondrew Slate",
+      "origin": "canon-name, invented character",
+      "house": "Slate",
+      "portrait_set": "ondrew",
+      "voice": "Tired and practical. Unimpressed by his fourth son and not unkind about it."
+    },
+    "hune": {
+      "name": "Serjeant Hune",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "hune",
+      "voice": "Blunt, fair, never sentimental. Dies in the Whispering Wood with no cutscene."
+    },
+    "mabb": {
+      "name": "Old Mabb",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "mabb",
+      "voice": "Seventy-one. Fourth king. Talks about flour at the worst moment and means it."
+    },
+    "pate": {
+      "name": "Pate of the Kitchens",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "pate",
+      "voice": "Fourteen and cannot hold a secret for one afternoon."
+    },
+    "wells": {
+      "name": "Ser Emmon Wells",
+      "origin": "invented",
+      "house": "Wells",
+      "portrait_set": "wells",
+      "voice": "Southron contempt that slowly turns into respect he is embarrassed about."
+    },
+    "cley": {
+      "name": "Ser Cley Stout",
+      "origin": "canon-house, invented character",
+      "house": "Stout",
+      "portrait_set": "cley",
+      "voice": "Torren's own age and rank, and unbothered by both. Jokes first, works last, sees more than he admits. The only person Torren is not performing for."
+    },
+    "stranger": {
+      "name": "An old man",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "stranger",
+      "voice": "One scene, three lines, never explained. Chapter 2 hook."
+    },
+    "rodrik_cassel": {
+      "name": "Ser Rodrik Cassel",
+      "origin": "canon",
+      "house": "Cassel",
+      "portrait_set": "rodrik",
+      "voice": "Master-at-arms. Bellows. Whiskers. Fair, and entirely out of patience."
+    },
+    "maester_luwin": {
+      "name": "Maester Luwin",
+      "origin": "canon",
+      "house": null,
+      "portrait_set": "luwin",
+      "voice": "Precise under pressure. Goes quiet exactly when it is worst."
+    },
+    "benjen_stark": {
+      "name": "Benjen Stark",
+      "origin": "canon",
+      "house": "Stark",
+      "portrait_set": "benjen",
+      "voice": "Talks about the Wall the way a man talks about a debt nobody else believes in."
+    },
+    "tyrion_lannister": {
+      "name": "Tyrion Lannister",
+      "origin": "canon",
+      "house": "Lannister",
+      "portrait_set": "tyrion",
+      "voice": "Tests everyone with a joke and reads the answer. Never self-pitying on screen."
+    },
+    "hodor": {
+      "name": "Hodor",
+      "origin": "canon",
+      "house": null,
+      "portrait_set": "hodor",
+      "voice": "Hodor."
+    },
+    "stable_hand": {
+      "name": "Stable Hand",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "stablehand",
+      "voice": "Has never been past the winter town and says so."
+    },
+    "winterfell_guard": {
+      "name": "Winterfell Guard",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "guard",
+      "voice": "Generic household guard. Panics usefully."
+    }
   }
 }

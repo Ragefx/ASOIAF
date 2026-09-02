@@ -3,10 +3,23 @@
   "title": "The Young Wolf",
   "pov": "torren",
   "timeline": "Month 6, 298 AC. Winterfell to the Twins.",
-  "locations": ["winterfell_maester_turret", "winterfell_yard", "winterfell_great_hall", "kingsroad_march", "moat_cailin", "the_twins"],
+  "locations": [
+    "winterfell_maester_turret",
+    "winterfell_yard",
+    "winterfell_great_hall",
+    "kingsroad_march",
+    "moat_cailin",
+    "the_twins"
+  ],
   "summary": "Bran wakes with no legs and no memory. A raven comes from the south saying the Hand of the King is a traitor, and the boy who is now Lord of Winterfell calls his father's banners. Winterfell fills with two thousand men in three days. Torren rides south in the middle of the largest thing that has ever happened to him, learns what it costs to cross a river, and is standing in the yard at the Twins when the army is cut in half on purpose.",
-  "entry_flags": ["act2_complete"],
-  "exit_flags": ["act3_complete", "act3_frey_bargain", "act3_with_robbs_horse"],
+  "entry_flags": [
+    "act2_complete"
+  ],
+  "exit_flags": [
+    "act3_complete",
+    "act3_frey_bargain",
+    "act3_with_robbs_horse"
+  ],
   "scenes": [
     {
       "scene_id": "s3_01_the_waking",
@@ -17,16 +30,25 @@
       "mode": "explore",
       "music": "winterfell_thin",
       "stage_directions": "CANON: Bran wakes after weeks, crippled, with no memory of the fall; the catspaw assassin's attempt has already happened and Summer has already killed him. Torren has been on the door since the catspaw got past the guard, which is his failure and is treated as one. Small, quiet, three-room scene. Winterfell is half empty and cold and Act 1's crowd is conspicuously gone. Composer: the Act 1 Winterfell theme, same melody, one instrument, minor.",
-      "objectives": ["Stand your watch"],
-      "requires_flags": ["act2_complete"],
-      "sets_flags": ["act3_started", "act3_bran_woke"],
+      "objectives": [
+        "Stand your watch"
+      ],
+      "requires_flags": [
+        "act2_complete"
+      ],
+      "sets_flags": [
+        "act3_started",
+        "act3_bran_woke"
+      ],
       "dialogue": {
         "start": "n1",
         "nodes": {
           "n1": {
             "speaker": "narrator",
             "text": "A man came up this stair with a knife while you were on the door, and got past you, and it was a wolf that stopped him and not you. Nobody has said a word about it. You have been on this door for nineteen days.",
-            "sets_flags": ["act3_catspaw_guilt"],
+            "sets_flags": [
+              "act3_catspaw_guilt"
+            ],
             "next": "n2"
           },
           "n2": {
@@ -37,13 +59,17 @@
               {
                 "text": "\"I want the door.\"",
                 "next": "n3",
-                "traits": { "loyal": 2 },
+                "traits": {
+                  "loyal": 2
+                },
                 "tag": "stay"
               },
               {
                 "text": "\"I should have stopped him.\"",
                 "next": "n4",
-                "traits": { "honest": 2 },
+                "traits": {
+                  "honest": 2
+                },
                 "tag": "confess"
               },
               {
@@ -57,14 +83,18 @@
             "speaker": "hune",
             "portrait": "hune_kind",
             "text": "I know you do. That's not a reason, that's a penance, and penance is no good to a lad on a door. Four hours. Then come back.",
-            "relationship": { "hune": 1 },
+            "relationship": {
+              "hune": 1
+            },
             "next": "n5"
           },
           "n4": {
             "speaker": "hune",
             "portrait": "hune_flat",
             "text": "You should. So should I, and so should the four men on the outer stair, and so should whoever left a window open in a castle full of strangers. That's six of us and one boy. Divide it up however you like, it doesn't come off him.",
-            "relationship": { "hune": 2 },
+            "relationship": {
+              "hune": 2
+            },
             "next": "n5"
           },
           "n5": {
@@ -76,7 +106,9 @@
             "speaker": "bran_stark",
             "portrait": "bran_waking",
             "text": "...I can't feel my legs.",
-            "sets_flags": ["act3_bran_woke"],
+            "sets_flags": [
+              "act3_bran_woke"
+            ],
             "next": "n7"
           },
           "n7": {
@@ -92,19 +124,26 @@
               {
                 "text": "\"You fell, my lord. From the tower.\"",
                 "next": "n9",
-                "traits": { "honest": 2 },
+                "traits": {
+                  "honest": 2
+                },
                 "tag": "truth"
               },
               {
                 "text": "\"Your lady mother's coming. She'll tell you.\"",
                 "next": "n10",
-                "traits": { "merciful": 1, "honest": -1 },
+                "traits": {
+                  "merciful": 1,
+                  "honest": -1
+                },
                 "tag": "defer"
               },
               {
                 "text": "\"You're awake. That's the whole of what matters this morning.\"",
                 "next": "n11",
-                "traits": { "merciful": 2 },
+                "traits": {
+                  "merciful": 2
+                },
                 "tag": "kind"
               }
             ]
@@ -114,7 +153,9 @@
             "portrait": "bran_flat",
             "text": "I don't fall.",
             "direction": "He says it three times over the following weeks. He is right.",
-            "relationship": { "bran_stark": 1 },
+            "relationship": {
+              "bran_stark": 1
+            },
             "next": "n12"
           },
           "n10": {
@@ -126,7 +167,9 @@
             "speaker": "bran_stark",
             "portrait": "bran_small",
             "text": "That isn't an answer.",
-            "relationship": { "bran_stark": 2 },
+            "relationship": {
+              "bran_stark": 2
+            },
             "next": "n12"
           },
           "n12": {
@@ -152,9 +195,16 @@
       "mode": "explore",
       "music": "the_muster",
       "stage_directions": "CANON: word of Ned's arrest reaches Winterfell; Robb calls his father's banners; the Northern lords come in. The yard's population visibly triples across three in-game days - the same level as Act 1, re-dressed with tents, forges, horse lines, mud. Six optional lord conversations, each worth a relationship that pays off in Act 5 battle dialogue. DRAMATIC IRONY: everyone here is desperate for news of Lord Stark. The player watched him be arrested one act ago and knows exactly how bad it is.",
-      "objectives": ["Attend the muster", "Meet the lords of the North"],
-      "requires_flags": ["act3_bran_woke"],
-      "sets_flags": ["act3_banners_called"],
+      "objectives": [
+        "Attend the muster",
+        "Meet the lords of the North"
+      ],
+      "requires_flags": [
+        "act3_bran_woke"
+      ],
+      "sets_flags": [
+        "act3_banners_called"
+      ],
       "dialogue": {
         "start": "n1",
         "nodes": {
@@ -162,14 +212,18 @@
             "speaker": "narrator",
             "text": "A raven from the south. The Hand of the King has confessed to treason. Lord Eddard Stark is in a cell under the Red Keep and his daughters are in the queen's hands.",
             "direction": "The player already knows all of this and knows it is a lie, having been in the throne room for it. Nobody in this scene does.",
-            "sets_flags": ["act3_heard_of_arrest"],
+            "sets_flags": [
+              "act3_heard_of_arrest"
+            ],
             "next": "n2"
           },
           "n2": {
             "speaker": "robb_stark",
             "portrait": "robb_hard",
             "text": "Call the banners. All of them. Every man who owes Winterfell service - and ser, you'll write to Blackpool yourself, since you know the road.",
-            "sets_flags": ["act3_banners_called"],
+            "sets_flags": [
+              "act3_banners_called"
+            ],
             "next": "n3"
           },
           "n3": {
@@ -182,27 +236,39 @@
             "speaker": "robb_stark",
             "portrait": "robb_hard",
             "text": "Then write for eighty. I'll take every one of them and I'll know all their names by the Neck.",
-            "relationship": { "robb_stark": 1 },
+            "relationship": {
+              "robb_stark": 1
+            },
             "end": true
           },
           "n10": {
             "speaker": "greatjon_umber",
             "portrait": "greatjon_loud",
             "text": "BLACKPOOL! Gods, is Ondrew Slate still alive? He owes me a horse from before you were whelped.",
-            "requires_flags": ["!act3_met_greatjon"],
-            "sets_flags": ["act3_met_greatjon"],
+            "requires_flags": [
+              "!act3_met_greatjon"
+            ],
+            "sets_flags": [
+              "act3_met_greatjon"
+            ],
             "choices": [
               {
                 "text": "\"He is, my lord, and he says you lost that horse at dice.\"",
                 "next": "n11",
-                "traits": { "bold": 2 },
-                "relationship": { "greatjon_umber": 3 },
+                "traits": {
+                  "bold": 2
+                },
+                "relationship": {
+                  "greatjon_umber": 3
+                },
                 "tag": "cheek"
               },
               {
                 "text": "\"He is well, my lord.\"",
                 "next": "n12",
-                "relationship": { "greatjon_umber": 1 },
+                "relationship": {
+                  "greatjon_umber": 1
+                },
                 "tag": "polite"
               }
             ]
@@ -223,8 +289,12 @@
             "speaker": "rickard_karstark",
             "portrait": "karstark_grim",
             "text": "Three sons I've brought. Harrion, Eddard, Torrhen. I'd have brought thirty if I had them.",
-            "requires_flags": ["!act3_met_karstark"],
-            "sets_flags": ["act3_met_karstark"],
+            "requires_flags": [
+              "!act3_met_karstark"
+            ],
+            "sets_flags": [
+              "act3_met_karstark"
+            ],
             "next": "n21"
           },
           "n21": {
@@ -238,27 +308,39 @@
             "portrait": "karstark_grim",
             "text": "For the King Who Knelt. There's a deal of Torrhens in the North and every one of them named for a man who gave up. Don't let it stick to you, ser.",
             "direction": "The name joke, said once, plainly, by a man who will be executed for refusing to give anything up. Never referred to again in Chapter 1.",
-            "relationship": { "rickard_karstark": 1 },
+            "relationship": {
+              "rickard_karstark": 1
+            },
             "end": true
           },
           "n30": {
             "speaker": "maege_mormont",
             "portrait": "maege_flat",
             "text": "You've a good hand on that horse and a terrible one on that sword. Where were you knighted?",
-            "requires_flags": ["!act3_met_mormont"],
-            "sets_flags": ["act3_met_mormont"],
+            "requires_flags": [
+              "!act3_met_mormont"
+            ],
+            "sets_flags": [
+              "act3_met_mormont"
+            ],
             "choices": [
               {
                 "text": "\"A field. In the rain, my lady.\"",
                 "next": "n31",
-                "traits": { "honest": 2 },
-                "relationship": { "maege_mormont": 2 },
+                "traits": {
+                  "honest": 2
+                },
+                "relationship": {
+                  "maege_mormont": 2
+                },
                 "tag": "truth"
               },
               {
                 "text": "\"Does it matter where, my lady?\"",
                 "next": "n32",
-                "traits": { "bold": 1 },
+                "traits": {
+                  "bold": 1
+                },
                 "tag": "deflect"
               }
             ]
@@ -279,26 +361,42 @@
             "speaker": "wyman_manderly",
             "portrait": "manderly_jovial",
             "text": "Fifteen hundred men and a hundred lances from White Harbour, and every one of them fed better than yours. Have you eaten today, ser? You have not. I can always tell.",
-            "requires_flags": ["!act3_met_manderly"],
-            "sets_flags": ["act3_met_manderly"],
-            "relationship": { "wyman_manderly": 1 },
+            "requires_flags": [
+              "!act3_met_manderly"
+            ],
+            "sets_flags": [
+              "act3_met_manderly"
+            ],
+            "relationship": {
+              "wyman_manderly": 1
+            },
             "end": true
           },
           "n50": {
             "speaker": "galbart_glover",
             "portrait": "glover_dry",
             "text": "You'll want to stop counting the tents. Everyone does it for the first day. Two thousand at Winterfell, another six on the road, twelve by Moat Cailin if the Ryswells come. It's a number and then it's men and then it's a great deal less than the number.",
-            "requires_flags": ["!act3_met_glover"],
-            "sets_flags": ["act3_met_glover"],
-            "relationship": { "galbart_glover": 1 },
+            "requires_flags": [
+              "!act3_met_glover"
+            ],
+            "sets_flags": [
+              "act3_met_glover"
+            ],
+            "relationship": {
+              "galbart_glover": 1
+            },
             "end": true
           },
           "n60": {
             "speaker": "hune",
             "portrait": "hune_flat",
             "text": "Eighty men from Blackpool came in this morning. Your father's not with them.",
-            "requires_flags": ["!act3_blackpool_arrived"],
-            "sets_flags": ["act3_blackpool_arrived"],
+            "requires_flags": [
+              "!act3_blackpool_arrived"
+            ],
+            "sets_flags": [
+              "act3_blackpool_arrived"
+            ],
             "next": "n61"
           },
           "n61": {
@@ -311,7 +409,47 @@
             "speaker": "hune",
             "portrait": "hune_kind",
             "text": "He sent his men and he sent his son, ser. In the North that's the whole of what a lord is for. Don't make it a slight because you'd like one.",
-            "traits": { "loyal": 1 },
+            "traits": {
+              "loyal": 1
+            },
+            "end": true
+          },
+          "n70": {
+            "speaker": "cley",
+            "portrait": "cley_dry",
+            "text": "Stout has sent a hundred and twenty and made me bring them, which I take as a comment on my value at home.",
+            "requires_flags": [
+              "act1_met_cley",
+              "!act3_cley_arrived"
+            ],
+            "sets_flags": [
+              "act3_cley_arrived"
+            ],
+            "next": "n71"
+          },
+          "n71": {
+            "speaker": "torren",
+            "portrait": "torren_relieved",
+            "text": "Cley.",
+            "next": "n72"
+          },
+          "n72": {
+            "speaker": "cley",
+            "portrait": "cley_quiet",
+            "text": "Aye. Do not do that, you will set me off. I have been on a horse for nine days working out how to be light about this and I have not managed it once.",
+            "relationship": {
+              "cley": 2
+            },
+            "next": "n73"
+          },
+          "n73": {
+            "speaker": "cley",
+            "portrait": "cley_flat",
+            "text": "They are saying in the yard that Lord Stark confessed. Torren, I served him ale in that hall. Is there any version of this where that man is a traitor?",
+            "direction": "DRAMATIC IRONY. The player watched the confession, and watched what it bought, and knows precisely what it was worth. Torren has no answer and the scene does not give him one.",
+            "sets_flags": [
+              "act3_cley_asked_about_ned"
+            ],
             "end": true
           }
         }
@@ -326,9 +464,15 @@
       "mode": "fixed",
       "music": "the_hall_tense",
       "stage_directions": "CANON: the Greatjon objects to the order of march, draws steel on Robb in his own hall, and Grey Wind takes two of his fingers; the Greatjon laughs it off and calls Robb his lord. Torren is on the lower bench, close enough to be splashed. This is the moment the player watches a boy become a commander. Composer: cut everything on the draw. Nothing under the wolf.",
-      "objectives": ["Attend the war council"],
-      "requires_flags": ["act3_banners_called"],
-      "sets_flags": ["act3_greatjon_fingers"],
+      "objectives": [
+        "Attend the war council"
+      ],
+      "requires_flags": [
+        "act3_banners_called"
+      ],
+      "sets_flags": [
+        "act3_greatjon_fingers"
+      ],
       "dialogue": {
         "start": "n1",
         "nodes": {
@@ -357,7 +501,9 @@
           "n5": {
             "speaker": "narrator",
             "text": "Nobody sees the wolf move. That is the honest truth of it. There is a lord with a knife and then there is a lord with two fingers on the table and a great grey animal under him with a red mouth.",
-            "sets_flags": ["act3_greatjon_fingers"],
+            "sets_flags": [
+              "act3_greatjon_fingers"
+            ],
             "next": "n6"
           },
           "n6": {
@@ -384,13 +530,17 @@
               {
                 "text": "Watch Robb's hands. They are steady.",
                 "next": "n10",
-                "traits": { "honest": 1 },
+                "traits": {
+                  "honest": 1
+                },
                 "tag": "observe"
               },
               {
                 "text": "Watch the wolf.",
                 "next": "n11",
-                "traits": { "bold": 1 },
+                "traits": {
+                  "bold": 1
+                },
                 "tag": "wolf"
               }
             ]
@@ -398,8 +548,12 @@
           "n10": {
             "speaker": "narrator",
             "text": "His hands are steady on the table. Under the table, out of everyone's sight but yours from the lower bench, one of them is gripping the wood hard enough to whiten.",
-            "sets_flags": ["act3_saw_robbs_hand"],
-            "relationship": { "robb_stark": 1 },
+            "sets_flags": [
+              "act3_saw_robbs_hand"
+            ],
+            "relationship": {
+              "robb_stark": 1
+            },
             "next": "n12"
           },
           "n11": {
@@ -431,18 +585,40 @@
       "mode": "battle",
       "music": "the_long_column",
       "stage_directions": "CANON: the Northern host marches south to Moat Cailin and on toward the Twins. Structured as three camp interstitials with a combat tutorial in the middle - Lannister outriders scouting the column, which is Torren's first fight and is deliberately unglamorous, muddy, and over in ninety seconds. He does not kill anyone here; that is reserved for the Whispering Wood. Composer: a marching ostinato that gets a little more tired every interstitial.",
-      "objectives": ["March south", "Drive off the outriders"],
-      "requires_flags": ["act3_greatjon_fingers"],
-      "sets_flags": ["act3_first_skirmish", "act3_reached_the_twins"],
+      "objectives": [
+        "March south",
+        "Drive off the outriders"
+      ],
+      "requires_flags": [
+        "act3_greatjon_fingers"
+      ],
+      "sets_flags": [
+        "act3_first_skirmish",
+        "act3_reached_the_twins"
+      ],
       "waves": [
         {
           "id": "w1",
-          "enemies": [{ "type": "lannister_outrider", "count": 3 }],
+          "enemies": [
+            {
+              "type": "lannister_outrider",
+              "count": 3
+            }
+          ],
           "on_clear_node": "n20"
         },
         {
           "id": "w2",
-          "enemies": [{ "type": "lannister_outrider", "count": 4 }, { "type": "lannister_serjeant", "count": 1 }],
+          "enemies": [
+            {
+              "type": "lannister_outrider",
+              "count": 4
+            },
+            {
+              "type": "lannister_serjeant",
+              "count": 1
+            }
+          ],
           "on_clear_node": "n22"
         }
       ],
@@ -463,7 +639,9 @@
           "n10": {
             "speaker": "narrator",
             "text": "Moat Cailin, or what is left of it: three towers standing out of a bog that has eaten twenty. Every man in the column goes quiet passing under it and nobody can say why.",
-            "sets_flags": ["act3_moat_cailin"],
+            "sets_flags": [
+              "act3_moat_cailin"
+            ],
             "end": true
           },
           "n15": {
@@ -471,7 +649,9 @@
             "portrait": "hune_alert",
             "text": "Riders on the flank. Lions. Ser - shield up, feet apart, and stop thinking about how you look.",
             "direction": "COMBAT TUTORIAL. Fires wave w1.",
-            "sets_flags": ["act3_first_skirmish"],
+            "sets_flags": [
+              "act3_first_skirmish"
+            ],
             "end": true
           },
           "n20": {
@@ -489,7 +669,9 @@
           "n22": {
             "speaker": "narrator",
             "text": "They break and ride. Nobody chases them, which surprises you until you understand: they were sent to be seen. Somebody now knows exactly where twelve thousand Northmen are.",
-            "sets_flags": ["act3_survived_skirmish"],
+            "sets_flags": [
+              "act3_survived_skirmish"
+            ],
             "next": "n23"
           },
           "n23": {
@@ -500,13 +682,17 @@
               {
                 "text": "\"I didn't hit anyone.\"",
                 "next": "n24",
-                "traits": { "honest": 2 },
+                "traits": {
+                  "honest": 2
+                },
                 "tag": "admit"
               },
               {
                 "text": "Say nothing. Nobody was counting.",
                 "next": "n25",
-                "traits": { "honest": -1 },
+                "traits": {
+                  "honest": -1
+                },
                 "tag": "hide"
               }
             ]
@@ -515,8 +701,12 @@
             "speaker": "hune",
             "portrait": "hune_kind",
             "text": "No. Nobody does, the first time. You stood in the line and you didn't run and the man beside you didn't have to think about you. That is the entire job, ser. The killing's later and it's worse.",
-            "relationship": { "hune": 2 },
-            "traits": { "loyal": 1 },
+            "relationship": {
+              "hune": 2
+            },
+            "traits": {
+              "loyal": 1
+            },
             "end": true
           },
           "n25": {
@@ -528,8 +718,13 @@
             "speaker": "wells",
             "portrait": "wells_tired",
             "text": "Blackpool. You're a long way from a wet field.",
-            "requires_flags": ["act3_survived_skirmish", "!act3_camp_wells"],
-            "sets_flags": ["act3_camp_wells"],
+            "requires_flags": [
+              "act3_survived_skirmish",
+              "!act3_camp_wells"
+            ],
+            "sets_flags": [
+              "act3_camp_wells"
+            ],
             "next": "n31"
           },
           "n31": {
@@ -542,7 +737,9 @@
             "speaker": "wells",
             "portrait": "wells_flat",
             "text": "Because the king is dead and I liked him, and because the men who did for the Hand's guard in the street did it eight to one, and I have discovered that I mind that more than I expected to. It is not a better reason than yours. It is only mine.",
-            "relationship": { "wells": 2 },
+            "relationship": {
+              "wells": 2
+            },
             "end": true
           }
         }
@@ -557,9 +754,16 @@
       "mode": "fixed",
       "music": "the_crossing",
       "stage_directions": "CANON: Robb must cross the Green Fork; Walder Frey holds the only bridge; Catelyn goes in alone to negotiate; the price is Frey hostages, a Frey squire, Arya betrothed to a Frey son, and Robb married to a Frey daughter of Walder's choosing. Torren is on the door with Catelyn's guard and hears the terms through it. He is one of about six people who hears the marriage clause said out loud. Composer: a small, mean, pretty melody. Something that sounds like a bargain.",
-      "objectives": ["Stand the door", "Wait"],
-      "requires_flags": ["act3_reached_the_twins"],
-      "sets_flags": ["act3_frey_bargain"],
+      "objectives": [
+        "Stand the door",
+        "Wait"
+      ],
+      "requires_flags": [
+        "act3_reached_the_twins"
+      ],
+      "sets_flags": [
+        "act3_frey_bargain"
+      ],
       "dialogue": {
         "start": "n1",
         "nodes": {
@@ -581,14 +785,20 @@
               {
                 "text": "Listen properly.",
                 "next": "n4",
-                "traits": { "bold": 1 },
-                "sets_flags": ["act3_heard_the_terms"],
+                "traits": {
+                  "bold": 1
+                },
+                "sets_flags": [
+                  "act3_heard_the_terms"
+                ],
                 "tag": "listen"
               },
               {
                 "text": "Stand your post and hear nothing.",
                 "next": "n10",
-                "traits": { "loyal": 1 },
+                "traits": {
+                  "loyal": 1
+                },
                 "tag": "obey"
               }
             ]
@@ -609,7 +819,9 @@
             "speaker": "walder_frey",
             "portrait": "frey_gleeful",
             "text": "I'm asking him to cross my bridge. He can swim, my lady, it's free.",
-            "sets_flags": ["act3_heard_marriage_clause"],
+            "sets_flags": [
+              "act3_heard_marriage_clause"
+            ],
             "next": "n7"
           },
           "n7": {
@@ -633,13 +845,17 @@
           "n10": {
             "speaker": "narrator",
             "text": "You stand your post for four hours and hear an old man laugh twice, and you learn the terms three days later from a cook, like everybody else.",
-            "sets_flags": ["act3_heard_the_terms_secondhand"],
+            "sets_flags": [
+              "act3_heard_the_terms_secondhand"
+            ],
             "end": true
           },
           "n11": {
             "speaker": "narrator",
             "text": "The bridge is opened at dawn. It takes the host most of a day to cross it, and Lord Frey watches every single man of them go over, from a window, counting.",
-            "requires_flags": ["act3_frey_bargain"],
+            "requires_flags": [
+              "act3_frey_bargain"
+            ],
             "end": true
           }
         }
@@ -654,9 +870,17 @@
       "mode": "cutscene",
       "music": "the_splitting",
       "stage_directions": "ACT CLIMAX. CANON: Robb splits his host - Roose Bolton takes the foot south down the kingsroad to meet Tywin at the Green Fork, while Robb takes the horse west to relieve Riverrun. The foot are a feint and everyone in the tent knows it. Torren is assigned to the horse. The scene's job is to make the player understand, plainly and without softening, that the men they have been marching beside for an act are being spent. Composer: the marching ostinato, one last time, and then only hooves.",
-      "objectives": ["Attend the council", "Take your place"],
-      "requires_flags": ["act3_frey_bargain"],
-      "sets_flags": ["act3_with_robbs_horse", "act3_complete"],
+      "objectives": [
+        "Attend the council",
+        "Take your place"
+      ],
+      "requires_flags": [
+        "act3_frey_bargain"
+      ],
+      "sets_flags": [
+        "act3_with_robbs_horse",
+        "act3_complete"
+      ],
       "dialogue": {
         "start": "n1",
         "nodes": {
@@ -676,7 +900,9 @@
             "speaker": "robb_stark",
             "portrait": "robb_flat",
             "text": "The rest of it is that they will lose, and that while they are losing, six thousand horse will be forty miles west of where Lord Tywin thinks anyone is.",
-            "sets_flags": ["act3_the_feint_stated"],
+            "sets_flags": [
+              "act3_the_feint_stated"
+            ],
             "next": "n4"
           },
           "n4": {
@@ -698,19 +924,26 @@
               {
                 "text": "\"Then I'll go with them.\"",
                 "next": "n7",
-                "traits": { "loyal": 3, "bold": 1 },
+                "traits": {
+                  "loyal": 3,
+                  "bold": 1
+                },
                 "tag": "ask_to_stay"
               },
               {
                 "text": "\"Aye. West.\"",
                 "next": "n9",
-                "traits": { "loyal": -1 },
+                "traits": {
+                  "loyal": -1
+                },
                 "tag": "obey"
               },
               {
                 "text": "\"Do they know?\"",
                 "next": "n8",
-                "traits": { "honest": 2 },
+                "traits": {
+                  "honest": 2
+                },
                 "tag": "ask"
               }
             ]
@@ -719,7 +952,9 @@
             "speaker": "hune",
             "portrait": "hune_hard",
             "text": "No. You'll go where you're put, and you'll do it without a speech, because a knight who picks his own place in a battle is a knight who's decided the plan is a suggestion. West, ser.",
-            "relationship": { "hune": 2 },
+            "relationship": {
+              "hune": 2
+            },
             "next": "n10"
           },
           "n8": {
@@ -737,8 +972,11 @@
             "speaker": "narrator",
             "text": "Serjeant Hune goes west with you. Eighty men of Blackpool go south with Lord Bolton, and you shake perhaps nine of them by the hand before the columns part, and you get the names of six.",
             "direction": "The player is given a list of six names on screen. In Act 5, word of the Green Fork arrives and the list is shown again with four crossed off. The four are fixed; the player does not choose.",
-            "sets_flags": ["act3_with_robbs_horse", "act3_named_the_six"],
-            "next": "n11"
+            "sets_flags": [
+              "act3_with_robbs_horse",
+              "act3_named_the_six"
+            ],
+            "next": "n10a"
           },
           "n11": {
             "speaker": "robb_stark",
@@ -756,14 +994,82 @@
             "speaker": "robb_stark",
             "portrait": "robb_quiet",
             "text": "Because you carried my brother, and because you're the only man in this camp who doesn't want something from me. Both of those will stop being true. Ride near me while they're still both true.",
-            "requires_flags": ["act1_torren_carried_bran"],
-            "relationship": { "robb_stark": 3 },
+            "requires_flags": [
+              "act1_torren_carried_bran"
+            ],
+            "relationship": {
+              "robb_stark": 3
+            },
             "next": "n14"
           },
           "n14": {
             "speaker": "narrator",
             "text": "The horse rides west at moonrise, six thousand of them, without drums, without banners, without a single torch. It is the most frightening beautiful thing you have ever been part of.",
-            "sets_flags": ["act3_complete"],
+            "sets_flags": [
+              "act3_complete"
+            ],
+            "end": true
+          },
+          "n10a": {
+            "speaker": "cley",
+            "portrait": "cley_flat",
+            "text": "Stout's men are foot. So I am foot. So I go south with Lord Bolton and you go west with the horse, and that is the whole of it, and neither of us picked it.",
+            "requires_flags": [
+              "act3_cley_arrived"
+            ],
+            "sets_flags": [
+              "act3_cley_went_south"
+            ],
+            "next": "n10b"
+          },
+          "n10b": {
+            "speaker": "torren",
+            "portrait": "torren_stricken",
+            "text": "Cley—",
+            "choices": [
+              {
+                "text": "\"They're a feint. You know that. I'm telling you and I shouldn't.\"",
+                "next": "n10c",
+                "traits": {
+                  "honest": 3,
+                  "loyal": -1
+                },
+                "sets_flags": [
+                  "act3_told_cley_the_truth"
+                ],
+                "tag": "tell_him"
+              },
+              {
+                "text": "\"I'll see you at Riverrun.\"",
+                "next": "n10d",
+                "traits": {
+                  "honest": -2,
+                  "merciful": 1
+                },
+                "tag": "lie"
+              }
+            ]
+          },
+          "n10c": {
+            "speaker": "cley",
+            "portrait": "cley_still",
+            "text": "I had worked it out on the ride in. Eight thousand foot against Tywin Lannister and everybody very calm about it. Thank you for saying it out loud. Genuinely. It is the first honest thing anybody has said to me since the Neck.",
+            "relationship": {
+              "cley": 3
+            },
+            "next": "n10e"
+          },
+          "n10d": {
+            "speaker": "cley",
+            "portrait": "cley_wry",
+            "text": "At Riverrun. Aye.",
+            "direction": "He knows. He lets it stand, because Torren clearly needs him to.",
+            "next": "n10e"
+          },
+          "n10e": {
+            "speaker": "cley",
+            "portrait": "cley_grin",
+            "text": "Do not do anything brave, Torren. You are not good at it yet and it is a poor time to practise.",
             "end": true
           }
         }

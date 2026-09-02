@@ -3,12 +3,35 @@
   "quests": [
     {
       "id": "q_act1_the_deserter",
-      "title": "A Deserter's Head",
+      "title": "The King Is Coming",
       "act": "act_1",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Take your place in the ring", "flag": "act1_ring_formed" },
-        { "id": "o2", "text": "Ride home with the party", "flag": "act1_found_pups" }
+        {
+          "id": "o1",
+          "text": "Hear Ser Cley's news",
+          "flag": "act1_heard_king_coming"
+        },
+        {
+          "id": "o2",
+          "text": "Report to Ser Rodrik",
+          "flag": "act1_talked_rodrik"
+        },
+        {
+          "id": "o3",
+          "text": "Make Winterfell ready",
+          "flag": "act1_winterfell_prepared"
+        },
+        {
+          "id": "o4",
+          "text": "Ride out with Lord Stark's party",
+          "flag": "act1_ring_formed"
+        },
+        {
+          "id": "o5",
+          "text": "Ride home",
+          "flag": "act1_found_pups"
+        }
       ],
       "completion_flag": "act1_found_pups"
     },
@@ -18,11 +41,28 @@
       "act": "act_1",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Stand the honour guard in the yard", "flag": "act1_king_arrived" },
-        { "id": "o2", "text": "Hold the torch at the crypt stair", "flag": "act1_crypts" },
-        { "id": "o3", "text": "Attend the welcoming feast", "flag": "act1_entered_feast" }
+        {
+          "id": "o1",
+          "text": "Stand the honour guard in the yard",
+          "flag": "act1_king_arrived"
+        },
+        {
+          "id": "o2",
+          "text": "Hold the torch at the crypt stair",
+          "flag": "act1_crypts"
+        },
+        {
+          "id": "o3",
+          "text": "Attend the welcoming feast",
+          "flag": "act1_entered_feast"
+        },
+        {
+          "id": "o4",
+          "text": "Live in a castle full of strangers",
+          "flag": "act1_explored_during_visit"
+        }
       ],
-      "completion_flag": "act1_entered_feast"
+      "completion_flag": "act1_explored_during_visit"
     },
     {
       "id": "q_act1_the_fall",
@@ -30,9 +70,31 @@
       "act": "act_1",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Carry the lances to the yard", "flag": "act1_bran_fell" },
-        { "id": "o2", "text": "Carry Brandon Stark to the maester", "flag": "act1_torren_carried_bran" },
-        { "id": "o3", "text": "See the royal party off", "flag": "act1_complete" }
+        {
+          "id": "o1",
+          "text": "Carry the lances to the yard",
+          "flag": "act1_bran_fell"
+        },
+        {
+          "id": "o2",
+          "text": "Carry Brandon Stark to the maester",
+          "flag": "act1_torren_carried_bran"
+        },
+        {
+          "id": "o3",
+          "text": "Wait for the hunting party",
+          "flag": "act1_aftermath"
+        },
+        {
+          "id": "o4",
+          "text": "See the royal party off",
+          "flag": "act1_encounter_departure"
+        },
+        {
+          "id": "o5",
+          "text": "Watch them go",
+          "flag": "act1_complete"
+        }
       ],
       "completion_flag": "act1_complete"
     },
@@ -42,9 +104,21 @@
       "act": "act_2",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Report to the head laundress", "flag": "act2_briefed_by_mabb" },
-        { "id": "o2", "text": "Learn the service corridors", "flag": "act2_learned_corridors" },
-        { "id": "o3", "text": "Serve the small council", "flag": "act2_served_council" }
+        {
+          "id": "o1",
+          "text": "Report to the head laundress",
+          "flag": "act2_briefed_by_mabb"
+        },
+        {
+          "id": "o2",
+          "text": "Learn the service corridors",
+          "flag": "act2_learned_corridors"
+        },
+        {
+          "id": "o3",
+          "text": "Serve the small council",
+          "flag": "act2_served_council"
+        }
       ],
       "completion_flag": "act2_served_council"
     },
@@ -54,8 +128,16 @@
       "act": "act_2",
       "ordered": false,
       "objectives": [
-        { "id": "o1", "text": "Collect the clasp from the armourer on Steel Street", "flag": "act2_got_clasp" },
-        { "id": "o2", "text": "Attend the household at the Tourney of the Hand", "flag": "act2_tourney" }
+        {
+          "id": "o1",
+          "text": "Collect the clasp from the armourer on Steel Street",
+          "flag": "act2_got_clasp"
+        },
+        {
+          "id": "o2",
+          "text": "Attend the household at the Tourney of the Hand",
+          "flag": "act2_tourney"
+        }
       ],
       "completion_flag": "act2_tourney"
     },
@@ -65,9 +147,21 @@
       "act": "act_2",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Clean Lord Arryn's solar", "flag": "act2_littlefinger_noticed" },
-        { "id": "o2", "text": "Hang the linen in the godswood before dark", "flag": "act2_heard_godswood" },
-        { "id": "o3", "text": "Serve the royal apartments", "flag": "act2_robert_died" }
+        {
+          "id": "o1",
+          "text": "Clean Lord Arryn's solar",
+          "flag": "act2_littlefinger_noticed"
+        },
+        {
+          "id": "o2",
+          "text": "Hang the linen in the godswood before dark",
+          "flag": "act2_heard_godswood"
+        },
+        {
+          "id": "o3",
+          "text": "Serve the royal apartments",
+          "flag": "act2_robert_died"
+        }
       ],
       "completion_flag": "act2_complete"
     },
@@ -77,9 +171,21 @@
       "act": "act_3",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Stand your watch at the maester's turret", "flag": "act3_bran_woke" },
-        { "id": "o2", "text": "Write to Blackpool for men", "flag": "act3_banners_called" },
-        { "id": "o3", "text": "Attend the war council", "flag": "act3_greatjon_fingers" }
+        {
+          "id": "o1",
+          "text": "Stand your watch at the maester's turret",
+          "flag": "act3_bran_woke"
+        },
+        {
+          "id": "o2",
+          "text": "Write to Blackpool for men",
+          "flag": "act3_banners_called"
+        },
+        {
+          "id": "o3",
+          "text": "Attend the war council",
+          "flag": "act3_greatjon_fingers"
+        }
       ],
       "completion_flag": "act3_greatjon_fingers"
     },
@@ -89,11 +195,31 @@
       "act": "act_3",
       "ordered": false,
       "objectives": [
-        { "id": "o1", "text": "Speak with the Greatjon", "flag": "act3_met_greatjon" },
-        { "id": "o2", "text": "Speak with Lord Karstark", "flag": "act3_met_karstark" },
-        { "id": "o3", "text": "Speak with Lady Mormont", "flag": "act3_met_mormont" },
-        { "id": "o4", "text": "Speak with Lord Manderly", "flag": "act3_met_manderly" },
-        { "id": "o5", "text": "Speak with Lord Glover", "flag": "act3_met_glover" }
+        {
+          "id": "o1",
+          "text": "Speak with the Greatjon",
+          "flag": "act3_met_greatjon"
+        },
+        {
+          "id": "o2",
+          "text": "Speak with Lord Karstark",
+          "flag": "act3_met_karstark"
+        },
+        {
+          "id": "o3",
+          "text": "Speak with Lady Mormont",
+          "flag": "act3_met_mormont"
+        },
+        {
+          "id": "o4",
+          "text": "Speak with Lord Manderly",
+          "flag": "act3_met_manderly"
+        },
+        {
+          "id": "o5",
+          "text": "Speak with Lord Glover",
+          "flag": "act3_met_glover"
+        }
       ],
       "completion_flag": "act3_met_glover"
     },
@@ -103,10 +229,26 @@
       "act": "act_3",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Drive off the Lannister outriders", "flag": "act3_survived_skirmish" },
-        { "id": "o2", "text": "Reach the Twins", "flag": "act3_reached_the_twins" },
-        { "id": "o3", "text": "Stand the door while Lady Catelyn bargains", "flag": "act3_frey_bargain" },
-        { "id": "o4", "text": "Take your place with the horse", "flag": "act3_with_robbs_horse" }
+        {
+          "id": "o1",
+          "text": "Drive off the Lannister outriders",
+          "flag": "act3_survived_skirmish"
+        },
+        {
+          "id": "o2",
+          "text": "Reach the Twins",
+          "flag": "act3_reached_the_twins"
+        },
+        {
+          "id": "o3",
+          "text": "Stand the door while Lady Catelyn bargains",
+          "flag": "act3_frey_bargain"
+        },
+        {
+          "id": "o4",
+          "text": "Take your place with the horse",
+          "flag": "act3_with_robbs_horse"
+        }
       ],
       "completion_flag": "act3_complete"
     },
@@ -116,10 +258,26 @@
       "act": "act_4",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Get out of the throne room", "flag": "act4_ned_arrested" },
-        { "id": "o2", "text": "Reach the laundry alive", "flag": "act4_survived_the_purge" },
-        { "id": "o3", "text": "Buy flour at any price", "flag": "act4_bought_flour" },
-        { "id": "o4", "text": "Answer whoever has asked for you by name", "flag": "act4_questioned" }
+        {
+          "id": "o1",
+          "text": "Get out of the throne room",
+          "flag": "act4_ned_arrested"
+        },
+        {
+          "id": "o2",
+          "text": "Reach the laundry alive",
+          "flag": "act4_survived_the_purge"
+        },
+        {
+          "id": "o3",
+          "text": "Buy flour at any price",
+          "flag": "act4_bought_flour"
+        },
+        {
+          "id": "o4",
+          "text": "Answer whoever has asked for you by name",
+          "flag": "act4_questioned"
+        }
       ],
       "completion_flag": "act4_questioned"
     },
@@ -129,8 +287,16 @@
       "act": "act_4",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Stand where the household is put", "flag": "act4_ned_brought_out" },
-        { "id": "o2", "text": "...", "flag": "act4_ned_executed" }
+        {
+          "id": "o1",
+          "text": "Stand where the household is put",
+          "flag": "act4_ned_brought_out"
+        },
+        {
+          "id": "o2",
+          "text": "...",
+          "flag": "act4_ned_executed"
+        }
       ],
       "completion_flag": "act4_complete"
     },
@@ -140,11 +306,31 @@
       "act": "act_5",
       "ordered": true,
       "objectives": [
-        { "id": "o1", "text": "Walk the camp before the muster", "flag": "act5_night_camp" },
-        { "id": "o2", "text": "Hold the left of the line in the Whispering Wood", "flag": "act5_whispering_wood_survived" },
-        { "id": "o3", "text": "Hear the news from the Green Fork", "flag": "act5_green_fork_news" },
-        { "id": "o4", "text": "Break the siege of Riverrun", "flag": "act5_camps_survived" },
-        { "id": "o5", "text": "Attend the lords at Riverrun", "flag": "act5_robb_crowned" }
+        {
+          "id": "o1",
+          "text": "Walk the camp before the muster",
+          "flag": "act5_night_camp"
+        },
+        {
+          "id": "o2",
+          "text": "Hold the left of the line in the Whispering Wood",
+          "flag": "act5_whispering_wood_survived"
+        },
+        {
+          "id": "o3",
+          "text": "Hear the news from the Green Fork",
+          "flag": "act5_green_fork_news"
+        },
+        {
+          "id": "o4",
+          "text": "Break the siege of Riverrun",
+          "flag": "act5_camps_survived"
+        },
+        {
+          "id": "o5",
+          "text": "Attend the lords at Riverrun",
+          "flag": "act5_robb_crowned"
+        }
       ],
       "completion_flag": "ch1_complete"
     }

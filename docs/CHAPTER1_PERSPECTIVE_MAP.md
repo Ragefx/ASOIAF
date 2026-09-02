@@ -20,23 +20,26 @@ Proximity grades:
 
 ## Act 1 — *The Fall* · Ser Torren · Winterfell
 
-| Canonical event | Grade | How it is staged |
-|---|---|---|
-| Execution of Gared the deserter | **EYES** | Torren stands in the line. The camera holds on Bran, not the block. Tutorial for movement and interact. |
-| Finding the direwolf pups | **EYES** | Free-roam on the ride home. Optional dialogue with Jory, Theon, Robb — first relationship deltas. |
-| Word of Jon Arryn's death | **WORD** | A raven. Correct use of WORD: it is Act 2's spine, not Act 1's. |
-| Robert's arrival at Winterfell | **EYES** | Torren is in the honour guard in the yard. Fixed position; the player can look, not move. |
-| Robert in the crypts with Lyanna's tomb | **EDGE** | Torren holds a torch at the stair. Hears "Was she beautiful?" and the answer. Does not see Robert's face. |
-| **The welcoming feast** | **EYES** | Free-roam of the Great Hall. Six optional conversations. **Brief Encounter #1.** |
-| Jaime and Cersei in the Broken Tower | **AFTER** | Torren sees a shuttered window and two figures at the wrong hour. He does not climb. |
-| **Bran's fall** | **EYES** | Torren is crossing the yard. He looks up because of a sound. He is the first to reach the boy. |
-| Bran carried to the maester | **EYES** | Torren carries him. Player controls the walk. No combat, no choices — just the walk. |
-| The royal party departs | **EYES** | **Brief Encounter #2.** |
+Twelve scenes, two of them free-roam. The act's shape is: an ordinary castle, then an
+extraordinary one, then a broken one.
+
+| # | Scene | Canonical event | Grade | How it is staged |
+|---|---|---|---|---|
+| 1 | Morning Duties | Jon Arryn's death; Robert rides north | **WORD** | Correct use of WORD — it is Act 2's spine, not Act 1's. Movement/interact tutorial. Torren states his want in the first three minutes. |
+| 2 | Preparing for a King | — | — | Free-roam. Learn the castle *before* it fills with strangers. Rodrik, Jory, Hodor, a stable boy. The honour guard is optional and is the act's first pure piece of ambition. |
+| 3 | A Deserter's Head | Execution of Gared by Eddard Stark | **EYES** | Torren stands in the ring. The camera holds on Bran, never the block. |
+| 4 | Six Pups and a Seventh | The direwolf and her pups | **EYES** | Free-roam of a stretch of road. The albino is off the path and only found by wandering. |
+| 5 | The King Comes North | Robert's arrival | **EYES** | Torren pinned in the honour guard. Nyra is on screen in the baggage train and is *not* flagged. |
+| 6 | Torchlight | Robert at Lyanna's tomb | **EDGE** | Torren holds a torch at the stair. Two optional steps closer, each a clearer fragment. |
+| 7 | The Welcoming Feast | The feast | **EYES** | Free-roam of the hall. **Brief Encounter #1.** Benjen, Jon and Tyrion sighted across the room. |
+| 8 | Days of Feasting | The court settles in | — | Free-roam over several days. Robb (spar), Jon (the Wall), Tyrion (decent to him, which complicates Act 5), Benjen (the truest thing anyone says in the act). |
+| 9 | The Broken Tower | **Bran's fall** | **EYES** | An ordinary errand across an ordinary yard. Optional look-up. A shuttered window, and nothing else, ever. Torren reaches him first. |
+| 10 | Aftermath | The hunt recalled; Winterfell in shock | **EYES** | Free-roam of a castle that has become a sickroom. Ends in the godswood whether the player meant it or not. |
+| 11 | The Road South | The royal party departs | **EYES** | **Brief Encounter #2.** |
+| 12 | Winter Is Coming | — | — | The rampart. Robb alone in the yard below. The three words are never spoken by a character; the act is named for them and they are left in the player's mouth. |
 
 **Act 1 exit flags:** `act1_bran_fell`, `act1_torren_carried_bran`, `act1_encounter_feast`,
-`act1_encounter_departure`, plus trait totals.
-
----
+`act1_encounter_departure`, `act1_complete`, plus trait totals and five relationships.
 
 ## Act 2 — *The Investigation* · Nyra · The Red Keep
 
@@ -156,7 +159,7 @@ deliberately:
 
 | The player knows | Because | The character who doesn't |
 |---|---|---|
-| Bran was pushed | Act 1 staging | Everyone. Forever. |
+| Bran was pushed | Act 1 staging | Everyone. Forever. Torren has one closed shutter and never gets further. |
 | Joffrey is not Robert's son | Act 2, the ledger | Torren, the entire North |
 | Ned is already dead | Act 4 | Robb's army, for one whole act of Act 5 |
 | Jory Cassel is a person | Act 1, as Torren | Nyra, who steps over his body in Act 2 |

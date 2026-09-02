@@ -695,6 +695,31 @@
             "speaker": "narrator",
             "text": "You put the sack on the cart with the others and you write his name on it twice because the first time your hand was not steady enough to read.",
             "end": true
+          },
+          "n40": {
+            "speaker": "torren",
+            "portrait": "torren_flat",
+            "text": "Lord Glover. Stout's men were with the foot. Is there a list from Goldgrass?",
+            "requires_flags": [
+              "act3_cley_went_south",
+              "!act5_no_word_of_cley"
+            ],
+            "next": "n41"
+          },
+          "n41": {
+            "speaker": "galbart_glover",
+            "portrait": "glover_grim",
+            "text": "There is no list from Goldgrass. There is no list from half of them. Lord Bolton got off that field in the dark and he has not finished counting and he may never finish counting.",
+            "next": "n42"
+          },
+          "n42": {
+            "speaker": "narrator",
+            "text": "So there is no word. Not that he is dead and not that he is living. There is simply no word, and there will be no word for a long while, and you will go on asking every rider who comes up the river road for the rest of the year.",
+            "direction": "Deliberately unresolved, and left that way for Chapter 2. A friend who is merely absent is worse than a friend on a list, and the chapter already has a list.",
+            "sets_flags": [
+              "act5_no_word_of_cley"
+            ],
+            "end": true
           }
         }
       }
