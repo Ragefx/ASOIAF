@@ -1,0 +1,804 @@
+{
+  "act_id": "act_1",
+  "title": "The Fall",
+  "pov": "torren",
+  "timeline": "Months 1-2, 298 AC. Winterfell and the wolfswood.",
+  "locations": ["wolfswood_holdfast", "kingsroad_north", "winterfell_yard", "winterfell_crypts", "winterfell_great_hall", "winterfell_broken_tower"],
+  "summary": "Ser Torren Slate, a household knight of Blackpool seconded to Winterfell's guard, watches Lord Eddard Stark take a deserter's head, rides home through a summer snow where six pups are found, stands in the honour guard for a king, drinks at a feast where a servant girl looks at him for exactly as long as it takes to walk past, and is crossing the yard when a boy falls off the Broken Tower. He is the first man to reach him.",
+  "entry_flags": [],
+  "exit_flags": ["act1_complete", "act1_bran_fell", "act1_encounter_feast", "act1_encounter_departure"],
+  "scenes": [
+    {
+      "scene_id": "s1_01_the_deserter",
+      "title": "A Deserter's Head",
+      "level": "wolfswood_holdfast",
+      "spawn": "treeline",
+      "time_of_day": "morning",
+      "mode": "explore",
+      "music": "north_cold_open",
+      "stage_directions": "CANON: the execution of Gared, deserter of the Night's Watch, by Eddard Stark, witnessed by Bran at seven. Twenty riders in a ragged half-circle around a stump in old snow. This is the movement and interact tutorial: the player is free to walk the ring and speak to four men before the axe. The camera never frames the block. It frames Bran. Composer: no music under the execution itself, only wind and the sound of twenty horses breathing.",
+      "objectives": ["Take your place in the ring", "Speak with the men of the household"],
+      "requires_flags": [],
+      "sets_flags": ["act1_started"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Summer snow, three inches of it, and every man in the party pretending he is not cold.",
+            "direction": "Fires on level load. Italic, centred, fades.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "hune",
+            "portrait": "hune_neutral",
+            "text": "Slate. You'll stand at the left of the ring and you'll keep your mouth shut through it. Lord Stark does this himself and he does it quiet.",
+            "sets_flags": ["act1_briefed_by_hune"],
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "Aye, serjeant.",
+            "choices": [
+              {
+                "text": "\"Has he done many?\"",
+                "next": "n4",
+                "traits": { "honest": 1 },
+                "tag": "curious"
+              },
+              {
+                "text": "Say nothing and take your place.",
+                "next": "n6",
+                "traits": { "bold": -1 },
+                "tag": "silent"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "hune",
+            "portrait": "hune_flat",
+            "text": "Enough that he's stopped counting and not so many he's stopped minding. That's the whole of it. Don't ask him.",
+            "relationship": { "hune": 1 },
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "I wasn't going to ask him.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "The ring closes. The deserter is brought out. He does not struggle, and somehow that is worse.",
+            "sets_flags": ["act1_ring_formed"],
+            "end": true
+          },
+          "n10": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_neutral",
+            "text": "First one?",
+            "requires_flags": ["!act1_talked_to_jory"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "First one I've stood for.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_neutral",
+            "text": "Then here's the only advice worth having. Watch the boy, not the block. Lord Stark brought him out here to learn something and I'd wager you learn it faster.",
+            "sets_flags": ["act1_talked_to_jory"],
+            "relationship": { "jory_cassel": 1 },
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "Learn what, ser?",
+            "choices": [
+              {
+                "text": "\"Learn what?\"",
+                "next": "n14",
+                "tag": "ask"
+              },
+              {
+                "text": "\"I know what.\"",
+                "next": "n15",
+                "traits": { "bold": 1 },
+                "tag": "assert"
+              }
+            ]
+          },
+          "n14": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_flat",
+            "text": "That the man who passes the sentence swings the sword. It's a Stark thing. It sounds like a saying until you've watched him do it, and then it isn't one.",
+            "end": true
+          },
+          "n15": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_wry",
+            "text": "Do you. Well. Watch anyway, ser, and tell me after whether you knew it or only heard it.",
+            "relationship": { "jory_cassel": -1 },
+            "end": true
+          },
+          "n20": {
+            "speaker": "theon_greyjoy",
+            "portrait": "theon_smirk",
+            "text": "Blackpool, isn't it. Slate. I keep meaning to ask what your house does.",
+            "requires_flags": ["!act1_talked_to_theon"],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "torren",
+            "portrait": "torren_flat",
+            "text": "We hold Blackpool.",
+            "next": "n22"
+          },
+          "n22": {
+            "speaker": "theon_greyjoy",
+            "portrait": "theon_smirk",
+            "text": "Yes. That's what I thought it did.",
+            "sets_flags": ["act1_talked_to_theon"],
+            "choices": [
+              {
+                "text": "\"And what does yours hold, my lord?\"",
+                "next": "n23",
+                "traits": { "bold": 2 },
+                "relationship": { "theon_greyjoy": 2 },
+                "tag": "bite_back"
+              },
+              {
+                "text": "Let it go.",
+                "next": "n24",
+                "traits": { "bold": -1 },
+                "relationship": { "theon_greyjoy": -1 },
+                "tag": "swallow"
+              }
+            ]
+          },
+          "n23": {
+            "speaker": "theon_greyjoy",
+            "portrait": "theon_delighted",
+            "text": "Ha. Nothing at all, ser. Nothing at all. I like you better than I expected to and I expect that to pass.",
+            "end": true
+          },
+          "n24": {
+            "speaker": "narrator",
+            "text": "He smiles at you for a moment longer than he needs to, and turns his horse away.",
+            "end": true
+          },
+          "n30": {
+            "speaker": "robb_stark",
+            "portrait": "robb_neutral",
+            "text": "You're one of Lord Ondrew's. Torren.",
+            "requires_flags": ["!act1_talked_to_robb"],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "torren",
+            "portrait": "torren_surprised",
+            "text": "You know my name.",
+            "next": "n32"
+          },
+          "n32": {
+            "speaker": "robb_stark",
+            "portrait": "robb_wry",
+            "text": "My father makes me learn them. All of them. Every man who owes us service and every man he owes it back to. He says a lord who can't name his own household has already lost it.",
+            "sets_flags": ["act1_talked_to_robb"],
+            "relationship": { "robb_stark": 2 },
+            "next": "n33"
+          },
+          "n33": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "That's a great many names, my lord.",
+            "next": "n34"
+          },
+          "n34": {
+            "speaker": "robb_stark",
+            "portrait": "robb_neutral",
+            "text": "It is. Ask me again in ten years and I'll have forgotten half.",
+            "direction": "He will not. Act 3 pays this off: Robb names every lord in the yard without looking at a list.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s1_02_the_ride_home",
+      "title": "Six Pups and a Seventh",
+      "level": "kingsroad_north",
+      "spawn": "bridge",
+      "time_of_day": "midday",
+      "mode": "explore",
+      "music": "north_open_road",
+      "stage_directions": "CANON: the direwolf bitch dead in the snow with a broken antler in her throat; five pups; the albino found apart, silent, eyes open. Free-roam along a stretch of road. The dead direwolf is a fixed point the player will find; the albino is off the path and only found if the player wanders, which is the point. Composer: the road theme drops out entirely at the carcass and does not come back until the party remounts.",
+      "objectives": ["Ride south with the party", "Find what stopped the column"],
+      "requires_flags": ["act1_ring_formed"],
+      "sets_flags": ["act1_found_pups"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "hune",
+            "portrait": "hune_neutral",
+            "text": "Column's stopped. Go and see why, and if it's a fallen horse don't come back and tell me it's an omen.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "It is not a fallen horse.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "A direwolf, dead in the snow, larger than any wolf has a right to be. A shard of antler in her throat. Five pups blind against her cold flank, still trying.",
+            "sets_flags": ["act1_saw_direwolf"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "theon_greyjoy",
+            "portrait": "theon_flat",
+            "text": "Mercy would be quicker. I'll do it if nobody else has the stomach.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "robb_stark",
+            "portrait": "robb_firm",
+            "text": "You won't.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "Bran is holding one already. Nobody saw him pick it up.",
+            "choices": [
+              {
+                "text": "\"There's a sigil dead in the road, my lord. That's all anyone will say of it.\"",
+                "next": "n14",
+                "traits": { "bold": 1 },
+                "relationship": { "robb_stark": 1 },
+                "tag": "omen"
+              },
+              {
+                "text": "\"Five pups, five Stark children. Six, with the bastard.\"",
+                "next": "n15",
+                "traits": { "honest": 1 },
+                "tag": "count"
+              },
+              {
+                "text": "Say nothing. It is not your family.",
+                "next": "n16",
+                "traits": { "bold": -1 },
+                "tag": "silent"
+              }
+            ]
+          },
+          "n14": {
+            "speaker": "robb_stark",
+            "portrait": "robb_neutral",
+            "text": "Men will say what they like. I'd rather they said we found them than we left them.",
+            "end": true
+          },
+          "n15": {
+            "speaker": "narrator",
+            "text": "Jon Snow does not look at you. Lord Stark does, once, and then agrees to it, and you spend some time afterwards wondering which of those two things you did.",
+            "sets_flags": ["act1_counted_pups"],
+            "relationship": { "jon_snow": -1 },
+            "end": true
+          },
+          "n16": {
+            "speaker": "narrator",
+            "text": "You hold your horse and your tongue, and the decision is made without you, as most are.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "Off the road, twenty paces into the trees, a sixth pup. White as the snow it is sitting in. It is not crying. Its eyes are already open, and they are red, and they are on you.",
+            "direction": "Optional discovery. Ghost. The player finds this only by leaving the road. No dialogue follows; Jon collects him a beat later.",
+            "sets_flags": ["act1_found_ghost"],
+            "traits": { "bold": 1 },
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s1_03_the_arrival",
+      "title": "The King Comes North",
+      "level": "winterfell_yard",
+      "spawn": "honour_guard_left",
+      "time_of_day": "afternoon",
+      "mode": "fixed",
+      "music": "royal_column",
+      "stage_directions": "CANON: the royal party arrives at Winterfell; the household kneels; Robert goes straight to the crypts. Torren is pinned in the honour guard and cannot move more than two tiles. The player can look, and looking is the whole scene: the wheelhouse, the gold cloaks, the Kingsguard white, the queen who does not get down, and somewhere in the baggage train at the back, a girl with a covered head carrying water. She is on screen. The player is not meant to notice her. NYRA IS ON SCREEN HERE AND IS NOT FLAGGED. This is deliberate.",
+      "objectives": ["Hold the line", "Kneel when the household kneels"],
+      "requires_flags": ["act1_found_pups"],
+      "sets_flags": ["act1_king_arrived"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "hune",
+            "portrait": "hune_flat",
+            "text": "Straight back. Eyes front. If your knee's not down before the king's boot touches the stone I'll have it off you.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "Four hundred riders. You have never seen four hundred of anything.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "wells",
+            "portrait": "wells_smirk",
+            "text": "Northern knight, are you? I'd not have guessed it from the mail. Who dubbed you, ser? Anyone I'd know?",
+            "sets_flags": ["act1_met_wells"],
+            "choices": [
+              {
+                "text": "\"A hedge knight. In a field, in the rain.\"",
+                "next": "n4",
+                "traits": { "honest": 2 },
+                "tag": "truth"
+              },
+              {
+                "text": "\"Lord Slate of Blackpool saw it done.\"",
+                "next": "n5",
+                "traits": { "honest": -1, "bold": 1 },
+                "tag": "dress_it_up"
+              },
+              {
+                "text": "Keep your eyes front.",
+                "next": "n6",
+                "traits": { "bold": -1 },
+                "tag": "silent"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "wells",
+            "portrait": "wells_amused",
+            "text": "In the rain. Gods, that's honest. I'd have lied. Well, ser, we'll see what it's worth when there's something to be brave at.",
+            "relationship": { "wells": 1 },
+            "direction": "Wells respects the honesty and will say so again in Act 5, over Torren's shoulder, at the Camps.",
+            "end": true
+          },
+          "n5": {
+            "speaker": "wells",
+            "portrait": "wells_smirk",
+            "text": "Saw it done. Saw. There's a word doing a great deal of work.",
+            "relationship": { "wells": -1 },
+            "end": true
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "He waits. He is good at waiting. Eventually he laughs at something else.",
+            "relationship": { "wells": -1 },
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "The king is enormous and he is not what the songs said. He takes Lord Stark by the shoulders in front of everyone, and then he says something quiet, and they go down into the ground together.",
+            "sets_flags": ["act1_saw_robert"],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s1_04_the_crypts",
+      "title": "Torchlight",
+      "level": "winterfell_crypts",
+      "spawn": "stair_head",
+      "time_of_day": "afternoon",
+      "mode": "fixed",
+      "music": "none",
+      "stage_directions": "CANON: Robert descends to Lyanna's tomb and speaks with Ned about her. EDGE proximity: Torren holds a torch at the stair-head, twelve paces back, and hears fragments. The player cannot descend. The player CAN choose to move one tile closer, twice, and each step earns a clearer fragment and a small risk. Composer: no score. Dripping, and two men's voices in stone.",
+      "objectives": ["Hold the torch", "Do not listen (you will listen)"],
+      "requires_flags": ["act1_king_arrived"],
+      "sets_flags": ["act1_crypts"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "They took a torch and left you holding another, which is a way of saying stay here without troubling to say it.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "Sound carries badly in the crypts, and then all at once very well.",
+            "choices": [
+              {
+                "text": "Step closer.",
+                "next": "n3",
+                "traits": { "bold": 1 },
+                "tag": "listen"
+              },
+              {
+                "text": "Stay where you were put.",
+                "next": "n8",
+                "traits": { "loyal": 1 },
+                "tag": "obey"
+              }
+            ]
+          },
+          "n3": {
+            "speaker": "robert_baratheon",
+            "portrait": "robert_distant",
+            "text": "...seventeen years and they still put her down here in the dark. She should have a hill and the wind on it.",
+            "sets_flags": ["act1_heard_crypt_1"],
+            "choices": [
+              {
+                "text": "Step closer again.",
+                "next": "n4",
+                "traits": { "bold": 2 },
+                "tag": "listen_more"
+              },
+              {
+                "text": "That is enough.",
+                "next": "n8",
+                "tag": "back_off"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_distant",
+            "text": "She's home. That was the whole of what she asked me for.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "robert_baratheon",
+            "portrait": "robert_distant",
+            "text": "She asked you. She never asked me for anything, Ned, not once, not in her whole life.",
+            "sets_flags": ["act1_heard_crypt_2"],
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "A long silence with two men in it. Then the sound of a big man breathing badly, and you go back up the stair very quietly, and you take the sound with you, and you never repeat it to anyone.",
+            "traits": { "honest": -1 },
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "torren",
+            "portrait": "torren_flat",
+            "text": "That wasn't mine to have.",
+            "end": true
+          },
+          "n8": {
+            "speaker": "narrator",
+            "text": "You hold the torch until your arm shakes, and you hear only the shape of it, and not one word.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s1_05_the_feast",
+      "title": "The Welcoming Feast",
+      "level": "winterfell_great_hall",
+      "spawn": "lower_bench",
+      "time_of_day": "night",
+      "mode": "explore",
+      "music": "feast_warm",
+      "stage_directions": "CANON: the welcoming feast at Winterfell. Free-roam of a hot, loud, crowded hall. Six optional conversations. Torren is on the lowest bench, which is correct and which he minds. BRIEF ENCOUNTER #1 fires here: a servant girl on a fixed patrol route crosses the hall with a wine jug. If the player's facing intersects her path within two tiles, hold one frame of eye contact, no music sting, no camera push, and set act1_encounter_feast. If the player follows her, she looks back once at the door. She has no dialogue. She never speaks in Act 1. Her sprite is silver-haired under a plain grey coif that does not quite cover it.",
+      "objectives": ["Eat, drink, and be seen", "Do not embarrass Blackpool"],
+      "requires_flags": ["act1_crypts"],
+      "sets_flags": ["act1_entered_feast"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Winterfell has not been this loud in living memory and will not be again.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "hune",
+            "portrait": "hune_drunk",
+            "text": "Look at it. Half the realm in one hall and every one of them certain they're the important half.",
+            "requires_flags": ["!act1_feast_hune"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "Which half are we, serjeant?",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "hune",
+            "portrait": "hune_drunk",
+            "text": "We're the half that's still standing at the end, lad, because we didn't drink the good stuff.",
+            "sets_flags": ["act1_feast_hune"],
+            "relationship": { "hune": 1 },
+            "end": true
+          },
+          "n20": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_wry",
+            "text": "You've been staring at the high table for a quarter hour.",
+            "requires_flags": ["!act1_feast_jory"],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "torren",
+            "portrait": "torren_caught",
+            "text": "I've been counting it.",
+            "next": "n22"
+          },
+          "n22": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_neutral",
+            "text": "Aye. Everybody at this end counts it. Here's the trick of it, ser. Nobody up there is counting back.",
+            "sets_flags": ["act1_feast_jory"],
+            "choices": [
+              {
+                "text": "\"Then I'll give them something to count.\"",
+                "next": "n23",
+                "traits": { "bold": 2 },
+                "tag": "ambition"
+              },
+              {
+                "text": "\"That's a hard thing to hear.\"",
+                "next": "n24",
+                "traits": { "honest": 1 },
+                "tag": "honest"
+              },
+              {
+                "text": "\"I'm content where I sit.\"",
+                "next": "n25",
+                "traits": { "bold": -1, "honest": -1 },
+                "tag": "lie"
+              }
+            ]
+          },
+          "n23": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_flat",
+            "text": "That's what they all say at your age and I've buried a fair number of them. Do it anyway. Just don't do it in a hurry.",
+            "relationship": { "jory_cassel": 1 },
+            "end": true
+          },
+          "n24": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_kind",
+            "text": "It's a true one. There's worse to hear and you'll hear that too.",
+            "relationship": { "jory_cassel": 2 },
+            "end": true
+          },
+          "n25": {
+            "speaker": "jory_cassel",
+            "portrait": "jory_wry",
+            "text": "No you're not. Drink your ale, ser.",
+            "end": true
+          },
+          "n30": {
+            "speaker": "wells",
+            "portrait": "wells_drunk",
+            "text": "In the rain, he says! In a field! Sers, I give you the knighthood of the North.",
+            "requires_flags": ["act1_met_wells", "!act1_feast_wells"],
+            "sets_flags": ["act1_feast_wells"],
+            "choices": [
+              {
+                "text": "Laugh with them.",
+                "next": "n31",
+                "traits": { "bold": -1 },
+                "tag": "laugh"
+              },
+              {
+                "text": "\"It was raining. You'd have drowned in it, ser.\"",
+                "next": "n32",
+                "traits": { "bold": 2 },
+                "tag": "return_fire"
+              },
+              {
+                "text": "Stand up and leave the table.",
+                "next": "n33",
+                "traits": { "bold": 1, "honest": 1 },
+                "tag": "walk"
+              }
+            ]
+          },
+          "n31": {
+            "speaker": "narrator",
+            "text": "You laugh. It comes out a half-beat late and everyone at the table hears the half-beat.",
+            "relationship": { "wells": -1 },
+            "end": true
+          },
+          "n32": {
+            "speaker": "wells",
+            "portrait": "wells_amused",
+            "text": "Ha! There he is. Sit down, Blackpool, you've earned the jug.",
+            "relationship": { "wells": 2 },
+            "end": true
+          },
+          "n33": {
+            "speaker": "narrator",
+            "text": "You leave with your cup, and behind you the table finds something else to be funny about within a count of ten, which is the part that stings.",
+            "traits": { "loyal": 1 },
+            "end": true
+          },
+          "n40": {
+            "speaker": "narrator",
+            "text": "A servant girl crossing with a jug. Grey coif, silver hair escaping it, eyes you would call dark until the torch swings and they are not dark at all.",
+            "direction": "BRIEF ENCOUNTER #1. Fires on facing-intersect only. No portrait, no name plate, no music cue. One node, then she is past. She does not speak.",
+            "sets_flags": ["act1_encounter_feast"],
+            "next": "n41"
+          },
+          "n41": {
+            "speaker": "narrator",
+            "text": "She looks at you for as long as it takes to walk four paces. Then the hall closes behind her.",
+            "end": true
+          },
+          "n42": {
+            "speaker": "narrator",
+            "text": "At the door she looks back. Not at the hall. Then she is gone into the kitchens and the noise comes back in.",
+            "direction": "Only fires if the player followed her. Optional flavour, no mechanical effect beyond the flag.",
+            "requires_flags": ["act1_encounter_feast"],
+            "sets_flags": ["act1_followed_her"],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s1_06_the_fall",
+      "title": "The Broken Tower",
+      "level": "winterfell_yard",
+      "spawn": "armoury_door",
+      "time_of_day": "morning",
+      "mode": "explore",
+      "music": "winterfell_quiet_morning",
+      "stage_directions": "ACT CLIMAX. CANON: Bran climbs the Broken Tower, sees Jaime and Cersei, and is pushed. Staged as an ordinary errand across an ordinary yard. Torren is carrying a bundle of lances. The player can look up and see a small figure on the wall - this is optional and most players will. There is no way to intervene. Nobody is meant to feel they could have. The sound happens off-camera and the camera does NOT whip to it; Torren turns at a walking pace, because that is what a man actually does. Composer: birds and a hammer in the forge, then nothing at all.",
+      "objectives": ["Carry the lances to the yard", "Reach the boy"],
+      "requires_flags": ["act1_entered_feast"],
+      "sets_flags": ["act1_bran_fell", "act1_torren_carried_bran"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "hune",
+            "portrait": "hune_neutral",
+            "text": "Lances to the yard, and then you can sleep off whatever you did to yourself last night.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "The castle is half empty. Half the household is still abed and the other half is being quiet about it.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "High up on the Broken Tower, something moves. A boy, hand over hand, going up the outside of a ruin as easily as most men use a stair.",
+            "direction": "Optional look-up trigger. If the player does not look, the flag is not set and n11 does not play.",
+            "sets_flags": ["act1_saw_bran_climbing"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "torren",
+            "portrait": "torren_neutral",
+            "text": "Gods. He does that every day, they say.",
+            "end": true
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "A window in the Broken Tower is shuttered from the inside. There is nobody in that tower. There has not been anybody in that tower in a hundred years.",
+            "direction": "Optional. AFTER-grade proximity on the Jaime/Cersei beat. The player is given the fact and no interpretation.",
+            "sets_flags": ["act1_noticed_shutter"],
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "The sound is not loud. That is the thing nobody tells you about it. It is a small sound and then the yard is entirely silent.",
+            "direction": "THE FALL. Camera does not move. Torren turns over four frames. Player regains control and can walk - not run. Running is disabled for this beat.",
+            "sets_flags": ["act1_bran_fell"],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "narrator",
+            "text": "You reach him first. You are the first man there and you will think about that for the rest of your life, because there is nothing at all that being first gets you.",
+            "next": "n22"
+          },
+          "n22": {
+            "speaker": "torren",
+            "portrait": "torren_shaken",
+            "text": "He's breathing. Somebody get the maester. SOMEBODY GET THE MAESTER.",
+            "next": "n23"
+          },
+          "n23": {
+            "speaker": "narrator",
+            "text": "A direwolf pup is already there, standing over the boy, and it will not let the second man near.",
+            "next": "n24"
+          },
+          "n24": {
+            "speaker": "catelyn_stark",
+            "portrait": "catelyn_broken",
+            "text": "Don't move him. Don't - carry him. Carry him. Carefully. Ser. Carefully.",
+            "next": "n25"
+          },
+          "n25": {
+            "speaker": "narrator",
+            "text": "He weighs nothing. That is the other thing nobody tells you.",
+            "direction": "The player walks Bran to the maester's turret. No choices, no interaction, no music. Roughly ninety seconds of walking. This is the act's last playable beat and it must feel too long.",
+            "sets_flags": ["act1_torren_carried_bran"],
+            "relationship": { "catelyn_stark": 2, "robb_stark": 2 },
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s1_07_the_departure",
+      "title": "The Road South",
+      "level": "winterfell_yard",
+      "spawn": "gate",
+      "time_of_day": "dawn",
+      "mode": "cutscene",
+      "music": "departure_cold",
+      "stage_directions": "CANON: the royal party departs Winterfell for King's Landing with Ned, Sansa and Arya; Jon rides north with Tyrion and Benjen. BRIEF ENCOUNTER #2, scripted, unmissable. A servant girl loses her grip on a trunk in the press of the yard; Torren catches it. Four frames of overlapping hands. Neither speaks. If the player mashes interact, Torren says something, and it is the wrong thing, and it is recorded. Act card follows.",
+      "objectives": ["See the column off"],
+      "requires_flags": ["act1_bran_fell"],
+      "sets_flags": ["act1_encounter_departure", "act1_complete"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "They go south at dawn with the boy still asleep in the turret behind them, and nobody says the obvious thing about that.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "The yard is all elbows. A trunk goes out of a girl's hands at the level of your chest and you have it before you have decided to.",
+            "sets_flags": ["act1_encounter_departure"],
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "Her hands are still on it. Yours are under it. Four frames, and the yard shoves past on both sides.",
+            "direction": "Hold. Genuinely hold. No music change. She does not speak and the player is given the option to, which is a trap.",
+            "choices": [
+              {
+                "text": "Say nothing. Set it on the cart.",
+                "next": "n5",
+                "traits": { "bold": -1 },
+                "tag": "silent"
+              },
+              {
+                "text": "\"Careful.\"",
+                "next": "n4",
+                "traits": { "bold": 1 },
+                "sets_flags": ["act1_torren_spoke_first"],
+                "tag": "spoke"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "narrator",
+            "text": "It comes out flat, and it sounds like a rebuke, and it is not one, and there is no time at all to fix it. She takes the trunk. She is already three people away.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "narrator",
+            "text": "You do not learn her name. She does not learn yours. Two hours later the column is a smudge on the kingsroad and Winterfell is very, very quiet.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "hune",
+            "portrait": "hune_flat",
+            "text": "Well. That's that, then. Back to it, ser.",
+            "sets_flags": ["act1_complete"],
+            "end": true
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,883 @@
+{
+  "act_id": "act_4",
+  "title": "The Traitor's Daughter",
+  "pov": "nyra",
+  "timeline": "Months 6-7, 298 AC. King's Landing.",
+  "locations": ["red_keep_throne_room", "red_keep_service", "red_keep_tower_of_the_hand", "kings_landing_street", "great_sept_plaza"],
+  "summary": "The shortest act and the worst. Nyra's whole skill is being unseen, and in the space of one morning the Red Keep stops being a place where people are overlooked and becomes a place where people are hunted. She hides in corridors she has swept a thousand times, decides whether to lie to an armed man about a girl with a sword, is questioned by whoever noticed her in Act 2, and stands in a crowd on the plaza of the Great Sept of Baelor with a clear view of the steps.",
+  "entry_flags": ["act3_complete"],
+  "exit_flags": ["act4_complete", "act4_ned_executed", "act4_nyra_survives"],
+  "scenes": [
+    {
+      "scene_id": "s4_01_the_throne_room",
+      "title": "The Gold Cloaks Turn",
+      "level": "red_keep_throne_room",
+      "spawn": "servant_pillar",
+      "time_of_day": "morning",
+      "mode": "fixed",
+      "music": "none",
+      "stage_directions": "CANON: Ned brings Robert's will to the throne room to deny Joffrey's claim; Cersei tears it up; Janos Slynt's gold cloaks, bought by Littlefinger, turn on the Stark guard; Littlefinger puts a knife to Ned's throat with the words that he warned him not to trust him. Nyra is behind a pillar with a jug she has forgotten she is holding. She cannot leave; the doors are held. Composer: nothing at all until the first sword comes out, then one strike of something metallic and low, then nothing again.",
+      "objectives": ["Serve the court", "Get out of the throne room"],
+      "requires_flags": ["act3_complete"],
+      "sets_flags": ["act4_started", "act4_ned_arrested"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Nine days of bells and black cloth and a boy of twelve on a chair made of swords, looking pleased.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_hard",
+            "text": "This is the king's hand and the king's seal. Read it out. Read all of it out, and then we will speak about who sits there.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_cold",
+            "text": "Is this meant to be my death warrant, my lord? I confess I expected something longer.",
+            "next": "n4"
+          },
+          "n4": {
+            "speaker": "narrator",
+            "text": "She tears it into four pieces and lets them go, and they take a long time to reach the floor, and everyone in the hall watches them the whole way down.",
+            "sets_flags": ["act4_will_destroyed"],
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_hard",
+            "text": "Ser Janos. Take the queen and her children into custody. No harm is to come to them.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "Nothing happens. That is what it looks like from behind a pillar: a man gives an order and nothing at all happens, and then the gold cloaks turn around, and they are facing the wrong way, and every one of them is facing the wrong way at the same instant, which means it was arranged.",
+            "sets_flags": ["act4_cloaks_turned"],
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "narrator",
+            "text": "Twenty men of Winterfell die in front of the throne in less time than it takes to draw water. They fight well. It does not signify.",
+            "next": "n8"
+          },
+          "n8": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_flat",
+            "text": "I did tell you not to trust me, my lord.",
+            "direction": "Original phrasing of the canon beat. Said quietly, almost kindly, with the knife already at Ned's throat.",
+            "sets_flags": ["act4_baelish_betrayal"],
+            "next": "n9"
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "You are eleven paces from the throne with a jug of watered wine that you cannot remember picking up, and there is blood coming across the flagstones toward your feet in a slow, ordinary way, like spilled water.",
+            "choices": [
+              {
+                "text": "Get behind the pillar. Do not move again.",
+                "next": "n10",
+                "traits": { "bold": -1 },
+                "tag": "freeze"
+              },
+              {
+                "text": "Put the jug down. A servant with empty hands is running away; a servant with a jug is working.",
+                "next": "n11",
+                "traits": { "bold": 1 },
+                "tag": "clever"
+              },
+              {
+                "text": "Look at Lord Stark's face.",
+                "next": "n12",
+                "traits": { "honest": 2 },
+                "tag": "witness"
+              }
+            ]
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "You do not move for a very long time. Long enough that a gold cloak steps around you twice without registering that you are a person.",
+            "next": "n13"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "You pick the jug back up and you walk the length of the hall at a serving pace, past the bodies, and out through the servants' arch, and nobody stops you, because you are furniture and furniture does not flee.",
+            "sets_flags": ["act4_walked_out_clean"],
+            "traits": { "bold": 1 },
+            "next": "n13"
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "He is not frightened. That is the thing you cannot get past afterwards. He is looking at his own dead men and he is not frightened, he is ashamed, as though this were a thing he had done to them.",
+            "sets_flags": ["act4_saw_neds_face"],
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "They take him down the stair to the black cells. Somebody starts shouting orders about the Tower of the Hand and the Stark household, and you understand what that order is before they finish giving it.",
+            "sets_flags": ["act4_ned_arrested"],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s4_02_the_corridors",
+      "title": "Rooms You Have Swept",
+      "level": "red_keep_service",
+      "spawn": "throne_room_arch",
+      "time_of_day": "morning",
+      "mode": "stealth",
+      "music": "none",
+      "stage_directions": "CANON: the Stark household in the Tower of the Hand is put to the sword; Septa Mordane and Jory's men die; Syrio Forel holds a door with a wooden sword; Arya escapes into the city. Pure stealth, no combat, no fail state - detection means being caught and questioned, not death. Every corridor here has been walked by the player in Act 2 in daylight with a bucket. THE ARYA CHOICE is the act's moral centre and is entirely optional to get right. Composer: silence, and doors.",
+      "objectives": ["Get to the laundry", "Do not be found"],
+      "requires_flags": ["act4_ned_arrested"],
+      "sets_flags": ["act4_survived_the_purge"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "The service corridors are the safest place in the Red Keep and you have never once been frightened in them until this morning.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "There is a woman face-down outside the linen store. You know the shape of her back. You have handed her sheets.",
+            "sets_flags": ["act4_saw_the_dead"],
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "From the turn of the stair you can see a door held shut from the inside, and a man in front of it with a wooden practice sword, in his shirt, with no armour on at all, and four gold cloaks in the corridor who cannot get past him.",
+            "direction": "SYRIO. AFTER/EDGE proximity. She cannot help and there is no option to. She watches from a stair she must leave.",
+            "sets_flags": ["act4_saw_syrio"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "He is laughing at them. You leave before you find out how it ends and you are glad, afterwards, that you left before you found out how it ends.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "Somebody comes past you in the dark at a dead run - small, fast, filthy, a child - and there is a very thin sword in her hand and blood on her hem, and she is gone through the sept passage before you can breathe in.",
+            "sets_flags": ["act4_saw_arya"],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "You. Girl. A child came through here. Stark's youngest. Skinny thing, brown hair, dressed like a stableboy.",
+            "direction": "THE ARYA CHOICE. Detection is irrelevant here - she has been seen, and the only question is what she says. All three options are survivable and the difference is who Nyra is.",
+            "choices": [
+              {
+                "text": "\"Down to the kitchens, ser. Toward the river gate.\"",
+                "next": "n22",
+                "traits": { "honest": -2, "merciful": 3, "bold": 2 },
+                "sets_flags": ["act4_lied_for_arya"],
+                "tag": "lie"
+              },
+              {
+                "text": "\"Through the sept passage, ser.\"",
+                "next": "n24",
+                "traits": { "honest": 1, "merciful": -3 },
+                "sets_flags": ["act4_told_them_about_arya"],
+                "tag": "tell"
+              },
+              {
+                "text": "\"I've seen nobody, ser.\"",
+                "next": "n26",
+                "traits": { "honest": -1, "merciful": 1 },
+                "sets_flags": ["act4_said_nothing_about_arya"],
+                "tag": "nothing"
+              }
+            ]
+          },
+          "n22": {
+            "speaker": "narrator",
+            "text": "You send four armed men in exactly the wrong direction, in a corridor, to their faces, in a castle where a hundred people have been killed this morning for less.",
+            "next": "n23"
+          },
+          "n23": {
+            "speaker": "narrator",
+            "text": "When they are gone you find that you cannot let go of the door frame for some time. You do not know that girl's name. You have never spoken to her. She had a sword and she was nine and she was running and that was, apparently, enough.",
+            "traits": { "bold": 1 },
+            "relationship": { "arya_stark": 3 },
+            "end": true
+          },
+          "n24": {
+            "speaker": "narrator",
+            "text": "You tell him. It is true, and it is quick, and he does not thank you, and he is already moving.",
+            "next": "n25"
+          },
+          "n25": {
+            "speaker": "narrator",
+            "text": "They do not catch her. You find that out weeks later and it does not help at all, because you will always know what you said in the corridor, and so will he.",
+            "sets_flags": ["act4_trant_knows_her_face"],
+            "relationship": { "meryn_trant": 1, "arya_stark": -3 },
+            "end": true
+          },
+          "n26": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_hard",
+            "text": "Nobody. In a corridor with one end.",
+            "next": "n27"
+          },
+          "n27": {
+            "speaker": "narrator",
+            "text": "He looks at you for four seconds, deciding whether you are worth the time, and decides you are not, and goes the wrong way anyway out of impatience.",
+            "sets_flags": ["act4_trant_knows_her_face"],
+            "next": "n28"
+          },
+          "n28": {
+            "speaker": "narrator",
+            "text": "You did not lie. You did not help. You will get to think about which of those you did for a long while.",
+            "end": true
+          },
+          "n30": {
+            "speaker": "mabb",
+            "portrait": "mabb_terrified",
+            "text": "In. IN. Under the tubs and don't you make a sound, girl, they've been through here twice.",
+            "requires_flags": ["act4_saw_the_dead"],
+            "sets_flags": ["act4_reached_the_laundry", "act4_survived_the_purge"],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "nyra",
+            "portrait": "nyra_shaking",
+            "text": "Pate. Mabb, where's Pate?",
+            "next": "n32"
+          },
+          "n32": {
+            "speaker": "mabb",
+            "portrait": "mabb_broken",
+            "text": "Don't.",
+            "requires_flags": ["act2_told_pate"],
+            "direction": "If Nyra told Pate the godswood secret in Act 2, he repeated it, because he is fourteen. He does not survive the morning. Mabb will not say it and does not have to.",
+            "sets_flags": ["act4_pate_died"],
+            "next": "n33"
+          },
+          "n33": {
+            "speaker": "narrator",
+            "text": "You get under the tubs. You stay there until dark. It is the second time in your life somebody has hidden you, and you were too small to remember the first.",
+            "direction": "The only reference in Act 4 to the motherhouse. Unexplained.",
+            "end": true
+          },
+          "n34": {
+            "speaker": "mabb",
+            "portrait": "mabb_shaken",
+            "text": "Kitchens. He's under a table with the cook's boy and he's whole. Small mercies and they're the only size we get.",
+            "requires_flags": ["!act2_told_pate"],
+            "relationship": { "pate": 1 },
+            "next": "n33"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s4_03_the_city_turns",
+      "title": "A City With Its Gates Shut",
+      "level": "kings_landing_street",
+      "spawn": "river_gate",
+      "time_of_day": "day",
+      "mode": "explore",
+      "music": "kl_hostile",
+      "stage_directions": "CANON: after Ned's arrest the city closes - gates shut, grain prices climb, the smallfolk turn ugly, and Northern accents get people killed in the street. Free-roam of the same King's Landing streets from Act 2, re-dressed hostile. Nyra is sent out for flour because Mabb is too old to go. Optional: Sansa in the gallery (EDGE), the stranger in the market (SEED). Composer: the Act 2 street theme, same tune, wrong intervals.",
+      "objectives": ["Buy flour at any price", "Get back inside the walls"],
+      "requires_flags": ["act4_survived_the_purge"],
+      "sets_flags": ["act4_city_turned"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "mabb",
+            "portrait": "mabb_grim",
+            "text": "Flour. Whatever it costs, and it'll cost. And Nyra - your hair under the cap and your mouth shut. There's men out there beating anyone who sounds wrong and they're not fussy about what wrong means today.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "The gates have been shut nine days. You have never seen this city with its gates shut and neither has anybody else, and it has changed the smell of it.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "A grain seller with two armed men behind his stall and a price chalked up that has been rubbed out and rewritten three times this morning.",
+            "requires_flags": ["!act4_bought_flour"],
+            "choices": [
+              {
+                "text": "Pay it.",
+                "next": "n11",
+                "sets_flags": ["act4_bought_flour"],
+                "tag": "pay"
+              },
+              {
+                "text": "Argue.",
+                "next": "n12",
+                "traits": { "bold": 2 },
+                "tag": "argue"
+              }
+            ]
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "You pay four times what it is worth with the queen's household money and it is not your money and you still feel it.",
+            "end": true
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "You get it for three times what it is worth, and one of the armed men remembers your face, which is a thing you have spent your entire life avoiding, and you got two coppers for it.",
+            "sets_flags": ["act4_bought_flour", "act4_remembered_in_the_market"],
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "A crowd around a man on his knees in the mud with a Northern voice, being asked to say something in it, again, and again, for the entertainment of it.",
+            "choices": [
+              {
+                "text": "Keep walking.",
+                "next": "n21",
+                "traits": { "merciful": -1 },
+                "tag": "walk"
+              },
+              {
+                "text": "Shout that the gold cloaks are coming.",
+                "next": "n22",
+                "traits": { "merciful": 2, "bold": 2 },
+                "sets_flags": ["act4_saved_the_northman"],
+                "tag": "intervene"
+              }
+            ]
+          },
+          "n21": {
+            "speaker": "narrator",
+            "text": "You keep walking. Behind you the noise changes and you do not turn around, and you get very good at not turning around, over the next few weeks.",
+            "end": true
+          },
+          "n22": {
+            "speaker": "narrator",
+            "text": "It works for about nine seconds, which is enough for a man with a Northern voice to get up and get gone, and then the crowd works out that there are no gold cloaks and looks around for who said it.",
+            "next": "n23"
+          },
+          "n23": {
+            "speaker": "narrator",
+            "text": "You are already three stalls away with your head down and a sack of flour on your hip, being nobody, which is the only thing you have ever been good at and today it was worth something.",
+            "traits": { "bold": 1 },
+            "end": true
+          },
+          "n30": {
+            "speaker": "narrator",
+            "text": "An old man by the fishmonger's is looking at you. Not the way men look at girls. He has stopped what he was doing and he is looking at your face like a man reading a word in a language he has not seen since he was young.",
+            "direction": "THE SEED. This is the single hard planting of the Valyrian arc in Chapter 1 and it resolves in Chapter 2. The word Valyrian is not used. Nothing is explained.",
+            "requires_flags": ["!act4_stranger_recognized_her"],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "stranger",
+            "portrait": "stranger_old",
+            "text": "Your eyes. Girl - forgive me. I knew a woman with your eyes, a long while ago, and she was not from here, and she did not end well.",
+            "sets_flags": ["act4_stranger_recognized_her"],
+            "choices": [
+              {
+                "text": "\"Who was she?\"",
+                "next": "n32",
+                "traits": { "bold": 2 },
+                "sets_flags": ["act4_asked_the_stranger"],
+                "tag": "ask"
+              },
+              {
+                "text": "\"You've mistaken me, ser.\"",
+                "next": "n33",
+                "traits": { "honest": -1 },
+                "tag": "deny"
+              },
+              {
+                "text": "Walk away.",
+                "next": "n34",
+                "tag": "flee"
+              }
+            ]
+          },
+          "n32": {
+            "speaker": "narrator",
+            "text": "He opens his mouth and the crowd surges - a cart, a shout, the press of forty people going the other way - and when it clears he is not where he was, and he is not anywhere, and you stand in the fish market for a quarter of an hour looking for a man you would not be able to describe.",
+            "direction": "Deliberately unresolved. Do not resolve it. Chapter 2 hook.",
+            "next": "n35"
+          },
+          "n33": {
+            "speaker": "stranger",
+            "portrait": "stranger_sad",
+            "text": "Aye. I've done that before. Old men do.",
+            "next": "n35"
+          },
+          "n34": {
+            "speaker": "narrator",
+            "text": "You are twenty paces gone before you let yourself think about it and then you think about it for three years.",
+            "next": "n35"
+          },
+          "n35": {
+            "speaker": "narrator",
+            "text": "You take your cap off in the alley behind the Mud Gate, in the dark, where there is nobody, and you look at a piece of your own hair for a while, and then you put the cap back on.",
+            "sets_flags": ["act4_city_turned"],
+            "end": true
+          },
+          "n40": {
+            "speaker": "narrator",
+            "text": "In the gallery above the throne room, a girl of twelve in grey is kneeling in front of the court and asking for her father's life in a clear, careful, well-taught voice, and every word of it has been written for her by somebody else.",
+            "direction": "EDGE. Sansa. Nyra is on the servants' walk above and can see the top of her head.",
+            "sets_flags": ["act4_saw_sansa_plead"],
+            "next": "n41"
+          },
+          "n41": {
+            "speaker": "narrator",
+            "text": "She does it well. She has been raised for exactly this and nobody ever told her what it was for.",
+            "relationship": { "sansa_stark": 1 },
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s4_04_the_questioning",
+      "title": "Someone Remembers You",
+      "level": "red_keep_service",
+      "spawn": "laundry",
+      "time_of_day": "night",
+      "mode": "fixed",
+      "music": "interrogation",
+      "stage_directions": "PAYOFF SCENE. Which version fires depends entirely on Act 2: act2_cersei_noticed routes to Cersei, act2_littlefinger_noticed to Baelish, and neither to Ser Meryn Trant, which is the worst of the three because he wants nothing from her. If both Act 2 flags are set, Baelish takes precedence - he gets there first, and says so. No combat. No escape. Failing forward: there is no version of this where she is not questioned. Composer: one instrument, close-miked, uncomfortable.",
+      "objectives": ["Answer"],
+      "requires_flags": ["act4_city_turned"],
+      "sets_flags": ["act4_questioned"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "mabb",
+            "portrait": "mabb_afraid",
+            "text": "Someone's asked for you by name. By your name, girl. Nobody's asked for me by name in sixty years.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "There are three people in this castle who know your name and you have spent two months trying not to count them.",
+            "choices": [
+              {
+                "text": "Go.",
+                "next": "n3",
+                "tag": "go"
+              }
+            ]
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "...",
+            "direction": "Router node. SceneDirector selects the branch by flag priority: baelish > cersei > trant.",
+            "requires_flags": ["act2_littlefinger_noticed"],
+            "next": "n10"
+          },
+          "n4": {
+            "speaker": "narrator",
+            "text": "...",
+            "requires_flags": ["act2_cersei_noticed", "!act2_littlefinger_noticed"],
+            "next": "n30"
+          },
+          "n5": {
+            "speaker": "narrator",
+            "text": "...",
+            "requires_flags": ["!act2_cersei_noticed", "!act2_littlefinger_noticed"],
+            "next": "n50"
+          },
+          "n10": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleasant",
+            "text": "Nyra. Sit down. There is a chair, it is for sitting in, and I have gone to some trouble to get to you before somebody less pleasant did.",
+            "sets_flags": ["act4_interrogated_by_baelish"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_mild",
+            "text": "You were in Lord Arryn's solar with a very old book. You were in the godswood with a basket of linen. You were behind a pillar in the throne room eleven days ago. You are the most well-travelled girl in this castle and you have never once been anywhere on purpose.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "nyra",
+            "portrait": "nyra_blank",
+            "text": "I go where I'm sent, m'lord.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_amused",
+            "text": "Yes. And I am about to start sending you. Here is the arrangement, and you should understand that it is not an offer. You will continue to be exactly what you are - invisible, useful, and holding something in both hands - and once in a while somebody will ask you what you saw, and you will tell them.",
+            "next": "n14"
+          },
+          "n14": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleasant",
+            "text": "In exchange, nobody will ever have this conversation with you again. Which is worth rather more than you think, because the alternative was going to be Ser Meryn, and Ser Meryn does not have conversations.",
+            "choices": [
+              {
+                "text": "\"Yes, m'lord.\"",
+                "next": "n15",
+                "traits": { "loyal": -1 },
+                "sets_flags": ["act4_baelish_owns_her"],
+                "tag": "accept"
+              },
+              {
+                "text": "\"And if I say no?\"",
+                "next": "n16",
+                "traits": { "bold": 3 },
+                "tag": "push"
+              },
+              {
+                "text": "\"What did you do to Lord Stark?\"",
+                "next": "n17",
+                "traits": { "honest": 3, "bold": 3 },
+                "sets_flags": ["act4_asked_baelish_about_ned"],
+                "tag": "accuse"
+              }
+            ]
+          },
+          "n15": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleased",
+            "text": "Good girl. Go back to your laundry.",
+            "relationship": { "petyr_baelish": 2 },
+            "next": "n20"
+          },
+          "n16": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_mild",
+            "text": "Then you say no, and you go back to your laundry, and in eight or nine days something will happen to you and it will have nothing whatever to do with me. That is not a threat, Nyra. I am far too busy to threaten a laundress. It is simply how this castle works when nobody is holding an umbrella over you.",
+            "sets_flags": ["act4_baelish_owns_her"],
+            "relationship": { "petyr_baelish": 1 },
+            "next": "n20"
+          },
+          "n17": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_still",
+            "text": "...",
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_quiet",
+            "text": "I gave an honourable man exactly what he asked me for and he was astonished when it was not what he wanted. That is the entire answer and you will not get a better one from anybody who was in the room.",
+            "next": "n19"
+          },
+          "n19": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleasant",
+            "text": "And now you have asked me a question, which nobody does, which means I shall have to keep you. Go back to your laundry.",
+            "sets_flags": ["act4_baelish_owns_her"],
+            "relationship": { "petyr_baelish": 3 },
+            "next": "n20"
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "You are down the stair before you understand that you were never in any danger at all, and that being valuable to Petyr Baelish is a worse thing to be than forgotten by him, and that it is done now.",
+            "sets_flags": ["act4_questioned"],
+            "end": true
+          },
+          "n30": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_cold",
+            "text": "Take the cap off.",
+            "sets_flags": ["act4_interrogated_by_cersei"],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "narrator",
+            "text": "She looks at your hair for a long time. Then at your face. She does not ask you a single question about the godswood, or the book, or the throne room, and you realise she has not brought you here about any of that.",
+            "next": "n32"
+          },
+          "n32": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_narrow",
+            "text": "Where were you born.",
+            "choices": [
+              {
+                "text": "\"A motherhouse at Rosby, your grace. I don't know past that.\"",
+                "next": "n33",
+                "traits": { "honest": 2 },
+                "sets_flags": ["act4_told_cersei_rosby"],
+                "tag": "truth"
+              },
+              {
+                "text": "\"Flea Bottom, your grace.\"",
+                "next": "n34",
+                "traits": { "honest": -2 },
+                "tag": "lie"
+              }
+            ]
+          },
+          "n33": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_still",
+            "text": "A foundling. Of course you are.",
+            "next": "n35"
+          },
+          "n34": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_contempt",
+            "text": "No, you weren't. Nobody out of Flea Bottom has teeth like that.",
+            "next": "n35"
+          },
+          "n35": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_cold",
+            "text": "When I was a girl there was a great deal of that hair in this castle, and there were rather a lot of fires, and then there was none of it. It has taken me a moment to remember why the sight of you annoyed me.",
+            "direction": "As close as Chapter 1 comes. She does not say the word. She does not draw the conclusion. She is talking about the Sack, and she is bored, and that is what saves Nyra.",
+            "sets_flags": ["act4_cersei_almost_said_it"],
+            "next": "n36"
+          },
+          "n36": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_dismissive",
+            "text": "Keep it covered in my presence. Get out.",
+            "next": "n37"
+          },
+          "n37": {
+            "speaker": "narrator",
+            "text": "You are out of the room and down two flights before your legs stop working properly, and you sit on a stair in the dark for an hour, and you do not know what just happened, and you know exactly that something did.",
+            "sets_flags": ["act4_questioned"],
+            "end": true
+          },
+          "n50": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "You were in the corridor.",
+            "sets_flags": ["act4_interrogated_by_trant"],
+            "next": "n51"
+          },
+          "n51": {
+            "speaker": "narrator",
+            "text": "He does not sit down and he does not offer you anything and he does not seem to be enjoying it, which you had expected and which would have been better.",
+            "next": "n52"
+          },
+          "n52": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "The Stark girl. You said kitchens. There was no Stark girl in the kitchens.",
+            "requires_flags": ["act4_lied_for_arya"],
+            "choices": [
+              {
+                "text": "\"I thought I saw her go that way, ser.\"",
+                "next": "n53",
+                "traits": { "honest": -1 },
+                "tag": "hold_the_lie"
+              },
+              {
+                "text": "\"I lied, ser.\"",
+                "next": "n54",
+                "traits": { "honest": 3, "bold": 3 },
+                "sets_flags": ["act4_confessed_the_lie"],
+                "tag": "confess"
+              }
+            ]
+          },
+          "n53": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "Mm.",
+            "next": "n56"
+          },
+          "n54": {
+            "speaker": "narrator",
+            "text": "He hits you once, without any particular feeling in it, the way a man closes a door he is not thinking about.",
+            "sets_flags": ["act4_struck_by_trant"],
+            "next": "n55"
+          },
+          "n55": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "Right.",
+            "next": "n56"
+          },
+          "n56": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "You'll be on the plaza when they bring the traitor out. All of you will. Her grace wants the household seen there. Front, where you can be seen looking pleased about it.",
+            "sets_flags": ["act4_ordered_to_the_plaza"],
+            "next": "n57"
+          },
+          "n57": {
+            "speaker": "narrator",
+            "text": "He leaves. He never asked your name. He has no idea what you heard in the godswood or read in the solar and he never will, because he has never once wondered what a servant knows, and that incuriosity is the only reason you are alive.",
+            "sets_flags": ["act4_questioned"],
+            "end": true
+          },
+          "n58": {
+            "speaker": "meryn_trant",
+            "portrait": "trant_flat",
+            "text": "You said nothing. In a corridor with one end.",
+            "requires_flags": ["!act4_lied_for_arya"],
+            "next": "n56"
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s4_05_the_steps",
+      "title": "The Steps of Baelor",
+      "level": "great_sept_plaza",
+      "spawn": "crowd_rear",
+      "time_of_day": "midday",
+      "mode": "fixed",
+      "music": "the_sept",
+      "stage_directions": "ACT CLIMAX AND THE CHAPTER'S WORST SCENE. CANON: Ned Stark is brought before the crowd at the Great Sept of Baelor, confesses treason and names Joffrey the true king to save his daughters, and Joffrey - against the plan of everyone on the platform - orders his head taken. Ilyn Payne does it with Ice, Ned's own sword. Sansa is on the platform. Arya is in the crowd, pulled down by Yoren of the Night's Watch. Nyra is pushed toward the front by the household, NOT by choice; the crowd carries her. THE HOLD MECHANIC: the player may hold the look button to keep the camera on the steps or release to let it fall to the flagstones. Both are recorded. Neither is judged. Composer: crowd noise only, and it cuts to nothing on the stroke, and stays nothing for eleven seconds.",
+      "objectives": ["Stand where you are put"],
+      "requires_flags": ["act4_questioned"],
+      "sets_flags": ["act4_ned_executed", "act4_complete", "act4_nyra_survives"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Half the city is on the plaza and the other half is on the roofs. The household is put near the front because being seen is the point of the household today.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "You do not choose to be at the front. You are carried there, by forty thousand people all leaning the same way, which is how most people end up watching most things.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "They bring him out. He is grey and he is thin and his leg is wrong and he has to be helped up three steps, and the crowd makes a noise you have never heard a crowd make.",
+            "sets_flags": ["act4_ned_brought_out"],
+            "next": "n4"
+          },
+          "n4": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_broken",
+            "text": "I am Eddard Stark, Lord of Winterfell and Hand of the King, and I come before you to confess my treason.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "narrator",
+            "text": "He is not looking at the crowd. He is looking at one place in it, low down, near the statue, and he does not stop looking at it while he says the rest.",
+            "direction": "He is looking at Arya. The player is shown where he is looking and is not told why. Anyone who has read the books will know.",
+            "sets_flags": ["act4_saw_where_he_looked"],
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_broken",
+            "text": "I betrayed the faith of my king and the trust of my friend. Joffrey of the House Baratheon is the one true heir to the Iron Throne, by the grace of all the gods, Lord of the Seven Kingdoms and Protector of the Realm.",
+            "sets_flags": ["act4_ned_confessed"],
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "narrator",
+            "text": "It is a lie. You are one of perhaps five people on this plaza who knows precisely which part of it is the lie and exactly how, and there is nothing at all to be done with that.",
+            "requires_flags": ["act2_heard_godswood"],
+            "next": "n8"
+          },
+          "n8": {
+            "speaker": "narrator",
+            "text": "On the platform the septon is already turning to speak of mercy and the Wall. The queen is nodding. The girl in grey has both hands over her mouth. Everything on that platform has been agreed beforehand.",
+            "next": "n9"
+          },
+          "n9": {
+            "speaker": "joffrey_baratheon",
+            "portrait": "joffrey_bright",
+            "text": "My mother wishes me to let Lord Eddard join the Night's Watch. Stripped of all titles and powers, he would serve the realm in permanent exile. And my lady Sansa has begged mercy for her father.",
+            "next": "n10"
+          },
+          "n10": {
+            "speaker": "joffrey_baratheon",
+            "portrait": "joffrey_delighted",
+            "text": "But they have the soft hearts of women. So long as I am your king, treason shall never go unpunished. Ser Ilyn - bring me his head.",
+            "sets_flags": ["act4_joffrey_ordered_it"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "Everything happens at once and none of it is a plan. The queen is on her feet saying a word nobody hears. The septon has hold of the king's cloak. There are ten thousand people shouting and it is not clear what any of them want.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "A man in black comes over the plinth of the statue in front of you and takes a small filthy child around the waist and puts a hand over her eyes and turns her face into his chest, and you are close enough to see him do it, and you understand what he is and you say nothing at all.",
+            "direction": "Yoren and Arya. Nyra is one of the very few witnesses. She says nothing. This is not a choice node - after the corridor, she is already the person who says nothing.",
+            "sets_flags": ["act4_saw_yoren_take_arya"],
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "The headsman comes up the steps with a greatsword taller than the boy who ordered this, and it is a beautiful sword, and it is dark, and it is smoking slightly in the sun the way only one kind of steel does.",
+            "direction": "Ice. Named only by description. Torren, in Act 5, will hear that it was Ice, and the player will already know.",
+            "next": "n14"
+          },
+          "n14": {
+            "speaker": "narrator",
+            "text": "They put him down on the step.",
+            "direction": "HOLD MECHANIC. The prompt appears now: hold to keep looking. No timer is shown. The stroke comes at 6.5 seconds regardless.",
+            "choices": [
+              {
+                "text": "Hold. Watch it.",
+                "next": "n15",
+                "traits": { "honest": 2, "merciful": -1 },
+                "sets_flags": ["act4_watched_execution"],
+                "tag": "watched"
+              },
+              {
+                "text": "Let go. Look at the flagstones.",
+                "next": "n16",
+                "traits": { "merciful": 1 },
+                "sets_flags": ["act4_looked_away"],
+                "tag": "looked_away"
+              }
+            ]
+          },
+          "n15": {
+            "speaker": "narrator",
+            "text": "You watch it. All of it, from the first movement of the sword to the last, and the sound is not what you expected and the crowd's sound afterward is not what you expected either.",
+            "next": "n17"
+          },
+          "n16": {
+            "speaker": "narrator",
+            "text": "You look at the flagstones between your feet. There is a crack in one of them shaped like a river. You hear all of it. It turns out that the looking was never the part.",
+            "next": "n17"
+          },
+          "n17": {
+            "speaker": "narrator",
+            "text": "Forty thousand people, and for about eleven seconds not one of them makes a sound. Then somebody cheers, and then everybody does, because it is easier.",
+            "sets_flags": ["act4_ned_executed"],
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "narrator",
+            "text": "Birds go up off the roofs of the Sept, all at once, the whole flock, and everyone on the plaza looks up at them because it is somewhere else to look.",
+            "next": "n19"
+          },
+          "n19": {
+            "speaker": "nyra",
+            "portrait": "nyra_hollow",
+            "text": "...",
+            "direction": "She has no line. She has had no line for the entire scene. She does not get one now.",
+            "next": "n20"
+          },
+          "n20": {
+            "speaker": "mabb",
+            "portrait": "mabb_broken",
+            "text": "Come away, girl. Come away now. We've flour to get and the queues will be terrible.",
+            "direction": "The most devastating line in the act, and it is about flour, and she means it, because she is seventy-one and this is the fourth king she has served and there is always flour.",
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "narrator",
+            "text": "You go and get the flour. The queues are terrible.",
+            "sets_flags": ["act4_complete", "act4_nyra_survives"],
+            "end": true
+          }
+        }
+      }
+    }
+  ]
+}

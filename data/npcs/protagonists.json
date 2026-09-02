@@ -1,0 +1,39 @@
+{
+  "_comment": "Single source of truth for protagonist naming. Every dialogue line refers to these through the {knight}, {girl} and {house} tokens, so renaming a protagonist is an edit to this file and nothing else. See docs/CHARACTER_BIBLE.md for the reasoning and the alternates.",
+  "tokens": {
+    "knight": "Torren",
+    "knight_full": "Ser Torren Slate",
+    "house": "Slate",
+    "house_seat": "Blackpool",
+    "girl": "Nyra",
+    "girl_full": "Nyra"
+  },
+  "protagonists": {
+    "torren": {
+      "display_name": "Ser Torren Slate",
+      "short_name": "Torren",
+      "age": 23,
+      "house": "Slate of Blackpool",
+      "role": "Household knight, seconded to Winterfell's guard",
+      "pov_acts": ["act_1", "act_3", "act_5"],
+      "sprite": "res://assets/sprites/torren.png",
+      "portrait_set": "torren",
+      "combat": true,
+      "stats": { "max_hp": 40, "attack": 6, "armor": 2, "stamina": 100 },
+      "trait_pressure": ["bold", "loyal"]
+    },
+    "nyra": {
+      "display_name": "Nyra",
+      "short_name": "Nyra",
+      "age": 18,
+      "house": null,
+      "role": "Servant, the queen's household, the Red Keep",
+      "pov_acts": ["act_2", "act_4"],
+      "sprite": "res://assets/sprites/nyra.png",
+      "portrait_set": "nyra",
+      "combat": false,
+      "stats": { "detection_max": 4 },
+      "trait_pressure": ["honest", "merciful"]
+    }
+  }
+}

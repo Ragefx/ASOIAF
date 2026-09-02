@@ -1,0 +1,1182 @@
+{
+  "act_id": "act_5",
+  "title": "The Sword in the Morning",
+  "pov": "torren",
+  "timeline": "Month 7, 298 AC. The Riverlands.",
+  "locations": [
+    "riverlands_camp",
+    "whispering_wood",
+    "riverrun_field",
+    "riverrun_hall"
+  ],
+  "summary": "Six thousand horse in a wood at night, waiting for a man who does not know they are there. Torren fights his first battle and kills his first man and finds out that he is neither as brave nor as much of a coward as he had privately arranged to be. Then he does it again in daylight, on open ground, which is worse. Then a rider comes up the river road from the south with news that is already a fortnight old, and a boy of fifteen puts his sword into a tree, and eleven hundred men in a hall decide that Westeros has four kings in it.",
+  "entry_flags": [
+    "act3_complete",
+    "act4_complete"
+  ],
+  "exit_flags": [
+    "act5_complete",
+    "ch1_complete",
+    "act5_first_kill",
+    "act5_robb_crowned"
+  ],
+  "scenes": [
+    {
+      "scene_id": "s5_01_the_night_camp",
+      "title": "The Last Quiet Night",
+      "level": "riverlands_camp",
+      "spawn": "picket_line",
+      "time_of_day": "night",
+      "mode": "explore",
+      "music": "camp_before",
+      "stage_directions": "The chapter's last quiet scene, and it is doing a specific job: every relationship the player built in Act 3 gets one conversation, and some of these men are dead by tomorrow evening. Free-roam a camp with no fires - Robb has forbidden them. Six optional conversations, and the player will not have time for all six, which is deliberate. Composer: a single instrument per campfire that isn't lit. Very sparse. Nothing resolves.",
+      "objectives": [
+        "Walk the camp before the muster",
+        "Sleep, if you can"
+      ],
+      "requires_flags": [
+        "act3_complete",
+        "act4_complete"
+      ],
+      "sets_flags": [
+        "act5_started",
+        "act5_night_camp"
+      ],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "No fires. Six thousand men and a hundred acres of wood and not one fire, and the whole camp talking in the voice people use in a sickroom.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "hune",
+            "portrait": "hune_quiet",
+            "text": "Eat something. You'll not want to and you'll want to have done, after.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "hune",
+            "portrait": "hune_quiet",
+            "text": "Ser. Sit down a moment.",
+            "requires_flags": [
+              "!act5_talked_hune"
+            ],
+            "sets_flags": [
+              "act5_talked_hune"
+            ],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "torren",
+            "portrait": "torren_quiet",
+            "text": "Serjeant.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "hune",
+            "portrait": "hune_quiet",
+            "text": "Two things and then I'll leave you be. First: when it starts you'll not hear a single order after the first one. Nobody does. So get the first one and then just stay on the man in front of you.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "hune",
+            "portrait": "hune_quiet",
+            "text": "Second. You'll kill somebody tomorrow and you'll think about it for a week and then you'll stop, and the stopping is the part that frightens the good ones. It frightened me. It doesn't mean anything's wrong with you. It means you're a soldier now and that's a smaller thing than the songs make out.",
+            "relationship": {
+              "hune": 2
+            },
+            "choices": [
+              {
+                "text": "\"Were you frightened? Your first?\"",
+                "next": "n14",
+                "traits": {
+                  "honest": 2
+                },
+                "tag": "ask"
+              },
+              {
+                "text": "\"I'm ready, serjeant.\"",
+                "next": "n15",
+                "traits": {
+                  "bold": 1,
+                  "honest": -1
+                },
+                "tag": "brave_face"
+              },
+              {
+                "text": "\"I don't want to.\"",
+                "next": "n16",
+                "traits": {
+                  "honest": 3
+                },
+                "tag": "truth"
+              }
+            ]
+          },
+          "n14": {
+            "speaker": "hune",
+            "portrait": "hune_wry",
+            "text": "I wet myself. Twenty-one years old at the Trident, on the left, and I stood in it for an hour. Nobody noticed. Everybody around me had done the same and we've all been lying about it for seventeen years.",
+            "relationship": {
+              "hune": 1
+            },
+            "next": "n17"
+          },
+          "n15": {
+            "speaker": "hune",
+            "portrait": "hune_flat",
+            "text": "No you're not. That's all right. Nobody is and the ones who say they are go first.",
+            "next": "n17"
+          },
+          "n16": {
+            "speaker": "hune",
+            "portrait": "hune_kind",
+            "text": "Good. Wanting to is a disease and I've buried three men who had it.",
+            "relationship": {
+              "hune": 2
+            },
+            "next": "n17"
+          },
+          "n17": {
+            "speaker": "hune",
+            "portrait": "hune_quiet",
+            "text": "Get your head down, ser. It'll be a long day and you'll get old in the middle of it.",
+            "direction": "Serjeant Hune dies in the Whispering Wood, in s5_02, in the second wave, off to the player's left, and it is not a cutscene and there is no music for it.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_quiet",
+            "text": "Blackpool. Look at that.",
+            "requires_flags": [
+              "act3_met_greatjon",
+              "!act5_talked_greatjon"
+            ],
+            "sets_flags": [
+              "act5_talked_greatjon"
+            ],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "torren",
+            "portrait": "torren_quiet",
+            "text": "At what, my lord?",
+            "next": "n22"
+          },
+          "n22": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_quiet",
+            "text": "Six thousand horse in a wood and you can hear an owl. I've been fighting since before your father could grow a beard and I've never heard a quiet like it. Whatever else happens, lad, you were in this wood tonight.",
+            "relationship": {
+              "greatjon_umber": 2
+            },
+            "end": true
+          },
+          "n30": {
+            "speaker": "wells",
+            "portrait": "wells_quiet",
+            "text": "In the rain, wasn't it. A field, in the rain.",
+            "requires_flags": [
+              "act3_camp_wells",
+              "!act5_talked_wells"
+            ],
+            "sets_flags": [
+              "act5_talked_wells"
+            ],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "torren",
+            "portrait": "torren_quiet",
+            "text": "You've been at that a year, ser.",
+            "next": "n32"
+          },
+          "n32": {
+            "speaker": "wells",
+            "portrait": "wells_flat",
+            "text": "I have. I'd like to stop. Ser Torren - I was knighted in a sept with three hundred people watching and a septon with oil, and tomorrow morning it will be worth precisely as much as a wet field, and I have been trying to say that to you since Winterfell and making a poor job of it.",
+            "relationship": {
+              "wells": 3
+            },
+            "next": "n33"
+          },
+          "n33": {
+            "speaker": "narrator",
+            "text": "It is, you realise, an apology, and it has taken him four months and a war to get to it.",
+            "direction": "Ser Emmon Wells survives the Whispering Wood and dies at the Battle of the Camps in s5_04, in the third wave, in front of the player, and can be saved. See s5_04 n40.",
+            "end": true
+          },
+          "n40": {
+            "speaker": "robb_stark",
+            "portrait": "robb_quiet",
+            "text": "You can't sleep either.",
+            "requires_flags": [
+              "!act5_talked_robb"
+            ],
+            "sets_flags": [
+              "act5_talked_robb"
+            ],
+            "next": "n41"
+          },
+          "n41": {
+            "speaker": "torren",
+            "portrait": "torren_quiet",
+            "text": "No, my lord.",
+            "next": "n42"
+          },
+          "n42": {
+            "speaker": "robb_stark",
+            "portrait": "robb_quiet",
+            "text": "I keep doing the sum. Six thousand horse. If I am wrong about where he is, or wrong about the hour, or he has a scout I didn't account for - six thousand. And there is nobody I can ask, because the moment I ask, they'll all know I don't know.",
+            "choices": [
+              {
+                "text": "\"You're not wrong, my lord.\"",
+                "next": "n43",
+                "traits": {
+                  "loyal": 2,
+                  "honest": -1
+                },
+                "tag": "reassure"
+              },
+              {
+                "text": "\"You might be. Do it anyway.\"",
+                "next": "n44",
+                "traits": {
+                  "honest": 3,
+                  "bold": 2
+                },
+                "tag": "honest"
+              },
+              {
+                "text": "\"Ask me, my lord. I'm nobody. It costs you nothing.\"",
+                "next": "n45",
+                "traits": {
+                  "loyal": 3
+                },
+                "tag": "offer"
+              }
+            ]
+          },
+          "n43": {
+            "speaker": "robb_stark",
+            "portrait": "robb_tired",
+            "text": "You don't know that. But thank you.",
+            "relationship": {
+              "robb_stark": 1
+            },
+            "next": "n46"
+          },
+          "n44": {
+            "speaker": "robb_stark",
+            "portrait": "robb_quiet",
+            "text": "...Aye. That's the answer, isn't it. That's the whole of the answer and everyone's been so careful not to say it to me.",
+            "relationship": {
+              "robb_stark": 3
+            },
+            "next": "n46"
+          },
+          "n45": {
+            "speaker": "robb_stark",
+            "portrait": "robb_almost_smiling",
+            "text": "You're not nobody, ser, you're the man who carried my brother down a stair. But I'll take it. Gods, I'll take it.",
+            "requires_flags": [
+              "act1_torren_carried_bran"
+            ],
+            "relationship": {
+              "robb_stark": 4
+            },
+            "next": "n46"
+          },
+          "n46": {
+            "speaker": "robb_stark",
+            "portrait": "robb_quiet",
+            "text": "My father is in a cell in King's Landing and I am about to spend six thousand men getting him out. That is the only reason any of this is happening. I want somebody else to have heard me say it.",
+            "direction": "DRAMATIC IRONY AT MAXIMUM. Ned has been dead for eleven days. The player watched it. Robb does not know. Torren does not know. Nobody in this camp knows.",
+            "sets_flags": [
+              "act5_robb_said_why"
+            ],
+            "next": "n47"
+          },
+          "n47": {
+            "speaker": "torren",
+            "portrait": "torren_quiet",
+            "text": "I heard it, my lord.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s5_02_the_whispering_wood",
+      "title": "The Whispering Wood",
+      "level": "whispering_wood",
+      "spawn": "treeline_left",
+      "time_of_day": "night",
+      "mode": "battle",
+      "music": "whispering_wood",
+      "stage_directions": "CANON: Robb ambushes Jaime Lannister's outriding force in the Whispering Wood at night; Jaime cuts his way toward Robb, kills three of his guard, and is taken alive. Torren's first battle. Scripted wave arena among trees, deliberately disorienting - no minimap, torch-light only, friend and enemy hard to tell apart at range, and the player is told at the start that anyone coming from the left is theirs and to check before swinging. FIRST KILL is a scripted beat with no choice in it and no combo, one hit, badly, at close range. Serjeant Hune dies in wave 2, to the player's left, without a cutscene or a musical cue. Composer: no music during waves. Only the horn at the start and the horn at the end.",
+      "objectives": [
+        "Hold the left of the line",
+        "Do not lose the man beside you"
+      ],
+      "requires_flags": [
+        "act5_night_camp"
+      ],
+      "sets_flags": [
+        "act5_first_kill",
+        "act5_whispering_wood_survived",
+        "act5_jaime_taken"
+      ],
+      "waves": [
+        {
+          "id": "w1",
+          "enemies": [
+            {
+              "type": "lannister_outrider",
+              "count": 5
+            }
+          ],
+          "on_clear_node": "n10"
+        },
+        {
+          "id": "w2",
+          "enemies": [
+            {
+              "type": "lannister_footman",
+              "count": 6
+            },
+            {
+              "type": "lannister_serjeant",
+              "count": 2
+            }
+          ],
+          "on_clear_node": "n20"
+        },
+        {
+          "id": "w3",
+          "enemies": [
+            {
+              "type": "lannister_knight",
+              "count": 3
+            },
+            {
+              "type": "lannister_footman",
+              "count": 4
+            }
+          ],
+          "on_clear_node": "n30"
+        }
+      ],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "hune",
+            "portrait": "hune_hard",
+            "text": "Anyone coming from the left is ours. Anyone. Look before you swing, ser, and if you can't see, don't.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "The horn goes. It is a very small sound in a very large wood and then there is no sound at all that anyone could describe afterwards.",
+            "direction": "Wave 1 begins.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "A man comes at you through a gap in the trees with his mouth open and no shield and you put your sword through his throat because he is closer to you than the length of your arm and there is nothing else in the world to do about it.",
+            "direction": "THE FIRST KILL. Unmissable, unchosen, ugly, and over in one frame. No slow motion, no music, no confirmation prompt. Control returns immediately and wave 2 begins six seconds later.",
+            "sets_flags": [
+              "act5_first_kill"
+            ],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "He takes some time about it. You do not have any of that time to give him.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "Somewhere off to your left, in the dark, in the middle of everything, Serjeant Hune is killed by a man he does not see, and nobody calls out, and you do not know about it for two hours.",
+            "direction": "No cue. No music. No camera. The line appears while the player is fighting and cannot stop to read it properly, which is the entire point. The relationship is not adjusted. He is simply gone.",
+            "sets_flags": [
+              "act5_hune_died"
+            ],
+            "end": true
+          },
+          "n30": {
+            "speaker": "narrator",
+            "text": "A knight in red comes through the middle of it on foot with no helm on and he is the best thing you have ever seen with a sword and he is killing his way toward the boy in the grey cloak with a kind of terrible patience.",
+            "sets_flags": [
+              "act5_saw_jaime"
+            ],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "narrator",
+            "text": "He kills three men of Robb's guard in the space of about nine seconds. You are eleven paces away and there is a horse between you and you do not move, and afterwards you will not be able to say whether that was the horse's fault.",
+            "choices": [
+              {
+                "text": "Go at him.",
+                "next": "n32",
+                "traits": {
+                  "bold": 3
+                },
+                "sets_flags": [
+                  "act5_went_at_jaime"
+                ],
+                "tag": "charge"
+              },
+              {
+                "text": "Get between him and Robb. Just stand there.",
+                "next": "n33",
+                "traits": {
+                  "loyal": 3,
+                  "bold": 2
+                },
+                "sets_flags": [
+                  "act5_shielded_robb"
+                ],
+                "tag": "shield"
+              },
+              {
+                "text": "Do not move.",
+                "next": "n34",
+                "traits": {
+                  "bold": -2,
+                  "honest": 1
+                },
+                "sets_flags": [
+                  "act5_froze"
+                ],
+                "tag": "freeze"
+              }
+            ]
+          },
+          "n32": {
+            "speaker": "narrator",
+            "text": "You get one swing. He takes it on his sword without appearing to notice that he has, and puts you on your back in the leaf mould with an elbow, and steps over you, and you have never been so comprehensively dismissed in your life.",
+            "next": "n35"
+          },
+          "n33": {
+            "speaker": "narrator",
+            "text": "You put yourself in front of a boy of fifteen and you raise a shield and you close your eyes, which is not in any song, and twenty other men do the same thing at the same time, and that is what stops him: not one of you. Twenty.",
+            "relationship": {
+              "robb_stark": 2
+            },
+            "next": "n35"
+          },
+          "n34": {
+            "speaker": "narrator",
+            "text": "You do not move. You are not proud of it and you are also alive, and both of those will be true for the rest of your life at the same time.",
+            "next": "n35"
+          },
+          "n35": {
+            "speaker": "narrator",
+            "text": "In the end it is not a duel and there is no moment. He is simply surrounded, by more and more men, until there is nowhere to put the sword, and someone takes it off him, and it is over.",
+            "sets_flags": [
+              "act5_jaime_taken"
+            ],
+            "next": "n36"
+          },
+          "n36": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_bloody",
+            "text": "THE KINGSLAYER! We've got the Kingslayer!",
+            "next": "n37"
+          },
+          "n37": {
+            "speaker": "narrator",
+            "text": "Six thousand men make a noise that shakes water off the leaves. You make it too. You find later that you cannot remember deciding to.",
+            "sets_flags": [
+              "act5_whispering_wood_survived"
+            ],
+            "next": "n38"
+          },
+          "n38": {
+            "speaker": "narrator",
+            "text": "They count in the grey light. Two hundred and some of ours. They lay them in rows because there is nothing else to do with them and the rows take longer than the battle did.",
+            "next": "n39"
+          },
+          "n39": {
+            "speaker": "torren",
+            "portrait": "torren_hollow",
+            "text": "Where's Hune?",
+            "direction": "Nobody answers. There is no reply node. The scene ends on the question.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s5_03_the_river_road",
+      "title": "Six Names",
+      "level": "riverlands_camp",
+      "spawn": "horse_lines",
+      "time_of_day": "morning",
+      "mode": "explore",
+      "music": "after_the_wood",
+      "stage_directions": "CANON: word reaches Robb's camp of the Battle of the Green Fork - Tywin has broken the Northern foot under Roose Bolton, which was always the plan and does not stop it being eight thousand men. Also: the host moves on Riverrun, which is under siege by three separate Lannister camps. Short, flat, administrative scene. This is where the Act 3 list of six Blackpool names is shown again with four struck through. Composer: nothing until the list, then one note.",
+      "objectives": [
+        "Bury the dead",
+        "Hear the news from the south"
+      ],
+      "requires_flags": [
+        "act5_whispering_wood_survived"
+      ],
+      "sets_flags": [
+        "act5_green_fork_news"
+      ],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "You dig for most of a morning. It is the first thing you have done in this war that you were any good at.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "galbart_glover",
+            "portrait": "glover_grim",
+            "text": "Rider up from the south. The Green Fork's been fought.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "torren",
+            "portrait": "torren_flat",
+            "text": "And?",
+            "next": "n4"
+          },
+          "n4": {
+            "speaker": "galbart_glover",
+            "portrait": "glover_grim",
+            "text": "And it went how it was always going to go. Lord Bolton got off the field with more of them than anyone had a right to. That's the whole of the good news and I'd not stretch it.",
+            "sets_flags": [
+              "act5_green_fork_news"
+            ],
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "narrator",
+            "text": "There is a list. There is always a list, and someone has to read it out, and this morning it is you, because you wrote the Blackpool muster roll yourself at Winterfell and you know every hand it came from.",
+            "direction": "Torren wrote the Blackpool muster in s3_02, which is why the reading falls to him.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "Wend Harlan. Big Tom Fisher. Rodrik Rill. Aly Snow. Osric of the Mill. Hal Barrow.",
+            "direction": "The same six names shown on screen in s3_06. They are shown again in the same layout and in the same order, and four of them are struck through in front of the player, one at a time, with a beat between each. The four are fixed: Wend Harlan, Rodrik Rill, Aly Snow, Hal Barrow.",
+            "sets_flags": [
+              "act5_read_the_list"
+            ],
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "torren",
+            "portrait": "torren_hollow",
+            "text": "I shook nine of them by the hand at the Twins. I got six names. I had four months to get the other three and I never did it.",
+            "choices": [
+              {
+                "text": "\"I should have got all of them.\"",
+                "next": "n8",
+                "traits": {
+                  "honest": 2
+                },
+                "tag": "guilt"
+              },
+              {
+                "text": "Read the list again. Out loud. Properly.",
+                "next": "n9",
+                "traits": {
+                  "loyal": 3
+                },
+                "sets_flags": [
+                  "act5_read_it_twice"
+                ],
+                "tag": "honour"
+              },
+              {
+                "text": "Fold it and put it away.",
+                "next": "n10",
+                "traits": {
+                  "bold": -1
+                },
+                "tag": "away"
+              }
+            ]
+          },
+          "n8": {
+            "speaker": "galbart_glover",
+            "portrait": "glover_dry",
+            "text": "Aye. And next time you will, and it won't help then either, and you'll do it anyway. That's the job, ser. Nobody put it in a song because it doesn't scan.",
+            "next": "n11"
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "You read it again, slowly, and the second time about forty men stop what they are doing and stand still for it, and nobody asked them to.",
+            "relationship": {
+              "galbart_glover": 2
+            },
+            "next": "n11"
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "You fold it into your glove. It is still there at the Camps and it is still there in the hall at Riverrun and it will be there for a very long time.",
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "robb_stark",
+            "portrait": "robb_hard",
+            "text": "Riverrun. Three camps around it, none of them talking to the other two, and the Kingslayer who was supposed to be running all three of them is in a tent behind us in irons. We ride tonight.",
+            "sets_flags": [
+              "act5_riding_on_riverrun"
+            ],
+            "end": true
+          },
+          "n20": {
+            "speaker": "wells",
+            "portrait": "wells_bloody",
+            "text": "You're alive. Good. I had a wager on it and it was not a generous one and I would like you to know that I have never been so pleased to lose money.",
+            "requires_flags": [
+              "act5_talked_wells",
+              "!act5_wells_after_wood"
+            ],
+            "sets_flags": [
+              "act5_wells_after_wood"
+            ],
+            "relationship": {
+              "wells": 1
+            },
+            "end": true
+          },
+          "n30": {
+            "speaker": "narrator",
+            "text": "Serjeant Hune's kit is in a sack with a name on it and there is nobody to send it to. He never once said whether there was anybody.",
+            "requires_flags": [
+              "act5_hune_died",
+              "!act5_took_hunes_kit"
+            ],
+            "choices": [
+              {
+                "text": "Take the sword. He'd have wanted it used.",
+                "next": "n31",
+                "traits": {
+                  "loyal": 2
+                },
+                "sets_flags": [
+                  "act5_took_hunes_kit",
+                  "act5_carries_hunes_sword"
+                ],
+                "tag": "take"
+              },
+              {
+                "text": "Leave it. It isn't yours.",
+                "next": "n32",
+                "traits": {
+                  "honest": 1
+                },
+                "sets_flags": [
+                  "act5_took_hunes_kit"
+                ],
+                "tag": "leave"
+              }
+            ]
+          },
+          "n31": {
+            "speaker": "narrator",
+            "text": "It is heavier than yours and the grip is wrong for your hand and you carry it for the rest of the war.",
+            "direction": "Mechanical: +2 damage, -1 attack speed. The player is not told this. They find out.",
+            "end": true
+          },
+          "n32": {
+            "speaker": "narrator",
+            "text": "You put the sack on the cart with the others and you write his name on it twice because the first time your hand was not steady enough to read.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s5_04_the_camps",
+      "title": "The Battle of the Camps",
+      "level": "riverrun_field",
+      "spawn": "right_flank",
+      "time_of_day": "dawn",
+      "mode": "battle",
+      "music": "the_camps",
+      "stage_directions": "CANON: Robb's host, joined by Tytos Blackwood and the sally from Riverrun under Edmure Tully, destroys the three Lannister siege camps and lifts the siege. Open ground, daylight, three waves, no trees to hide the scale. Deliberately the opposite of the Whispering Wood: the player can see everything, which is worse. Ser Emmon Wells goes down in wave 3 in front of the player and CAN be saved by breaking formation, which costs the wave and is worth it. Composer: this one has music, and it is the only heroic cue in the chapter, and it is undercut in the last eight bars.",
+      "objectives": [
+        "Break the northern camp",
+        "Reach the river gate"
+      ],
+      "requires_flags": [
+        "act5_riding_on_riverrun"
+      ],
+      "sets_flags": [
+        "act5_camps_survived",
+        "act5_siege_broken"
+      ],
+      "waves": [
+        {
+          "id": "w1",
+          "enemies": [
+            {
+              "type": "lannister_footman",
+              "count": 8
+            }
+          ],
+          "on_clear_node": "n10"
+        },
+        {
+          "id": "w2",
+          "enemies": [
+            {
+              "type": "lannister_footman",
+              "count": 8
+            },
+            {
+              "type": "lannister_crossbowman",
+              "count": 3
+            }
+          ],
+          "on_clear_node": "n20"
+        },
+        {
+          "id": "w3",
+          "enemies": [
+            {
+              "type": "lannister_knight",
+              "count": 4
+            },
+            {
+              "type": "lannister_serjeant",
+              "count": 3
+            },
+            {
+              "type": "lannister_footman",
+              "count": 6
+            }
+          ],
+          "on_clear_node": "n40"
+        }
+      ],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "In the wood you could see eleven paces. Here you can see three miles and every single thing in it is coming toward you or running away from you and there is no third category.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_roaring",
+            "text": "THEY'RE ASLEEP! THEY'RE ASLEEP AND THEY'VE NO PALISADE! GO ON!",
+            "direction": "Wave 1 begins.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "The first camp is not a battle. It is men in their shirts and men still in blankets and it goes on for a quarter of an hour and you would not tell anyone at home about any of it.",
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "torren",
+            "portrait": "torren_grim",
+            "text": "This isn't - serjeant, this isn't -",
+            "direction": "He addresses Hune. Hune has been dead for two days. The line is left in and not corrected, and nobody near him hears it.",
+            "sets_flags": [
+              "act5_called_for_hune"
+            ],
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "The second camp has had time to get up. That is the difference between the two halves of this morning and it is the only difference and it costs about four hundred men.",
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "narrator",
+            "text": "Crossbows on the wagon line. The man on your right takes one in the shoulder and sits down in the mud looking annoyed about it and does not get up again.",
+            "direction": "Wave 3 begins after this node.",
+            "end": true
+          },
+          "n40": {
+            "speaker": "narrator",
+            "text": "Ser Emmon Wells is down. Twenty paces to your right, on one knee, with a knight standing over him and his sword out of reach, and the line you are holding is holding because everyone in it is standing where they were put.",
+            "direction": "THE WELLS CHOICE. Breaking formation resets the wave's progress and spawns two extra enemies. The game does not tell the player that Wells dies if they hold. It also does not tell them that holding is the correct military decision. Both things are true.",
+            "choices": [
+              {
+                "text": "Break the line. Go and get him.",
+                "next": "n41",
+                "traits": {
+                  "bold": 3,
+                  "merciful": 3,
+                  "loyal": -1
+                },
+                "sets_flags": [
+                  "act5_saved_wells"
+                ],
+                "tag": "break"
+              },
+              {
+                "text": "Hold the line.",
+                "next": "n43",
+                "traits": {
+                  "loyal": 3,
+                  "merciful": -2
+                },
+                "sets_flags": [
+                  "act5_wells_died"
+                ],
+                "tag": "hold"
+              }
+            ]
+          },
+          "n41": {
+            "speaker": "narrator",
+            "text": "You break formation in the middle of a battle, which is the single stupidest thing a man in a line can do, and the line closes behind you without you because lines do, and you get there.",
+            "next": "n42"
+          },
+          "n42": {
+            "speaker": "wells",
+            "portrait": "wells_bleeding",
+            "text": "You absolute fool. You absolute - get down, get DOWN -",
+            "direction": "He survives. He is at Riverrun for the crowning, on a crutch, and he has one more line in s5_06.",
+            "relationship": {
+              "wells": 5
+            },
+            "next": "n44"
+          },
+          "n43": {
+            "speaker": "narrator",
+            "text": "You hold the line. It is what you were told to do and it is what keeps eleven other men alive and it is the correct decision and you watch him die from twenty paces while making it.",
+            "relationship": {
+              "wells": 0
+            },
+            "next": "n44"
+          },
+          "n44": {
+            "speaker": "narrator",
+            "text": "Then the gates of Riverrun open from the inside and a thousand men come out of a castle that has been shut for a month, and the third camp does not so much break as evaporate.",
+            "sets_flags": [
+              "act5_siege_broken",
+              "act5_camps_survived"
+            ],
+            "next": "n45"
+          },
+          "n45": {
+            "speaker": "narrator",
+            "text": "You are blooded. It is a word you have heard your whole life and it turns out to mean this: that you are extremely tired, and there is somebody else's on your hands, and you are hungry, which seems like it ought to be impossible and is not.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s5_05_the_news",
+      "title": "A Fortnight Old",
+      "level": "riverrun_hall",
+      "spawn": "hall_rear",
+      "time_of_day": "evening",
+      "mode": "fixed",
+      "music": "none",
+      "stage_directions": "CANON: word of Ned Stark's execution reaches Riverrun after the Battle of the Camps; Robb, in the godswood, puts his sword into a tree until the blade breaks. THE CHAPTER'S KEYSTONE OF DRAMATIC IRONY: the player watched Ned die eleven days ago, as Nyra, from the front of the crowd, and has spent all of Act 5 with characters who are fighting a war to get him out of a cell. There is no way to warn anybody. There never was. Composer: nothing at all until the tree, and then nothing after it either.",
+      "objectives": [
+        "Hear the rider out"
+      ],
+      "requires_flags": [
+        "act5_camps_survived"
+      ],
+      "sets_flags": [
+        "act5_ned_news_arrived"
+      ],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "A rider comes up the river road at dusk on a horse that will not live the night, and everybody in the hall is drunk and happy, and the hall goes quiet in layers, from the door backwards.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "The news is a fortnight old. It has been a fortnight old the whole time. It was already a fortnight old when the wood was fought and when the camps were broken and when a boy of fifteen said he was doing all of it to get his father out of a cell.",
+            "sets_flags": [
+              "act5_ned_news_arrived"
+            ],
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "They did it on the steps of the Great Sept of Baelor in front of the whole city. The boy king ordered it against his own council. They used Lord Stark's own sword.",
+            "direction": "Every detail the rider gives is something the player personally witnessed one act ago. The scene is written so the player is ahead of the room on every single sentence.",
+            "next": "n4"
+          },
+          "n4": {
+            "speaker": "torren",
+            "portrait": "torren_hollow",
+            "text": "...Ice.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "galbart_glover",
+            "portrait": "glover_grey",
+            "text": "Aye. His own sword. There's a message in that and it's meant for us and it's meant to be read exactly the way we're reading it.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "Lord Robb does not say anything. He gets up and he walks the length of the hall and out, and nobody follows him, and his mother puts a hand flat on the table and leaves it there.",
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "narrator",
+            "text": "From the godswood, for some time, there is the sound of a sword going into a tree. Over and over. Nobody in the hall moves and nobody looks at anybody.",
+            "next": "n8"
+          },
+          "n8": {
+            "speaker": "narrator",
+            "text": "It stops when the blade breaks. Everyone hears that too.",
+            "sets_flags": [
+              "act5_robb_broke_the_sword"
+            ],
+            "choices": [
+              {
+                "text": "Go out to him.",
+                "next": "n9",
+                "traits": {
+                  "loyal": 2,
+                  "bold": 2
+                },
+                "sets_flags": [
+                  "act5_went_to_robb"
+                ],
+                "tag": "go"
+              },
+              {
+                "text": "Stay. He has a mother.",
+                "next": "n11",
+                "traits": {
+                  "merciful": 1
+                },
+                "tag": "stay"
+              }
+            ]
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "He is sitting against the heart tree with a broken sword and both hands bleeding, and he does not tell you to go, which is the only thing he could have done that would have been worse.",
+            "next": "n10"
+          },
+          "n10": {
+            "speaker": "torren",
+            "portrait": "torren_quiet",
+            "text": "My lord. I'm going to sit down over here and I'm not going to say anything, and when you want to go back in, we'll go back in.",
+            "direction": "The most competent thing Torren does in the entire chapter, and it involves no sword at all.",
+            "relationship": {
+              "robb_stark": 4
+            },
+            "next": "n12"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "You stay where you are. Lady Catelyn goes out after a while, and comes back after a longer while, alone, and sits down and does not eat anything.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "You lie awake in the guard hall and you do the sum that everyone in this castle is doing tonight. If the raven was a fortnight, then when we were in the wood - and you stop, because there is no end to that sum that anybody can carry.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s5_06_the_king_in_the_north",
+      "title": "The King in the North",
+      "level": "riverrun_hall",
+      "spawn": "hall_rear",
+      "time_of_day": "night",
+      "mode": "fixed",
+      "music": "king_in_the_north",
+      "stage_directions": "CHAPTER 1 FINALE. CANON: in the hall at Riverrun, with news of Ned's death and Renly's and Stannis's claims both in the air, the Greatjon declares that the North will bend to no southern king, names Robb the King in the North, and the hall takes it up. THE KNEEL: the player chooses when Torren kneels - before the Greatjon, with the hall, or last. All three are recorded. None is judged, none is scored, and no NPC comments on it. It is the last input of the chapter. Composer: this is the only full-orchestra cue in Chapter 1 and it does not start until the third 'THE KING IN THE NORTH'. Hold on Torren's face for four seconds after the last shout, in silence, then cut to the chapter card.",
+      "objectives": [
+        "Attend the lords"
+      ],
+      "requires_flags": [
+        "act5_ned_news_arrived"
+      ],
+      "sets_flags": [
+        "act5_robb_crowned",
+        "act5_complete",
+        "ch1_complete"
+      ],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Eleven hundred men in a hall built for four hundred, and every one of them has an opinion, and the opinions are about which southern king to kneel to.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "rickard_karstark",
+            "portrait": "karstark_hard",
+            "text": "Renly Baratheon. He has the Reach and the Stormlands and a hundred thousand men and he is the only one of them who can win.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "galbart_glover",
+            "portrait": "glover_flat",
+            "text": "Stannis, then. It's his by law and law is what we're supposed to be fighting about.",
+            "next": "n4"
+          },
+          "n4": {
+            "speaker": "narrator",
+            "text": "It goes on like that for an hour. And then the Greatjon stands up, which takes a while, and the hall stops, because when a man that size stands up in a hall it is a kind of weather.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_standing",
+            "text": "My lords. I've listened to the lot of you and I'll say my piece and sit down.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_roaring",
+            "text": "Renly Baratheon is nothing to me. Stannis is nothing to me. Why should they rule over me and mine from some flowered seat in the south? What do they know of the Wall, or the wolfswood, or a winter? Their gods aren't our gods.",
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "greatjon_umber",
+            "portrait": "greatjon_roaring",
+            "text": "The dragons are dead. There sits the only king I mean to bend my knee to. THE KING IN THE NORTH!",
+            "direction": "Original phrasing of the canon beat. He draws his sword, two-fingered hand and all, and points it at a boy of fifteen.",
+            "sets_flags": [
+              "act5_greatjon_declared"
+            ],
+            "next": "n8"
+          },
+          "n8": {
+            "speaker": "narrator",
+            "text": "There is one full heartbeat where the entire hall could go either way and everyone in it knows it.",
+            "direction": "THE KNEEL. This is the last player input in Chapter 1. No timer is shown. The hall will move at the count of four regardless.",
+            "choices": [
+              {
+                "text": "Kneel now. Before anyone.",
+                "next": "n9",
+                "traits": {
+                  "bold": 3,
+                  "loyal": 3
+                },
+                "sets_flags": [
+                  "act5_knelt_first"
+                ],
+                "tag": "first"
+              },
+              {
+                "text": "Kneel with the hall.",
+                "next": "n10",
+                "traits": {
+                  "loyal": 1
+                },
+                "sets_flags": [
+                  "act5_knelt_with_the_hall"
+                ],
+                "tag": "with"
+              },
+              {
+                "text": "Wait. Kneel last.",
+                "next": "n11",
+                "traits": {
+                  "honest": 2,
+                  "loyal": -1
+                },
+                "sets_flags": [
+                  "act5_knelt_last"
+                ],
+                "tag": "last"
+              }
+            ]
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "You are on one knee before the Greatjon's sword has stopped moving. You are a household knight of a house nobody has heard of and you are the first man in the hall down, and about four hundred people see you do it, and not one of them will ever remember it was you.",
+            "next": "n12"
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "You go down when the hall goes down, in the middle of eleven hundred men, at exactly the moment it stops being a decision and starts being a fact.",
+            "next": "n12"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "You wait. You watch the whole hall go down around you like a field going over in wind, and you stand in it for three seconds longer than anybody else, and then you kneel too, because there was never anywhere else to go - and because you wanted to know what it felt like to be the last man standing in a room, and now you know, and it is lonely and it is nothing.",
+            "direction": "Nobody notices. Nobody comments. The flag persists into Chapter 2 and one character eventually mentions it, four chapters later.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "THE KING IN THE NORTH.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "THE KING IN THE NORTH.",
+            "next": "n14"
+          },
+          "n14": {
+            "speaker": "narrator",
+            "text": "THE KING IN THE NORTH.",
+            "direction": "Full orchestra enters here and only here.",
+            "sets_flags": [
+              "act5_robb_crowned"
+            ],
+            "next": "n15"
+          },
+          "n15": {
+            "speaker": "wells",
+            "portrait": "wells_crutch",
+            "text": "Well, Blackpool. Somebody's going to have to write all this down and I don't imagine they'll get to us.",
+            "requires_flags": [
+              "act5_saved_wells"
+            ],
+            "relationship": {
+              "wells": 1
+            },
+            "next": "n16"
+          },
+          "n16": {
+            "speaker": "narrator",
+            "text": "Four months ago you wanted House Slate to be a name someone said out loud in a hall.",
+            "next": "n17"
+          },
+          "n17": {
+            "speaker": "narrator",
+            "text": "You are in the loudest hall in Westeros and nobody in it has said your name all night, and Serjeant Hune is in the ground in a wood eighty miles east, and there are four names struck off a list folded in your glove, and you find, kneeling on the rushes with your ears ringing, that you do not want it any more. You want something else. You have not worked out what yet.",
+            "direction": "The arc's turn. Stated once, plainly, and not resolved. Chapter 2 opens on it.",
+            "sets_flags": [
+              "act5_torren_arc_turned"
+            ],
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "narrator",
+            "text": "Nine hundred miles south, in a laundry under the Red Keep, a girl whose name you do not know is asleep under a tub of linen with a cap on, because she has learned not to take it off even when she sleeps.",
+            "direction": "The chapter's last image. Cross-cut, four seconds, no dialogue. Neither character thinks about the other; the CAMERA does. This is the only place in Chapter 1 where the two POVs touch.",
+            "sets_flags": [
+              "act5_complete",
+              "ch1_complete"
+            ],
+            "end": true
+          }
+        }
+      }
+    }
+  ]
+}

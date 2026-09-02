@@ -1,0 +1,1053 @@
+{
+  "act_id": "act_2",
+  "title": "The Investigation",
+  "pov": "nyra",
+  "timeline": "Months 3-5, 298 AC. The Red Keep and King's Landing.",
+  "locations": ["red_keep_service", "red_keep_council", "red_keep_godswood", "kings_landing_street", "steel_street", "tourney_grounds"],
+  "summary": "Nyra carries water, empties basins, and is invisible, which is a skill. The new Hand of the King begins asking questions about how the old one died, and because nobody sees Nyra, she is in every room where the questions are asked. She learns to read a ledger she was not meant to open, sees a blacksmith's apprentice with the wrong face, hears the most dangerous sentence in Westeros from behind a heart tree, and is standing outside a door when a king dies behind it.",
+  "entry_flags": ["act1_complete"],
+  "exit_flags": ["act2_complete", "act2_read_ledger", "act2_robert_died"],
+  "scenes": [
+    {
+      "scene_id": "s2_01_service_corridors",
+      "title": "Below the Stone",
+      "level": "red_keep_service",
+      "spawn": "kitchen_door",
+      "time_of_day": "before dawn",
+      "mode": "explore",
+      "music": "kl_service_quiet",
+      "stage_directions": "Establishing scene. Teaches the act's real map: the service corridors, which run behind and beneath every room the court uses, and which no highborn character in the game ever walks. Teaches CARRY - Nyra with an object in her hands is invisible; Nyra with empty hands is a girl loitering, and the detection meter is live. Also plants, without underlining it, that she can read. Composer: no melody. Water, stone, the kitchen fires two rooms away.",
+      "objectives": ["Draw water for the queen's household", "Report to Old Mabb"],
+      "requires_flags": ["act1_complete"],
+      "sets_flags": ["act2_arrived", "act2_learned_corridors"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "The Red Keep has two castles in it. The one with the tapestries, and the one behind the tapestries, and only one of them has to be quiet.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "mabb",
+            "portrait": "mabb_neutral",
+            "text": "There you are. Two buckets to the queen's rooms, and girl - hands full, head down, and if a lord speaks to you, you're carrying it for someone more important than him.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "nyra",
+            "portrait": "nyra_neutral",
+            "text": "Yes, Mabb.",
+            "choices": [
+              {
+                "text": "\"Who's more important than a lord?\"",
+                "next": "n4",
+                "traits": { "honest": 1 },
+                "tag": "ask"
+              },
+              {
+                "text": "Take the buckets and go.",
+                "next": "n6",
+                "tag": "obey"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "mabb",
+            "portrait": "mabb_wry",
+            "text": "Another lord. There's always another lord. That's the whole of the trick, and it's the only thing I've got to leave anybody.",
+            "relationship": { "mabb": 1 },
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "nyra",
+            "portrait": "nyra_small",
+            "text": "I'll remember it.",
+            "direction": "She does. It is the mechanic.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "mabb",
+            "portrait": "mabb_flat",
+            "text": "Go on, then.",
+            "sets_flags": ["act2_briefed_by_mabb"],
+            "end": true
+          },
+          "n10": {
+            "speaker": "pate",
+            "portrait": "pate_grin",
+            "text": "New Hand came in last night. Northman. Brought his own guards and they've got wolves on them and everything.",
+            "requires_flags": ["!act2_talked_to_pate"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "nyra",
+            "portrait": "nyra_neutral",
+            "text": "Pate. You're supposed to be turning the spit.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "pate",
+            "portrait": "pate_grin",
+            "text": "The spit turns itself if you're clever about it. They say the old Hand went off in three days. Fine one morning, dead by the next but one. Cook says that's not how a man goes.",
+            "sets_flags": ["act2_talked_to_pate", "act2_heard_arryn_rumour"],
+            "choices": [
+              {
+                "text": "\"Don't say that where anyone can hear you.\"",
+                "next": "n13",
+                "traits": { "merciful": 1 },
+                "relationship": { "pate": 1 },
+                "tag": "protect"
+              },
+              {
+                "text": "\"How does a man go, then?\"",
+                "next": "n14",
+                "traits": { "bold": 1 },
+                "tag": "pull_thread"
+              },
+              {
+                "text": "\"It isn't ours.\"",
+                "next": "n15",
+                "traits": { "bold": -1 },
+                "tag": "shut_it_down"
+              }
+            ]
+          },
+          "n13": {
+            "speaker": "pate",
+            "portrait": "pate_confused",
+            "text": "It's only the cook.",
+            "next": "n16"
+          },
+          "n14": {
+            "speaker": "pate",
+            "portrait": "pate_conspirator",
+            "text": "Slow. Cook says a belly goes slow, and this one went fast, and fast costs money.",
+            "next": "n16"
+          },
+          "n15": {
+            "speaker": "pate",
+            "portrait": "pate_deflated",
+            "text": "Everything's ours down here. It's all we've got.",
+            "next": "n16"
+          },
+          "n16": {
+            "speaker": "nyra",
+            "portrait": "nyra_flat",
+            "text": "Turn the spit, Pate.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "A wine list, nailed by the cellar door. Tuns, dates, a steward's mark. You read it before you can decide not to.",
+            "direction": "PLANT: she can read. No comment, no fanfare, one node, and it is never mentioned again until s2_05. The player may not even register it, which is correct.",
+            "sets_flags": ["act2_can_read_established"],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "nyra",
+            "portrait": "nyra_small",
+            "text": "...",
+            "direction": "She looks down the corridor both ways. Then she goes.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s2_02_small_council",
+      "title": "Six Million Gold Dragons",
+      "level": "red_keep_council",
+      "spawn": "servant_door",
+      "time_of_day": "midday",
+      "mode": "stealth",
+      "music": "council_low",
+      "stage_directions": "CANON: Ned Stark's first small council, and the Crown's debt to House Lannister. EDGE proximity, but she is physically in the room - pouring. The player chooses one of three standing positions between pours (behind Baelish, behind Pycelle, at the sideboard) and each catches a different pair of lines. All three are needed for the full picture; one playthrough gets two at most. Detection rises if she pours too slowly. Composer: strings under, very quiet, no resolution.",
+      "objectives": ["Serve the council", "Do not be sent out"],
+      "requires_flags": ["act2_arrived"],
+      "sets_flags": ["act2_served_council"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Five men and a chair for a sixth who has not come. You pour, and you keep pouring, because a girl with a jug has business here and a girl without one does not.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_neutral",
+            "text": "Say the number again.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleasant",
+            "text": "Six million. Rather more than six, if we are being unkind about the interest, and the Lannisters are always kind about the interest until they are not.",
+            "sets_flags": ["act2_heard_debt"],
+            "next": "n4"
+          },
+          "n4": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_grim",
+            "text": "Jon Arryn let the Crown run six million into debt.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_amused",
+            "text": "Lord Arryn was a careful man, my lord Hand. He gave sound counsel to a king who has never in his life taken any. There is a lesson in that, and I have watched three Hands decline to learn it.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "Your jug is empty. It has been empty for some time.",
+            "direction": "Detection beat. The player must choose to leave or manufacture a reason to stay.",
+            "choices": [
+              {
+                "text": "Go for more wine. Come back.",
+                "next": "n7",
+                "traits": { "bold": -1 },
+                "tag": "cautious"
+              },
+              {
+                "text": "Stay. Wipe something that is already clean.",
+                "next": "n8",
+                "traits": { "bold": 2 },
+                "sets_flags": ["act2_lingered_council"],
+                "tag": "linger"
+              }
+            ]
+          },
+          "n7": {
+            "speaker": "narrator",
+            "text": "When you come back they are on the tourney, and the number is gone, and nobody will say it again in front of a servant.",
+            "end": true
+          },
+          "n8": {
+            "speaker": "varys",
+            "portrait": "varys_mild",
+            "text": "The little jug has been empty for a while.",
+            "direction": "He does not look at her. He says this to the table. Nobody else understands it. She does.",
+            "sets_flags": ["act2_varys_noticed"],
+            "next": "n9"
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "Nobody looks up. You are out of the door before your hands start, and they start in the corridor, which is where you have learned to keep them.",
+            "relationship": { "varys": 1 },
+            "end": true
+          },
+          "n20": {
+            "speaker": "grand_maester_pycelle",
+            "portrait": "pycelle_doddering",
+            "text": "A fever, my lord. A burning fever, of the belly. I bled him. I gave him milk of the poppy for the pain of it. There was nothing in the world to be done.",
+            "requires_flags": ["!act2_heard_pycelle"],
+            "direction": "Position 2: behind Pycelle. His hands are steady. His voice is not. Only a player standing here sees the hands.",
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_flat",
+            "text": "How long from the first of it to the last?",
+            "next": "n22"
+          },
+          "n22": {
+            "speaker": "grand_maester_pycelle",
+            "portrait": "pycelle_careful",
+            "text": "Three days, my lord. Perhaps four. It is difficult, at my age, to hold the days apart.",
+            "sets_flags": ["act2_heard_pycelle"],
+            "next": "n23"
+          },
+          "n23": {
+            "speaker": "narrator",
+            "text": "His hands are perfectly steady on the table. You have carried enough basins for enough old men to know that they should not be.",
+            "traits": { "honest": 1 },
+            "end": true
+          },
+          "n30": {
+            "speaker": "narrator",
+            "text": "From the sideboard you can see the whole table at once, which is worth more than any single voice.",
+            "requires_flags": ["!act2_sideboard"],
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "narrator",
+            "text": "When the Hand says the name Arryn, four men look at their papers and one man looks at the queen's empty chair.",
+            "sets_flags": ["act2_sideboard", "act2_saw_baelish_look"],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s2_03_the_armourer",
+      "title": "Steel Street",
+      "level": "steel_street",
+      "spawn": "gate_of_the_gods",
+      "time_of_day": "afternoon",
+      "mode": "explore",
+      "music": "kl_city_heat",
+      "stage_directions": "CANON: Ned's investigation reaches Tobho Mott's armoury and Gendry, Robert's bastard, who has Robert's black hair and Robert's face. Nyra is sent on a household errand and is in the yard when the Hand arrives. The player is SHOWN the boy's face and told nothing. Gendry gets one conversation, entirely ordinary, about a helm. The scene's whole job is that the player recognises something Nyra does not. Composer: street noise, a hammer keeping time, no score at all.",
+      "objectives": ["Collect the queen's clasp from the armourer", "Wait your turn"],
+      "requires_flags": ["act2_served_council"],
+      "sets_flags": ["act2_saw_gendry"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Steel Street smells of hot iron and quenched iron and the river underneath both. The armourer's yard is the loudest place you have ever been sent.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "tobho_mott",
+            "portrait": "mott_busy",
+            "text": "The clasp is not finished. The clasp will be finished when the Hand of the King is finished standing in my yard asking me about a dead man. Wait there.",
+            "sets_flags": ["act2_at_the_armoury"],
+            "end": true
+          },
+          "n10": {
+            "speaker": "gendry",
+            "portrait": "gendry_neutral",
+            "text": "You're stood in my light.",
+            "requires_flags": ["act2_at_the_armoury", "!act2_talked_to_gendry"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "nyra",
+            "portrait": "nyra_neutral",
+            "text": "Sorry.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "gendry",
+            "portrait": "gendry_neutral",
+            "text": "No, it's - it's fine. It's a helm. It's a bull's head. Nobody asked me for it, I just wanted to make one.",
+            "sets_flags": ["act2_talked_to_gendry"],
+            "choices": [
+              {
+                "text": "\"It's good.\"",
+                "next": "n13",
+                "traits": { "merciful": 1 },
+                "relationship": { "gendry": 1 },
+                "tag": "kind"
+              },
+              {
+                "text": "\"Why a bull?\"",
+                "next": "n14",
+                "traits": { "honest": 1 },
+                "tag": "ask"
+              },
+              {
+                "text": "Say nothing and step out of his light.",
+                "next": "n15",
+                "traits": { "bold": -1 },
+                "tag": "silent"
+              }
+            ]
+          },
+          "n13": {
+            "speaker": "gendry",
+            "portrait": "gendry_shy",
+            "text": "It isn't. But it will be.",
+            "next": "n16"
+          },
+          "n14": {
+            "speaker": "gendry",
+            "portrait": "gendry_shrug",
+            "text": "Because I'm strong and I'm stupid and I don't move when I'm pushed. Master Mott says all three and he's only wrong about one.",
+            "next": "n16"
+          },
+          "n15": {
+            "speaker": "gendry",
+            "portrait": "gendry_neutral",
+            "text": "...Right. Thanks.",
+            "next": "n16"
+          },
+          "n16": {
+            "speaker": "narrator",
+            "text": "He is perhaps sixteen. Shoulders like a door. Black hair, thick and coarse, hanging in his eyes, and eyes under it the exact blue of nothing you have ever seen in this city.",
+            "direction": "The camera holds on his face for one beat too long. Nyra does not react. She has no reason to.",
+            "next": "n17"
+          },
+          "n17": {
+            "speaker": "narrator",
+            "text": "The Hand of the King comes out of the forge and stops when he sees the boy, and stands there, and does not say anything at all for the length of four hammer strokes.",
+            "sets_flags": ["act2_saw_ned_see_gendry"],
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "nyra",
+            "portrait": "nyra_puzzled",
+            "text": "...",
+            "direction": "She notices the Hand noticing. She does not know what it means. Neither does she ask. The player knows.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "tobho_mott",
+            "portrait": "mott_flat",
+            "text": "Your clasp. Tell her grace the enamel wants a week and she'll have it in a week whatever she tells me.",
+            "requires_flags": ["act2_saw_ned_see_gendry"],
+            "sets_flags": ["act2_got_clasp"],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s2_04_the_tourney",
+      "title": "The Tourney of the Hand",
+      "level": "tourney_grounds",
+      "spawn": "household_stand",
+      "time_of_day": "midday",
+      "mode": "explore",
+      "music": "tourney_bright",
+      "stage_directions": "CANON: the Tourney of the Hand. Ser Hugh of the Vale - Jon Arryn's squire, knighted immediately after his lord's death - is killed by Ser Gregor Clegane's lance through the throat. Loras unhorses Gregor; Gregor kills his own horse and goes for Loras; the Hound stops him. Bright, loud, colourful, and two men die in it. The player free-roams the grounds between bouts. Ser Hugh's death is unmissable and the crowd around Nyra CHEERS. Composer: bright and brassy, and it does not stop when he dies, because it wouldn't.",
+      "objectives": ["Attend the household in the stands", "Run the queen's errands between bouts"],
+      "requires_flags": ["act2_saw_gendry"],
+      "sets_flags": ["act2_tourney", "act2_hugh_died"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Forty thousand people outside the city walls and every one of them in their best. From the household stand you can see the whole field and nobody can see you at all.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "mabb",
+            "portrait": "mabb_flat",
+            "text": "You'll fetch and you'll carry and you'll not watch the jousting with your mouth open like a fish. It's only men falling off horses. They've been doing it since before I was young and they were bad at it then too.",
+            "end": true
+          },
+          "n10": {
+            "speaker": "narrator",
+            "text": "A new knight in the lists. Blue cloak, moon-and-falcon, and a suit of armour so new it still has the smith's shine on it.",
+            "requires_flags": ["!act2_hugh_died"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "pate",
+            "portrait": "pate_excited",
+            "text": "That's Ser Hugh. He was a squire a month back. Jon Arryn's squire. They made him a knight the week the old man died and nobody's said why.",
+            "sets_flags": ["act2_knows_hugh"],
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "The Mountain's horse comes down the lists like a wall coming down a hill.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "The lance takes Ser Hugh in the throat, above the gorget, and a foot of splintered ash stands out of his neck, and the crowd around you comes to its feet cheering because from where they sit it was a very good strike.",
+            "sets_flags": ["act2_hugh_died"],
+            "next": "n14"
+          },
+          "n14": {
+            "speaker": "narrator",
+            "text": "It takes him some time. Nobody goes to him for a while, because the horses are still on the field.",
+            "choices": [
+              {
+                "text": "Watch until it is finished.",
+                "next": "n15",
+                "traits": { "honest": 1, "merciful": -1 },
+                "sets_flags": ["act2_watched_hugh_die"],
+                "tag": "watch"
+              },
+              {
+                "text": "Look at your hands.",
+                "next": "n16",
+                "traits": { "merciful": 1 },
+                "tag": "look_away"
+              },
+              {
+                "text": "Look at the queen instead.",
+                "next": "n17",
+                "traits": { "bold": 1 },
+                "sets_flags": ["act2_watched_cersei_at_tourney"],
+                "tag": "watch_cersei"
+              }
+            ]
+          },
+          "n15": {
+            "speaker": "narrator",
+            "text": "You watch it finish. You will find, later, that you can do this, and that being able to is not the same as being unharmed by it.",
+            "next": "n18"
+          },
+          "n16": {
+            "speaker": "narrator",
+            "text": "You look at your hands until the noise changes. It takes longer to change than you expect.",
+            "next": "n18"
+          },
+          "n17": {
+            "speaker": "narrator",
+            "text": "The queen is not watching the field. She is watching the Hand of the King watch the field, and her face is doing nothing at all, very carefully.",
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "narrator",
+            "text": "They carry him off and they rake the ground and the next pair rides.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "Later: the Knight of Flowers puts the Mountain in the dirt with a mare in heat and a red rose, and the Mountain takes his own horse's head off at the neck with one stroke, and comes for the boy.",
+            "requires_flags": ["act2_hugh_died"],
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "narrator",
+            "text": "Forty thousand people go silent. The Hound puts himself between them, and stands there, and takes his brother's blows on his own sword until the king's voice stops it. His face never changes. You are close enough to see that his face never changes.",
+            "sets_flags": ["act2_saw_the_hound"],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s2_05_the_ledger",
+      "title": "Black of Hair",
+      "level": "red_keep_service",
+      "spawn": "arryn_solar_door",
+      "time_of_day": "evening",
+      "mode": "stealth",
+      "music": "none",
+      "stage_directions": "ACT TURNING POINT. CANON: the great book of lineages, and Jon Arryn's discovery - every Baratheon bastard in a hundred years is black of hair, and the queen's three children are not. Nyra is sent to clean the dead Hand's solar, which has been shut since he died. She opens a book because it is in her way. She can read - established in s2_01 and never mentioned since. The player, who has met Gendry, understands the page instantly. Nyra does not. She understands only that it is a list of children and that it frightened a man to death. Detection is live: Baelish arrives. Composer: silence, then a single held note when the page turns.",
+      "objectives": ["Clean the old Hand's solar", "Do not be found in it"],
+      "requires_flags": ["act2_tourney"],
+      "sets_flags": ["act2_read_ledger"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "mabb",
+            "portrait": "mabb_uneasy",
+            "text": "Lord Arryn's solar. It's stood shut since he went and the new Hand wants it aired. Don't move his things. Don't read his things, not that you - just don't move them.",
+            "direction": "Mabb nearly says it. She stops. She has known for three years and has never once said it aloud.",
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "narrator",
+            "text": "The room smells of a shut window and old paper. Everything is exactly where a man left it who expected to come back.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "A great book, open on the table, too heavy to move without both hands. To lift it you have to look at it, and to look at it is to read it, and you have never once managed not to.",
+            "choices": [
+              {
+                "text": "Read the page.",
+                "next": "n4",
+                "traits": { "bold": 2, "honest": 1 },
+                "sets_flags": ["act2_read_ledger"],
+                "tag": "read"
+              },
+              {
+                "text": "Close it. Dust around it.",
+                "next": "n20",
+                "traits": { "bold": -2 },
+                "tag": "refuse"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "narrator",
+            "text": "It is a book of families. Names and names and names, going back, and beside each name a colour, written out in a maester's hand as though the colour of a child's hair were a fact worth a hundred years of ink.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "narrator",
+            "text": "Baratheon. Ninety years of Baratheons and every one of them the same word after it. Black. Black. Black of hair. Black of hair. Black.",
+            "sets_flags": ["act2_saw_the_pattern"],
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "Somebody has been here before you. There are pressure marks in the vellum where a thumb held the page open a long while, and a fresh ink line under a name, made with a hand that pressed too hard.",
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "nyra",
+            "portrait": "nyra_frowning",
+            "text": "It's a list of children.",
+            "direction": "CRITICAL: she does not solve it. She must not. She names only what is literally on the page. The player solves it because the player met Gendry in s2_03 and has seen the prince's hair every day of the act.",
+            "choices": [
+              {
+                "text": "Keep reading. Find the newest entries.",
+                "next": "n8",
+                "traits": { "bold": 2 },
+                "sets_flags": ["act2_read_recent_entries"],
+                "tag": "deeper"
+              },
+              {
+                "text": "Put it down. You have already gone too far.",
+                "next": "n10",
+                "tag": "stop"
+              }
+            ]
+          },
+          "n8": {
+            "speaker": "narrator",
+            "text": "The last page has been written this year, and not by a maester. A short list, no colours after the names. An apprentice on Steel Street. Some children at a brothel by the Mud Gate. A boy in the Vale, dead now.",
+            "next": "n9"
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "You do not know what you are holding. You know precisely what it weighs.",
+            "traits": { "honest": 1 },
+            "next": "n10"
+          },
+          "n10": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleasant",
+            "text": "That book has had a great deal of company lately, for a book nobody reads.",
+            "direction": "He is in the doorway. He has been there for an unknowable length of time. Detection does not apply - being seen was never avoidable here, only survivable.",
+            "sets_flags": ["act2_littlefinger_noticed"],
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "nyra",
+            "portrait": "nyra_blank",
+            "text": "I was told to air the room, m'lord.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_amused",
+            "text": "You were. And you are. And you were holding it open with your thumb, which is not how a person dusts, but is very much how a person reads.",
+            "choices": [
+              {
+                "text": "\"I can't read, m'lord.\"",
+                "next": "n13",
+                "traits": { "honest": -2 },
+                "sets_flags": ["act2_lied_to_baelish"],
+                "tag": "lie"
+              },
+              {
+                "text": "\"A septa taught me. It was years ago.\"",
+                "next": "n14",
+                "traits": { "honest": 2 },
+                "sets_flags": ["act2_told_baelish_truth"],
+                "tag": "truth"
+              },
+              {
+                "text": "Say nothing at all.",
+                "next": "n15",
+                "traits": { "bold": 1 },
+                "tag": "silence"
+              }
+            ]
+          },
+          "n13": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_delighted",
+            "text": "No. Of course not. Nobody can. It's a great comfort to the rest of us.",
+            "direction": "He knows. He has known since the first sentence. He is pleased, which is the worst outcome.",
+            "relationship": { "petyr_baelish": 2 },
+            "next": "n16"
+          },
+          "n14": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_interested",
+            "text": "A septa. How generous of her, and how thoughtless. Do you know what a reading servant is worth, girl? A great deal. To exactly two sorts of people, and I am one of them.",
+            "relationship": { "petyr_baelish": 3 },
+            "next": "n16"
+          },
+          "n15": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleased",
+            "text": "Better. Much better. Most people fill a silence with something they'd rather have kept. You are going to be useful to somebody.",
+            "relationship": { "petyr_baelish": 2 },
+            "next": "n16"
+          },
+          "n16": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_pleasant",
+            "text": "Finish the room. And - your name.",
+            "next": "n17"
+          },
+          "n17": {
+            "speaker": "nyra",
+            "portrait": "nyra_small",
+            "text": "Nyra, m'lord.",
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "petyr_baelish",
+            "portrait": "baelish_thoughtful",
+            "text": "Nyra. And that hair under the cap. Lys, at a guess. Half this city came out of Lys and the other half wishes it had.",
+            "direction": "SEED. He is wrong. He is confidently, casually wrong, and he is not corrected, and the word Valyrian is not spoken in this act.",
+            "sets_flags": ["act2_hair_remarked_baelish"],
+            "next": "n19"
+          },
+          "n19": {
+            "speaker": "narrator",
+            "text": "He is gone before you can answer, which is fortunate, because you have never had an answer to that question.",
+            "end": true
+          },
+          "n20": {
+            "speaker": "narrator",
+            "text": "You dust around it. You do it very thoroughly and it takes a long time and you look at the ceiling a great deal.",
+            "next": "n21"
+          },
+          "n21": {
+            "speaker": "narrator",
+            "text": "At the door you stop. You are eighteen years old and you have been careful your entire life and you are so extremely tired of it.",
+            "direction": "Second chance. The refusal path loops back once. If refused again the flag is unset and Act 4's interrogation scene is a different, colder version.",
+            "choices": [
+              {
+                "text": "Go back. Read the page.",
+                "next": "n4",
+                "traits": { "bold": 3 },
+                "tag": "relent"
+              },
+              {
+                "text": "Go.",
+                "next": "n22",
+                "traits": { "bold": -2 },
+                "sets_flags": ["act2_never_read_ledger"],
+                "tag": "leave"
+              }
+            ]
+          },
+          "n22": {
+            "speaker": "narrator",
+            "text": "You go. It is the safe thing. You will find out, in a month, that there was no safe thing and there had not been one for some time.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s2_06_the_godswood",
+      "title": "Behind the Heart Tree",
+      "level": "red_keep_godswood",
+      "spawn": "wash_line",
+      "time_of_day": "dusk",
+      "mode": "stealth",
+      "music": "none",
+      "stage_directions": "CANON: Ned confronts Cersei in the godswood, tells her he knows, and gives her the chance to take her children and run. Also CANON, immediately prior: Jaime's men kill Jory Cassel in the street and break Ned's leg; Ned resigns; Robert orders Daenerys killed. Nyra is hanging linen when the two of them come in. There is no way out of the godswood that does not cross open ground. She has to stay. Composer: nothing. Wind in leaves and two people ruining each other quietly.",
+      "objectives": ["Hang the linen before dark", "Do not move"],
+      "requires_flags": ["act2_read_ledger", "act2_tourney"],
+      "sets_flags": ["act2_heard_godswood"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "Three days ago the Hand's guard were killed in the street and the Hand's leg was broken and a man called Jory Cassel died on the cobbles by the Great Sept.",
+            "direction": "DRAMATIC IRONY: the player met Jory in Act 1, as Torren, and liked him. Nyra never met him. She reports it flatly, as a piece of household news, which is how it would reach her.",
+            "sets_flags": ["act2_heard_jory_died"],
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "mabb",
+            "portrait": "mabb_grim",
+            "text": "Northmen's blood on the stones and the queen's brother rode out of the city the same night. Nobody's calling it anything. That's how you know what it was.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "The godswood at dusk, with a basket of wet linen and the light going. Then voices on the path, coming this way, and the only cover in twenty paces is the tree.",
+            "choices": [
+              {
+                "text": "Get behind the heart tree.",
+                "next": "n4",
+                "tag": "hide"
+              },
+              {
+                "text": "Walk out with the basket. Servants are furniture.",
+                "next": "n30",
+                "traits": { "bold": 2 },
+                "tag": "brazen"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_cold",
+            "text": "You sent for me like a steward sends for a cook. In my own castle.",
+            "sets_flags": ["act2_in_the_godswood"],
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_hard",
+            "text": "I know about your brother.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "narrator",
+            "text": "There is a pause with a great deal in it.",
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_still",
+            "text": "Which one.",
+            "next": "n8"
+          },
+          "n8": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_hard",
+            "text": "Your children have his hair, my lady. All three. And Robert's have never once, in a hundred years of them, been anything but black. I have read the book. Jon Arryn read the book. He read it and he was dead inside the month.",
+            "sets_flags": ["act2_ned_said_it"],
+            "next": "n9"
+          },
+          "n9": {
+            "speaker": "narrator",
+            "text": "The linen is dripping on your foot. You do not move it.",
+            "direction": "This is the moment she understands the ledger. Not before. The book gave her the fact; Ned gives her the meaning; the player has had it for two scenes.",
+            "next": "n10"
+          },
+          "n10": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_dangerous",
+            "text": "And what is it you imagine happens now, Lord Stark? You say it to Robert and he kills me, and he kills my children, and you go home to your snow having been very honourable about it.",
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_tired",
+            "text": "Take them and go. Tonight. Any of the free cities, I don't care which. Go far, and go now, and when Robert is told I will make sure you are already a month at sea.",
+            "next": "n12"
+          },
+          "n12": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_contempt",
+            "text": "You are offering me mercy. That is the single most frightening thing anyone has said to me in nine years, because you mean it, and a man who means it has no idea at all what he has walked into.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "She goes. He stands there a while on his broken leg. Then he goes too, slowly, and you are alone in the dark with the wettest linen in the Red Keep and the answer to a question nobody has asked you.",
+            "sets_flags": ["act2_heard_godswood", "act2_understands_the_secret"],
+            "next": "n14"
+          },
+          "n14": {
+            "speaker": "nyra",
+            "portrait": "nyra_afraid",
+            "text": "Oh.",
+            "direction": "One syllable. It is the largest thing she says in the act.",
+            "choices": [
+              {
+                "text": "Tell Mabb. She has survived here sixty years.",
+                "next": "n15",
+                "traits": { "honest": 2 },
+                "sets_flags": ["act2_told_mabb"],
+                "tag": "tell_mabb"
+              },
+              {
+                "text": "Tell no one. Ever.",
+                "next": "n16",
+                "traits": { "honest": -1, "bold": 1 },
+                "sets_flags": ["act2_told_no_one"],
+                "tag": "keep_it"
+              },
+              {
+                "text": "Tell Pate. He'd want to know.",
+                "next": "n17",
+                "traits": { "merciful": -1 },
+                "sets_flags": ["act2_told_pate"],
+                "tag": "tell_pate"
+              }
+            ]
+          },
+          "n15": {
+            "speaker": "mabb",
+            "portrait": "mabb_terrified",
+            "text": "Stop. Stop talking. Girl - Nyra - look at me. You did not hear that. You were not in the godswood. You have never been in the godswood in your life. Say it.",
+            "relationship": { "mabb": 2 },
+            "next": "n18"
+          },
+          "n16": {
+            "speaker": "narrator",
+            "text": "You tell no one. You carry it up and down the service stair for eleven days, and it gets heavier, and nobody notices, because nobody ever notices you. Which was, until now, the good news.",
+            "next": "n18"
+          },
+          "n17": {
+            "speaker": "narrator",
+            "text": "Pate is fourteen and cannot hold a piece of gossip for a single afternoon, and you know that, and you tell him anyway, because you cannot hold it alone.",
+            "direction": "This flag has consequences in Act 4. Pate does not survive it.",
+            "relationship": { "pate": 1 },
+            "next": "n18"
+          },
+          "n18": {
+            "speaker": "narrator",
+            "text": "Eleven days later the king goes hunting.",
+            "end": true
+          },
+          "n30": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_dismissive",
+            "text": "You. Out.",
+            "next": "n31"
+          },
+          "n31": {
+            "speaker": "narrator",
+            "text": "You go, with the basket, and you get four paces before she says it again to your back, differently.",
+            "next": "n32"
+          },
+          "n32": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_narrow",
+            "text": "Wait. Turn around. Take that cap off.",
+            "next": "n33"
+          },
+          "n33": {
+            "speaker": "narrator",
+            "text": "She looks at your hair for three full seconds, and at your eyes for longer, and something moves behind her face that is not quite recognition and is very much worse than not noticing you.",
+            "direction": "SEED. She says nothing about it. She never will, in Chapter 1.",
+            "sets_flags": ["act2_cersei_noticed", "act2_hair_remarked_cersei"],
+            "next": "n34"
+          },
+          "n34": {
+            "speaker": "cersei_lannister",
+            "portrait": "cersei_cold",
+            "text": "Now go.",
+            "next": "n35"
+          },
+          "n35": {
+            "speaker": "narrator",
+            "text": "You go, and you hear nothing at all of what is said under the heart tree, and you will spend the rest of your life not knowing what it cost you to be brave for four paces.",
+            "direction": "The brazen path trades the godswood knowledge for the Cersei flag. It is not a punishment; it is a different Act 4.",
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "scene_id": "s2_07_the_kings_death",
+      "title": "A Boar and a Bottle",
+      "level": "red_keep_service",
+      "spawn": "royal_apartments_corridor",
+      "time_of_day": "night",
+      "mode": "fixed",
+      "music": "kings_death",
+      "stage_directions": "ACT CLIMAX. CANON: Robert is gored by a boar while drunk, lingers, and dictates a will naming Ned Protector of the Realm and regent for 'my heir' - and Ned writes 'my rightful heir'. Nyra is on the corridor outside with basins. EDGE proximity: she hears the dictation through a door left ajar by a maester in a hurry. She also carries the basins out, and they are what he is emptying into them. Composer: one low sustained cello, no movement.",
+      "objectives": ["Serve the royal apartments", "Carry out what needs carrying out"],
+      "requires_flags": ["act2_heard_godswood"],
+      "sets_flags": ["act2_robert_died", "act2_complete"],
+      "dialogue": {
+        "start": "n1",
+        "nodes": {
+          "n1": {
+            "speaker": "narrator",
+            "text": "They brought him back on a litter of spears and four men could not carry him and it took six. You were on the stair. You had to press yourself against the wall to let him past, and he was still talking, and the smell of him was wine and opened bowel.",
+            "sets_flags": ["act2_saw_robert_carried"],
+            "next": "n2"
+          },
+          "n2": {
+            "speaker": "mabb",
+            "portrait": "mabb_flat",
+            "text": "Basins. In and out and don't look at the bed. Two days he's been at it. He's a strong man. That's the trouble with it.",
+            "next": "n3"
+          },
+          "n3": {
+            "speaker": "narrator",
+            "text": "The door does not shut properly. A maester went through it in a hurry and it has stood a hand's width ajar for an hour, and nobody has noticed, because nobody in that room is thinking about doors.",
+            "choices": [
+              {
+                "text": "Stand where you can hear.",
+                "next": "n4",
+                "traits": { "bold": 1 },
+                "sets_flags": ["act2_heard_the_will"],
+                "tag": "listen"
+              },
+              {
+                "text": "Take the basin and go.",
+                "next": "n12",
+                "traits": { "bold": -1 },
+                "tag": "leave"
+              }
+            ]
+          },
+          "n4": {
+            "speaker": "robert_baratheon",
+            "portrait": "robert_dying",
+            "text": "Write it. Ned. Take it down and I'll put my hand to it and then you'll do it, because you always bloody do it.",
+            "next": "n5"
+          },
+          "n5": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_quiet",
+            "text": "I'm writing.",
+            "next": "n6"
+          },
+          "n6": {
+            "speaker": "robert_baratheon",
+            "portrait": "robert_dying",
+            "text": "Lord Eddard Stark to be Lord Regent and Protector of the Realm upon my death, to rule in my stead until my son Joffrey comes of age.",
+            "next": "n7"
+          },
+          "n7": {
+            "speaker": "narrator",
+            "text": "The pen stops. You cannot see it. You can hear a pen stop, it turns out, if the room is quiet enough and you have been listening at doors your whole life.",
+            "next": "n8"
+          },
+          "n8": {
+            "speaker": "narrator",
+            "text": "When it starts again, it writes something else. You do not know what. You know only that it is fewer words than the king said, or more, and that the Hand of the King has just changed a dying man's will with the man in the room.",
+            "sets_flags": ["act2_saw_the_pen_stop"],
+            "next": "n9"
+          },
+          "n9": {
+            "speaker": "robert_baratheon",
+            "portrait": "robert_dying",
+            "text": "And the girl. The Targaryen girl. Call it off, Ned. Call it off. I want - I don't want it. Tell them.",
+            "next": "n10"
+          },
+          "n10": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_quiet",
+            "text": "I'll tell them.",
+            "next": "n11"
+          },
+          "n11": {
+            "speaker": "narrator",
+            "text": "Then there is nothing for a long while, and then there is a sound from the bed that a very big man makes when he stops, and a maester's voice saying a thing you cannot hear, and then bells.",
+            "next": "n13"
+          },
+          "n12": {
+            "speaker": "narrator",
+            "text": "You take the basin down four flights and empty it and rinse it and carry it back up, and by the time you reach the corridor the bells have started.",
+            "next": "n13"
+          },
+          "n13": {
+            "speaker": "narrator",
+            "text": "Every bell in King's Landing at once. You have never heard them all together and you understand immediately, without being told, what all together means.",
+            "sets_flags": ["act2_robert_died"],
+            "next": "n14"
+          },
+          "n14": {
+            "speaker": "nyra",
+            "portrait": "nyra_afraid",
+            "text": "Mabb. Mabb, what happens now?",
+            "next": "n15"
+          },
+          "n15": {
+            "speaker": "mabb",
+            "portrait": "mabb_grim",
+            "text": "Now? Now a boy of twelve is king, and his mother owns him, and the only man in this castle who knows what she is has a broken leg and no friends in it.",
+            "next": "n16"
+          },
+          "n16": {
+            "speaker": "mabb",
+            "portrait": "mabb_grim",
+            "text": "Get your things out of the queen's wing tonight. Sleep in the laundry with me. And Nyra - whatever it is you heard in that godswood, you take it down to the bottom of you and you put a stone on it.",
+            "requires_flags": ["act2_told_mabb"],
+            "next": "n17"
+          },
+          "n17": {
+            "speaker": "narrator",
+            "text": "You do not sleep. Neither does the city. Somewhere below the Red Keep, in the dark, the gold cloaks are being paid, and it is not the Crown that is paying them.",
+            "sets_flags": ["act2_complete"],
+            "end": true
+          }
+        }
+      }
+    }
+  ]
+}
