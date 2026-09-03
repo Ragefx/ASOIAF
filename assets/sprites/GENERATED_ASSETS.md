@@ -15,13 +15,34 @@ Record every generation here at the time it is made, so an asset id is never los
 
 ---
 
-## Awaiting review
+## The three to download
 
-| Asset ID | What | Size | Goes to |
-|---|---|---|---|
-| `e0659339-b3e3-45a6-bef6-3a13d51ed031` | **Torren** — sprite base, chibi re-roll | 44×44 | `assets/sprites/torren/torren_base.png` |
-| `e6085562-7c8a-487b-a072-8dae47cc5399` | **Nyra** — sprite base, chibi re-roll | 80×80 | `assets/sprites/nyra/nyra_base.png` |
-| `0c490d4c-22e2-4409-a7d6-087c5ab02527` | **Grass + dirt** — flat re-roll, 15-piece autotile | 64×64 (4×4) | `assets/tilesets/grass_dirt.png` |
+Every asset is now **labelled in SpriteCook**, and the label becomes the downloaded filename — so
+the right files are identifiable without matching UUIDs by eye. Grab the three named `USE THIS`.
+
+| SpriteCook label → filename | Asset ID | Size | Colours | Goes to |
+|---|---|---|---|---|
+| `USE_THIS_01_-_Torren_SPRITE_chibi_big_head` | `e0659339…` | 44×44 | 359 | `assets/sprites/torren/torren_base.png` |
+| `USE_THIS_02_-_Nyra_SPRITE_chibi_big_head` | `e6085562…` | 80×80 | 748 | `assets/sprites/nyra/nyra_base.png` |
+| `USE_THIS_03_-_Grass_Dirt_TILESET_flat` | `0c490d4c…` | 64×64 (4×4) | **9** | `assets/tilesets/grass_dirt.png` |
+
+Everything else is prefixed `zz` (portrait bases) or `zzz` (superseded) and sorts to the bottom.
+
+**Telling them apart by eye:** the sprites are *chibi* — head roughly one third of the figure,
+stubby body, almost no face. The portrait bases are tall and slender, about five heads, with soft
+shading and a detailed face. If the figure looks like a nicely drawn person, it is the portrait
+base and it is the wrong file.
+
+### Colour count as a quality signal
+
+Worth watching, because it predicts how well `prepare_sprite.py` will do:
+
+| Asset | Colours | Read |
+|---|---|---|
+| Flat tileset | **9** | Exactly the forced palette. Perfect — needs no preparation. |
+| Chibi Torren | 359 | Usable; quantises down cleanly. |
+| Chibi Nyra | 748 | Usable, slightly soft. |
+| Torren v1 (muted) | 3029 | An illustration, not a sprite. |
 
 ## Approved for a different use — portrait bases
 
