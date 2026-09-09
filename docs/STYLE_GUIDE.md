@@ -112,6 +112,14 @@ Measured, not guessed:
 | Palette lock | `force_enabled: true` + `force_colors` with §4 |
 | Output | A 16px 15-piece atlas returns **64 × 64, 4 × 4** — drop straight into a Godot `TileSet` |
 
+**"Drop straight into a Godot `TileSet`" is not what happened, the one time this was checked.**
+The grass/dirt atlas actually in the repo (`assets/tilesets/grass_dirt.png`) is one continuous
+painted scene sliced into a 4×4 grid, not a set of tiles that recombine against each other — see
+`assets/sprites/GENERATED_ASSETS.md` and `docs/TECHNICAL_DESIGN.md`'s Scene Graph section for what
+that meant for the first level. Before trusting this row for a future tileset, generate one and
+look at the actual tile grid — grid lines drawn over an upscaled copy make it obvious in seconds —
+rather than assuming the settings alone guarantee a modular result.
+
 **Lead every character prompt with the style, not the character.** The blocks in §2 belong at the
 top of the prompt in almost those words; the character description comes after. Prompts that led
 with the character produced 166 × 166 illustrations at 3,000 colours. Prompts that led with the

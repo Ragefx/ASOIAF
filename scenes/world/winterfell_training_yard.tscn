@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/grass_dirt.png" id="1_ground"]
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/NPC.tscn" id="3_npc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(360, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(12, 360)
+
+[node name="WinterfellTrainingYard" type="Node2D"]
+
+[node name="Ground" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("1_ground")
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="WallNorth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0, -160)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallNorth"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WallSouth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0, 160)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallSouth"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WallWest" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-160, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallWest"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="WallEast" type="StaticBody2D" parent="Bounds"]
+position = Vector2(160, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallEast"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="dummy_line" type="Marker2D" parent="Markers"]
+position = Vector2(0, 70)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("2_player")]
+position = Vector2(0, 70)
+
+[node name="Cley" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(30, -130)
+npc_id = "cley"
+wander = false

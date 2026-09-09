@@ -73,6 +73,19 @@ Main (Node)
 `Main` is the only persistent scene. Levels are instanced into `World` and freed on transition, so
 autoload state is the single source of truth for anything that must survive a level change.
 
+**A `TileMap` needs a modular tileset — a real one isn't built yet.** The one atlas generated so
+far (`assets/tilesets/grass_dirt.png`, see `assets/sprites/GENERATED_ASSETS.md`) turned out, once
+inspected at the tile grid, to be one continuous painted scene sliced into a 4×4 grid rather than
+a set of tiles designed to recombine against each other in arbitrary layouts — the dirt path
+enters and exits particular tile edges, so placing them in any order but the one they were painted
+in shows the seams. `scenes/world/winterfell_training_yard.tscn`, the first level built, uses the
+whole 64×64 image as one fixed `Sprite2D` background instead of a `TileMap`, scaled ×6 and boxed
+in by plain `StaticBody2D` walls rather than tile collision. That is a stopgap for this one small,
+static yard, not the pattern for every level — a level with more than one open area, or that needs
+to reuse ground pieces in new combinations, needs an actual modular 16px tile atlas (true edge and
+corner variants, each one tileable against its neighbours) before a real `TileMap` here is worth
+building.
+
 ---
 
 ## 4. Autoloads (Singletons)

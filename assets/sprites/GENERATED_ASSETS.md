@@ -135,6 +135,16 @@ done; done
 The tileset needed no preparation, as predicted: 64×64 in a 4×4 grid, palette already locked by
 `force_colors`.
 
+**"Needs no preparation" turned out to mean the pixels, not the design.** Building the first level
+(`scenes/world/winterfell_training_yard.tscn`, 2026-09-09) required actually looking at the 4×4
+grid tile by tile, and it isn't a modular tileset — it's one continuous painted meadow-and-path
+scene cut into 16 pieces. Adjacent pieces align only in the exact layout they were painted in; the
+dirt path enters and exits particular tile edges, so there's no "plain grass" or "plain dirt" tile
+that recombines cleanly against arbitrary neighbours the way an autotile edge set would. Full
+writeup and the workaround used for this one level: `docs/TECHNICAL_DESIGN.md`, in the Scene Graph
+section. A real modular atlas — true tileable edge and corner pieces — is unbuilt and is the
+blocker for any level bigger or more varied than a single static yard.
+
 | Input | → output | Note |
 |---|---|---|
 | `torren_base` 44×44 | 14×24 | Reads cleanly. |
