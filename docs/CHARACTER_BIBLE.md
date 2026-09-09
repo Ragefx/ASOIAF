@@ -17,7 +17,7 @@ rewrites.
 
 ## 1. Ser Torren Slate of Blackpool
 
-**Age 23. Household knight. POV of Acts 1, 3, 5.**
+**Age 20. Household knight. POV of Acts 1, 3, 5.**
 
 ### Why this name
 
@@ -80,7 +80,7 @@ That belief surviving Act 5 — or not — is his whole arc.
 
 ## 2. Nyra
 
-**Age 18. Servant, the queen's household. POV of Acts 2 and 4.**
+**Age 20. Servant, the queen's household. POV of Acts 2 and 4.**
 
 ### Why this name
 
@@ -97,14 +97,14 @@ purely on the silver hair) · *Elenya* (too obvious) · *Mysa*.
 
 ### Backstory — the committed version
 
-Left at the **motherhouse at Rosby** as an infant, in autumn 280 AC, wrapped in a cloak too good
+Left at the **motherhouse at Rosby** as an infant, in autumn 278 AC, wrapped in a cloak too good
 for a foundling. The septas dyed her hair with walnut stain until she was eleven, told her it was
 for lice, and were doing it to keep her alive. She has silver-blonde hair and dark violet eyes and
 has been told all her life that this means her mother was a Lysene whore, which is the only
 explanation anyone in the Crownlands has for a face like that, and which she believes.
 
 She came to the Red Keep at fifteen through a household steward who took a bribe from the
-motherhouse to make her someone else's problem. She has been invisible for three years and is
+motherhouse to make her someone else's problem. She has been invisible for five years and is
 extremely good at it.
 
 **She can read.** A septa taught her, badly and in secret, and it is the single most dangerous

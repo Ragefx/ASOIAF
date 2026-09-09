@@ -12,7 +12,7 @@
     "torren": {
       "display_name": "Ser Torren Slate",
       "short_name": "Torren",
-      "age": 23,
+      "age": 20,
       "house": "Slate of Blackpool",
       "role": "Household knight, seconded to Winterfell's guard",
       "pov_acts": ["act_1", "act_3", "act_5"],
@@ -25,7 +25,7 @@
     "nyra": {
       "display_name": "Nyra",
       "short_name": "Nyra",
-      "age": 18,
+      "age": 20,
       "house": null,
       "role": "Servant, the queen's household, the Red Keep",
       "pov_acts": ["act_2", "act_4"],

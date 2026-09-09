@@ -90,9 +90,12 @@ emblem, no gold** — House Slate is too minor to have a device anyone would pai
 look cheaply equipped next to any southron knight in frame. Cheap, not grim: bright steel, not
 rust.
 
-**Nyra** — small and slight, the shortest silhouette in most scenes. Pale silver-blonde hair under
-a soft pale-grey cap with strands loose; the hair is the silhouette and the reason she is
-memorable. Dove-grey dress, cream apron, brown cloth shoes. No jewellery, no ornament.
+**Nyra** — same build and height as Torren; both protagonists read as the same age and neither
+should be drawn shorter or slighter than the other. Pale silver-blonde hair under a soft pale-grey
+cap with strands loose; the hair is the silhouette and the reason she is memorable, carrying the
+distinction from Torren that height no longer does. Dove-grey dress at the knee — long enough to
+read as a dress, short enough that both legs stay visible in a chibi sprite — cream apron, brown
+cloth shoes. No jewellery, no ornament.
 
 At 16px **her eye colour will not read, and that is correct.** Violet reads in the *portrait*,
 which is where all three "your hair / your eyes" scenes land. Do not try to force it into the

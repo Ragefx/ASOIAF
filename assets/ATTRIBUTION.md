@@ -6,7 +6,7 @@ One row per imported pack, added **at import time**, not later. See
 | Directory | Pack | Author | Source URL | Licence | Notes |
 |---|---|---|---|---|---|
 | `assets/sprites/torren/` | Torren chibi sprite + tier-1 top-down animations | AI-generated, SpriteCook (`gemini-3.1-flash-image` base, `pixel_engine` animation) | https://spritecook.ai — project account, not a public pack | Per SpriteCook's terms for generated assets | Imported 2026-09-09. Prompt anchor: style-block-first chibi prompt in `assets/sprites/GENERATED_ASSETS.md`. Base `e0659339…`; animations from run `3419d902…`. `*_prepared.png` are derived locally by `tools/prepare_sprite.py`. |
-| `assets/sprites/nyra/` | Nyra chibi sprite + tier-1 top-down animations | AI-generated, SpriteCook (as above) | https://spritecook.ai — project account | Per SpriteCook's terms for generated assets | Imported 2026-09-09. Base `e6085562…`. See the proportion caveat in `GENERATED_ASSETS.md`. |
+| `assets/sprites/nyra/` | Nyra chibi sprite + tier-1 top-down animations (v2) | AI-generated, SpriteCook (as above) | https://spritecook.ai — project account | Per SpriteCook's terms for generated assets | Imported 2026-09-09, re-rolled same day. Base `20ffa3a7…`, matched to Torren's proportions and age. The original base `e6085562…` and its animations are superseded — see `GENERATED_ASSETS.md`. |
 | `assets/tilesets/` | Grass + dirt 15-piece atlas | AI-generated, SpriteCook | https://spritecook.ai — project account | Per SpriteCook's terms for generated assets | Imported 2026-09-09. Asset `0c490d4c…`, 64×64 4×4, palette locked with `force_colors` from `docs/STYLE_GUIDE.md` §4. No preparation needed. |
 
 ## Rules
