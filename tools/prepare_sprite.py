@@ -17,6 +17,10 @@ Usage:
     # a horizontal spritesheet of N frames keeps its frames aligned:
     python3 tools/prepare_sprite.py walk_down.png --height 24 --frames 8
 
+    # a missing direction, mirrored from one that exists (no extra generation spend):
+    python3 tools/prepare_sprite.py walk_right.png --height 24 --frames 8 --mirror \
+        --out walk_left_prepared.png
+
 On the resampling filter, which matters more than it sounds: nearest-neighbour is
 the right choice for *enlarging* pixel art, and the wrong one for shrinking it a
 long way. Shrinking by 0.27 - which is what an 88px SpriteCook sprite does on its
@@ -33,7 +37,7 @@ import pathlib
 import sys
 
 try:
-    from PIL import Image
+    from PIL import Image, ImageOps
 except ImportError:
     sys.exit("Pillow is required: pip install Pillow")
 
@@ -64,6 +68,7 @@ def prepare(
     out: pathlib.Path,
     filter_name: str | None = None,
     nearest_above: float = NEAREST_ABOVE,
+    mirror: bool = False,
 ) -> None:
     img = Image.open(path).convert("RGBA")
 
@@ -93,10 +98,25 @@ def prepare(
     rgb = img.convert("RGB").quantize(colors=colors, dither=Image.Dither.NONE).convert("RGB")
     rgb.putalpha(alpha)
 
+    if mirror:
+        # Flip each frame in place; do NOT reverse the strip, or the gait plays
+        # backwards in time while only looking like it faces the other way.
+        # A single (frames=1) image just mirrors whole.
+        if frames > 1:
+            fw = rgb.width // frames
+            flipped = Image.new("RGBA", rgb.size, (0, 0, 0, 0))
+            for i in range(frames):
+                box = (i * fw, 0, (i + 1) * fw, rgb.height)
+                flipped.paste(ImageOps.mirror(rgb.crop(box)), (i * fw, 0))
+            rgb = flipped
+        else:
+            rgb = ImageOps.mirror(rgb)
+
     out.parent.mkdir(parents=True, exist_ok=True)
     rgb.save(out)
+    mirror_note = ", mirrored" if mirror else ""
     print(f"{path.name}: {Image.open(path).size} -> {rgb.size}, {colors} colours, "
-          f"{resample_name} resample -> {out}")
+          f"{resample_name} resample{mirror_note} -> {out}")
 
 
 def main() -> int:
@@ -111,11 +131,14 @@ def main() -> int:
     ap.add_argument("--nearest-above", type=float, default=NEAREST_ABOVE,
                      help=f"use nearest when shrinking by less than this factor, else box "
                           f"(default {NEAREST_ABOVE})")
+    ap.add_argument("--mirror", action="store_true",
+                     help="flip each frame horizontally in place (frame order unchanged) - "
+                          "for deriving a missing left-facing animation from a right one")
     args = ap.parse_args()
 
     out = args.out or args.source.with_name(args.source.stem + "_prepared.png")
     prepare(args.source, args.height, args.colors, args.frames, out,
-            filter_name=args.filter, nearest_above=args.nearest_above)
+            filter_name=args.filter, nearest_above=args.nearest_above, mirror=args.mirror)
     return 0
 
 

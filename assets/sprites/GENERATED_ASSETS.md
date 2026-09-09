@@ -295,3 +295,38 @@ mushy again, check the resampling before assuming the colour count is the proble
 A full top-down set (adding run, attack, hurt, death in four directions) is roughly 550 per
 character on top of this. Not worth spending until the tier-1 strips have been seen moving in
 Godot at 16×24.
+
+## Wired into Godot — 2026-09-09
+
+Both characters now have a `SpriteFrames` resource — `assets/sprites/<char>/<char>.tres` — and
+`scripts/actors/player.gd` loads the right one at runtime from `protagonists.json`'s
+`sprite_frames` field, keyed off `GameManager.current_pov`. Nothing about this required opening
+Godot: `tools/build_spriteframes.py` emits the `.tres` as plain text — an `ExtResource` per
+animation strip, an `AtlasTexture` sub-resource per 24×24 frame region, one `[resource]` block
+tying them into named, looping animations at 8 fps. Re-run it after any re-prepared strip:
+
+```bash
+python3 tools/build_spriteframes.py torren nyra
+```
+
+**Walk-left exists now too**, and is the one animation with no SpriteCook spend behind it at all —
+exactly the plan recorded above. `prepare_sprite.py` gained a `--mirror` flag that flips each frame
+in place without reversing frame order (reversing would play the gait backwards in time, which
+reads as wrong even though the character faces the correct way):
+
+```bash
+python3 tools/prepare_sprite.py assets/sprites/torren/walk_right.png --height 24 --colors 16 \
+    --frames 8 --mirror --out assets/sprites/torren/walk_left_prepared.png
+```
+
+**What still can't be verified from here:** none of this has been opened in the Godot editor or
+run, since the sandbox has no Godot install. The `.tres` format was hand-verified structurally
+(resource/frame counts, region math, animation names matching `player.gd`'s `ANIM_FALLBACKS`
+exactly) but the first real test is loading `Player.tscn` in-engine and confirming the sprite
+actually animates. Flag anything that doesn't load cleanly.
+
+**What this does not touch:** `scenes/world/` is still empty except `.gitkeep`. Every act's scene
+data references a `level` (22 distinct level ids across the five acts, none built) that
+`SceneDirector.goto_level()` expects to find as `res://scenes/world/<level_id>.tscn`, containing a
+`TileMap` and a child node literally named `Player`. The animations now play *if* a level exists to
+put them in; building the first one is the next real milestone, not this one.

@@ -14,7 +14,7 @@ people standing three feet behind them.
 
 | | **Ser Torren Slate** | **Nyra** |
 |---|---|---|
-| Age | 23 | 18 |
+| Age | 20 | 20 |
 | Role | Household knight, House Slate of Blackpool | Servant in the queen's household, Red Keep |
 | POV Acts | 1, 3, 5 | 2, 4 |
 | Arc | Earn a name for a house nobody remembers | Survive a court that eats people like her |

@@ -26,6 +26,31 @@ var _state_timer: float = 0.0
 var _input_locked: bool = false
 
 
+## There is one Player node, reused across acts; only its look and combat
+## capability change with GameManager.current_pov. See _apply_protagonist().
+func _ready() -> void:
+	super._ready()
+	GameManager.pov_changed.connect(_apply_protagonist)
+	if GameManager.current_pov != "":
+		_apply_protagonist(GameManager.current_pov)
+
+
+## Data-driven from data/npcs/protagonists.json's "sprite_frames" and "combat"
+## fields, so a new protagonist - or a re-rolled sprite sheet - needs no script
+## change, only a data edit. Missing sprite_frames leaves whatever the sprite
+## already had rather than clearing it, since a blank frame is worse than a
+## stale one and _update_animation() already no-ops when sprite_frames is null.
+func _apply_protagonist(pov: String) -> void:
+	var record: Dictionary = GameManager.protagonists.get(pov, {})
+	if record.is_empty():
+		push_warning("Player: no protagonists.json entry for pov '%s'" % pov)
+		return
+	var frames_path := String(record.get("sprite_frames", ""))
+	if frames_path != "" and ResourceLoader.exists(frames_path):
+		sprite.sprite_frames = load(frames_path)
+	can_fight = bool(record.get("combat", true))
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _input_locked or DialogueSystem.is_running:
 		return
