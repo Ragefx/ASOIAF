@@ -28,15 +28,19 @@ text = ""
 
 [node name="TextLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 2
+anchor_right = 1.0
 offset_left = 40.0
 offset_top = 12.0
+offset_right = -4.0
 bbcode_enabled = true
 fit_content = true
 
 [node name="Choices" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
+anchor_right = 1.0
 offset_left = 40.0
 offset_top = 40.0
+offset_right = -4.0
 
 [node name="ContinueHint" type="Label" parent="Panel"]
 layout_mode = 2
