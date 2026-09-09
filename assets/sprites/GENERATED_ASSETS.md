@@ -1,32 +1,42 @@
 # Generated Assets — SpriteCook
 
-Assets generated into the project's SpriteCook account. **The bytes are not in this repo yet.**
-The egress policy denies `api.spritecook.ai`, so generation works but downloading does
-not — every result comes back as a signed URL on that blocked host.
+Assets generated into the project's SpriteCook account. **The bytes are now in this repo** — all
+eleven files were downloaded on 2026-09-09 and committed.
 
-> **Re-tested 2026-09-03 and still blocked.** A direct `curl` of a fresh signed sprite URL returns
-> `curl: (56) CONNECT tunnel failed, response 403`. The agent proxy README classifies 403 on
-> CONNECT as an organization egress denial and says not to route around it. This is not a stale
-> note and not worth re-testing casually — assume the browser loop below until an admin allows
-> the host.
+> **The egress block is fixed.** `api.spritecook.ai` was denied for the first sessions here: the
+> cloud environment's network access was set to **Trusted**, which allowlists package registries
+> and GitHub and nothing else, so `curl` got `403` on CONNECT while the MCP tools kept working —
+> MCP connector traffic goes through Anthropic's servers and never touches the session allowlist.
+> That asymmetry is why generation succeeded and downloading did not.
+>
+> The fix was to set the environment's **Network access** to **Custom** with `*.spritecook.ai`
+> added and *"also include default list of common package managers"* ticked. It is reachable only
+> from the cloud icon above the message box at claude.ai/code — there is no settings URL for it.
+> **If downloads start failing again, check that first.** Signed URLs also expire in about a week,
+> so always fetch fresh ones from the MCP tools rather than reusing a link from these notes.
 
-**The loop that works:** Claude generates → you download from the SpriteCook web app in your own
-browser → you attach the file here → Claude prepares, commits and wires it.
+**The loop now:** Claude generates → Claude downloads with `curl` from a freshly-issued signed URL
+→ Claude prepares, commits and wires it. No browser round trip.
 
-> **Attach as files, not pasted images.** An image pasted inline can be *looked at* but never
-> reaches the session filesystem, so it cannot be committed or run through `prepare_sprite.py`.
-> A file attachment lands on disk and can be. This distinction has already cost one round trip.
+> Kept in case the allowlist is ever lost: the fallback is to download in your own browser and
+> **attach the files, not paste them.** A pasted image can be *looked at* but never reaches the
+> session filesystem, so it cannot be committed or run through `prepare_sprite.py`.
 
 Record every generation here at the time it is made, so an asset id is never lost to scrollback.
 
 ---
 
-## What to download
+## What is in the repo
 
-**Eleven files now:** the three bases below, plus the eight animation strips in the
-[tier-1 section](#tier-1-animations--generated-2026-09-03). Everything is **labelled in SpriteCook**
-and the label becomes the downloaded filename, so the right files are identifiable without matching
-UUIDs by eye — every one of the eleven starts `USE_THIS`.
+All eleven — the three bases below and the eight animation strips in the
+[tier-1 section](#tier-1-animations--generated-2026-09-03) — are committed, each alongside a
+`*_prepared.png` produced by `tools/prepare_sprite.py`. **Import the `_prepared` files into Godot;**
+the un-suffixed file is the untouched original, kept so preparation can be redone with different
+settings without spending credits.
+
+Everything is **labelled in SpriteCook** and the label becomes the downloaded filename, so if these
+ever need re-fetching the right files are identifiable without matching UUIDs by eye — every one of
+the eleven starts `USE_THIS`.
 
 ### The three bases
 
@@ -97,15 +107,70 @@ the grass, large areas of untouched flat green" produced a far flatter atlas tha
 
 ---
 
-## Before the characters are usable
+## Preparation — run 2026-09-09
+
+`prepare_sprite.py` has now been run for real, against real SpriteCook files, for the first time.
+The commands, all of which produced committed output:
 
 ```bash
+# bases
 python3 tools/prepare_sprite.py assets/sprites/torren/torren_base.png --height 24 --colors 16
-python3 tools/prepare_sprite.py assets/sprites/nyra/nyra_base.png   --height 24 --colors 16
+python3 tools/prepare_sprite.py assets/sprites/nyra/nyra_base.png     --height 24 --colors 16
+
+# the eight animation strips — --frames keeps frames aligned
+for c in torren nyra; do for a in idle walk_down walk_up walk_right; do
+  python3 tools/prepare_sprite.py "assets/sprites/$c/$a.png" --height 24 --colors 16 --frames 8
+done; done
 ```
 
-The tilesets should need no preparation: a 16px 15-piece atlas returns 64×64 in a 4×4 grid with
-the palette already locked by `force_colors`.
+The tileset needed no preparation, as predicted: 64×64 in a 4×4 grid, palette already locked by
+`force_colors`.
+
+| Input | → output | Note |
+|---|---|---|
+| `torren_base` 44×44 | 14×24 | Reads cleanly. |
+| `nyra_base` 80×80 | 10×24 | Thin; see the proportion problem below. |
+| Each strip | 192×24, i.e. **24×24 per frame** | Frames stay aligned; the walk cycles read. |
+
+**The script works.** Its docstring warned it was untested — it no longer is. Two things it got
+right that were worth verifying: `--frames` scales the sheet as a whole so frames do not jitter,
+and the separate alpha/colour quantisation left no halo, because both sources turned out to have
+**no partial alpha at all** (every pixel fully opaque or fully transparent). The `ALPHA_CUTOFF`
+threshold is therefore doing nothing on these files — useful to know, not a bug.
+
+Note the frame is **24×24, not the 16×24** in `STYLE_GUIDE.md` §3, because SpriteCook returns a
+square frame. The extra width is transparent padding; set the `AnimatedSprite2D` offset from the
+feet as §3 requires and it does not matter.
+
+### The proportion problem — Nyra does not match Torren
+
+Measured from the figure bounding boxes, not eyeballed:
+
+| | Figure in source | Aspect w/h |
+|---|---|---|
+| Torren | 24 × 41 | **0.585** — stocky, big head, about three heads tall |
+| Nyra | 34 × 78 | **0.436** — slender, about four and a half heads |
+
+`STYLE_GUIDE.md` §2 asks for "roughly three heads tall" for *every* character. Torren's base hits
+it; Nyra's does not — hers is halfway back toward the portrait register. Two consequences:
+
+1. **She is mushy at 24px.** At 10px wide there is not enough room for her silhouette, and her
+   997-colour hair quantises to 16 with visible speckle. Torren, being chunkier, survives easily.
+2. **Scaling both to `--height 24` makes them the same height**, which contradicts §5: Nyra is
+   supposed to be "the shortest silhouette in most scenes." That reads as a bug in the scene, not
+   in the art, and no amount of quantising fixes it.
+
+Neither is fixed here, because both fixes cost credits or change approved art. The options, in
+increasing cost:
+
+- **Prepare Nyra shorter** — `--height 20` instead of 24. Free, immediately restores the height
+  difference §5 wants, does not fix the mushiness.
+- **Re-roll Nyra's base** with Torren's exact prompt shape, which is the one that produced 44×44
+  chibi, then re-run her tier-1 animations. ~134 credits (12 base + 122 animations) and it discards
+  art already approved as `USE THIS 02`.
+
+The second is the real fix. It is worth doing *before* any tier-2 spend, since every animation
+frame derives from the base and re-rolling later throws away more work.
 
 ## Tier-1 animations — generated 2026-09-03
 
