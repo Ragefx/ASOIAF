@@ -4,7 +4,11 @@ extends Node
 ## lives in an autoload.
 
 @onready var world: Node2D = $World
-@onready var transition: CanvasLayer = $TransitionLayer
+## The fade target is the ColorRect, not its parent CanvasLayer - CanvasLayer
+## extends Node, not CanvasItem, so it has no "modulate" for SceneDirector's
+## tweens to animate. Handing CanvasLayer itself around here would break every
+## fade the first time one ran.
+@onready var transition: ColorRect = $TransitionLayer/Fade
 
 
 func _ready() -> void:

@@ -16,8 +16,8 @@ var current_level: String = ""
 var current_spawn: String = ""
 var is_transitioning: bool = false
 
-var world_root: Node2D = null            ## set by Main on _ready
-var transition_layer: CanvasLayer = null ## set by Main on _ready
+var world_root: Node2D = null          ## set by Main on _ready
+var transition_layer: ColorRect = null ## the fade ColorRect, set by Main on _ready
 
 
 func goto_level(level_id: String, spawn: String = "") -> void:

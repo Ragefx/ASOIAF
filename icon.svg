@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Placeholder project icon. Flat fill + thick outline per docs/STYLE_GUIDE.md
+       palette (foliage green, universal outline), not final art - a real icon
+       is a design task, not this one. Exists only so project.godot's
+       config/icon path resolves instead of erroring on load. -->
+  <rect x="4" y="4" width="120" height="120" rx="16" fill="#6FC23A" stroke="#10280F" stroke-width="8"/>
+  <rect x="56" y="24" width="16" height="56" fill="#E3C48C" stroke="#10280F" stroke-width="6"/>
+  <circle cx="64" cy="92" r="14" fill="#9AA3AD" stroke="#10280F" stroke-width="6"/>
+</svg>
