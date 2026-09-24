@@ -26,6 +26,14 @@ const HINTS := [
 	{"level": "wolfswood_holdfast", "flags": [], "text": "Serjeant Hune is waiting"},
 	{"level": "kingsroad_north", "flags": ["act1_found_pups"], "text": "The column rides on north   ·   the woods are yours to look at first"},
 	{"level": "kingsroad_north", "flags": [], "text": "Walk up the road to the head of the column"},
+	{"level": "winterfell_yard_arrival", "flags": [], "text": "Hold the line"},
+	{"level": "winterfell_crypts", "flags": [], "text": "Hold the torch"},
+	{"level": "winterfell_great_hall", "flags": [], "text": "E  to talk   ·   the door south goes out to the yard"},
+	{"level": "winterfell_yard_visit", "flags": ["act1_talked_robb_yard"], "text": ""},
+	{"level": "winterfell_yard_visit", "flags": [], "text": "Robb is at the dummies   ·   E  to talk"},
+	{"level": "winterfell_yard_fall", "flags": ["act1_bran_fell"], "text": ""},
+	{"level": "winterfell_yard_fall", "flags": [], "text": "Take the lances out through the south gate"},
+	{"level": "winterfell_godswood", "flags": ["act1_aftermath"], "text": "The heart tree is north"},
 ]
 
 var _player: CombatActor = null

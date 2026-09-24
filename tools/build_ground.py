@@ -120,6 +120,24 @@ LEVELS = {
             (-9, -9, -3, -5),    # where the party has dismounted around her
         ],
     },
+    # Levels whose "upper" surface is the small part: "invert" makes the rectangles the
+    # upper surface and everything else the lower one.
+    "winterfell_crypts": {      # a flagstone aisle between the stone kings, rubble dark either side
+        "size": (46, 30), "tileset": "crypt_32.png", "plain": False, "invert": True,
+        "earth": [(-5, -12, 5, 12)],
+    },
+    "winterfell_great_hall": {  # rushes over the floor, bare dark flags along the walls
+        "size": (46, 30), "tileset": "hall_32.png", "plain": False, "invert": True,
+        "earth": [(-19, -8, 19, 11)],
+    },
+    "winterfell_walls": {       # the wall-walk across the middle, snow far below either side
+        "size": (80, 52), "tileset": "wallwalk_32.png", "plain": False, "invert": True,
+        "earth": [(-40, -2, 40, 2)],
+    },
+    "winterfell_godswood": {    # grass, a trodden path from the gate to the heart tree
+        "size": (46, 30),
+        "earth": [(-1, 1, 1, 15), (-4, -6, 4, 0)],
+    },
 }
 
 
@@ -160,11 +178,14 @@ def build(name: str) -> pathlib.Path:
     w, h = spec["size"]
     ox, oy = w // 2, h // 2  # tile (0,0) of the layout sits at the image centre
     grass = [[True] * (w + 1) for _ in range(h + 1)]  # vertices
+    invert = spec.get("invert", False)
+    if invert:
+        grass = [[False] * (w + 1) for _ in range(h + 1)]
     for x0, y0, x1, y1 in spec["earth"]:
         for vy in range(y0, y1 + 1):
             for vx in range(x0, x1 + 1):
                 if 0 <= vx + ox <= w and 0 <= vy + oy <= h:
-                    grass[vy + oy][vx + ox] = False
+                    grass[vy + oy][vx + ox] = invert
 
     tileset = ROOT / "assets" / "tilesets" / spec["tileset"] if "tileset" in spec else TILESET
     atlas = Image.open(tileset).convert("RGBA")

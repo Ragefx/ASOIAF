@@ -210,6 +210,28 @@ Autosave fires on act change and level transition, into a reserved slot 0.
 
 ---
 
+### 4.6 Level scripting (Act 1 onward)
+
+Scenes are played in levels by small data-driven nodes rather than per-level scripts
+(`scripts/world/`):
+
+| Node | What it does |
+|---|---|
+| `scene_trigger.gd` | plays a scene node once on arrival (an establishing line) |
+| `trigger_zone.gd` | plays a node when the player walks in (finding the direwolf) |
+| `interact_point.gd` | an inspectable thing (the stables, the ring place); can move the camera to a focus |
+| `exit_zone.gd` | the way out, once flags allow; an end card while the next level is unbuilt |
+| `sequence.gd` | a scripted run of steps - play, wait, await a flag, move a node, swap the player's look, show/hide groups, fade, zoom, go to the next level |
+| `tether.gd` | holds the player near a point (the honour guard line) |
+| `flag_move.gd` | moves a node when a flag is set (a step down the crypt stair per choice) |
+| `glance_zone.gd` | a brief encounter: fires only when the player is near *and facing* someone |
+| `flag_visibility.gd`, `camera_limits.gd` | hide/show on a flag; keep the camera inside the level |
+
+SceneDirector plays each level's music as the latest scene set there whose flags are met; a
+dialogue node's `"music"` key can change it mid-scene (`"none"` = the scripted silences).
+Levels for scenes 5-12 are written by `tools/build_act1_levels.py`; the castle yard is four
+levels there (arrival, visit, fall, departure) over one ground.
+
 ## 5. NPC System
 
 `scenes/actors/NPC.tscn` — `CharacterBody2D` + `AnimatedSprite2D` + `Area2D` interaction zone.

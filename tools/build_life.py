@@ -113,7 +113,15 @@ LIFE = {
     "benjen": dict(kind="frames", height=56, anims={"idle": ("benjen_idle", 6, True, False)}),
     "lannister_soldier": dict(kind="static", height=55, footprint=(18, 8), anims={"idle": ("lannister_soldier_idle", 6, True, False)}),
     "catelyn": dict(kind="frames", height=52, anims={"idle": ("catelyn_idle", 6, True, False)}),
-    "torren_lances": dict(kind="frames", height=52, anims={"walk_right": ("torren_lances_walk", 8, True, False)}),
+    # the player's look while carrying the lances: one side-on walk, mirrored for left, and
+    # used for up/down too (he is carrying five lances; nobody watches his feet); idle is
+    # the walk's first frame held (fps 0)
+    "torren_lances": dict(kind="frames", height=52, anims={
+        "idle": ("torren_lances_walk", 0, True, False),
+        "walk_right": ("torren_lances_walk", 8, True, False),
+        "walk_left": ("torren_lances_walk", 8, True, True),
+        "walk_down": ("torren_lances_walk", 8, True, False),
+        "walk_up": ("torren_lances_walk", 8, True, True)}),
     "pup_howl": dict(kind="static", height=24, footprint=(16, 6), anims={"idle": ("pup_howl", 8, True, False)}),
     "nyra_trunk": dict(kind="frames", height=47, anims={"idle": ("nyra_trunk", 8, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene

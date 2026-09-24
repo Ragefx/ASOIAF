@@ -1,5 +1,5 @@
 extends SceneTree
-## Automated playthrough of Act 1's first four scenes: Morning Duties in the training yard,
+## Automated playthrough of all of Act 1: Morning Duties in the training yard,
 ## Preparing for a King in the castle yard, A Deserter's Head in the Wolfswood, and Six Pups
 ## and a Seventh on the kingsroad.
 ##
@@ -259,17 +259,177 @@ func _run() -> void:
 	await _shot("the_white_pup")
 	await _finish_dialogue()
 	_check(GM.has_flag("act1_found_ghost"), "found the white pup")
-	# on north: the king's arrival isn't built, so the card
-	player.global_position = Vector2(60, -360)
+	# on north, home, a month later: the king comes (up the road's west edge, past the
+	# horses and the guard at the head of the column)
+	player.global_position = Vector2(-85, -370)
 	Input.action_press("move_up")
 	await _wait(1.2)
 	Input.action_release("move_up")
-	await _wait(2.0)
-	await _shot("kingsroad_exit")
-	_check(SD.current_level == "kingsroad_north", "the unbuilt king's arrival shows its card")
+	await _wait(2.5)
+
+	# === Scene 5: The King Comes North (a scripted beat; Torren held in the line) =====
+	_check(SD.current_level == "winterfell_yard_arrival", "the column rides home to the king's arrival")
+	player = get_first_node_in_group("player")
+	var line_at := player.global_position
+	player.global_position = line_at + Vector2(-300, 0)
+	await _wait(0.2)
+	_check(player.global_position.distance_to(line_at) <= 65.0, "Torren is held in the honour guard line")
+	var knelt := false
+	var robert_close := false
+	for i in 400:
+		if DS.is_running:
+			if DS._current_id == "n10":
+				var spr := player.get_node("AnimatedSprite2D") as AnimatedSprite2D
+				knelt = String(spr.sprite_frames.resource_path).contains("torren_kneel")
+				var robert := root.find_child("Robert", true, false) as Node2D
+				robert_close = robert.global_position.y < 0
+				await _shot("the_king")
+			await _step_dialogue()
+		elif SD.current_level != "winterfell_yard_arrival":
+			break
+		await _wait(0.1)
+	_check(knelt, "the household kneels, and Torren with it, when the king comes")
+	_check(robert_close, "the king has walked up the yard to Lord Stark")
+	_check(GM.has_flag("act1_king_arrived") and GM.has_flag("act1_met_wells"), "the arrival played through (the king, Ser Emmon)")
+
+	# === Scene 6: Torchlight (the crypts) =============================================
+	await _until_level("winterfell_crypts")
+	player = get_first_node_in_group("player")
+	var torch_ok := String((player.get_node("AnimatedSprite2D") as AnimatedSprite2D).sprite_frames.resource_path).contains("torren_torch")
+	_check(torch_ok, "Torren holds a torch at the stair head")
+	var start_y := player.global_position.y
+	await _play_out("winterfell_crypts", "the_crypts")
+	_check(GM.has_flag("act1_heard_crypt_2"), "choosing to listen, twice, hears both fragments")
+	_check(GM.has_flag("act1_crypts"), "the crypt scene completes")
+
+	# === Scene 7: The Feast ===========================================================
+	await _until_level("winterfell_great_hall")
+	player = get_first_node_in_group("player")
+	await _wait(0.5)
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_entered_feast"), "the feast opens")
+	for who in [["Hune", "act1_feast_hune"], ["Jory", "act1_feast_jory"], ["Wells", "act1_feast_wells"]]:
+		await _talk(who[0])
+		await _finish_dialogue()
+		_check(GM.has_flag(who[1]), "spoke with %s at the feast" % who[0])
+	# the brief encounter: stand in her way, facing her
+	var girl := root.find_child("ServingGirl", true, false) as Node2D
+	_check(girl != null, "the serving girl crosses the hall")
+	for i in 120:
+		player.global_position = girl.global_position + Vector2(0, 40)
+		player.facing = Vector2.UP
+		await _wait(0.05)
+		if DS.is_running:
+			break
+	_check(DS.is_running and GM.has_flag("act1_encounter_feast"), "facing her as she passes: the first brief encounter")
+	await _shot("the_feast")
+	await _finish_dialogue()
+	player.global_position = Vector2(0, 300)
+	Input.action_press("move_down")
+	await _wait(1.0)
+	Input.action_release("move_down")
+
+	# === Scene 8: Days of Feasting ====================================================
+	await _until_level("winterfell_yard_visit")
+	player = get_first_node_in_group("player")
+	await _wait(0.6)
+	await _finish_dialogue()
+	for who in [["Jon", "act1_talked_to_jon"], ["Tyrion", "act1_met_tyrion"], ["Benjen", "act1_met_benjen"]]:
+		await _talk(who[0])
+		await _finish_dialogue()
+		_check(GM.has_flag(who[1]), "spoke with %s during the visit" % who[0])
+	await _shot("the_visit")
+	await _talk("Robb")
+	await _play_out("winterfell_yard_visit", "")
+	_check(GM.has_flag("act1_explored_during_visit"), "nine days pass; the king rides out to hunt")
+
+	# === Scene 9: The Fall ============================================================
+	await _until_level("winterfell_yard_fall")
+	player = get_first_node_in_group("player")
+	await _wait(0.6)
+	await _finish_dialogue()
+	await _wait(0.4)
+	var lances := String((player.get_node("AnimatedSprite2D") as AnimatedSprite2D).sprite_frames.resource_path).contains("torren_lances")
+	_check(lances, "Torren carries the lances")
+	player.global_position = Vector2(470, -130)   # under the Broken Tower, looking up
+	await _wait(0.6)
+	_check(DS.is_running, "looking up at the Broken Tower: a small figure on the wall")
+	await _shot("the_climber")
+	await _finish_dialogue()
+	player.global_position = Vector2(0, 150)
+	Input.action_press("move_down")
+	await _wait(1.2)
+	Input.action_release("move_down")
+	await _play_out("winterfell_yard_fall", "the_fall")
+	_check(GM.has_flag("act1_bran_fell") and GM.has_flag("act1_torren_carried_bran"), "the fall; Torren carries the boy")
+
+	# === Scene 10: Aftermath ==========================================================
+	await _until_level("winterfell_godswood")
+	player = get_first_node_in_group("player")
+	await _wait(0.6)
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_aftermath"), "the hunting party comes back")
+	player.global_position = Vector2(0, 40)
+	Input.action_press("move_up")
+	await _wait(0.8)
+	Input.action_release("move_up")
+	await _wait(0.3)
+	_check(DS.is_running, "the heart tree")
+	await _shot("the_godswood")
+	await _play_out("winterfell_godswood", "")
+
+	# === Scenes 11 and 12: the departure and the wall =================================
+	await _until_level("winterfell_yard_departure")
+	await _wait(0.6)
+	for i in 400:
+		if DS.is_running:
+			if DS._current_id == "n3":
+				await _shot("the_departure")
+			await _step_dialogue()
+		elif SD.current_level != "winterfell_yard_departure":
+			break
+		await _wait(0.1)
+	_check(GM.has_flag("act1_encounter_departure"), "the trunk, and the second brief encounter")
+	await _until_level("winterfell_walls")
+	await _wait(0.6)
+	await _finish_dialogue()
+	await _wait(10.0)
+	await _shot("winter_is_coming")
+	_check(GM.has_flag("act1_complete"), "Act 1 is complete")
 
 	print("PLAYTEST %s (%d failure(s))" % ["PASS" if failures == 0 else "FAIL", failures])
 	quit(1 if failures else 0)
+
+
+func _step_dialogue() -> void:
+	if not DS._pending_choices.is_empty():
+		DS.choose(0)   # the first choice: in the crypts that is "go one step closer"
+	else:
+		DS.advance()
+
+
+func _until_level(level: String) -> void:
+	for i in 100:
+		if SD.current_level == level and not SD.is_transitioning:
+			break
+		if DS.is_running:
+			await _step_dialogue()
+		await _wait(0.1)
+	await _wait(0.4)
+
+
+## Keep answering dialogue (as the player would) until the level changes; shoot once.
+func _play_out(level: String, shot: String) -> void:
+	var shot_done := shot == ""
+	for i in 600:
+		if SD.current_level != level:
+			return
+		if DS.is_running:
+			if not shot_done:
+				await _shot(shot)
+				shot_done = true
+			await _step_dialogue()
+		await _wait(0.1)
 
 
 func _finish_dialogue() -> void:

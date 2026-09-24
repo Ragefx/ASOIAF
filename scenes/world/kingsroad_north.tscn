@@ -119,13 +119,12 @@ position = Vector2(0, -412)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_exit")
-target_level = "winterfell_yard"
+target_level = "winterfell_yard_arrival"
 target_spawn = "honour_guard_left"
 requires_flags = Array[String](["act1_found_pups"])
 unbuilt_card = "A month later the king's column is sighted on the road, and every banner Winterfell owns is up.
 
 End of the fourth scene - the king's arrival is still being built."
-card_only = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitNorth"]
 shape = SubResource("RectangleShape2D_exit")

@@ -122,10 +122,23 @@ at the left of the ring (E). The camera watches Bran, not the block. The road ho
 
 Scene 4, Six Pups and a Seventh: the column has stopped on the kingsroad. Walk up the road to
 find out why (no button - you find it). A sixth pup sits alone in the trees east of the road,
-and only a player who leaves the road finds it. The column rides on north (currently an end
-card - the king's arrival isn't built yet).
+and only a player who leaves the road finds it. The column rides on north, home.
 
-`tools/godot/playtest_act1_opening.gd` plays all four automatically and screenshots each beat:
+Scenes 5 to 12 finish the act:
+- **The King Comes North** - held in the honour guard line (you can shuffle, not leave), the
+  king rides up the yard and the household kneels.
+- **Torchlight** - the crypts; you hold a torch at the stair head and may step closer twice.
+- **The Feast** - free roam of the great hall; face the serving girl as she crosses and you
+  meet her eyes (the first brief encounter).
+- **Days of Feasting** - the yard during the visit: Robb, Jon, Tyrion, Benjen.
+- **The Fall** - carry the lances to the south gate; look up at the Broken Tower if you like.
+- **Aftermath** - the godswood and the heart tree.
+- **The Departure** and **Winter Is Coming** - the trunk, the column leaving, the wall.
+
+The later levels are generated from data: `tools/build_act1_levels.py` (people, scripted
+beats as `scripts/world/sequence.gd` steps) plus `tools/build_props.py place <level>`.
+
+`tools/godot/playtest_act1_opening.gd` plays the whole act automatically and screenshots each beat:
 
     xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
         -s tools/godot/playtest_act1_opening.gd -- /tmp/playtest

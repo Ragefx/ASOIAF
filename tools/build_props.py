@@ -387,8 +387,160 @@ def kingsroad() -> list[tuple]:
     return placed
 
 
+def _yard_people(extra: list[tuple], clear: tuple | None = None) -> list[tuple]:
+    """The castle yard as scene 2 dressed it, plus a later scene's people and baggage.
+    `clear` (x0, y0, x1, y1) empties that part of scene 2's yard - the well and the
+    barrels are not in the road when a king rides up it."""
+    base = castle_yard()
+    if clear:
+        x0, y0, x1, y1 = clear
+        base = [e for e in base if not (x0 <= e[1] <= x1 and y0 <= e[2] <= y1)]
+    return base + extra
+
+
+def _pair(name: str, x: int, y: int) -> list[tuple]:
+    """A man of the household standing, and the same man kneeling (hidden) in his place."""
+    return [(name, x, y, {"groups": ["standing"]}),
+            ("life/guard_kneel", x, y, {"groups": ["kneeling"], "visible": "false"})]
+
+
+def yard_arrival() -> list[tuple]:
+    """Scene 5: the royal party rides in from the south gate to the keep door, between two
+    lines of the household - Torren in the left line at (-100, 20)."""
+    extra = []
+    for y in (-140, -80, 80, 140):
+        extra += _pair("life/guard_idle", -100, y)
+    for y in (-140, -80, 20, 80, 140):
+        extra += _pair("life/guard_idle", 100, y)
+    extra += [
+        ("wheelhouse", 0, 330), ("life/kingsguard", -96, 250), ("life/kingsguard", 96, 250),
+        ("life/goldcloak", -60, 350), ("life/goldcloak", 60, 350), ("life/goldcloak", -150, 340),
+        ("life/goldcloak", 150, 340),
+        # the baggage train at the back, and in it a girl with a covered head carrying water
+        ("wagon", 330, 330), ("trunks", 400, 310), ("life/nyra_covered", 270, 318),
+        ("life/banner_baratheon", -354, -246), ("life/banner_lannister", 354, -246),
+    ]
+    return _yard_people(extra, clear=(-160, -200, 160, 380))
+
+
+def yard_visit() -> list[tuple]:
+    """Scene 8: nine days in. Lannister men and Stark men circle each other in the yard."""
+    return _yard_people([
+        ("training_dummy", -330, 120), ("training_dummy", -270, 110),
+        ("life/lannister_soldier", 120, 170), ("life/lannister_soldier", 170, 190),
+        ("life/lannister_soldier", 90, 210), ("life/guard_idle", 30, 150), ("life/guard_idle", -10, 190),
+        ("life/goldcloak", -60, 330), ("life/goldcloak", 60, 330),
+        ("life/kingsguard", 40, -200), ("wagon", 400, 300), ("trunks", 340, 320),
+        ("life/banner_baratheon", -354, -246), ("life/banner_lannister", 354, -246),
+    ])
+
+
+def yard_fall() -> list[tuple]:
+    """Scene 9: the half-empty morning. A small figure goes up the outside of the Broken
+    Tower (group "climber", hidden once he falls); the pup stands over him after."""
+    return _yard_people([
+        ("tower_climber", 646, -316, {"groups": ["climber"]}),
+        ("life/pup_howl", 596, -176, {"groups": ["fallen"], "visible": "false"}),
+        ("training_dummy", -330, 120),
+        ("life/banner_baratheon", -354, -246), ("life/banner_lannister", 354, -246),
+    ])
+
+
+def yard_departure() -> list[tuple]:
+    """Scene 11: the royal column forming up to leave, the yard all elbows."""
+    extra = [("wheelhouse", 60, 90), ("wagon", 200, 190), ("wagon", 330, 250), ("wagon", -220, 180),
+             ("trunks", -120, 240), ("trunks", 120, 290), ("trunks", -300, 260),
+             ("life/kingsguard", -40, 60), ("life/kingsguard", 160, 60)]
+    for x in (-200, -120, 200, 280):
+        extra.append(("life/goldcloak", x, 320))
+    for x, y in ((-300, 120), (300, 140), (-20, 180)):
+        extra.append(("life/lannister_soldier", x, y))
+    extra += [("life/horse", -40, 150, {"modulate": "Color(0.4, 0.36, 0.34, 1)"}), ("life/horse", 420, 180),
+              ("life/banner_baratheon", -354, -246), ("life/banner_lannister", 354, -246)]
+    return _yard_people(extra, clear=(-160, -200, 160, 380))
+
+
+def crypts() -> list[tuple]:
+    """Scene 6: the crypts. Stone kings in two rows down a flagstone aisle; Torren at the
+    stair head at the north end, the king and Lord Stark at Lyanna's tomb at the south."""
+    placed = [("crypt_stair", 0, -252), ("lyanna_statue", 0, 290),
+              ("life/candelabra", -70, 270), ("life/candelabra", 70, 270)]
+    for y in (-150, -40, 70, 180):
+        placed += [("crypt_king", -120, y), ("crypt_king", 120, y)]
+        placed += [("life/wall_torch", -150, y - 60, {"z_index": 1}), ("life/wall_torch", 150, y - 60, {"z_index": 1})]
+    return placed
+
+
+def great_hall() -> list[tuple]:
+    """Scene 7: the feast. The high table on its dais at the north wall, long tables down
+    the hall, the hearth, candles; the low benches at the south-west end are Torren's."""
+    WALL_Y = -214
+    placed = [("high_table", 0, -150), ("life/hearth", -420, WALL_Y + 8)]
+    for x in (-620, -372, -124, 124, 372, 620):
+        placed.append(("hall_wall", x, WALL_Y))
+    for x in (-250, 250):
+        for y in (-40, 110, 250):
+            placed.append(("feast_table", x, y))
+    diners = ["life/diner_ale", "life/diner_bread", "life/diner_woman"]
+    i = 0
+    for x in (-250, 250):
+        for y in (-40, 110, 250):
+            for dx in (-44, 0, 44):
+                if (x, y) == (-250, 250) and dx == -44:
+                    continue  # Torren's seat on the lowest bench
+                # on the far bench: set back far enough that head and shoulders show over
+                # the table's back edge (the table is 80px tall and y-sorts in front)
+                placed.append((diners[i % 3], x + dx, y - 64))
+                i += 1
+    placed += [("life/candelabra", -120, -180), ("life/candelabra", 120, -180),
+               ("life/candelabra", -560, 200), ("life/candelabra", 560, 200),
+               ("barrel", 540, 300), ("barrel", 566, 316), ("life/hound_sleeping", -520, 300)]
+    return placed
+
+
+def godswood() -> list[tuple]:
+    """Scene 10: the godswood - the heart tree over its black pool, old trees close round."""
+    placed = [("heart_tree", 0, -96), ("black_pool", 70, -40),
+              ("life/crow", -120, -150), ("life/crow", 160, -160), ("life/hare", -300, 100)]
+    rng = random.Random("winterfell_godswood")
+    taken = [(e[1], e[2]) for e in placed]
+    for _ in range(9000):
+        if len(taken) > 70:
+            break
+        x, y = rng.uniform(-720, 720), rng.uniform(-470, 520)
+        if (abs(x) < 60 and y > 0) or (abs(x) < 170 and -230 < y < 20):
+            continue
+        if not all(math.hypot(x - a, y - b) >= 66 for a, b in taken):
+            continue
+        placed.append((rng.choice(["tree_oak", "tree_oak", "tree_pine"]), round(x), round(y)))
+        taken.append((x, y))
+    for _ in range(3000):
+        if len(placed) > 110:
+            break
+        x, y = rng.uniform(-700, 700), rng.uniform(-440, 460)
+        if (abs(x) < 50 and y > 0) or (abs(x) < 150 and -210 < y < 10):
+            continue
+        placed.append((rng.choice(["bush", "flowers", "sticks", "boulder"]), round(x), round(y)))
+    return placed
+
+
+def walls() -> list[tuple]:
+    """Scene 12: the south rampart. The parapet's face along the walk's south edge."""
+    placed = []
+    x = -1260
+    while x < 1300:
+        placed.append(("wall", x, 88))
+        x += 134
+    placed += [("tower", -700, 96), ("tower", 700, 96)]
+    return placed
+
+
 LEVELS = {"winterfell_training_yard": training_yard, "winterfell_yard": castle_yard,
-          "wolfswood_holdfast": wolfswood, "kingsroad_north": kingsroad}
+          "wolfswood_holdfast": wolfswood, "kingsroad_north": kingsroad,
+          "winterfell_yard_arrival": yard_arrival, "winterfell_yard_visit": yard_visit,
+          "winterfell_yard_fall": yard_fall, "winterfell_yard_departure": yard_departure,
+          "winterfell_crypts": crypts, "winterfell_great_hall": great_hall,
+          "winterfell_godswood": godswood, "winterfell_walls": walls}
 
 
 def place(level: str) -> None:
@@ -419,8 +571,12 @@ def place(level: str) -> None:
     nodes = []
     for i, entry in enumerate(layout):
         name, x, y = entry[:3]
-        extra = "".join(f"{k} = {v}\n" for k, v in (entry[3] if len(entry) > 3 else {}).items())
-        nodes.append(f'\n[node name="prop_{i:03d}_{name.replace("/", "_")}" parent="Actors" '
+        props = dict(entry[3]) if len(entry) > 3 else {}
+        # "groups" goes in the node header (sequences show/hide by group), the rest are properties
+        groups = props.pop("groups", [])
+        group_attr = f' groups=[{", ".join(chr(34) + g + chr(34) for g in groups)}]' if groups else ""
+        extra = "".join(f"{k} = {v}\n" for k, v in props.items())
+        nodes.append(f'\n[node name="prop_{i:03d}_{name.replace("/", "_")}" parent="Actors"{group_attr} '
                      f'instance=ExtResource("{rid(name)}")]\n'
                      f"position = Vector2({x}, {y})\n{extra}")
     path.write_text(text + "".join(nodes))

@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/winterfell_walls_ground.png" id="ground"]
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/NPC.tscn" id="npc"]
+[ext_resource type="Script" path="res://scripts/life/drifting_layer.gd" id="drift"]
+[ext_resource type="Texture2D" path="res://assets/fx/snow_far.png" id="t_snow_far"]
+[ext_resource type="Script" path="res://scripts/world/sequence.gd" id="sequence"]
+[ext_resource type="PackedScene" path="res://scenes/props/tower.tscn" id="prop_tower"]
+[ext_resource type="PackedScene" path="res://scenes/props/wall.tscn" id="prop_wall"]
+
+[sub_resource type="RectangleShape2D" id="wall_h"]
+size = Vector2(2600, 24)
+
+[sub_resource type="RectangleShape2D" id="wall_v"]
+size = Vector2(24, 320)
+
+[node name="WinterfellWalls" type="Node2D"]
+
+[node name="Light" type="CanvasModulate" parent="."]
+color = Color(0.86, 0.88, 1, 1)
+
+[node name="Ground" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("ground")
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="WallNorth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0.0, -60)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallNorth"]
+shape = SubResource("wall_h")
+
+[node name="WallWest" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-1200, 0.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallWest"]
+shape = SubResource("wall_v")
+
+[node name="WallEast" type="StaticBody2D" parent="Bounds"]
+position = Vector2(1200, 0.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallEast"]
+shape = SubResource("wall_v")
+
+[node name="WallSouth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0.0, 60)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallSouth"]
+shape = SubResource("wall_h")
+
+[node name="Snow" type="Sprite2D" parent="."]
+z_index = 60
+modulate = Color(1, 1, 1, 1.0)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("t_snow_far")
+region_enabled = true
+region_rect = Rect2(0, 0, 3000, 2200)
+script = ExtResource("drift")
+drift = Vector2(3, -12)
+
+[node name="WinterIsComing" type="Node" parent="."]
+script = ExtResource("sequence")
+scene_id = "s1_12_winter_is_coming"
+requires_flags = Array[String](["act1_encounter_departure"])
+done_flag = "act1_walls_done"
+steps = Array[Dictionary]([{"lock": true}, {"wait": 1.0}, {"play": "n1"}, {"zoom": 0.5, "time": 9.0}, {"card": "End of Act One.\n\nAct Two is still being built."}])
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="south_rampart" type="Marker2D" parent="Markers"]
+position = Vector2(0, 20)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("player")]
+position = Vector2(0, 20)
+
+[node name="Cley" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(60, 18)
+npc_id = "cley"
+
+[node name="prop_000_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-1260, 88)
+
+[node name="prop_001_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-1126, 88)
+
+[node name="prop_002_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-992, 88)
+
+[node name="prop_003_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-858, 88)
+
+[node name="prop_004_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-724, 88)
+
+[node name="prop_005_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-590, 88)
+
+[node name="prop_006_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-456, 88)
+
+[node name="prop_007_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-322, 88)
+
+[node name="prop_008_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-188, 88)
+
+[node name="prop_009_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(-54, 88)
+
+[node name="prop_010_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(80, 88)
+
+[node name="prop_011_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(214, 88)
+
+[node name="prop_012_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(348, 88)
+
+[node name="prop_013_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(482, 88)
+
+[node name="prop_014_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(616, 88)
+
+[node name="prop_015_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(750, 88)
+
+[node name="prop_016_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(884, 88)
+
+[node name="prop_017_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(1018, 88)
+
+[node name="prop_018_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(1152, 88)
+
+[node name="prop_019_wall" parent="Actors" instance=ExtResource("prop_wall")]
+position = Vector2(1286, 88)
+
+[node name="prop_020_tower" parent="Actors" instance=ExtResource("prop_tower")]
+position = Vector2(-700, 96)
+
+[node name="prop_021_tower" parent="Actors" instance=ExtResource("prop_tower")]
+position = Vector2(700, 96)

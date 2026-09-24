@@ -1,0 +1,194 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/winterfell_crypts_ground.png" id="ground"]
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/NPC.tscn" id="npc"]
+[ext_resource type="Script" path="res://scripts/world/camera_limits.gd" id="camera"]
+[ext_resource type="Script" path="res://scripts/world/tether.gd" id="tether"]
+[ext_resource type="Script" path="res://scripts/world/flag_move.gd" id="flagmove"]
+[ext_resource type="Script" path="res://scripts/world/sequence.gd" id="sequence"]
+[ext_resource type="PackedScene" path="res://scenes/props/crypt_king.tscn" id="prop_crypt_king"]
+[ext_resource type="PackedScene" path="res://scenes/props/crypt_stair.tscn" id="prop_crypt_stair"]
+[ext_resource type="PackedScene" path="res://scenes/life/candelabra.tscn" id="prop_life_candelabra"]
+[ext_resource type="PackedScene" path="res://scenes/life/wall_torch.tscn" id="prop_life_wall_torch"]
+[ext_resource type="PackedScene" path="res://scenes/props/lyanna_statue.tscn" id="prop_lyanna_statue"]
+
+[sub_resource type="RectangleShape2D" id="wall_h"]
+size = Vector2(500, 24)
+
+[sub_resource type="RectangleShape2D" id="wall_v"]
+size = Vector2(24, 890)
+
+[sub_resource type="Gradient" id="glow"]
+colors = PackedColorArray(1, 0.8, 0.5, 1, 1, 0.8, 0.5, 0)
+
+[sub_resource type="GradientTexture2D" id="glow_tex"]
+gradient = SubResource("glow")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="WinterfellCrypts" type="Node2D"]
+
+[node name="Light" type="CanvasModulate" parent="."]
+color = Color(0.34, 0.33, 0.42, 1)
+
+[node name="Ground" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("ground")
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("camera")
+rect = Rect2(-704, -470, 1408, 930)
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="WallNorth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0.0, -330)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallNorth"]
+shape = SubResource("wall_h")
+
+[node name="WallWest" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-150, 15.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallWest"]
+shape = SubResource("wall_v")
+
+[node name="WallEast" type="StaticBody2D" parent="Bounds"]
+position = Vector2(150, 15.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallEast"]
+shape = SubResource("wall_v")
+
+[node name="WallSouth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0.0, 360)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallSouth"]
+shape = SubResource("wall_h")
+
+[node name="Tether" type="Node2D" parent="."]
+position = Vector2(0, -230)
+script = ExtResource("tether")
+radius = 4.0
+
+[node name="StepCloser" type="Node" parent="."]
+script = ExtResource("flagmove")
+target = NodePath("../Tether")
+moves = {"act1_heard_crypt_1": Vector2(0, 40), "act1_heard_crypt_2": Vector2(0, 40)}
+
+[node name="KingsTorch" type="PointLight2D" parent="."]
+position = Vector2(20, 210)
+energy = 1.1
+texture = SubResource("glow_tex")
+texture_scale = 1.6
+
+[node name="Torchlight" type="Node" parent="."]
+script = ExtResource("sequence")
+scene_id = "s1_06_the_crypts"
+requires_flags = Array[String](["act1_king_arrived"])
+done_flag = "act1_crypts_done"
+steps = Array[Dictionary]([{"lock": true}, {"look": "res://assets/life/torren_torch.tres"}, {"play": "n1"}, {"wait": 1.0}, {"fade": true}, {"goto": "winterfell_great_hall", "spawn": "lower_bench"}])
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="stair_head" type="Marker2D" parent="Markers"]
+position = Vector2(0, -230)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("player")]
+position = Vector2(0, -230)
+
+[node name="Robert" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-26, 238)
+npc_id = "robert_baratheon"
+
+[node name="Eddard" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(30, 236)
+npc_id = "eddard_stark"
+
+[node name="prop_000_crypt_stair" parent="Actors" instance=ExtResource("prop_crypt_stair")]
+position = Vector2(0, -252)
+
+[node name="prop_001_lyanna_statue" parent="Actors" instance=ExtResource("prop_lyanna_statue")]
+position = Vector2(0, 290)
+
+[node name="prop_002_life_candelabra" parent="Actors" instance=ExtResource("prop_life_candelabra")]
+position = Vector2(-70, 270)
+
+[node name="prop_003_life_candelabra" parent="Actors" instance=ExtResource("prop_life_candelabra")]
+position = Vector2(70, 270)
+
+[node name="prop_004_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(-120, -150)
+
+[node name="prop_005_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(120, -150)
+
+[node name="prop_006_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(-150, -210)
+z_index = 1
+
+[node name="prop_007_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(150, -210)
+z_index = 1
+
+[node name="prop_008_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(-120, -40)
+
+[node name="prop_009_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(120, -40)
+
+[node name="prop_010_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(-150, -100)
+z_index = 1
+
+[node name="prop_011_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(150, -100)
+z_index = 1
+
+[node name="prop_012_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(-120, 70)
+
+[node name="prop_013_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(120, 70)
+
+[node name="prop_014_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(-150, 10)
+z_index = 1
+
+[node name="prop_015_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(150, 10)
+z_index = 1
+
+[node name="prop_016_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(-120, 180)
+
+[node name="prop_017_crypt_king" parent="Actors" instance=ExtResource("prop_crypt_king")]
+position = Vector2(120, 180)
+
+[node name="prop_018_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(-150, 120)
+z_index = 1
+
+[node name="prop_019_life_wall_torch" parent="Actors" instance=ExtResource("prop_life_wall_torch")]
+position = Vector2(150, 120)
+z_index = 1
+
+[node name="Torch" type="PointLight2D" parent="Actors/Player"]
+position = Vector2(8, -40)
+energy = 1.2
+texture = SubResource("glow_tex")
+texture_scale = 1.3
