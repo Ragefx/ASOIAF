@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/life/jory_idle.png" id="t0"]
+
+[sub_resource type="AtlasTexture" id="a0_0"]
+atlas = ExtResource("t0")
+region = Rect2(0, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_1"]
+atlas = ExtResource("t0")
+region = Rect2(62, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_2"]
+atlas = ExtResource("t0")
+region = Rect2(124, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_3"]
+atlas = ExtResource("t0")
+region = Rect2(186, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_4"]
+atlas = ExtResource("t0")
+region = Rect2(248, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_5"]
+atlas = ExtResource("t0")
+region = Rect2(310, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_6"]
+atlas = ExtResource("t0")
+region = Rect2(372, 0, 62, 62)
+
+[sub_resource type="AtlasTexture" id="a0_7"]
+atlas = ExtResource("t0")
+region = Rect2(434, 0, 62, 62)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("a0_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]

@@ -220,7 +220,10 @@
           "n1": {
             "speaker": "narrator",
             "text": "Every banner in the North is being beaten, every hearth swept, every barrel of anything drinkable counted twice. Winterfell has not been this frightened of a guest in living memory.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_yard_arrived"
+            ]
           },
           "n10": {
             "speaker": "rodrik_cassel",
@@ -427,9 +430,18 @@
               "act1_winterfell_prepared"
             ],
             "end": true
+          },
+          "n51": {
+            "speaker": "narrator",
+            "text": "Grooms are mucking out every stall at once and nobody has told you where to stand. Ser Rodrik will know.",
+            "requires_flags": [
+              "!act1_talked_rodrik"
+            ],
+            "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_03_the_deserter",

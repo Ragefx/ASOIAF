@@ -65,6 +65,13 @@ LIFE = {
     "blacksmith": dict(kind="static", height=78, footprint=(30, 10), anims={"idle": ("blacksmith", 8, True, False)}),
     # kneeling at her tub: a kneeling grown woman, head about where Torren's is standing
     "washerwoman": dict(kind="static", height=60, footprint=(40, 10), anims={"idle": ("washerwoman", 8, True, False)}),
+    # Act 1 people, frames only: NPCs load these through data/npcs/npcs.json's sprite_frames.
+    # Grown men 56px (Torren is 45 standing); Rodrik stout and a touch shorter; Hodor is
+    # near seven feet in the books - 72px, a head and more over everyone - barrel included.
+    "rodrik": dict(kind="frames", height=55, anims={"idle": ("rodrik_idle", 6, True, False)}),
+    "jory": dict(kind="frames", height=57, anims={"idle": ("jory_idle", 6, True, False)}),
+    "hodor": dict(kind="frames", height=72, anims={"idle": ("hodor_idle", 6, True, False)}),
+    "stable_hand": dict(kind="frames", height=42, anims={"idle": ("stable_boy_idle", 8, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene
     "bird": dict(kind="frames", height=18, anims={"fly": ("bird_fly", 12, True, False)}),
 }

@@ -77,6 +77,22 @@ LEVELS = {
             (-1, 9, 1, 22),      # the track leading south out of the yard
         ],
     },
+    # Inside the castle: cobbles (the tileset's "upper" surface, grass's role above), with
+    # packed earth where horses stand and work gets done. The view is 1280x720 world px,
+    # held to x +-704, y -470..460 by the level's CameraLimits; the ground covers that.
+    "winterfell_yard": {
+        "size": (46, 30),
+        "tileset": "cobble_earth_32.png",
+        "plain": False,   # no painted-out variant: every cobble tile is fine as it is
+        "earth": [
+            (10, -2, 20, 3),     # the stable forecourt, trodden to mud
+            (9, 0, 10, 2),
+            (-19, -2, -14, 3),   # the forge and armoury corner
+            (-15, 4, -13, 5),
+            (-1, 8, 1, 15),      # the track south to the gate and the winter town
+            (10, 6, 17, 10),     # the laundry green, worn bare
+        ],
+    },
 }
 
 
@@ -106,13 +122,14 @@ def build(name: str) -> pathlib.Path:
                 if 0 <= vx + ox <= w and 0 <= vy + oy <= h:
                     grass[vy + oy][vx + ox] = False
 
-    atlas = Image.open(TILESET).convert("RGBA")
+    tileset = ROOT / "assets" / "tilesets" / spec["tileset"] if "tileset" in spec else TILESET
+    atlas = Image.open(tileset).convert("RGBA")
     tiles = {
         pos: atlas.crop((pos[0] * TILE, pos[1] * TILE, (pos[0] + 1) * TILE, (pos[1] + 1) * TILE))
         for pos in CORNERS_TO_ATLAS.values()
     }
     full_grass = CORNERS_TO_ATLAS[frozenset({"TL", "TR", "BL", "BR"})]
-    plain_grass = plain_variant(tiles[full_grass])
+    plain_grass = plain_variant(tiles[full_grass]) if spec.get("plain", True) else tiles[full_grass]
     rng = random.Random(name)
     out = Image.new("RGBA", (w * TILE, h * TILE))
     for cy in range(h):

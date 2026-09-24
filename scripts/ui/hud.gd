@@ -18,6 +18,9 @@ const HINTS := [
 	{"level": "winterfell_training_yard", "flags": ["act1_heard_king_coming"], "text": "Follow the track south"},
 	{"level": "winterfell_training_yard", "flags": ["act1_drill_done"], "text": "E  to talk   ·   Ser Cley is by the fence"},
 	{"level": "winterfell_training_yard", "flags": [], "text": "WASD  to move   ·   Left mouse  to swing"},
+	{"level": "winterfell_yard", "flags": ["act1_winterfell_prepared"], "text": "Take the track south, out of the yard"},
+	{"level": "winterfell_yard", "flags": ["act1_talked_rodrik"], "text": "E  at the stable doors   ·   Jory is by the horses"},
+	{"level": "winterfell_yard", "flags": [], "text": "Ser Rodrik is at the keep door"},
 ]
 
 var _player: CombatActor = null

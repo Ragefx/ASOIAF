@@ -62,7 +62,8 @@
       "origin": "canon",
       "house": "Cassel",
       "portrait_set": "jory",
-      "voice": "Practical kindness with no sentiment on it. The player must like him; Act 2 depends on it."
+      "voice": "Practical kindness with no sentiment on it. The player must like him; Act 2 depends on it.",
+      "sprite_frames": "res://assets/life/jory.tres"
     },
     "robert_baratheon": {
       "name": "Robert Baratheon",
@@ -238,7 +239,8 @@
       "origin": "canon",
       "house": "Cassel",
       "portrait_set": "rodrik",
-      "voice": "Master-at-arms. Bellows. Whiskers. Fair, and entirely out of patience."
+      "voice": "Master-at-arms. Bellows. Whiskers. Fair, and entirely out of patience.",
+      "sprite_frames": "res://assets/life/rodrik.tres"
     },
     "maester_luwin": {
       "name": "Maester Luwin",
@@ -266,14 +268,16 @@
       "origin": "canon",
       "house": null,
       "portrait_set": "hodor",
-      "voice": "Hodor."
+      "voice": "Hodor.",
+      "sprite_frames": "res://assets/life/hodor.tres"
     },
     "stable_hand": {
       "name": "Stable Hand",
       "origin": "invented",
       "house": null,
       "portrait_set": "stablehand",
-      "voice": "Has never been past the winter town and says so."
+      "voice": "Has never been past the winter town and says so.",
+      "sprite_frames": "res://assets/life/stable_hand.tres"
     },
     "winterfell_guard": {
       "name": "Winterfell Guard",

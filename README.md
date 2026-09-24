@@ -106,13 +106,18 @@ godot --path . --editor
 - [ ] Combat encounter tuning
 - [ ] Audio pass
 
-## Playing / testing the opening scene
+## Playing / testing the opening scenes
 
 Act 1 opens in Winterfell's training yard: finish your drill on the straw man (left mouse),
 then talk to Ser Cley at the fence (E) for the news that the king is coming, then take the
-track south (currently an end card - the next level isn't built yet).
+track south into the castle yard.
 
-`tools/godot/playtest_act1_opening.gd` plays it automatically and screenshots each beat:
+Scene 2, Preparing for a King: Winterfell is being scrubbed for the royal visit. Report to
+Ser Rodrik at the keep door, see to the stables (E at the stable doors), and - optionally -
+talk to Jory about the honour guard, the stable hand, and Hodor. Then take the track south
+(currently an end card - the Wolfswood isn't built yet).
+
+`tools/godot/playtest_act1_opening.gd` plays both automatically and screenshots each beat:
 
     xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
         -s tools/godot/playtest_act1_opening.gd -- /tmp/playtest

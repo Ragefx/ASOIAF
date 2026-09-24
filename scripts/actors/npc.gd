@@ -36,6 +36,10 @@ func _ready() -> void:
 		sprite.sprite_frames = load(frames_path)
 		if sprite.sprite_frames.has_animation("idle"):
 			sprite.play("idle")
+			# Frames are square cells with the feet 2px above the bottom edge (see
+			# tools/fit_animation.py), so a taller character just needs a taller offset.
+			var cell := sprite.sprite_frames.get_frame_texture("idle", 0).get_height()
+			sprite.offset.y = -cell / 2.0 + 2.0
 
 
 static func _load_data() -> void:

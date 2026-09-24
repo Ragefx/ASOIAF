@@ -198,7 +198,61 @@ def training_yard() -> list[tuple]:
     return placed
 
 
-LEVELS = {"winterfell_training_yard": training_yard}
+def castle_yard() -> list[tuple]:
+    """Winterfell's main yard, scene 2 of Act 1 (Preparing for a King).
+
+    Cobbles inside the walls; the view (1280x720 world px) is held to x +-704, y -470..460
+    by the level's CameraLimits, and invisible walls keep the player within x +-650. North:
+    the Great Keep's gate in the curtain wall (base y = WALL_Y), torches either side of the
+    door, banners on the wall, the Broken Tower at the east end. West: the forge and the
+    armoury yard, where the player arrives. East: the stables (the level's Stables node is
+    the interaction in front of the doors), horses and hay. South-east: the laundry. South:
+    the track out to the gate (the level's ExitSouth). NPCs are placed in the level scene
+    itself, not here."""
+    WALL_Y = -250
+    placed = [
+        ("keep_gate", 0, WALL_Y + 2),
+        # torches on the gate's face: drawn over the gate (z 1), hung ~36px up the wall
+        ("life/wall_torch", -40, WALL_Y - 34, {"z_index": 1}), ("life/wall_torch", 40, WALL_Y - 34, {"z_index": 1}),
+        ("life/brazier", -110, WALL_Y + 16), ("life/brazier", 110, WALL_Y + 16),
+        ("life/banner_stark", -218, WALL_Y + 4), ("life/banner_stark", 218, WALL_Y + 4),
+        ("life/banner_stark", -490, WALL_Y + 4), ("life/banner_stark", 490, WALL_Y + 4),
+        ("life/guard_idle", -76, WALL_Y + 30), ("life/guard_idle", 76, WALL_Y + 30),
+        ("tower", -354, WALL_Y + 10), ("tower", 354, WALL_Y + 10), ("broken_tower", 640, WALL_Y + 12),
+        # the forge and the armoury yard (west), where the player comes in
+        ("life/forge", -560, -60), ("life/blacksmith", -470, -30),
+        ("weapon_rack", -600, 60), ("weapon_rack", -530, 70), ("barrel", -610, 130),
+        ("barrel", -590, 146), ("barrel", -360, 196), ("barrel", -336, 206), ("barrel", -350, 222),
+        ("life/hound_sleeping", -380, 60), ("life/crow", -300, -120),
+        # the stables (east) with horses out front and hay waiting
+        ("stable", 480, -44), ("life/horse", 390, 60), ("life/horse", 580, 50),
+        ("hay_bale", 600, 110), ("hay_bale", 620, 136), ("hay_cart", 510, 150),
+        ("life/hen", 200, 10), ("life/hen", 170, 40), ("life/hen", 230, 60), ("life/hen", -250, 300),
+        ("life/cat", 640, -90),
+        # the laundry (south-east): the line and the washerwoman at her tub
+        ("life/laundry_line", 470, 262), ("life/washerwoman", 380, 300),
+        # the middle of the yard: the well, provisions being counted for the guests
+        ("well", -40, 70), ("barrel", 40, 40), ("barrel", 60, 56),
+        ("hay_bale", -170, 290), ("log", 170, 320), ("sticks", -80, 330),
+        ("life/crow", 20, 200), ("life/crow", 300, 200),
+        # the gate south out of the yard, and the men on it
+        ("life/guard_idle", -70, 330), ("life/guard_idle", 70, 330),
+        ("life/brazier", -130, 350), ("life/brazier", 130, 350),
+    ]
+    # the curtain wall either side of the gate, closing the north side end to end
+    for x in (-150, -286, -422, -558, -694, 150, 286, 422, 558, 694):
+        placed.append(("wall", x, WALL_Y))
+    # the Great Keep's own walls rising in tiers behind it, so the view above the curtain
+    # wall is castle, not more yard (y-sort draws them behind the gate and towers)
+    for row, y in enumerate((WALL_Y - 60, WALL_Y - 120, WALL_Y - 180)):
+        x = -762 + 68 * (row % 2)
+        while x < 800:
+            placed.append(("wall", x, y))
+            x += 136
+    return placed
+
+
+LEVELS = {"winterfell_training_yard": training_yard, "winterfell_yard": castle_yard}
 
 
 def place(level: str) -> None:

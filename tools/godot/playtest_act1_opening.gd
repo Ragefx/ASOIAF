@@ -1,5 +1,6 @@
 extends SceneTree
-## Automated playthrough of Act 1's opening scene (Morning Duties).
+## Automated playthrough of Act 1's first two scenes: Morning Duties in the training yard,
+## then Preparing for a King in the castle yard.
 ##
 ##   xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
 ##       -s tools/godot/playtest_act1_opening.gd -- <screenshot_dir>
@@ -111,8 +112,108 @@ func _run() -> void:
 	await _wait(2.5)
 	await _shot("exit")
 
+	# === Scene 2: Preparing for a King, in the castle yard =========================
+	_check(SD.current_level == "winterfell_yard", "the track south leads to the castle yard")
+	player = get_first_node_in_group("player")
+	await _wait(1.0)
+	_check(DS.is_running, "the yard's establishing line plays on arrival")
+	await _shot("yard_arrival")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_yard_arrived"), "arrival flag set, so it never replays")
+	for who in ["Rodrik", "Jory", "StableHand", "Hodor"]:
+		var npc := root.find_child(who, true, false)
+		var spr := npc.get_node("AnimatedSprite2D") as AnimatedSprite2D if npc else null
+		_check(spr != null and spr.sprite_frames != null and spr.is_playing(), "%s is drawn and animated" % who)
+	var hodor_h := _sprite_height("Hodor")
+	var guard_h := _sprite_height("Rodrik")
+	_check(hodor_h > guard_h + 10, "Hodor towers over the grown men (%d px vs Rodrik's %d)" % [hodor_h, guard_h])
+
+	# the stables before orders: a nudge, and nothing changes
+	await _interact_at(root.find_child("Stables", true, false) as Node2D, Vector2(0, 16))
+	_check(DS.is_running, "the stables answer before Rodrik's orders")
+	await _finish_dialogue()
+	_check(not GM.has_flag("act1_winterfell_prepared"), "... but can't be finished yet")
+
+	# Jory has nothing for Torren until Rodrik has spoken
+	await _talk("Jory")
+	_check(not DS.is_running, "Jory waits for Rodrik's orders")
+
+	# Ser Rodrik
+	await _talk("Rodrik")
+	_check(DS.is_running, "E starts Ser Rodrik's dialogue")
+	await _shot("rodrik")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_talked_rodrik"), "Rodrik gives his orders")
+	await _wait(0.3)
+	_check(_hud_text("ObjectiveLabel") == "Make Winterfell ready", "objective advanced to Make Winterfell ready")
+	await _talk("Rodrik")
+	_check(DS.is_running and DS._current_id == "n14", "Rodrik repeats only 'Stables first. Go.'")
+	await _finish_dialogue()
+
+	# the optional three
+	await _talk("Jory")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_joined_honor_guard"), "Jory puts Torren in the honour guard")
+	await _talk("StableHand")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_talked_stablehand"), "the stable hand's scene played")
+	await _talk("Hodor")
+	await _finish_dialogue()
+	await _talk("Hodor")
+	_check(DS.is_running and DS._current_id == "n42", "Hodor, again: just 'Hodor. Hodor hodor.'")
+	await _finish_dialogue()
+
+	# the stables, now with orders: the scene's goal
+	await _interact_at(root.find_child("Stables", true, false) as Node2D, Vector2(0, 16))
+	await _shot("stables")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_winterfell_prepared"), "seeing to the stables readies Winterfell")
+	await _wait(0.3)
+	_check(_hud_text("ObjectiveLabel") == "Ride out with Lord Stark's party", "objective advanced to Ride out with Lord Stark's party")
+
+	# out the south gate: the Wolfswood isn't built, so the card shows
+	player.global_position = Vector2(0, 320)
+	Input.action_press("move_down")
+	await _wait(1.0)
+	Input.action_release("move_down")
+	await _wait(2.0)
+	await _shot("yard_exit")
+	_check(SD.current_level == "winterfell_yard", "the unbuilt Wolfswood shows its card instead of loading")
+
 	print("PLAYTEST %s (%d failure(s))" % ["PASS" if failures == 0 else "FAIL", failures])
 	quit(1 if failures else 0)
+
+
+func _finish_dialogue() -> void:
+	var steps := 0
+	while DS.is_running and steps < 60:
+		if not DS._pending_choices.is_empty():
+			DS.choose(0)
+		else:
+			DS.advance()
+		steps += 1
+		await _wait(0.05)
+	await _wait(0.2)
+
+
+func _interact_at(target: Node2D, offset: Vector2) -> void:
+	player.global_position = target.global_position + offset
+	player.facing = Vector2.UP
+	await _wait(0.4)
+	var ev := InputEventAction.new(); ev.action = "interact"; ev.pressed = true
+	Input.parse_input_event(ev)
+	await _wait(0.5)
+
+
+func _talk(who: String) -> void:
+	await _interact_at(root.find_child(who, true, false) as Node2D, Vector2(0, 28))
+
+
+## Visible height of an NPC's current frame (the character, not its padded cell).
+func _sprite_height(who: String) -> int:
+	var spr := root.find_child(who, true, false).get_node("AnimatedSprite2D") as AnimatedSprite2D
+	var img := spr.sprite_frames.get_frame_texture(spr.animation, 0).get_image()
+	return img.get_used_rect().size.y
 
 
 func _find_drill_dummy() -> Node2D:

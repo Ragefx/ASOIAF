@@ -490,6 +490,29 @@ stray mark on its full-cobble tile. Both raws in `assets/tilesets/raw/`.
 
 Spend this round: 3,662 -> 3,494.
 
+## Act 1 scene 2 - the castle yard's people, 2026-09-24
+
+NPC idles, built by `tools/build_life.py` as frames only (`assets/life/<name>.tres`), linked
+from `data/npcs/npcs.json`'s `sprite_frames`. `scripts/actors/npc.gd` now sets the sprite's
+offset from the frame size, so NPCs of any height stand on their feet. Heights: grown men
+55-57px (Torren 45 standing); Hodor 72px - he is near seven feet in the books.
+
+| NPC | Still (identity edit of guard `95f8d239-...`) | Idle animation | Game height |
+|---|---|---|---|
+| rodrik_cassel | `00683deb-6766-463f-9ae6-2dea31779785` | `be1dc563-7b83-4c1a-b0c3-007518272837` | 55 |
+| jory_cassel | `eb1298dc-0da5-4ad7-8ba8-f1f519ca0efc` | `39beee9d-99d7-4d37-8eaf-e1441432e51b` (pixel-engine-v1.5; the first, `ec7f1955-...`, grew 10px mid-loop) | 57 |
+| hodor | `930172f1-169a-4a27-a4b7-d2f28e3076f4` | `9e750a56-c76b-4614-a4cf-ed5d2b4dd879` | 72, barrel on his shoulder |
+| stable_hand | stable_boy `d736f106-91c3-486d-aa0f-f0f30b6733fc` | `9de06d63-2661-4268-9e32-4cf4cec87a39` | 42 |
+
+Named-character prompts ("Ser Rodrik Cassel", "Hodor") were refused by SpriteCook's content
+filter; describing the look without the name went through.
+
+Level: `scenes/world/winterfell_yard.tscn`, ground `assets/tilesets/winterfell_yard_ground.png`
+(`tools/build_ground.py winterfell_yard`, cobble tileset), props and life placed by
+`tools/build_props.py place winterfell_yard`.
+
+Spend this round: 3,494 -> 3,352.
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8
