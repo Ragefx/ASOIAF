@@ -43,12 +43,24 @@ hero-to-world ratio. Everything measured from the reference above multiplies by 
 | Trees, big props | ~2–3× hero height | still 2–3× hero height → **~100–150px** tall |
 | Visible screen | 320×180 | ~550×310 to show the same amount of world |
 
-**Decided 2026-09-24: 32px tiles, 640×360 viewport** (shown at 3× = 1080p). The user compared
-mockups of both whole-number options (the reference screenshot scaled 1.5× and 2× with Torren
-dropped in) and chose this one. At 2× the world, Torren (48px) stands a little smaller than the
-reference hero would (56px), which is the "tiny hero in a big world" feel. The rejected option
-was 24px tiles at 480×270. This supersedes "keep 16px tiles" in the table above and in section 3.
+**Decided 2026-09-24: 32px tiles, 1280×720 viewport** (shown at 2× on the user's 2560×1440
+screen). Tile size came from comparing mockups of the reference world scaled 1.5× and 2× with
+Torren dropped in: at 2× the world, Torren (48px) stands a little smaller than the reference hero
+would (56px), the "tiny hero in a big world" feel. The viewport came second: 640×360 at 4× made
+Torren "way too big" on screen, and the user confirmed from a screenshot that Torren should be
+about **1/15 of the screen height (96px on 1440p)** while the camera shows more world — about
+**40 × 22 tiles**. So: the hero-to-world ratio is fixed by the tiles; how much world is visible
+is fixed by the viewport. Rejected: 24px tiles; 640×360 and 853×480 viewports.
+This supersedes "keep 16px tiles" in the table above and in section 3.
 (The earlier rejection of 48px tiles was of the *RPG Maker look*, not of bigger tiles as such.)
+
+**Other screens:** 1280×720 is an exact 2× on 1440p and 3× on 4K. On **1080p** it is 1.5×,
+which integer scaling rounds down to 1× — Torren would be 48px (1/22 of the screen) with a black
+border. If 1080p matters, the fix is to pick the viewport per screen (screen ÷ 2 on 1080p, i.e.
+960×540) rather than fix one size; decide when a 1080p player turns up.
+
+**A bigger view means more world to build per screen** — each area needs roughly 4× the ground
+of a 640×360 view. Levels should be designed for 40 × 22 tiles visible.
 
 **Not applied to the game yet.** `project.godot` is still 384×216 and the level still uses 16px
 tiles and the old chibi sprites. Switching the viewport alone would shrink the current level into
