@@ -376,7 +376,37 @@ layout into one PNG (`assets/tilesets/<level>_ground.png`), and `assets/tilesets
 is the matching TileSet (terrain "Grass", match-corners) for painting in the editor later.
 The old 16px `grass_dirt.png` is no longer referenced.
 
+## Environment props — 2026-09-24
 
+`generate_game_art`, default model, 12 cr each, `style_asset_ids` = an upload of the reference
+screenshot's trees/logs/flowers (`9e5dd20a-b4e2-4d76-8098-c5ecf2d2b2a3`). All usable first try; 156 cr.
+Untouched downloads in `assets/props/raw/`, game-size sprites in `assets/props/` (majority filter,
+or box for shrinks below ~0.5 - the weapon rack turned to mush under majority at 0.35).
+
+| Prop | Asset | Game height |
+|---|---|---|
+| tree_oak | `e3b24fb2-c457-4da5-82af-bf12e28f7599` | 144 |
+| tree_pine | `d9656b12-0301-418a-8097-e0710d978035` | 150 |
+| bush | `3675d21b-1730-4630-8eb1-be6dee68ecd0` | 32 |
+| boulder | `f37d8930-797d-4da0-a4ff-c734e6799ad6` | 36 |
+| rock_pile (asked for pebbles; came out a rock pile) | `f196ba68-b626-486a-b163-3f1977e68b3a` | 30 |
+| sticks | `8acfcc56-4d6c-4d2f-b2e8-4aa1c191144a` | 16 |
+| log | `33fa2c40-884a-40d7-aa42-e526847aefbb` | 18 |
+| stump | `bdeb3211-cdff-4626-8a47-abbdbe511a96` | 30 |
+| dummy (straw training dummy) | `6e49d9d2-aecd-4e5a-b05f-8be9d2c5ba72` | 56 |
+| weapon_rack | `ac72b3b9-973e-469b-9350-1ecc3c03279a` | 64 |
+| barrel | `10b9e6b1-4af0-49cb-8ccc-4999d8dd4eda` | 34 |
+| fence (drawn at an angle) | `5c2a76d0-a8be-41dc-bc9d-9bf0f66ff65b` | 44 |
+| flowers | `ba3b3a8c-e2b7-4ccf-adfe-2361f03c10c5` | 18 |
+
+`tools/build_props.py scenes` makes `scenes/props/<name>.tscn` (StaticBody2D, origin at the base,
+collider on the footprint only); `tools/build_props.py place winterfell_training_yard` dresses
+the level (fixed placements + seeded scatter, rerunnable). Sizes are relative to Torren (48px).
+
+## Credits
+
+The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8
+bases, animations, ground tileset and props took the balance from 4,922 to 4,406.
 
 | | |
 |---|---|
