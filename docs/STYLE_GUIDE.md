@@ -26,6 +26,44 @@ explosion VFX; the user explicitly doesn't want those.
 | View | Three-quarter / slightly-from-above, soft dark ellipse shadow under the feet. |
 | World | Lush, saturated greens; large detailed props (trees ~2–3× hero height). |
 
+### Approved hero and the new world scale (2026-09-24, later the same day)
+
+**Torren v7 is approved** — `assets/sprites/torren/torren_base_v7_65.png`, **31×48 px**. The user
+chose it over shrinking further to the reference's 20×28 ("the world will have to be bigger in
+comparison to keep the ratio"). It is the look of the reference — big hair mass, crisp 4–5-tone
+shading, flat-toned mail, ground shadow — drawn at about **1.7× the reference's scale**.
+
+So **the hero keeps its size and the world scales up to match**, keeping the reference's
+hero-to-world ratio. Everything measured from the reference above multiplies by ~1.7:
+
+| | Reference | This project from now on |
+|---|---|---|
+| Hero | ~20×28 | **31×48** (the approved sprite) |
+| Hero height in tiles | ~1.75 tiles of 16px | the same ~1.75 tiles → tiles of roughly **27px** |
+| Trees, big props | ~2–3× hero height | still 2–3× hero height → **~100–150px** tall |
+| Visible screen | 320×180 | ~550×310 to show the same amount of world |
+
+**Still open, decide before building levels at this scale:** the exact tile size and viewport.
+The whole-number options either side of 1.7× are **24px tiles with a 480×270 viewport** (1.5×,
+exactly 4× to 1080p; the hero is a little taller relative to the world) or **32px tiles with a
+640×360 viewport** (2×, exactly 3× to 1080p; the hero is a little smaller relative to the
+world, closest to the "tiny hero" feel). This supersedes "keep 16px tiles" in the table above
+and in section 3. Note the earlier rejection of 48px tiles was of the *RPG Maker look*, not of
+bigger tiles as such.
+
+**How it was made, so the next sprite can be made the same way:**
+
+1. `generate_game_art` with the reference uploaded as a **style** reference
+   (`style_asset_ids`, asset `5bebfe17…`) → v5: right proportions, but too detailed.
+2. Edit v5 (`edit_asset_id`) with the style reference again, asking for crisp, flat, low-res →
+   v6: exactly the sharpness wanted, **but it copied the reference's red-haired character**. When
+   a style reference is passed alongside an edit, it can override the character's identity.
+3. Edit v6 with **no** style reference, changing only hair, tunic and colours → **v7**. Sharpness kept.
+4. SpriteCook will **not** draw a figure much smaller than ~48×74, whatever `width`/`height` say
+   (they are hints; a 24×32 request came back unchanged). Size is done locally:
+   `tools/prepare_sprite.py torren_base_v7.png --height 48 --filter majority --colors 256`.
+   Don't quantise it to 32 colours — that visibly pulls the tunic toward brown.
+
 **What was tried and rejected, so nobody repeats it:**
 
 - *Flat chibi* (16×24, 2-tone, dot eyes, thick uniform outline) — right size, wrong rendering: read as a toy.

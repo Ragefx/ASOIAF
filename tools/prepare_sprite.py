@@ -30,11 +30,20 @@ into fragments, BOX (area-average) kept it solid. So the filter is chosen by sca
 factor: BOX when shrinking past --nearest-above, nearest otherwise. Override with
 --filter when a source really is clean pixel art at an integer multiple.
 
+--filter majority is the third option, and the one the approved 2026-09-24 Torren
+(v7, shipped at 65%) was made with. Each output pixel takes the most common opaque
+colour in the source area it covers, and a dark outline colour wins whenever it holds
+at least half that area. It never invents a blended colour, so edges stay hard like
+nearest, but it looks at every source pixel, so outlines don't break up the way they
+do with nearest. It is for a *modest* shrink of an already-clean sprite (0.6-0.9);
+for a big shrink of a noisy illustration, BOX is still the safer choice.
+
 Requires Pillow (pip install Pillow).
 """
 import argparse
 import pathlib
 import sys
+from collections import Counter
 
 try:
     from PIL import Image, ImageOps
@@ -48,7 +57,38 @@ ALPHA_CUTOFF = 128
 # the ratios that still looked clean by eye.
 NEAREST_ABOVE = 0.75
 
-FILTERS = {"nearest": Image.NEAREST, "box": Image.BOX, "lanczos": Image.LANCZOS}
+FILTERS = {"nearest": Image.NEAREST, "box": Image.BOX, "lanczos": Image.LANCZOS,
+           "majority": "majority"}
+
+# Luminance below which a colour counts as outline for the majority filter.
+OUTLINE_LUMA = 45
+
+
+def _luma(p) -> float:
+    return 0.3 * p[0] + 0.59 * p[1] + 0.11 * p[2]
+
+
+def majority_resize(img: Image.Image, size: tuple[int, int]) -> Image.Image:
+    """Shrink by taking each output pixel's majority source colour; see the docstring."""
+    w, h = size
+    sx, sy = img.width / w, img.height / h
+    src = img.load()
+    out = Image.new("RGBA", size, (0, 0, 0, 0))
+    dst = out.load()
+    for y in range(h):
+        y0 = int(y * sy)
+        y1 = min(img.height, max(y0 + 1, int((y + 1) * sy)))
+        for x in range(w):
+            x0 = int(x * sx)
+            x1 = min(img.width, max(x0 + 1, int((x + 1) * sx)))
+            area = [src[i, j] for j in range(y0, y1) for i in range(x0, x1)]
+            opaque = [p for p in area if p[3] >= ALPHA_CUTOFF]
+            if not opaque or len(opaque) * 2 < len(area):
+                continue
+            dark = [p for p in opaque if _luma(p) < OUTLINE_LUMA]
+            pool = dark if dark and len(dark) * 2 >= len(opaque) else opaque
+            dst[x, y] = Counter(pool).most_common(1)[0][0]
+    return out
 
 
 def pick_filter(scale: float, override: str | None, nearest_above: float):
@@ -88,7 +128,16 @@ def prepare(
 
     scale = target[1] / img.height
     resample, resample_name = pick_filter(scale, filter_name, nearest_above)
-    img = img.resize(target, resample)
+    if resample == "majority":
+        # Per frame, so a source pixel never bleeds across a frame boundary.
+        fw_src, fw_dst = img.width // frames, target[0] // frames
+        sheet = Image.new("RGBA", target, (0, 0, 0, 0))
+        for i in range(frames):
+            frame = img.crop((i * fw_src, 0, (i + 1) * fw_src, img.height))
+            sheet.paste(majority_resize(frame, (fw_dst, target[1])), (i * fw_dst, 0))
+        img = sheet
+    else:
+        img = img.resize(target, resample)
 
     # Quantise colour and alpha separately: quantising RGBA directly spends palette
     # entries on semi-transparent edge pixels that are about to be thrown away.

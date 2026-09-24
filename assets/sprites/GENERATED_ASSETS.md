@@ -289,6 +289,24 @@ colour count and then adds to it, and a bigger source canvas gives it more room 
 Quantises fine at `--colors 16` after the resample-filter fix below; if a future re-roll makes her
 mushy again, check the resampling before assuming the colour count is the problem.
 
+---
+
+## Torren v7 — the approved "reference look" base, 2026-09-24
+
+Made against `docs/reference/target_character_crop.png` (uploaded as `5bebfe17-2ca4-413d-9b9a-0600fced3541`).
+See `docs/STYLE_GUIDE.md` §0 for why and how. 48 credits across four generations.
+
+| SpriteCook label | Asset ID | What |
+|---|---|---|
+| `USE THIS 04 v7 - Torren BASE (approved …)` | `c5dacea6-62f6-4040-bc18-a791200820f8` | **Approved.** 48×74 figure → `torren/torren_base_v7.png` (untouched) and `torren/torren_base_v7_65.png` (**31×48, the one to use**) |
+| `zzz v5 Torren test (superseded by v7)` | `54623217-6766-40c6-ac05-70346e504361` | First try with the style reference; too detailed |
+| `zzz v6 sharp but copied the reference girl …` | `68c3340f-631f-4aca-af98-87f4d9ebca13` | Right sharpness, wrong character; v7 is an edit of it |
+| `zzz v8 Torren smaller-size attempt …` | `97cc0df2-0462-4728-bc71-cc78dfcf2880` | Asked for 22×30; came back the same size as v7 |
+
+The older `torren_base.png` / animations in `torren/` are the **rejected** flat-chibi pass and are
+still what the game has wired in. They stay until v7's animations exist; nothing references the
+v7 files yet.
+
 ## Credits
 
 | | |
