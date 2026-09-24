@@ -525,13 +525,27 @@ def godswood() -> list[tuple]:
 
 
 def walls() -> list[tuple]:
-    """Scene 12: the south rampart. The parapet's face along the walk's south edge."""
+    """Scene 12: the south rampart. The parapet's face along the walk's south edge; south of
+    it, snow and the edge of the Wolfswood the column rides into; north, below, the castle
+    - keep, towers, stable - small once the camera pulls back."""
     placed = []
     x = -1260
     while x < 1300:
         placed.append(("wall", x, 88))
         x += 134
     placed += [("tower", -700, 96), ("tower", 700, 96)]
+    rng = random.Random("winterfell_walls")
+    taken = []
+    for _ in range(6000):
+        if len(taken) >= 90:
+            break
+        x, y = rng.uniform(-1260, 1260), rng.uniform(230, 820)
+        if abs(x) < 90 or not all(math.hypot(x - a, y - b) >= 70 for a, b in taken):
+            continue  # the kingsroad runs straight south from the gate
+        placed.append((rng.choice(["tree_pine_snow"] * 3 + ["tree_oak_snow"]), round(x), round(y)))
+        taken.append((x, y))
+    placed += [("keep_gate", 0, -170), ("broken_tower", 420, -150), ("tower", -380, -160),
+               ("stable", -760, -120), ("tower", 820, -170), ("wall", -250, -200), ("wall", 250, -200)]
     return placed
 
 

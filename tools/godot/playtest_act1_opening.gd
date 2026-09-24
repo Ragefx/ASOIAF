@@ -270,10 +270,12 @@ func _run() -> void:
 	# === Scene 5: The King Comes North (a scripted beat; Torren held in the line) =====
 	_check(SD.current_level == "winterfell_yard_arrival", "the column rides home to the king's arrival")
 	player = _level_player()
-	var line_at := player.global_position
+	var tether := root.find_child("Tether", true, false) as Node2D
+	var line_at := tether.global_position
 	player.global_position = line_at + Vector2(-300, 0)
 	await _wait(0.2)
-	_check(player.global_position.distance_to(line_at) <= 65.0, "Torren is held in the honour guard line")
+	var off := player.global_position.distance_to(line_at)
+	_check(off <= 65.0, "Torren is held in the honour guard line (%.0f px from his place)" % off)
 	var knelt := false
 	var robert_close := false
 	for i in 400:
