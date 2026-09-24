@@ -307,6 +307,21 @@ The older `torren_base.png` / animations in `torren/` are the **rejected** flat-
 still what the game has wired in. They stay until v7's animations exist; nothing references the
 v7 files yet.
 
+## Nyra v3 — the approved "reference look" base, 2026-09-24
+
+Made as an **edit of the approved Torren v7** (`c5dacea6…`), changing only identity (no style
+reference passed — see STYLE_GUIDE §0 on why). That gave her Torren's exact sharpness,
+proportions, height and shadow in one generation, 12 credits. Approved first try. Shrunk with
+`tools/prepare_sprite.py nyra_base_v3.png --height 48 --filter majority --colors 256` → 29×48,
+the same height as Torren.
+
+| SpriteCook label | Asset ID | What |
+|---|---|---|
+| `USE THIS 05 v3 - Nyra BASE (approved …)` | `b8aa9b49-10fe-4bee-9329-b4d16fb15efc` | **Approved.** → `nyra/nyra_base_v3.png` (untouched) and `nyra/nyra_base_v3_65.png` (**29×48, the one to use**) |
+
+Her dress came out a bluish slate grey rather than the "dove grey" in the style guide; the user
+approved it as is. As with Torren, the old chibi files in `nyra/` are still what Godot uses.
+
 ## Credits
 
 | | |
