@@ -307,24 +307,6 @@ The older `torren_base.png` / animations in `torren/` are the **rejected** flat-
 still what the game has wired in. They stay until v7's animations exist; nothing references the
 v7 files yet.
 
-### Torren v7 — walk down, approved 2026-09-24
-
-`animate_game_art` on the approved v7 base (`c5dacea6…`), default model, 8 frames,
-`output_format: spritesheet`, `colors: 64`, `auto_enhance_prompt: false`, 20 credits. Prompt asked
-for a looping walk toward the camera, on the spot, same size and shadow. Approved first try.
-
-| SpriteCook label | Asset ID | Goes to |
-|---|---|---|
-| `USE THIS 04 v7 - Torren WALK DOWN (approved …)` | `9d868b94-831b-49e3-8b23-ce6ca74ce119` | `torren/walk_down_v7.png` (untouched, 8 × 86×86) and `torren/walk_down_v7_65.png` (**8 × 56×56, the one to use**) |
-
-Download the `spritesheet_url` (the `…/raw` link), not the preview. Torren stands 74px in the
-86px frames — the same as the base — so the same 65% applies:
-`tools/prepare_sprite.py walk_down_v7.png --frames 8 --height 56 --filter majority --colors 256`,
-which leaves him exactly 48px tall in every frame, matching `torren_base_v7_65.png`.
-
-He faces three-quarters toward screen-right rather than straight at the camera, because the base
-sprite stands that way. The user saw this and approved it as is.
-
 ## Nyra v3 — the approved "reference look" base, 2026-09-24
 
 Made as an **edit of the approved Torren v7** (`c5dacea6…`), changing only identity (no style
@@ -339,6 +321,44 @@ the same height as Torren.
 
 Her dress came out a bluish slate grey rather than the "dove grey" in the style guide; the user
 approved it as is. As with Torren, the old chibi files in `nyra/` are still what Godot uses.
+
+## Torren v7 and Nyra v3 — movement animations, 2026-09-24
+
+Idle + walk down / up / right for both, walk left mirrored from walk right (free). Game-ready strips
+live in `torren/v7/` and `nyra/v3/`: **8 frames × 56×56**, character exactly 48px tall (Nyra's idle
+49 at the top of a breath), union bbox centred, ground shadow on the bottom row — every animation
+shares one anchor. Untouched downloads are in each folder's `raw/`. Rebuild any strip with
+`tools/fit_animation.py raw/<name>.png <name>.png` (add `--mirror` for walk_left).
+Walk down was approved by the user on its own first; the user then handed SpriteCook over
+("only ask me if something costs 100 credits or more") and the rest were made and checked together.
+
+**Recipe** (what worked, per direction):
+
+- **Down / idle:** animate the approved base directly.
+- **Up:** edit the base into a back view (default model, 12 cr), then animate that.
+- **Right:** the default model will *not* turn the body side-on — two edits and a reference-based
+  redraw all came back with only the head turned. `model: gpt-image-2.5-sunburst` with the base as
+  `edit_asset_id` gave a true profile first time (16 cr, draws larger — ~134px — which the fit
+  step absorbs).
+- Every animation: `animate_game_art`, default model, 8 frames, `output_format: spritesheet`,
+  `colors: 64`, `auto_enhance_prompt: false`, prompt asks to walk *on the spot*, 20 cr.
+  Download the `spritesheet_url` (`…/raw`), not the preview.
+
+| Animation | Torren asset | Nyra asset |
+|---|---|---|
+| Idle | `8812541f-17b4-4259-b037-339ac9990296` | `e2fb172d-41da-4bfd-8ed1-0d06ca37f358` |
+| Walk down | `9d868b94-831b-49e3-8b23-ce6ca74ce119` | `5195addd-f1e2-4932-802b-fb60088450cb` |
+| Walk up | `a4cdfd70-d04f-4b44-b554-679b2999dba5` | `677674da-3ebd-421c-96eb-36cff3c14b68` |
+| Walk right | `0251123a-75ec-4d65-be54-d215e84f0b9d` | `77750aee-4c70-4a42-a528-6c967f0ac72f` |
+| Back pose (for up) | `b40d88a1-b255-494c-8462-48f8681d2480` | `ae2176df-6c76-46b3-a4a5-e2de5b6f22f5` |
+| Side pose (for right) | `a5ca898b-f73e-4555-bb8d-6016921b67e5` | `c4ebe8f7-2ce3-4be9-aa84-fe67d8a56ac5` |
+
+All animations are labelled `USE THIS 04 v7 - Torren …` / `USE THIS 05 v3 - Nyra …` in SpriteCook.
+Failed Torren side-pose attempts, not used: `1f2cf039…`, `b68b27ff…`, `1a9f7d69…`.
+Spend for this batch after walk down: 232 credits (4,842 → 4,610).
+
+Walking left is a mirror, so Torren's sword swaps hips when he faces left. Standard for the genre;
+generate a real walk_left (~36 cr) if it ever bothers anyone.
 
 ## Credits
 
