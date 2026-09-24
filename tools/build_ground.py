@@ -108,6 +108,18 @@ LEVELS = {
             (7, -2, 22, -1),     # the road east, home
         ],
     },
+    # The kingsroad north of Winterfell: a rutted track through the snow, bottom to top,
+    # with a wide trampled patch where the column has stopped around the carcass.
+    "kingsroad_north": {
+        "size": (46, 30),
+        "tileset": "snow_earth_32.png",
+        "plain": "snow",
+        "earth": [
+            (-2, -16, 1, 16),    # the road
+            (-3, -9, -3, -2), (2, -12, 2, 4),
+            (-9, -9, -3, -5),    # where the party has dismounted around her
+        ],
+    },
 }
 
 

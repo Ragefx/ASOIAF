@@ -118,10 +118,14 @@ talk to Jory about the honour guard, the stable hand, and Hodor. Then take the t
 
 Scene 3, A Deserter's Head: three days later, a clearing in the Wolfswood under summer snow.
 Serjeant Hune briefs you; speak with Jory, Theon, Robb and Cley if you like, then take your place
-at the left of the ring (E). The camera watches Bran, not the block. The road home runs east
-(currently an end card - the kingsroad isn't built yet).
+at the left of the ring (E). The camera watches Bran, not the block. The road home runs east.
 
-`tools/godot/playtest_act1_opening.gd` plays all three automatically and screenshots each beat:
+Scene 4, Six Pups and a Seventh: the column has stopped on the kingsroad. Walk up the road to
+find out why (no button - you find it). A sixth pup sits alone in the trees east of the road,
+and only a player who leaves the road finds it. The column rides on north (currently an end
+card - the king's arrival isn't built yet).
+
+`tools/godot/playtest_act1_opening.gd` plays all four automatically and screenshots each beat:
 
     xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
         -s tools/godot/playtest_act1_opening.gd -- /tmp/playtest

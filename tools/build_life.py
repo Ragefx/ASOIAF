@@ -81,6 +81,10 @@ LIFE = {
     "bran": dict(kind="frames", height=36, anims={"idle": ("bran_idle", 8, True, False)}),
     # the deserter, kneeling and bound; not someone you can talk to
     "gared": dict(kind="static", height=40, footprint=(28, 8), anims={"idle": ("gared_idle", 6, True, False)}),
+    # scene 4, the ride home. Stills only for now (one-frame strips): Jon 49px - fourteen,
+    # between Torren and Robb - and the white pup, alone in the snow, 17px.
+    "jon": dict(kind="frames", height=49, anims={"idle": ("jon_still", 1, True, False)}),
+    "ghost_pup": dict(kind="deco", height=17, anims={"idle": ("ghost_pup", 1, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene
     "bird": dict(kind="frames", height=18, anims={"fly": ("bird_fly", 12, True, False)}),
 }

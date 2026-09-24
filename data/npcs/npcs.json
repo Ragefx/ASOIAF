@@ -51,7 +51,8 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "jon",
-      "voice": "Act 1 only. Two lines. Leaves the frame."
+      "voice": "Act 1 only. Two lines. Leaves the frame.",
+      "sprite_frames": "res://assets/life/jon.tres"
     },
     "theon_greyjoy": {
       "name": "Theon Greyjoy",

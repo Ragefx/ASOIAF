@@ -10,6 +10,9 @@ extends Area2D
 @export var target_spawn: String = ""
 @export var requires_flags: Array[String] = []
 @export_multiline var unbuilt_card: String = "To be continued."
+## Show the card even though target_level exists - the level is built but the scene
+## that belongs to it isn't yet (the king's arrival reuses the castle yard).
+@export var card_only: bool = false
 
 var _used := false
 
@@ -22,7 +25,7 @@ func _on_body_entered(body: Node) -> void:
 	if _used or not body.is_in_group("player") or not GameManager.check_flags(requires_flags):
 		return
 	_used = true
-	if ResourceLoader.exists("res://scenes/world/%s.tscn" % target_level):
+	if not card_only and ResourceLoader.exists("res://scenes/world/%s.tscn" % target_level):
 		SceneDirector.goto_level(target_level, target_spawn)
 	else:
 		_show_card()

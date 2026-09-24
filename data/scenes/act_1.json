@@ -816,15 +816,22 @@
           "n2": {
             "speaker": "narrator",
             "text": "It is not a fallen horse.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_road_arrived"
+            ]
           },
           "n10": {
             "speaker": "narrator",
             "text": "A direwolf, dead in the snow, larger than any wolf has a right to be. A shard of antler in her throat. Five pups blind against her cold flank, still trying.",
             "sets_flags": [
-              "act1_saw_direwolf"
+              "act1_saw_direwolf",
+              "act1_found_pups"
             ],
-            "next": "n11"
+            "next": "n11",
+            "requires_flags": [
+              "!act1_saw_direwolf"
+            ]
           },
           "n11": {
             "speaker": "theon_greyjoy",
@@ -903,10 +910,14 @@
             "traits": {
               "bold": 1
             },
-            "end": true
+            "end": true,
+            "requires_flags": [
+              "!act1_found_ghost"
+            ]
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_05_the_arrival",

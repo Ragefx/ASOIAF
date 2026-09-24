@@ -536,6 +536,21 @@ Procedural: `assets/fx/snow_far.png`, `snow_near.png` - two drifting layers of f
 
 Spend this round: 3,352 -> 3,050.
 
+## Act 1 scene 4 - the kingsroad, 2026-09-24
+
+Stills only so far - no animations yet (each new SpriteCook generation now waits for the owner's
+approval). Game sizes: the dead direwolf lies 111x64, longer than a horse; Jon Snow 49px (fourteen,
+between Torren's 45 and Robb's 50); the white pup 17px.
+
+| Name | SpriteCook asset | Notes |
+|---|---|---|
+| direwolf_dead (prop) | `0cba210c-0972-4cf3-87ec-d4a12a6ce4d1` | antler at her neck, five grey pups at her belly |
+| ghost_pup (life/, one frame) | `e863e62c-ab79-460a-96da-c81ee1243d97` | white, red eyes, sitting |
+| jon_snow (NPC, one frame) | `daa326b0-04a3-4f66-9747-64a6739e7c84` | identity edit of the guard |
+
+Wanted later (needs approval): idle animations for Jon and the pup, the pups squirming, a bridge
+over a frozen stream for the "bridge" spawn (two logs stand in for it now).
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8

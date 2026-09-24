@@ -24,6 +24,8 @@ const HINTS := [
 	{"level": "wolfswood_holdfast", "flags": ["act1_deserter_executed"], "text": "The road home runs east"},
 	{"level": "wolfswood_holdfast", "flags": ["act1_ring_formed"], "text": "E  at your place, left of the ring   ·   or speak with the men first"},
 	{"level": "wolfswood_holdfast", "flags": [], "text": "Serjeant Hune is waiting"},
+	{"level": "kingsroad_north", "flags": ["act1_found_pups"], "text": "The column rides on north   ·   the woods are yours to look at first"},
+	{"level": "kingsroad_north", "flags": [], "text": "Walk up the road to the head of the column"},
 ]
 
 var _player: CombatActor = null

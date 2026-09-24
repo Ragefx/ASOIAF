@@ -65,6 +65,7 @@ PROPS = {
     "tree_pine_snow": (16, 10),
     "tree_oak_snow": (28, 12),
     "holdfast": (80, 24),
+    "direwolf_dead": (96, 20),
     "sticks": None,
     "flowers": None,
 }
@@ -315,8 +316,67 @@ def wolfswood() -> list[tuple]:
     return placed
 
 
+def kingsroad() -> list[tuple]:
+    """The kingsroad north of Winterfell, scene 4 of Act 1 (Six Pups and a Seventh).
+
+    The road runs bottom to top through snowy woods (x within +-64). The player comes in
+    at the south (the "bridge" marker: two logs over a frozen ditch) and the column has
+    stopped up the road, where the dead direwolf lies on the west verge at (-190, -230)
+    with the party around her (NPCs in the level scene). The white pup sits alone in
+    the trees east of the road at (430, -60) - only found by leaving the road."""
+    placed = [
+        ("direwolf_dead", -190, -230),
+        ("life/ghost_pup", 430, -60),
+        ("log", -70, 372), ("log", 70, 372),
+    ]
+    # the stopped column: horses nose to tail up the road, riders beside them
+    tints = ["Color(1, 1, 1, 1)", "Color(0.55, 0.5, 0.48, 1)", "Color(0.4, 0.36, 0.34, 1)",
+             "Color(0.85, 0.8, 0.75, 1)", "Color(1.1, 1.05, 1, 1)", "Color(0.7, 0.66, 0.6, 1)"]
+    for i, y in enumerate((-400, -330, -120, -40, 40, 120)):
+        placed.append(("life/horse", 20 if i % 2 else -24, y, {"modulate": tints[i]}))
+    placed += [("life/guard_idle", 60, -380), ("life/guard_idle", -60, -100),
+               ("life/guard_idle", 64, 60), ("life/crow", -300, -380), ("life/crow", 220, 200),
+               ("life/hare", -520, 160), ("life/stag", 600, -300)]
+
+    rng = random.Random("kingsroad_north")
+    taken = [(e[1], e[2]) for e in placed]
+
+    def free(x, y, gap):
+        return all(math.hypot(x - a, y - b) >= gap for a, b in taken)
+
+    def open_ground(x, y):
+        on_road = abs(x) < 110
+        # tall canopies reach far above their base: keep trees well south of her too
+        by_the_wolf = -360 <= x <= -60 and -330 <= y <= 20
+        # a small clearing, and nothing tall just south of it to hide the pup behind
+        pup_clearing = math.hypot(x - 430, y + 60) < 70 or (abs(x - 430) < 110 and -60 <= y <= 190)
+        return on_road or by_the_wolf or pup_clearing
+
+    trees = 0
+    for _ in range(8000):
+        if trees >= 80:
+            break
+        x, y = rng.uniform(-720, 720), rng.uniform(-470, 520)
+        if open_ground(x, y) or not free(x, y, 64):
+            continue
+        placed.append((rng.choice(["tree_pine_snow"] * 3 + ["tree_oak_snow"]), round(x), round(y)))
+        taken.append((x, y))
+        trees += 1
+    added = 0
+    for _ in range(6000):
+        if added >= 40:
+            break
+        x, y = rng.uniform(-700, 700), rng.uniform(-440, 460)
+        if abs(x) < 90 or (-330 <= x <= -60 and -330 <= y <= -130) or not free(x, y, 36):
+            continue
+        placed.append((rng.choice(["boulder", "rock_pile", "sticks", "sticks", "stump", "log"]), round(x), round(y)))
+        taken.append((x, y))
+        added += 1
+    return placed
+
+
 LEVELS = {"winterfell_training_yard": training_yard, "winterfell_yard": castle_yard,
-          "wolfswood_holdfast": wolfswood}
+          "wolfswood_holdfast": wolfswood, "kingsroad_north": kingsroad}
 
 
 def place(level: str) -> None:

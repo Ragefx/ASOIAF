@@ -1,6 +1,7 @@
 extends SceneTree
-## Automated playthrough of Act 1's first three scenes: Morning Duties in the training yard,
-## Preparing for a King in the castle yard, and A Deserter's Head in the Wolfswood.
+## Automated playthrough of Act 1's first four scenes: Morning Duties in the training yard,
+## Preparing for a King in the castle yard, A Deserter's Head in the Wolfswood, and Six Pups
+## and a Seventh on the kingsroad.
 ##
 ##   xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
 ##       -s tools/godot/playtest_act1_opening.gd -- <screenshot_dir>
@@ -218,14 +219,54 @@ func _run() -> void:
 	_check(get_root().get_viewport().get_camera_2d() == player.get_node("Camera2D"), "the camera returns to Torren")
 	_check(_hud_text("ObjectiveLabel") == "Ride home", "objective advanced to Ride home")
 
-	# the road home, east: not built yet, so the card
+	# the road home, east
 	player.global_position = Vector2(560, -48)
 	Input.action_press("move_right")
 	await _wait(1.0)
 	Input.action_release("move_right")
-	await _wait(2.0)
+	await _wait(2.5)
 	await _shot("wolfswood_exit")
-	_check(SD.current_level == "wolfswood_holdfast", "the unbuilt kingsroad shows its card instead of loading")
+
+	# === Scene 4: Six Pups and a Seventh, on the kingsroad ========================
+	_check(SD.current_level == "kingsroad_north", "the road east leads onto the kingsroad")
+	player = get_first_node_in_group("player")
+	await _wait(0.8)
+	_check(DS.is_running, "Hune sends Torren up the stopped column")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_road_arrived"), "arrival line plays once")
+	var jon := root.find_child("Jon", true, false)
+	_check(jon != null and (jon.get_node("AnimatedSprite2D") as AnimatedSprite2D).sprite_frames != null, "Jon Snow is drawn")
+	# up the road: walking into the party finds her - no button to press
+	player.global_position = Vector2(40, -60)
+	Input.action_press("move_up")
+	await _wait(0.9)
+	Input.action_release("move_up")
+	await _wait(0.3)
+	_check(DS.is_running, "walking up to the party finds the direwolf")
+	await _shot("the_direwolf")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_saw_direwolf") and GM.has_flag("act1_found_pups"), "the pups are found")
+	await _wait(0.3)
+	_check(_hud_text("ObjectiveLabel") != "Ride home", "objective moved on from Ride home")
+	# the seventh: off the road, in the trees
+	_check(not GM.has_flag("act1_found_ghost"), "the white pup is not found by staying on the road")
+	player.global_position = Vector2(340, -60)
+	Input.action_press("move_right")
+	await _wait(0.8)
+	Input.action_release("move_right")
+	await _wait(0.3)
+	_check(DS.is_running, "leaving the road finds the white pup")
+	await _shot("the_white_pup")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_found_ghost"), "found the white pup")
+	# on north: the king's arrival isn't built, so the card
+	player.global_position = Vector2(60, -360)
+	Input.action_press("move_up")
+	await _wait(1.2)
+	Input.action_release("move_up")
+	await _wait(2.0)
+	await _shot("kingsroad_exit")
+	_check(SD.current_level == "kingsroad_north", "the unbuilt king's arrival shows its card")
 
 	print("PLAYTEST %s (%d failure(s))" % ["PASS" if failures == 0 else "FAIL", failures])
 	quit(1 if failures else 0)
