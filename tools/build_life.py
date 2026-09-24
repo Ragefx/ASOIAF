@@ -56,6 +56,15 @@ LIFE = {
     "guard_spar_r": dict(kind="static", height=62, footprint=(18, 8), anims={"idle": ("guard_spar", 9, True, False)}),
     "guard_spar_l": dict(kind="static", height=62, footprint=(18, 8), anims={"idle": ("guard_spar", 9, True, True)}),
     "stable_boy": dict(kind="walker", height=42, anims={"walk_right": ("stable_boy_walk", 8, True, False)}),
+    # later scenes: fire and cloth that move, and townsfolk at work (grown adults: taller than Torren)
+    "forge": dict(kind="static", height=104, footprint=(90, 20), anims={"idle": ("forge", 8, True, False)}),
+    "wall_torch": dict(kind="deco", height=34, anims={"idle": ("wall_torch", 10, True, False)}),
+    "candelabra": dict(kind="static", height=60, footprint=(14, 6), anims={"idle": ("candelabra", 8, True, False)}),
+    "laundry_line": dict(kind="deco", height=68, anims={"idle": ("laundry_line", 6, True, False)}),
+    # height counts the raised hammer; his body stooped at the anvil comes out ~62px
+    "blacksmith": dict(kind="static", height=78, footprint=(30, 10), anims={"idle": ("blacksmith", 8, True, False)}),
+    # kneeling at her tub: a kneeling grown woman, head about where Torren's is standing
+    "washerwoman": dict(kind="static", height=60, footprint=(40, 10), anims={"idle": ("washerwoman", 8, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene
     "bird": dict(kind="frames", height=18, anims={"fly": ("bird_fly", 12, True, False)}),
 }

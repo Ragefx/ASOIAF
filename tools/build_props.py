@@ -55,12 +55,18 @@ PROPS = {
     "well": (44, 16),
     "hay_cart": (60, 14),
     "archery_target": (30, 10),
+    # later scenes: castle yard, great hall, godswood
+    "stable": (310, 40),
+    "keep_gate": (160, 30),
+    "broken_tower": (60, 22),
+    "heart_tree": (44, 16),
+    "feast_table": (130, 36),
     "sticks": None,
     "flowers": None,
 }
 
 # Plants lean in the wind (shaders/wind_sway.gdshader): px of lean at the top.
-SWAY = {"tree_oak": 2.5, "tree_pine": 2.0, "bush": 1.0, "flowers": 1.2}
+SWAY = {"heart_tree": 2.0, "tree_oak": 2.5, "tree_pine": 2.0, "bush": 1.0, "flowers": 1.2}
 # Groups a prop joins - trees shed leaves (scripts/life/leaf_fall.gd finds them).
 GROUPS = {"tree_oak": ["tree"], "tree_pine": ["tree"]}
 BASE_INSET = 3  # px from the sprite's bottom edge up to its origin (inside the shadow)

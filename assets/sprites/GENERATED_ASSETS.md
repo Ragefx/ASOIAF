@@ -455,6 +455,41 @@ shadows, butterflies, critters that potter and flee, walkers.
 
 Spend this round: 4,278 -> 3,794.
 
+## Later scenes - castle yard, great hall, godswood - 2026-09-24
+
+Built ahead of the scenes that need them, all at the training yard's scale (32px tiles; Torren
+45px standing; grown adults taller than him). Guards resized the same day: guard_idle 56px,
+the sparring pair 62px including the raised sword.
+
+Still props (`assets/props/`, scenes via `tools/build_props.py scenes`; not placed yet):
+
+| Name | SpriteCook asset | Game size | Notes |
+|---|---|---|---|
+| stable | `55007776-9358-4a1b-88fe-de7707317cd3` | 343x229 (1:1) | regenerated at 400px so a stall door fits a horse; first try `1d665369-...` too small |
+| keep_gate | `786a470f-6bce-44ba-9cae-7740a5699dbd` | 165x177 (1:1) | Great Keep entrance; first try `18225c7c-...` had a door smaller than Torren |
+| broken_tower | `c7171dd8-9cb1-4b26-bfe5-0ae2c0818cd6` | 74x207 (1:1) | |
+| heart_tree | `fd23315c-64e8-4654-8652-9bb9d9718aae` | 158x177 (1:1) | weirwood with face; sways |
+| feast_table | `fd271b31-b9ab-4370-96bb-ff91fe43ca3d` | 138x80 (majority) | great hall |
+
+Animated (`tools/build_life.py`, `scenes/life/`); the stills are kept in `assets/props/raw/`
+for re-animating:
+
+| Name | Still | Animation | Notes |
+|---|---|---|---|
+| forge | `8c918ca4-5bbe-477d-b381-8f1fc2333bce` | `9484a695-b1bf-426d-b6ca-40c84e27430e` | coals pulse, sparks; 104px |
+| wall_torch | `e3134fa5-8779-4395-b091-a09c4f08c4ff` | `8d33a6b6-3d08-4891-a406-60f416484714` | deco, hang on walls/pillars; 34px |
+| candelabra | `5d2e5b5a-d90b-4281-a7d9-a775ed5b2e04` | `6e7fa893-0c8c-4fc4-bfd5-836e697362a7` | hall / crypts; 60px |
+| laundry_line | `6860b2a5-c48a-418e-8980-3b0151d3ac37` | `ec3e79ed-b0a2-4d30-bca4-0a9b17e3d434` | sheets flap; 68px |
+| blacksmith | `b795d8f8-c690-410d-9e60-a1a82bf92aa6` | `a1fee85c-05d6-46f6-aa8d-26c619a8da19` | hammering; 78px incl. raised hammer |
+| washerwoman | `f4333fd1-3a26-46b9-8db3-13a09f7c21ab` | `5867ffdc-eeaf-4bc4-85db-711aae6e7bf3` | kneeling at her tub; 60px |
+
+Ground: `assets/tilesets/cobble_earth_32.png` (+ `.tres`), SpriteCook tileset
+`6f35a587-a297-4144-afc6-a9f2f776ed53` - the same 15-piece corner-match layout as grass_dirt_32,
+cobbles in the "upper" (grass) role, packed earth below. The alternative `610998a0-...` has a
+stray mark on its full-cobble tile. Both raws in `assets/tilesets/raw/`.
+
+Spend this round: 3,662 -> 3,494.
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8
