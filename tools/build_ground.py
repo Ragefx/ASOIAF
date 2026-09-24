@@ -136,6 +136,8 @@ LEVELS = {
         # the wall-walk tileset's own "far below" reads as open water; fill those cells with
         # the Wolfswood's plain snow instead
         "lower_fill": "snow_earth_32.png",
+        # ...except north of the wall, inside it: the castle's cobbled yards
+        "north_fill": "cobble_earth_32.png",
     },
     "winterfell_godswood": {    # grass, a trodden path from the gate to the heart tree
         "size": (46, 30),
@@ -210,6 +212,11 @@ def build(name: str) -> pathlib.Path:
         other = Image.open(ROOT / "assets" / "tilesets" / spec["lower_fill"]).convert("RGBA")
         fx, fy = CORNERS_TO_ATLAS[frozenset({"TL", "TR", "BL", "BR"})]
         lower_fill = plain_snow(other.crop((fx * TILE, fy * TILE, (fx + 1) * TILE, (fy + 1) * TILE)))
+    north_fill = None
+    if spec.get("north_fill"):
+        other = Image.open(ROOT / "assets" / "tilesets" / spec["north_fill"]).convert("RGBA")
+        fx, fy = CORNERS_TO_ATLAS[frozenset({"TL", "TR", "BL", "BR"})]
+        north_fill = other.crop((fx * TILE, fy * TILE, (fx + 1) * TILE, (fy + 1) * TILE))
     rng = random.Random(name)
     out = Image.new("RGBA", (w * TILE, h * TILE))
     for cy in range(h):
@@ -221,7 +228,7 @@ def build(name: str) -> pathlib.Path:
             if pos == full_grass and rng.random() >= DECORATED_SHARE:
                 tile = plain_grass
             if not corners and spec.get("lower_fill"):
-                tile = lower_fill
+                tile = north_fill if (north_fill is not None and cy < oy) else lower_fill
             if len(corners) in (0, 4):  # uniform cells can be turned freely
                 tile = tile.rotate(90 * rng.randrange(4))
                 if rng.random() < 0.5:
