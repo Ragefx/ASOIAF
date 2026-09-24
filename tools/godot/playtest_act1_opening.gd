@@ -1,6 +1,6 @@
 extends SceneTree
-## Automated playthrough of Act 1's first two scenes: Morning Duties in the training yard,
-## then Preparing for a King in the castle yard.
+## Automated playthrough of Act 1's first three scenes: Morning Duties in the training yard,
+## Preparing for a King in the castle yard, and A Deserter's Head in the Wolfswood.
 ##
 ##   xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
 ##       -s tools/godot/playtest_act1_opening.gd -- <screenshot_dir>
@@ -171,14 +171,61 @@ func _run() -> void:
 	await _wait(0.3)
 	_check(_hud_text("ObjectiveLabel") == "Ride out with Lord Stark's party", "objective advanced to Ride out with Lord Stark's party")
 
-	# out the south gate: the Wolfswood isn't built, so the card shows
+	# out the south gate, three days later, into the Wolfswood
 	player.global_position = Vector2(0, 320)
 	Input.action_press("move_down")
 	await _wait(1.0)
 	Input.action_release("move_down")
-	await _wait(2.0)
+	await _wait(2.5)
 	await _shot("yard_exit")
-	_check(SD.current_level == "winterfell_yard", "the unbuilt Wolfswood shows its card instead of loading")
+
+	# === Scene 3: A Deserter's Head, in the Wolfswood ==============================
+	_check(SD.current_level == "wolfswood_holdfast", "the south gate leads to the Wolfswood")
+	player = get_first_node_in_group("player")
+	await _wait(0.8)
+	_check(DS.is_running, "the Wolfswood opens on the narrator and Serjeant Hune")
+	await _shot("wolfswood_arrival")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_briefed_by_hune") and GM.has_flag("act1_ring_formed"), "Hune's briefing forms the ring")
+	await _wait(0.3)
+	for who in ["Hune", "Eddard", "Bran", "Robb", "Theon", "Jory", "Cley"]:
+		var npc := root.find_child(who, true, false)
+		var spr := npc.get_node("AnimatedSprite2D") as AnimatedSprite2D if npc else null
+		_check(spr != null and spr.sprite_frames != null and spr.is_playing(), "%s is drawn and animated" % who)
+	_check(_sprite_height("Bran") < _sprite_height("Robb") and _sprite_height("Robb") < _sprite_height("Eddard"),
+		"Bran (%d) < Robb (%d) < Lord Stark (%d)" % [_sprite_height("Bran"), _sprite_height("Robb"), _sprite_height("Eddard")])
+	# the four men, before the axe
+	for who in [["Jory", "act1_talked_to_jory"], ["Theon", "act1_talked_to_theon"],
+			["Robb", "act1_talked_to_robb"], ["Cley", "act1_deserter_cley"]]:
+		await _talk(who[0])
+		await _finish_dialogue()
+		_check(GM.has_flag(who[1]), "spoke with %s" % who[0])
+	var gared := root.find_child("prop_001_life_gared", true, false) as CanvasItem
+	_check(gared != null and gared.visible, "the deserter kneels in the ring")
+	# your place at the left of the ring: the camera goes to Bran, never the block
+	var bran := root.find_child("Bran", true, false) as Node2D
+	await _interact_at(root.find_child("RingPlace", true, false) as Node2D, Vector2(0, 16))
+	_check(DS.is_running, "taking your place starts the sentence")
+	await _wait(1.5)
+	var view := get_root().get_viewport().get_camera_2d()
+	var centre := view.get_screen_center_position()
+	_check(centre.distance_to(bran.global_position) < 60.0, "the camera frames Bran (%.0f px off)" % centre.distance_to(bran.global_position))
+	await _shot("the_sentence")
+	await _finish_dialogue()
+	_check(GM.has_flag("act1_deserter_executed"), "the sentence is carried out")
+	_check(not gared.visible, "the deserter is gone from the ring")
+	await _wait(1.6)
+	_check(get_root().get_viewport().get_camera_2d() == player.get_node("Camera2D"), "the camera returns to Torren")
+	_check(_hud_text("ObjectiveLabel") == "Ride home", "objective advanced to Ride home")
+
+	# the road home, east: not built yet, so the card
+	player.global_position = Vector2(560, -48)
+	Input.action_press("move_right")
+	await _wait(1.0)
+	Input.action_release("move_right")
+	await _wait(2.0)
+	await _shot("wolfswood_exit")
+	_check(SD.current_level == "wolfswood_holdfast", "the unbuilt kingsroad shows its card instead of loading")
 
 	print("PLAYTEST %s (%d failure(s))" % ["PASS" if failures == 0 else "FAIL", failures])
 	quit(1 if failures else 0)

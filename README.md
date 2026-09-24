@@ -114,10 +114,14 @@ track south into the castle yard.
 
 Scene 2, Preparing for a King: Winterfell is being scrubbed for the royal visit. Report to
 Ser Rodrik at the keep door, see to the stables (E at the stable doors), and - optionally -
-talk to Jory about the honour guard, the stable hand, and Hodor. Then take the track south
-(currently an end card - the Wolfswood isn't built yet).
+talk to Jory about the honour guard, the stable hand, and Hodor. Then take the track south.
 
-`tools/godot/playtest_act1_opening.gd` plays both automatically and screenshots each beat:
+Scene 3, A Deserter's Head: three days later, a clearing in the Wolfswood under summer snow.
+Serjeant Hune briefs you; speak with Jory, Theon, Robb and Cley if you like, then take your place
+at the left of the ring (E). The camera watches Bran, not the block. The road home runs east
+(currently an end card - the kingsroad isn't built yet).
+
+`tools/godot/playtest_act1_opening.gd` plays all three automatically and screenshots each beat:
 
     xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
         -s tools/godot/playtest_act1_opening.gd -- /tmp/playtest

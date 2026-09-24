@@ -513,6 +513,29 @@ Level: `scenes/world/winterfell_yard.tscn`, ground `assets/tilesets/winterfell_y
 
 Spend this round: 3,494 -> 3,352.
 
+## Act 1 scene 3 - the Wolfswood in summer snow, 2026-09-24
+
+People (identity edits of guard `95f8d239-...`, prompts describe the look without names; idles by
+`tools/build_life.py`). Heights: Lord Stark 57, Hune 56, Theon 55, Robb 50, Bran 36; Gared kneels at 40.
+
+| Who | Still | Idle animation | Notes |
+|---|---|---|---|
+| eddard_stark | `9a370e01-b8ed-47f2-8b9d-e4a495dfc7e7` | `49e8424a-bfff-43cd-b438-08c0e5369420` | hands on Ice's crossguard |
+| hune | `925792e9-40d9-4f4a-af82-2995162081db` | `4ee83106-4d19-4b7d-af85-32fa713b11a9` | spear |
+| theon_greyjoy | `21d01bfe-df03-49bb-94fd-777a6743cdb6` | `a3202c39-a491-4e2f-8399-54a900515b11` | v1.5; the v1.1 try `8415ccdf-...` grew 9px and didn't loop |
+| robb_stark | `767df33a-2661-448a-86fb-f12fd03450eb` | `07e36fe1-4b05-441c-9488-c373e077c768` | |
+| bran_stark | `953936b6-4018-4298-ab97-6b3140e1cdce` | `f539337e-b1fc-4db6-ab6e-27ad0c5b1a5d` | |
+| gared (life/, not an NPC) | `6600cbbc-f51b-4eac-92c4-4d19969cf18b` | `8c7cb88b-82b5-4226-8898-d23d6bffb258` | kneeling, bound; hidden once the sentence is done |
+
+Scenery: tree_pine_snow `7b1fc3d3-b96e-40f1-bc05-16f2b6bc6983`, tree_oak_snow `d9fc0198-d472-405f-a7a5-8c08184b1e7c`
+(edits of the yard's trees, same scale); holdfast `956ff13f-0708-4da7-a689-23a1636f08fd` at 0.6 (107x225) - the
+two square tries (`ff95b795-...`, `e33e21c0-...`) came out 162px with a doorway shorter than Torren; asking for
+9:16 gave a 376px image. Ground: `assets/tilesets/snow_earth_32.png`, tileset `99f21159-ca20-40a5-9ce3-f64b9812f29d`
+(alternative `04cb230b-...`), brown flecks painted out of the full-snow tile by build_ground's "snow" plain mode.
+Procedural: `assets/fx/snow_far.png`, `snow_near.png` - two drifting layers of falling snow.
+
+Spend this round: 3,352 -> 3,050.
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8

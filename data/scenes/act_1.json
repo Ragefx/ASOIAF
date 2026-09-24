@@ -460,6 +460,8 @@
         "act1_winterfell_prepared"
       ],
       "sets_flags": [
+        "act1_deserter_executed",
+        "act1_ring_formed",
         "act1_started"
       ],
       "dialogue": {
@@ -735,9 +737,53 @@
               "honest": 1
             },
             "end": true
+          },
+          "n50": {
+            "speaker": "narrator",
+            "text": "You take your place at the left of the ring, between Jory's horse and a pine shedding snow. Nobody speaks. Somewhere behind you a horse blows and stamps.",
+            "requires_flags": [
+              "act1_ring_formed",
+              "!act1_deserter_executed"
+            ],
+            "direction": "The camera leaves Torren here and drifts to Bran. It stays on Bran until the scene ends. It never frames the block.",
+            "next": "n51"
+          },
+          "n51": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_grave",
+            "text": "You swore an oath, and you broke it. I have heard what you had to say for yourself. The sentence is mine, and so is the sword.",
+            "next": "n52"
+          },
+          "n52": {
+            "speaker": "narrator",
+            "text": "You don't watch the sword. You watch the boy, as Jory told you to. Bran's hands are fists at his sides. He does not look away, and nobody makes him.",
+            "next": "n53"
+          },
+          "n53": {
+            "speaker": "narrator",
+            "text": "One stroke. The sound is smaller than you thought it would be, and the snow takes the rest of it.",
+            "direction": "No music. Wind, and twenty horses breathing.",
+            "next": "n54"
+          },
+          "n54": {
+            "speaker": "narrator",
+            "text": "Lord Stark cleans the blade in the snow, then goes to his son and says something to him. You are too far away to hear it, which is how it should be.",
+            "sets_flags": [
+              "act1_deserter_executed"
+            ],
+            "end": true
+          },
+          "n55": {
+            "speaker": "narrator",
+            "text": "Serjeant Hune wants you at the left of the ring. He has not finished with you yet.",
+            "requires_flags": [
+              "!act1_ring_formed"
+            ],
+            "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_04_the_ride_home",

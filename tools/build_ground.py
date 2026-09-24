@@ -93,6 +93,21 @@ LEVELS = {
             (10, 6, 17, 10),     # the laundry green, worn bare
         ],
     },
+    # A clearing in the Wolfswood under three inches of summer snow (the tileset's "upper"
+    # surface); the ring of horses and the tracks in have trampled it to dark slush.
+    "wolfswood_holdfast": {
+        "size": (46, 30),
+        "tileset": "snow_earth_32.png",
+        "plain": "snow",
+        "earth": [
+            (-6, -5, 6, 1),      # the ring, churned by horses
+            (-8, -3, -7, 0), (7, -3, 8, 0),
+            (-4, 2, 4, 2),
+            (-15, 2, -7, 3),     # the party's tracks in from the south-west treeline
+            (-16, 4, -12, 9),
+            (7, -2, 22, -1),     # the road east, home
+        ],
+    },
 }
 
 
@@ -108,6 +123,23 @@ def plain_variant(tile: Image.Image) -> Image.Image:
     out = tile.copy()
     data = [p if (p[1] > p[0] and p[1] > p[2]) else base for p in _pixels(tile)]
     out.putdata(data)
+    return out
+
+
+def plain_snow(tile: Image.Image) -> Image.Image:
+    """Paint out warm (brown, tan) pixels from a snow tile with the nearest cool pixel
+    to their left, so the snow keeps its own texture."""
+    out = tile.copy()
+    px = out.load()
+    for y in range(out.height):
+        for x in range(out.width):
+            r, g, b, a = px[x, y]
+            if r > b + 8:
+                for dx in range(1, out.width):
+                    r2, g2, b2, a2 = px[(x - dx) % out.width, y]
+                    if r2 <= b2 + 8:
+                        px[x, y] = (r2, g2, b2, a2)
+                        break
     return out
 
 
@@ -129,7 +161,14 @@ def build(name: str) -> pathlib.Path:
         for pos in CORNERS_TO_ATLAS.values()
     }
     full_grass = CORNERS_TO_ATLAS[frozenset({"TL", "TR", "BL", "BR"})]
-    plain_grass = plain_variant(tiles[full_grass]) if spec.get("plain", True) else tiles[full_grass]
+    plain = spec.get("plain", True)
+    if plain == "snow":
+        plain_grass = plain_snow(tiles[full_grass])
+        tiles[full_grass] = plain_grass  # the decorated tile's brown flecks read as litter
+    elif plain:
+        plain_grass = plain_variant(tiles[full_grass])
+    else:
+        plain_grass = tiles[full_grass]
     rng = random.Random(name)
     out = Image.new("RGBA", (w * TILE, h * TILE))
     for cy in range(h):

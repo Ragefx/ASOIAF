@@ -72,6 +72,15 @@ LIFE = {
     "jory": dict(kind="frames", height=57, anims={"idle": ("jory_idle", 6, True, False)}),
     "hodor": dict(kind="frames", height=72, anims={"idle": ("hodor_idle", 6, True, False)}),
     "stable_hand": dict(kind="frames", height=42, anims={"idle": ("stable_boy_idle", 8, True, False)}),
+    # scene 3, the deserter: Lord Stark with Ice 57px, Hune 56, Theon (nineteen) 55,
+    # Robb (fifteen) 50 - just over Torren's 45 - and Bran, seven, 36.
+    "eddard": dict(kind="frames", height=57, anims={"idle": ("ned_idle", 6, True, False)}),
+    "hune": dict(kind="frames", height=56, anims={"idle": ("hune_idle", 6, True, False)}),
+    "theon": dict(kind="frames", height=55, anims={"idle": ("theon_idle", 6, True, False)}),
+    "robb": dict(kind="frames", height=50, anims={"idle": ("robb_idle", 6, True, False)}),
+    "bran": dict(kind="frames", height=36, anims={"idle": ("bran_idle", 8, True, False)}),
+    # the deserter, kneeling and bound; not someone you can talk to
+    "gared": dict(kind="static", height=40, footprint=(28, 8), anims={"idle": ("gared_idle", 6, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene
     "bird": dict(kind="frames", height=18, anims={"fly": ("bird_fly", 12, True, False)}),
 }

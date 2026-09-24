@@ -6,7 +6,8 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "ned",
-      "voice": "Says the fewest words that will do. Never explains himself twice. Never says 'winter is coming'."
+      "voice": "Says the fewest words that will do. Never explains himself twice. Never says 'winter is coming'.",
+      "sprite_frames": "res://assets/life/eddard.tres"
     },
     "catelyn_stark": {
       "name": "Catelyn Stark",
@@ -20,14 +21,16 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "robb",
-      "voice": "Fifteen. Learns to sound certain about three weeks before he is."
+      "voice": "Fifteen. Learns to sound certain about three weeks before he is.",
+      "sprite_frames": "res://assets/life/robb.tres"
     },
     "bran_stark": {
       "name": "Bran Stark",
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "bran",
-      "voice": "Repeats things when frightened. 'I don't fall.'"
+      "voice": "Repeats things when frightened. 'I don't fall.'",
+      "sprite_frames": "res://assets/life/bran.tres"
     },
     "arya_stark": {
       "name": "Arya Stark",
@@ -55,7 +58,8 @@
       "origin": "canon",
       "house": "Greyjoy",
       "portrait_set": "theon",
-      "voice": "Jokes first, and one beat too early, every time."
+      "voice": "Jokes first, and one beat too early, every time.",
+      "sprite_frames": "res://assets/life/theon.tres"
     },
     "jory_cassel": {
       "name": "Jory Cassel",
@@ -196,7 +200,8 @@
       "origin": "invented",
       "house": null,
       "portrait_set": "hune",
-      "voice": "Blunt, fair, never sentimental. Dies in the Whispering Wood with no cutscene."
+      "voice": "Blunt, fair, never sentimental. Dies in the Whispering Wood with no cutscene.",
+      "sprite_frames": "res://assets/life/hune.tres"
     },
     "mabb": {
       "name": "Old Mabb",

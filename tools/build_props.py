@@ -61,14 +61,18 @@ PROPS = {
     "broken_tower": (60, 22),
     "heart_tree": (44, 16),
     "feast_table": (130, 36),
+    # the Wolfswood in summer snow
+    "tree_pine_snow": (16, 10),
+    "tree_oak_snow": (28, 12),
+    "holdfast": (80, 24),
     "sticks": None,
     "flowers": None,
 }
 
 # Plants lean in the wind (shaders/wind_sway.gdshader): px of lean at the top.
-SWAY = {"heart_tree": 2.0, "tree_oak": 2.5, "tree_pine": 2.0, "bush": 1.0, "flowers": 1.2}
+SWAY = {"tree_pine_snow": 2.0, "tree_oak_snow": 2.5, "heart_tree": 2.0, "tree_oak": 2.5, "tree_pine": 2.0, "bush": 1.0, "flowers": 1.2}
 # Groups a prop joins - trees shed leaves (scripts/life/leaf_fall.gd finds them).
-GROUPS = {"tree_oak": ["tree"], "tree_pine": ["tree"]}
+GROUPS = {"tree_oak": ["tree"], "tree_pine": ["tree"], "tree_oak_snow": ["tree"], "tree_pine_snow": ["tree"]}
 BASE_INSET = 3  # px from the sprite's bottom edge up to its origin (inside the shadow)
 
 
@@ -252,7 +256,67 @@ def castle_yard() -> list[tuple]:
     return placed
 
 
-LEVELS = {"winterfell_training_yard": training_yard, "winterfell_yard": castle_yard}
+def wolfswood() -> list[tuple]:
+    """A holdfast clearing in the Wolfswood, scene 3 of Act 1 (A Deserter's Head).
+
+    Summer snow. The ring - a ragged half-circle of horses and men - stands north of the
+    block at (0, -40); Lord Stark, his sons, Theon and Jory are NPCs placed in the level
+    scene, as are Hune by the south-west treeline where the party comes in and "your
+    place" at the left of the ring. The road home leaves east. Same view limits as the
+    castle yard: x +-704, y -470..460; the player is kept within x +-650, y -380..400."""
+    placed = [
+        ("stump", 0, -58), ("life/gared", 0, -40),
+        ("holdfast", 250, -250), ("rock_pile", 320, -214), ("boulder", 180, -210),
+    ]
+    # the ring: horses on a half-circle north of the block, heads in, a guard at each
+    tints = ["Color(1, 1, 1, 1)", "Color(0.55, 0.5, 0.48, 1)", "Color(1.1, 1.05, 1, 1)",
+             "Color(0.4, 0.36, 0.34, 1)", "Color(0.85, 0.8, 0.75, 1)", "Color(1, 0.95, 0.9, 1)"]
+    for i, deg in enumerate((200, 225, 250, 290, 315, 340)):
+        a = math.radians(deg)
+        x, y = round(200 * math.cos(a)), round(-40 + 120 * math.sin(a))
+        placed.append(("life/horse", x, y - 20, {"modulate": tints[i]}))
+    placed += [("life/guard_idle", -150, -150), ("life/guard_idle", 150, -150),
+               ("life/guard_idle", -236, -60), ("life/guard_idle", 236, -60),
+               ("life/crow", 60, 60), ("life/crow", -340, -200), ("life/stag", 560, 260),
+               ("life/hare", -560, -120), ("life/hare", 420, 330)]
+
+    rng = random.Random("wolfswood_holdfast")
+    taken = [(e[1], e[2]) for e in placed]
+
+    def free(x, y, gap):
+        return all(math.hypot(x - a, y - b) >= gap for a, b in taken)
+
+    def clearing(x, y):
+        in_ring = (x / 330) ** 2 + ((y + 40) / 230) ** 2 < 1
+        on_track_in = -520 <= x <= -200 and 40 <= y <= 330
+        on_road_home = x > 200 and -90 <= y <= 0
+        return in_ring or on_track_in or on_road_home
+
+    trees = 0
+    for _ in range(8000):
+        if trees >= 70:
+            break
+        x, y = rng.uniform(-720, 720), rng.uniform(-470, 520)
+        if clearing(x, y) or not free(x, y, 70):
+            continue
+        placed.append((rng.choice(["tree_pine_snow"] * 3 + ["tree_oak_snow"]), round(x), round(y)))
+        taken.append((x, y))
+        trees += 1
+    added = 0
+    for _ in range(6000):
+        if added >= 40:
+            break
+        x, y = rng.uniform(-700, 700), rng.uniform(-440, 460)
+        if (x / 260) ** 2 + ((y + 40) / 170) ** 2 < 1 or not free(x, y, 36):
+            continue
+        placed.append((rng.choice(["boulder", "rock_pile", "sticks", "sticks", "stump", "log"]), round(x), round(y)))
+        taken.append((x, y))
+        added += 1
+    return placed
+
+
+LEVELS = {"winterfell_training_yard": training_yard, "winterfell_yard": castle_yard,
+          "wolfswood_holdfast": wolfswood}
 
 
 def place(level: str) -> None:

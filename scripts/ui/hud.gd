@@ -21,6 +21,9 @@ const HINTS := [
 	{"level": "winterfell_yard", "flags": ["act1_winterfell_prepared"], "text": "Take the track south, out of the yard"},
 	{"level": "winterfell_yard", "flags": ["act1_talked_rodrik"], "text": "E  at the stable doors   ·   Jory is by the horses"},
 	{"level": "winterfell_yard", "flags": [], "text": "Ser Rodrik is at the keep door"},
+	{"level": "wolfswood_holdfast", "flags": ["act1_deserter_executed"], "text": "The road home runs east"},
+	{"level": "wolfswood_holdfast", "flags": ["act1_ring_formed"], "text": "E  at your place, left of the ring   ·   or speak with the men first"},
+	{"level": "wolfswood_holdfast", "flags": [], "text": "Serjeant Hune is waiting"},
 ]
 
 var _player: CombatActor = null
