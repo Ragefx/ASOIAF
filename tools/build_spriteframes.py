@@ -45,6 +45,16 @@ ANIMATIONS = [
     ("walk_left", "walk_left_prepared", True),
 ]
 
+# Versioned folders only (square frames, so the frame count is width / height).
+# Optional: a character without these simply doesn't get them - player.gd falls back.
+# Attacks play fast and once: 6 frames across the ~0.34s attack + recovery window.
+OPTIONAL = [
+    ("attack_down", False, 18.0),
+    ("attack_up", False, 18.0),
+    ("attack_right", False, 18.0),
+    ("attack_left", False, 18.0),
+]
+
 
 def build(char: str) -> pathlib.Path:
     char_dir = ROOT / "assets" / "sprites" / char
@@ -58,19 +68,24 @@ def build(char: str) -> pathlib.Path:
     ext_id_by_file = {}
     load_steps = 1  # the [resource] block itself counts as one step
 
-    for anim_name, stem, loop in ANIMATIONS:
+    entries = [(a, s, l, FPS, True) for a, s, l in ANIMATIONS]
+    if versioned:
+        entries += [(a, a, l, fps, False) for a, l, fps in OPTIONAL]
+    for anim_name, stem, loop, fps, required in entries:
         if versioned:
             stem = anim_name
         png_path = char_dir / f"{stem}.png"
         if not png_path.exists():
-            print(f"warning: {png_path} missing, skipping animation '{anim_name}'", file=sys.stderr)
+            if required:
+                print(f"warning: {png_path} missing, skipping animation '{anim_name}'", file=sys.stderr)
             continue
 
         img = Image.open(png_path)
-        if img.width % FRAMES:
-            print(f"warning: {png_path} width {img.width} does not divide into {FRAMES} frames",
+        frames = img.width // img.height if versioned else FRAMES
+        if img.width % frames:
+            print(f"warning: {png_path} width {img.width} does not divide into {frames} frames",
                   file=sys.stderr)
-        frame_w = img.width // FRAMES
+        frame_w = img.width // frames
         frame_h = img.height
 
         if stem not in ext_id_by_file:
@@ -82,7 +97,7 @@ def build(char: str) -> pathlib.Path:
         ext_id = ext_id_by_file[stem]
 
         frame_refs = []
-        for i in range(FRAMES):
+        for i in range(frames):
             atlas_id = f"atlas_{stem}_{i}"
             atlas_blocks.append(
                 f'[sub_resource type="AtlasTexture" id="{atlas_id}"]\n'
@@ -99,7 +114,7 @@ def build(char: str) -> pathlib.Path:
             f'{{\n"frames": [{frames_joined}],\n'
             f'"loop": {"true" if loop else "false"},\n'
             f'"name": &"{anim_name}",\n'
-            f'"speed": {FPS}\n}}'
+            f'"speed": {fps}\n}}'
         )
 
     if not anim_entries:

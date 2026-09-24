@@ -29,6 +29,13 @@ func _ready() -> void:
 	portrait_set = String(record.get("portrait_set", npc_id))
 	if record.is_empty() and npc_id != "":
 		push_warning("NPC: no data/npcs entry for %s" % npc_id)
+	# Look comes from data/npcs/npcs.json's optional "sprite_frames", like the
+	# protagonists'. An NPC without one stays invisible rather than erroring.
+	var frames_path := String(record.get("sprite_frames", ""))
+	if sprite != null and frames_path != "" and ResourceLoader.exists(frames_path):
+		sprite.sprite_frames = load(frames_path)
+		if sprite.sprite_frames.has_animation("idle"):
+			sprite.play("idle")
 
 
 static func _load_data() -> void:

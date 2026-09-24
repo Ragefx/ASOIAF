@@ -139,6 +139,11 @@ func _start_attack() -> void:
 	if hitbox != null:
 		hitbox.position = facing * 20.0
 	set_hitbox_active(true)
+	# Every step of the chain uses the same directional swing, so restart it -
+	# otherwise the second swing of a chain plays nothing new.
+	if sprite != null and sprite.sprite_frames != null:
+		_update_animation()
+		sprite.set_frame_and_progress(0, 0.0)
 
 
 func _start_dodge() -> void:

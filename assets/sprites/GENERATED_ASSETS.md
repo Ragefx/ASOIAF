@@ -403,6 +403,24 @@ or box for shrinks below ~0.5 - the weapon rack turned to mush under majority at
 collider on the footprint only); `tools/build_props.py place winterfell_training_yard` dresses
 the level (fixed placements + seeded scatter, rerunnable). Sizes are relative to Torren (48px).
 
+## Act 1 opening scene assets — 2026-09-24
+
+| Asset | SpriteCook id | In repo |
+|---|---|---|
+| Ser Cley base (identity edit of Torren v7) | `79d81465-c09f-414e-97b5-5832ad71e407` | `sprites/cley/v1/raw/base.png` |
+| Cley idle, eating his apple | `588c3686-77ad-4ffc-89fa-2650d2dc1dca` | `sprites/cley/v1/idle.png` |
+| Torren attack down (6 fr) | `fe90ddd5-63f3-4cdf-a658-98b5a4fb0e03` | `sprites/torren/v7/attack_down.png` |
+| Torren attack up (6 fr) | `4731498e-2c5e-40a4-9077-44972404b988` | `sprites/torren/v7/attack_up.png` |
+| Torren attack right (6 fr; left mirrored) | `d9ae13c6-d4e1-47dd-95db-6bd8b3861a6d` | `sprites/torren/v7/attack_right.png` |
+| Curtain wall section (tiles side by side) | `bf48eba2-7ee8-4884-af47-a876287b2c53` | `props/wall.png` |
+| Round tower | `ab8dd578-6dfd-4f23-a8b1-250e9355d739` | `props/tower.png` |
+| Straight fence | `135b4ac0-298f-410e-98ac-0bea1594bee0` | `props/fence_straight.png` |
+
+Attacks are fitted with `tools/fit_animation.py --frames 6 --like raw/walk_<dir>.png`, which
+takes the scale from that direction's walk (a raised blade would otherwise shrink Torren) and
+anchors on the standing pose in frame 0 (so the body doesn't slide when the blade swings wide).
+Spend: 4,406 -> 4,278 (128 cr). `assets/fx/mist.png` is procedural, not SpriteCook.
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8

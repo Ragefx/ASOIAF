@@ -69,10 +69,10 @@ LEVELS = {
     "winterfell_training_yard": {
         "size": (60, 44),
         "earth": [
-            (-8, -10, 8, 7),     # the yard itself
+            (-8, -9, 8, 7),      # the yard itself; its north edge runs under the castle
+                                 # wall (base y = -300), so no earth shows above it
             (-9, -8, -9, 5),     # soften the long edges so it isn't a perfect box
             (9, -8, 9, 5),
-            (-6, -11, 6, -11),
             (-6, 8, 6, 8),
             (-1, 9, 1, 22),      # the track leading south out of the yard
         ],

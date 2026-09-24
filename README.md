@@ -105,3 +105,16 @@ godot --path . --editor
 - [ ] Tilemaps built (Winterfell, Red Keep, Riverlands camp)
 - [ ] Combat encounter tuning
 - [ ] Audio pass
+
+## Playing / testing the opening scene
+
+Act 1 opens in Winterfell's training yard: finish your drill on the straw man (left mouse),
+then talk to Ser Cley at the fence (E) for the news that the king is coming, then take the
+track south (currently an end card - the next level isn't built yet).
+
+`tools/godot/playtest_act1_opening.gd` plays it automatically and screenshots each beat:
+
+    xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
+        -s tools/godot/playtest_act1_opening.gd -- /tmp/playtest
+
+It needs a fresh start (no autosave in `user://saves`).

@@ -42,19 +42,29 @@ def char_height(img: Image.Image, n: int) -> int:
     return max(b[3] - b[1] for b in (f.getbbox() for f in frames_of(img, n)) if b)
 
 
-def fit(src: pathlib.Path, out: pathlib.Path, frames: int, target: int, cell: int, mirror: bool) -> None:
+def fit(src: pathlib.Path, out: pathlib.Path, frames: int, target: int, cell: int, mirror: bool,
+        like: pathlib.Path | None = None) -> None:
     raw = Image.open(src).convert("RGBA")
-    guess = round(raw.height * target / char_height(raw, frames))
     with tempfile.TemporaryDirectory() as tmp:
         shrunk_path = pathlib.Path(tmp) / "shrunk.png"
-        # Rounding can land a pixel either side of the target; try the neighbours.
-        for sheet_h in sorted(range(guess - 2, guess + 3), key=lambda h: abs(h - guess)):
-            prepare(src, sheet_h, 256, frames, shrunk_path, filter_name="majority")
+        if like is not None:
+            # Same scale as a sibling strip drawn from the same pose (e.g. an attack
+            # uses its direction's walk): a raised sword must not count as height.
+            ref = Image.open(like).convert("RGBA")
+            ref_frames = ref.width // ref.height
+            scale = target / char_height(ref, ref_frames)
+            prepare(src, round(raw.height * scale), 256, frames, shrunk_path, filter_name="majority")
             shrunk = Image.open(shrunk_path).convert("RGBA")
-            if char_height(shrunk, frames) == target:
-                break
         else:
-            sys.exit(f"{src}: could not hit a {target}px character height")
+            guess = round(raw.height * target / char_height(raw, frames))
+            # Rounding can land a pixel either side of the target; try the neighbours.
+            for sheet_h in sorted(range(guess - 2, guess + 3), key=lambda h: abs(h - guess)):
+                prepare(src, sheet_h, 256, frames, shrunk_path, filter_name="majority")
+                shrunk = Image.open(shrunk_path).convert("RGBA")
+                if char_height(shrunk, frames) == target:
+                    break
+            else:
+                sys.exit(f"{src}: could not hit a {target}px character height")
 
     parts = frames_of(shrunk, frames)
     boxes = [f.getbbox() for f in parts]
@@ -64,12 +74,25 @@ def fit(src: pathlib.Path, out: pathlib.Path, frames: int, target: int, cell: in
     if w > cell or h > cell:
         sys.exit(f"{src}: character {w}x{h} does not fit a {cell}px cell")
 
+    # Horizontal anchor. Walks and idles centre their union box. Attacks (--like)
+    # centre the body as it stands in frame 0 instead: a blade swung out to one side
+    # widens the union, and centring that would slide the body sideways mid-swing.
+    if like is not None:
+        rest = boxes[0]
+        left = round(cell / 2 - ((rest[0] + rest[2]) / 2 - x0))
+        if mirror:
+            left = cell - w - left
+    else:
+        left = (cell - w) // 2
+    if left < 0 or left + w > cell:
+        sys.exit(f"{src}: anchored on the body, the swing overflows a {cell}px cell")
+
     sheet = Image.new("RGBA", (cell * frames, cell), (0, 0, 0, 0))
     for i, f in enumerate(parts):
         c = f.crop((x0, y0, x1, y1))
         if mirror:
             c = ImageOps.mirror(c)
-        sheet.paste(c, (i * cell + (cell - w) // 2, cell - h))
+        sheet.paste(c, (i * cell + left, cell - h))
     out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)
     print(f"{src.name}: {raw.width // frames}px frames -> {frames} x {cell}px, "
@@ -84,8 +107,11 @@ def main() -> int:
     ap.add_argument("--char-height", type=int, default=48, help="character height in px (default 48)")
     ap.add_argument("--frame", type=int, default=56, help="output cell size in px (default 56)")
     ap.add_argument("--mirror", action="store_true", help="flip each frame, e.g. walk_right -> walk_left")
+    ap.add_argument("--like", type=pathlib.Path,
+                    help="raw strip of the same pose/direction whose character height sets the scale "
+                         "(for attacks, where a raised weapon would otherwise shrink the character)")
     a = ap.parse_args()
-    fit(a.source, a.out, a.frames, a.char_height, a.frame, a.mirror)
+    fit(a.source, a.out, a.frames, a.char_height, a.frame, a.mirror, a.like)
     return 0
 
 

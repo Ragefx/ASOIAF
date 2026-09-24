@@ -8,6 +8,11 @@
       "ordered": true,
       "objectives": [
         {
+          "id": "o0",
+          "text": "Finish your drill",
+          "flag": "act1_drill_done"
+        },
+        {
           "id": "o1",
           "text": "Hear Ser Cley's news",
           "flag": "act1_heard_king_coming"

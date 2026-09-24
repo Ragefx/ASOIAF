@@ -30,6 +30,7 @@
       "spawn": "dummy_line",
       "time_of_day": "dawn",
       "mode": "explore",
+      "autostart": false,
       "music": "winterfell_morning",
       "stage_directions": "Opening scene. Mist on the training yard. Torren has been at a straw dummy since before light, which tells the player everything about him before he speaks. Ser Cley Stout watches from a fence rail eating an apple, which tells them everything about Cley. This is the movement and interact tutorial, and it carries the act's inciting news: Jon Arryn is dead and the king is riding north. CANON: Jon Arryn's death and Robert's journey to Winterfell to name Ned his Hand.",
       "objectives": [
@@ -38,6 +39,7 @@
       ],
       "requires_flags": [],
       "sets_flags": [
+        "act1_drill_done",
         "act1_started",
         "act1_heard_arryn_dead",
         "act1_heard_king_coming"

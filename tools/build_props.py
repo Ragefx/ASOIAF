@@ -13,6 +13,9 @@ decorations without one (flowers, sticks) are walked over.
 `place` rewrites the level's prop nodes: every node named prop_* under Actors and
 every ext_resource with an id starting prop_ is removed, then the layout below is
 written back. Hand-placed nodes that don't use the prop_ prefix are never touched.
+A layout entry may carry a 4th item, a dict of node properties written verbatim
+(e.g. the drill dummy's completion flag). Scenes not in PROPS - training_dummy -
+are hand-written in scenes/props/ and only placed here.
 Placement is fixed points plus a seeded scatter, so reruns give the same level.
 
 Sprites come from assets/props/<name>.png (prepared from assets/props/raw/ with
@@ -45,6 +48,9 @@ PROPS = {
     "weapon_rack": (50, 10),
     "barrel": (20, 10),
     "fence": (36, 8),
+    "fence_straight": (116, 8),
+    "wall": (136, 18),
+    "tower": (64, 22),
     "sticks": None,
     "flowers": None,
 }
@@ -75,50 +81,70 @@ def write_scenes() -> None:
 
 # --- level layouts -------------------------------------------------------------------
 
-def training_yard() -> list[tuple[str, int, int]]:
-    """Winterfell's training yard. Walls at +-320; the earth yard spans roughly x +-256,
-    y -320..224, with a track south (|x| < 48). The ground image covers +-960 x +-704."""
+def training_yard() -> list[tuple]:
+    """Winterfell's training yard, scene 1 of Act 1 (Morning Duties).
+
+    Invisible walls at +-320 (north: the castle wall); the earth yard spans roughly x +-256, y -352..224, with a
+    track leaving south (|x| < 48). The castle's curtain wall closes the north side
+    (base y = WALL_Y) with two towers; the trees west, east and south are the edge of
+    the godswood. The ground image covers +-960 x +-704."""
+    WALL_Y = -300
     placed = [
-        # the straw men Torren has been hacking at since before dawn (dummy_line is 0,140)
-        ("dummy", 0, 84), ("dummy", -110, 64), ("dummy", 110, 64),
-        # kit along the north side of the yard
-        ("weapon_rack", -170, -250), ("weapon_rack", -100, -262),
-        ("barrel", 180, -250), ("barrel", 206, -238), ("barrel", 192, -222),
-        ("stump", 228, -120), ("log", -226, 170), ("sticks", -40, 196),
+        # the straw men; the middle one is Torren's, and counts the drill
+        ("training_dummy", 0, -66, {"completion_flag": '"act1_drill_done"', "hits_needed": 5}),
+        ("training_dummy", -120, -86), ("training_dummy", 120, -86),
+        # Cley's fence rail, east of the dummies, where the player sees it from the start
+        ("fence_straight", 196, -168), ("fence_straight", 300, -168),
+        # kit along the north side of the yard, under the wall
+        ("weapon_rack", -170, -236), ("weapon_rack", -96, -244),
+        ("barrel", 180, -240), ("barrel", 206, -228), ("barrel", 190, -214),
+        ("stump", 236, -110), ("log", -226, 170), ("sticks", -40, 196),
         ("rock_pile", 236, 190),
-        # a fence line marking the yard's west side, and a gap-toothed one on the east
-        ("fence", -290, -140), ("fence", -290, -96), ("fence", -290, -52),
-        ("fence", 290, 20), ("fence", 290, 64),
+        ("fence_straight", -250, 250),
     ]
+    # the curtain wall, with a tower either side of the yard
+    x = -960 + 68
+    while x < 960 + 68:
+        placed.append(("wall", x, WALL_Y))
+        x += 134
+    placed += [("tower", -420, WALL_Y + 10), ("tower", 420, WALL_Y + 10)]
+
     rng = random.Random("winterfell_training_yard")
-    taken = [(x, y) for _, x, y in placed]
+    taken = [(e[1], e[2]) for e in placed if e[0] not in ("wall",)]
 
     def free(x, y, gap):
         return all(math.hypot(x - a, y - b) >= gap for a, b in taken)
 
-    def on_yard_or_track(x, y):
-        return (-280 <= x <= 280 and -340 <= y <= 250) or (abs(x) < 72 and y > 200)
+    def blocked(x, y):
+        on_yard = -280 <= x <= 280 and -360 <= y <= 250
+        on_track = abs(x) < 72 and y > 200
+        by_wall = y < WALL_Y + 60   # nothing grows against or beyond the curtain wall
+        return on_yard or on_track or by_wall
 
-    # woods outside the walls: denser further out, never on the yard or the track
-    for _ in range(4000):
-        if sum(1 for n, *_ in placed if n.startswith("tree")) >= 70:
+    # godswood: never on the yard, the track, or against the wall
+    trees = 0
+    for _ in range(6000):
+        if trees >= 60:
             break
         x, y = rng.uniform(-930, 930), rng.uniform(-660, 700)
-        if on_yard_or_track(x, y) or math.hypot(x / 1.4, y) < 330 or not free(x, y, 78):
+        if blocked(x, y) or math.hypot(x / 1.4, y) < 330 or not free(x, y, 78):
             continue
         placed.append((rng.choice(["tree_oak", "tree_oak", "tree_pine"]), round(x), round(y)))
         taken.append((x, y))
+        trees += 1
 
     # undergrowth and ground clutter on the grass, some of it inside the walls
     clutter = ["bush"] * 4 + ["boulder"] * 2 + ["rock_pile"] * 2 + ["flowers"] * 6 + ["sticks"] * 3 + ["stump"]
-    for _ in range(4000):
-        if len(placed) >= 70 + 17 + 90:
+    added = 0
+    for _ in range(6000):
+        if added >= 80:
             break
         x, y = rng.uniform(-930, 930), rng.uniform(-660, 700)
-        if on_yard_or_track(x, y) or not free(x, y, 40):
+        if blocked(x, y) or not free(x, y, 40):
             continue
         placed.append((rng.choice(clutter), round(x), round(y)))
         taken.append((x, y))
+        added += 1
     return placed
 
 
@@ -134,7 +160,7 @@ def place(level: str) -> None:
     text = text.rstrip("\n") + "\n"
 
     layout = LEVELS[level]()
-    used = sorted({n for n, *_ in layout})
+    used = sorted({e[0] for e in layout})
     ext = "".join(f'[ext_resource type="PackedScene" path="res://scenes/props/{n}.tscn" id="prop_{n}"]\n' for n in used)
     # ext_resources go after the last existing one
     last = list(re.finditer(r"\[ext_resource [^\]]*\]\n", text))[-1]
@@ -144,11 +170,13 @@ def place(level: str) -> None:
     text = re.sub(r"load_steps=\d+", f"load_steps={n_ext + n_sub + 1}", text, count=1)
 
     nodes = []
-    for i, (name, x, y) in enumerate(layout):
+    for i, entry in enumerate(layout):
+        name, x, y = entry[:3]
+        extra = "".join(f"{k} = {v}\n" for k, v in (entry[3] if len(entry) > 3 else {}).items())
         nodes.append(f'\n[node name="prop_{i:03d}_{name}" parent="Actors" instance=ExtResource("prop_{name}")]\n'
-                     f"position = Vector2({x}, {y})\n")
+                     f"position = Vector2({x}, {y})\n{extra}")
     path.write_text(text + "".join(nodes))
-    counts = {n: sum(1 for m, *_ in layout if m == n) for n in used}
+    counts = {n: sum(1 for e in layout if e[0] == n) for n in used}
     print(f"{level}: {len(layout)} props {counts}")
 
 

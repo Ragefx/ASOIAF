@@ -82,7 +82,11 @@ func begin_act(act_id: String) -> void:
 		return
 	var first: Dictionary = scenes[0]
 	await goto_level(String(first.get("level", "")), String(first.get("spawn", "")))
-	DialogueSystem.start_scene(act_id, String(first["scene_id"]))
+	# A scene with "autostart": false is played, not watched: its dialogue is
+	# started by the level (an NPC's dialogue_rules, a trigger) once the player
+	# has done what it asks. Act 1's opening drill works this way.
+	if bool(first.get("autostart", true)):
+		DialogueSystem.start_scene(act_id, String(first["scene_id"]))
 
 
 ## Enters a scene's graph part-way, for trigger volumes and the wave director.

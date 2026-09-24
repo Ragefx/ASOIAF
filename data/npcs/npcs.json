@@ -223,7 +223,8 @@
       "origin": "canon-house, invented character",
       "house": "Stout",
       "portrait_set": "cley",
-      "voice": "Torren's own age and rank, and unbothered by both. Jokes first, works last, sees more than he admits. The only person Torren is not performing for."
+      "voice": "Torren's own age and rank, and unbothered by both. Jokes first, works last, sees more than he admits. The only person Torren is not performing for.",
+      "sprite_frames": "res://assets/sprites/cley/v1/cley.tres"
     },
     "stranger": {
       "name": "An old man",
