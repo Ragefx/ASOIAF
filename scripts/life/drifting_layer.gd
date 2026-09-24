@@ -1,7 +1,6 @@
 extends Sprite2D
-## Dawn mist over the level: a tiling texture drifting slowly, which burns off
-## (fades out) once `clears_on_flag` is set - in the opening scene, when the drill
-## is done and the sun is properly up. Purely visual; above actors, below the UI.
+## A tiling texture that drifts - cloud shadows over the ground, or mist.
+## Optionally fades out when a flag is set (mist burning off after the drill).
 
 @export var drift := Vector2(6.0, 1.5)   ## texture px per second
 @export var clears_on_flag: String = ""

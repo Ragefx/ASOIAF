@@ -71,6 +71,9 @@ def fit(src: pathlib.Path, out: pathlib.Path, frames: int, target: int, cell: in
     x0, y0 = min(b[0] for b in boxes), min(b[1] for b in boxes)
     x1, y1 = max(b[2] for b in boxes), max(b[3] for b in boxes)
     w, h = x1 - x0, y1 - y0
+    if cell <= 0:  # auto: the smallest even square that holds every frame, plus a margin
+        cell = max(w, h) + 4
+        cell += cell % 2
     if w > cell or h > cell:
         sys.exit(f"{src}: character {w}x{h} does not fit a {cell}px cell")
 
@@ -105,7 +108,8 @@ def main() -> int:
     ap.add_argument("out", type=pathlib.Path)
     ap.add_argument("--frames", type=int, default=8)
     ap.add_argument("--char-height", type=int, default=48, help="character height in px (default 48)")
-    ap.add_argument("--frame", type=int, default=56, help="output cell size in px (default 56)")
+    ap.add_argument("--frame", type=int, default=56,
+                    help="output cell size in px (default 56; 0 = smallest square that fits)")
     ap.add_argument("--mirror", action="store_true", help="flip each frame, e.g. walk_right -> walk_left")
     ap.add_argument("--like", type=pathlib.Path,
                     help="raw strip of the same pose/direction whose character height sets the scale "

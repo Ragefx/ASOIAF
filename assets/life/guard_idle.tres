@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/life/guard_idle_idle.png" id="t0"]
+
+[sub_resource type="AtlasTexture" id="a0_0"]
+atlas = ExtResource("t0")
+region = Rect2(0, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_1"]
+atlas = ExtResource("t0")
+region = Rect2(52, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_2"]
+atlas = ExtResource("t0")
+region = Rect2(104, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_3"]
+atlas = ExtResource("t0")
+region = Rect2(156, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_4"]
+atlas = ExtResource("t0")
+region = Rect2(208, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_5"]
+atlas = ExtResource("t0")
+region = Rect2(260, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_6"]
+atlas = ExtResource("t0")
+region = Rect2(312, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="a0_7"]
+atlas = ExtResource("t0")
+region = Rect2(364, 0, 52, 52)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("a0_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]

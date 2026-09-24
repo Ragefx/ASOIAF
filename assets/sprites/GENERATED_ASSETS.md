@@ -421,6 +421,40 @@ takes the scale from that direction's walk (a raised blade would otherwise shrin
 anchors on the standing pose in frame 0 (so the body doesn't slide when the blade swings wide).
 Spend: 4,406 -> 4,278 (128 cr). `assets/fx/mist.png` is procedural, not SpriteCook.
 
+## Life - animals, people at work, banners, fire - 2026-09-24
+
+Everything here is built by `tools/build_life.py` from the untouched strips in `assets/life/raw/`
+into `assets/life/<name>_<anim>.png` + `<name>.tres` and a scene in `scenes/life/` (critter /
+walker / static / deco - see the tool's docstring). Placed in levels by `tools/build_props.py`
+as `life/<name>`. All reusable for later scenes (the castle yard, stables, kennels, the Wolfswood).
+
+| Name | Still | Animation | Notes |
+|---|---|---|---|
+| guard_idle | `95f8d239-cd2a-400a-98ba-e407b4a9ef93` (identity edit of Torren v7) | `b6096b6a-6b3b-40a0-80cc-93dc7aef3627` | Winterfell guardsman, grey fur-collared cloak |
+| guard_spar_r / _l | side pose `15642454-d020-4c32-b62f-35b0d3ab8aab` (sunburst edit) | `597ec02f-75ae-481e-9083-f84d12221bce` | same drill, one mirrored |
+| stable_boy | `d736f106-91c3-486d-aa0f-f0f30b6733fc`; side pose `7aacf84d-8a31-477f-9bd3-85bbc8becba1` | walk `730bb7e0-a0e0-40c1-a7e7-5fb808f7a6dd` | walker with a bucket |
+| hen | `5a875294-4c57-4271-b053-571d229fc184` | `20a9a7bd-72eb-4026-8d3b-a0f202cef785` | critter, scurries |
+| crow | `8cde80c5-186b-4284-9d6a-ff5fd2876834` | `5aba75f9-6ead-4cd0-96f5-3cc0656dbf7f` | critter, flies off |
+| cat | `2fa832ca-45d4-4221-a835-133a176cd5f5` | `b3eee522-bf6f-4f07-b428-4a3960710774` | sits |
+| hare | `fd3039c1-ed62-4c8b-a9ee-826085e7251d` | `fdd949ce-914b-4032-9f07-555ebf79c9f1` | critter, bolts |
+| stag | `c0a833a2-1a29-4e41-9484-d6895f09357c` | `91ae0835-98a1-47bd-8da4-a8da07c16398` | Wolfswood |
+| hound_sleeping | `50ed168e-ce4c-4c0c-818e-2e59cd8b5be5` | `7cac9452-603c-433b-bef5-4636cf9c73cb` | kennels / yard |
+| horse | `ee663bc6-aae4-4390-b78c-0acc3623b1b9` | `b4c64093-8e87-4531-847f-85e63d603b06` | saddled, idle |
+| brazier | `41dc3c1c-9ceb-4046-b4cb-4670f4c6e20f` | `55d536eb-236b-4ed5-8857-0090e06c3abe` | fire |
+| banner_stark | `f96b2a0b-c0d7-4c0a-9b23-6bc79885f437` | `642e85b8-5c86-4f91-9a65-436c5daad2d6` | grey direwolf on white |
+| bird (frames only) | `84304c92-04a2-46b7-91d3-8d60f48543bb` | `cdce035a-8ac0-4143-b914-e29028a77d7b` | used by the flyover |
+
+New still props (`assets/props/`, via build_props.py): hay_bale `c5916a42-7a7f-41c8-b04c-96b1a12767b6`,
+well `932892d7-32a6-4d1d-9692-31e966971878`, hay_cart `a1a1c350-f8d8-4550-a4b1-9e44078ecc14`,
+archery_target `6e9cc1ec-b0b7-4b38-8e21-c13ac2468f7e`.
+
+Procedural (not SpriteCook), in `assets/fx/`: butterfly (2-frame, tinted per instance), leaf,
+cloud_shadows, mist. Code-driven life in `scripts/life/`: wind sway shader on trees/bushes/flowers,
+drifting cloud shadows, leaves falling from trees near the camera, bird flyovers with ground
+shadows, butterflies, critters that potter and flee, walkers.
+
+Spend this round: 4,278 -> 3,794.
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8

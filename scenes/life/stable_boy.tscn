@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="SpriteFrames" path="res://assets/life/stable_boy.tres" id="1_frames"]
+[ext_resource type="Script" path="res://scripts/life/walker.gd" id="2_script"]
+
+[node name="stable_boy" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = ExtResource("1_frames")
+animation = &"walk_right"
+offset = Vector2(0, -21)
+script = ExtResource("2_script")
