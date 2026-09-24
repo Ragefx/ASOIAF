@@ -65,8 +65,9 @@ just shows less around him, with no black border:
 | 1920×1080 | 2×2 | 96px | 960×540 — ~30 × 17 tiles |
 | 3840×2160 (4K) | 4×4 | 192px | 960×540 (integer scaling picks 4× there) |
 
-Confirmed against `docs/reference/screen_scale_agreed.webp`: the user's screen with a red box
-marking exactly what a 1080p player sees.
+**The target is `docs/reference/screen_target_1440p.webp`** — confirmed by the user as *the* look
+on their 2560×1440 screen. `screen_scale_agreed.webp` is the same screen with a red box marking
+what a 1080p player would see instead (for other players only; it changes nothing on 1440p).
 
 In Godot this is settings only: base viewport **960×540** (the smallest area anyone sees),
 `window/stretch/aspect="expand"` so bigger screens reveal more world instead of adding borders,
