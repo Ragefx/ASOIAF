@@ -746,7 +746,8 @@
               "!act1_deserter_executed"
             ],
             "direction": "The camera leaves Torren here and drifts to Bran. It stays on Bran until the scene ends. It never frames the block.",
-            "next": "n51"
+            "next": "n51",
+            "music": "none"
           },
           "n51": {
             "speaker": "eddard_stark",
@@ -831,7 +832,8 @@
             "next": "n11",
             "requires_flags": [
               "!act1_saw_direwolf"
-            ]
+            ],
+            "music": "none"
           },
           "n11": {
             "speaker": "theon_greyjoy",

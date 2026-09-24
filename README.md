@@ -130,4 +130,11 @@ card - the king's arrival isn't built yet).
     xvfb-run -s "-screen 0 2560x1440x24" godot --path . --resolution 2560x1440 \
         -s tools/godot/playtest_act1_opening.gd -- /tmp/playtest
 
-It needs a fresh start (no autosave in `user://saves`).
+It needs a fresh start (no autosave in `user://saves`). `tools/godot/test_systems.gd` checks the
+plumbing around the scenes - music per level and the scripted silences, autosave and continue,
+the Esc pause menu and New game - the same way.
+
+In game, Esc pauses: Resume, New game (asks twice; forgets the autosave), Quit. Launching
+continues from the autosave taken at every level transition.
+
+What art is still to make, with costs, for approval in one pass: `docs/ART_BACKLOG.md`.
