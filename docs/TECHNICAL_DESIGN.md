@@ -8,11 +8,11 @@ Godot **4.x** (4.2+). GDScript. 2D top-down. Target: desktop (Windows/Linux/macO
 
 | Setting | Value | Why |
 |---|---|---|
-| Base viewport | 384 × 216 | 16:9, divides cleanly, fits 24 × 13.5 tiles at 16px |
-| Window override | 1536 × 864 (×4) | Integer scale only |
+| Base viewport | 384 × 216 — **moving to 640 × 360** with 32px tiles (decided 2026-09-24, see STYLE_GUIDE §0) | 16:9, divides cleanly; 640 × 360 is exactly 3× to 1080p, 4× to 1440p, 6× to 4K |
+| Window mode | Fullscreen (`window/size/mode=3`) | Full-screen game; the 1536 × 864 override only applies if it is ever run windowed |
 | Stretch mode | `viewport` | Renders at base res, scales the whole frame |
 | Stretch aspect | `keep` | No letterbox distortion |
-| Integer scaling | on | Never a half-pixel |
+| Integer scaling | on (`window/stretch/scale_mode="integer"`) | Never a half-pixel. Scales by the largest whole number that fits the screen; on a screen that isn't a multiple, the leftover is a thin black border rather than stretched pixels. Was documented as on but never actually set until 2026-09-24 |
 | Texture filter | `Nearest` (project default) | Set in Rendering → Textures → Canvas Textures |
 | Mipmaps | off | |
 | Snap 2D transforms to pixel | on | Kills sub-pixel shimmer on the camera |
