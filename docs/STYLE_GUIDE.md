@@ -43,13 +43,16 @@ hero-to-world ratio. Everything measured from the reference above multiplies by 
 | Trees, big props | ~2–3× hero height | still 2–3× hero height → **~100–150px** tall |
 | Visible screen | 320×180 | ~550×310 to show the same amount of world |
 
-**Still open, decide before building levels at this scale:** the exact tile size and viewport.
-The whole-number options either side of 1.7× are **24px tiles with a 480×270 viewport** (1.5×,
-exactly 4× to 1080p; the hero is a little taller relative to the world) or **32px tiles with a
-640×360 viewport** (2×, exactly 3× to 1080p; the hero is a little smaller relative to the
-world, closest to the "tiny hero" feel). This supersedes "keep 16px tiles" in the table above
-and in section 3. Note the earlier rejection of 48px tiles was of the *RPG Maker look*, not of
-bigger tiles as such.
+**Decided 2026-09-24: 32px tiles, 640×360 viewport** (shown at 3× = 1080p). The user compared
+mockups of both whole-number options (the reference screenshot scaled 1.5× and 2× with Torren
+dropped in) and chose this one. At 2× the world, Torren (48px) stands a little smaller than the
+reference hero would (56px), which is the "tiny hero in a big world" feel. The rejected option
+was 24px tiles at 480×270. This supersedes "keep 16px tiles" in the table above and in section 3.
+(The earlier rejection of 48px tiles was of the *RPG Maker look*, not of bigger tiles as such.)
+
+**Not applied to the game yet.** `project.godot` is still 384×216 and the level still uses 16px
+tiles and the old chibi sprites. Switching the viewport alone would shrink the current level into
+a corner, so the switch happens together with the first 32px tileset and the v7 animations.
 
 **How it was made, so the next sprite can be made the same way:**
 
@@ -117,7 +120,7 @@ Every sprite and tile, no exceptions:
 
 | | |
 |---|---|
-| Tile | **16 × 16** |
+| Tile | **32 × 32** as of 2026-09-24 (was 16 × 16; see §0) |
 | Character frame | **16 × 24** (a 16px footprint, headroom above) |
 | Large actors | 32 × 32 on a 16px footprint — mounted knights, the Hound, direwolves |
 | Sprite origin | The **feet**. `AnimatedSprite2D` offset `(0, -8)`. |
