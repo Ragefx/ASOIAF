@@ -1,7 +1,10 @@
 # Art backlog - Act 1, scenes 4 to 12
 
 Everything still to generate before Act 1 can be finished, grouped so it can be approved in one pass
-("approve all", "approve scene 5", "skip X"). Nothing below has been generated yet.
+("approve all", "approve scene 5", "skip X").
+
+**Status 2026-09-24: approved in full and generated** (see GENERATED_ASSETS.md, "Act 1 scenes 4-12").
+Only the battlements still failed; the walls scene reuses the curtain wall instead.
 
 Costs are SpriteCook credits: a still is 12, an animation 20 (26 on pixel-engine-v1.5, which is
 used when the default engine makes a character grow mid-loop), a tileset 24. Balance on

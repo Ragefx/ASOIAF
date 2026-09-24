@@ -14,7 +14,8 @@
       "origin": "canon",
       "house": "Tully",
       "portrait_set": "catelyn",
-      "voice": "Southern manners over northern iron. Politest when most dangerous."
+      "voice": "Southern manners over northern iron. Politest when most dangerous.",
+      "sprite_frames": "res://assets/life/catelyn.tres"
     },
     "robb_stark": {
       "name": "Robb Stark",
@@ -75,7 +76,8 @@
       "origin": "canon",
       "house": "Baratheon",
       "portrait_set": "robert",
-      "voice": "Enormous and grieving and never introduced with a fat joke."
+      "voice": "Enormous and grieving and never introduced with a fat joke.",
+      "sprite_frames": "res://assets/life/robert.tres"
     },
     "cersei_lannister": {
       "name": "Cersei Lannister",
@@ -89,7 +91,8 @@
       "origin": "canon",
       "house": "Baratheon",
       "portrait_set": "joffrey",
-      "voice": "Delighted. Twelve. Not evil so much as unsupervised."
+      "voice": "Delighted. Twelve. Not evil so much as unsupervised.",
+      "sprite_frames": "res://assets/life/joffrey.tres"
     },
     "petyr_baelish": {
       "name": "Petyr Baelish",
@@ -117,7 +120,8 @@
       "origin": "canon",
       "house": "Clegane",
       "portrait_set": "hound",
-      "voice": "Silent in Chapter 1. Acts instead."
+      "voice": "Silent in Chapter 1. Acts instead.",
+      "sprite_frames": "res://assets/life/sandor.tres"
     },
     "meryn_trant": {
       "name": "Ser Meryn Trant",
@@ -223,7 +227,8 @@
       "origin": "invented",
       "house": "Wells",
       "portrait_set": "wells",
-      "voice": "Southron contempt that slowly turns into respect he is embarrassed about."
+      "voice": "Southron contempt that slowly turns into respect he is embarrassed about.",
+      "sprite_frames": "res://assets/life/wells.tres"
     },
     "cley": {
       "name": "Ser Cley Stout",
@@ -260,14 +265,16 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "benjen",
-      "voice": "Talks about the Wall the way a man talks about a debt nobody else believes in."
+      "voice": "Talks about the Wall the way a man talks about a debt nobody else believes in.",
+      "sprite_frames": "res://assets/life/benjen.tres"
     },
     "tyrion_lannister": {
       "name": "Tyrion Lannister",
       "origin": "canon",
       "house": "Lannister",
       "portrait_set": "tyrion",
-      "voice": "Tests everyone with a joke and reads the answer. Never self-pitying on screen."
+      "voice": "Tests everyone with a joke and reads the answer. Never self-pitying on screen.",
+      "sprite_frames": "res://assets/life/tyrion.tres"
     },
     "hodor": {
       "name": "Hodor",
@@ -291,6 +298,21 @@
       "house": null,
       "portrait_set": "guard",
       "voice": "Generic household guard. Panics usefully."
+    },
+    "jaime_lannister": {
+      "name": "Ser Jaime Lannister",
+      "origin": "canon",
+      "house": "Lannister",
+      "portrait_set": "jaime",
+      "voice": "Charming, bored, and the only person in the yard who is enjoying himself. Never explains a joke.",
+      "sprite_frames": "res://assets/life/jaime.tres"
+    },
+    "serving_girl": {
+      "name": "A serving girl",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "servant",
+      "voice": "Never speaks to Torren. Eyes down."
     }
   }
 }

@@ -66,6 +66,18 @@ PROPS = {
     "tree_oak_snow": (28, 12),
     "holdfast": (80, 24),
     "direwolf_dead": (96, 20),
+    "bridge": None,
+    # scenes 5-12
+    "wheelhouse": (130, 30),
+    "crypt_king": (56, 20),
+    "lyanna_statue": (30, 14),
+    "crypt_stair": (70, 24),
+    "hall_wall": (248, 20),
+    "high_table": (170, 40),
+    "wagon": (90, 24),
+    "trunks": (36, 12),
+    "black_pool": (80, 30),
+    "tower_climber": None,
     "sticks": None,
     "flowers": None,
 }

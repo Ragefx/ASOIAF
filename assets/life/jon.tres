@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3]
+[gd_resource type="SpriteFrames" load_steps=10 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/life/jon_idle.png" id="t0"]
 
@@ -6,13 +6,62 @@
 atlas = ExtResource("t0")
 region = Rect2(0, 0, 54, 54)
 
+[sub_resource type="AtlasTexture" id="a0_1"]
+atlas = ExtResource("t0")
+region = Rect2(54, 0, 54, 54)
+
+[sub_resource type="AtlasTexture" id="a0_2"]
+atlas = ExtResource("t0")
+region = Rect2(108, 0, 54, 54)
+
+[sub_resource type="AtlasTexture" id="a0_3"]
+atlas = ExtResource("t0")
+region = Rect2(162, 0, 54, 54)
+
+[sub_resource type="AtlasTexture" id="a0_4"]
+atlas = ExtResource("t0")
+region = Rect2(216, 0, 54, 54)
+
+[sub_resource type="AtlasTexture" id="a0_5"]
+atlas = ExtResource("t0")
+region = Rect2(270, 0, 54, 54)
+
+[sub_resource type="AtlasTexture" id="a0_6"]
+atlas = ExtResource("t0")
+region = Rect2(324, 0, 54, 54)
+
+[sub_resource type="AtlasTexture" id="a0_7"]
+atlas = ExtResource("t0")
+region = Rect2(378, 0, 54, 54)
+
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("a0_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("a0_7")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
+"speed": 6.0
 }]

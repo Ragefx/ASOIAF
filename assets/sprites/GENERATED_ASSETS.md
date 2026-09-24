@@ -551,6 +551,32 @@ between Torren's 45 and Robb's 50); the white pup 17px.
 Wanted later (needs approval): idle animations for Jon and the pup, the pups squirming, a bridge
 over a frozen stream for the "bridge" spawn (two logs stand in for it now).
 
+## Act 1 scenes 4-12 - the approved backlog, 2026-09-24
+
+Everything in `docs/ART_BACKLOG.md`, approved in one pass. The full list of SpriteCook asset IDs
+(stills) and job IDs (animations) is in `docs/reference/act1_art_ledger.tsv`. How each was made:
+people are identity edits of the guard `95f8d239-...` (or of Torren v7 / Nyra v3 for their own
+poses), idles on pixel-engine-v1.5 so nobody grows mid-loop (every strip checked: height varies
+by at most a few px); side-on walks are sunburst edits, then animated.
+
+Game heights (Torren 45 standing): Tyrion 32, Joffrey 44, Nyra covered 45, Catelyn 52, Wells and
+the Lannister soldier 55, gold cloak 56, Jaime and Benjen 56, Kingsguard 57, Robert 60, the Hound
+64 (Hodor 72 stays the tallest). Seated diners ~40, kneeling men 36-40, the howling pup 24.
+
+Props (`assets/props/`): wheelhouse 145x120, bridge 144x133, crypt_king 63x112, lyanna_statue
+36x76, crypt_stair 82x104, hall_wall 248x144, high_table 179x128, wagon 96x100, trunks 39x40,
+black_pool 91x64, tower_climber 33x40 (the small figure on the Broken Tower). Life
+(`tools/build_life.py`): banners of Baratheon and Lannister, the hearth fire, the direwolf's pups
+squirming, the white pup, Torren with a torch, kneeling, and carrying lances, the serving girl
+with her jug (walker) and with the slipping trunk. Tilesets: `crypt_32`, `hall_32`, `wallwalk_32`.
+
+Not usable: the battlements still (`c726a7ae-...`) came out a 50px strip; the walls scene reuses
+the curtain wall. Two kneel edits were billed twice (a timeout hid that the first ones went
+through: `2973fe46-...`, `50333100-...` are the duplicates). The kneel animations were dropped -
+a kneel is a held pose.
+
+Spend: 3,014 -> about 1,880.
+
 ## Credits
 
 The table below covers spending up to 2026-09-09. Since then (2026-09-24): Torren/Nyra v5-v8

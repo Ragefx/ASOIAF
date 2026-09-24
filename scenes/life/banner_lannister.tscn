@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="SpriteFrames" path="res://assets/life/banner_lannister.tres" id="1_frames"]
+[ext_resource type="Script" path="res://scripts/life/idle_anim.gd" id="2_script"]
+
+[node name="banner_lannister" type="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("1_frames")
+animation = &"idle"
+offset = Vector2(0, -48)
+script = ExtResource("2_script")
+anim = &"idle"

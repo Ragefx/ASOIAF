@@ -81,10 +81,41 @@ LIFE = {
     "bran": dict(kind="frames", height=36, anims={"idle": ("bran_idle", 8, True, False)}),
     # the deserter, kneeling and bound; not someone you can talk to
     "gared": dict(kind="static", height=40, footprint=(28, 8), anims={"idle": ("gared_idle", 6, True, False)}),
-    # scene 4, the ride home. Stills only for now (one-frame strips): Jon 49px - fourteen,
-    # between Torren and Robb - and the white pup, alone in the snow, 17px.
-    "jon": dict(kind="frames", height=49, anims={"idle": ("jon_still", 1, True, False)}),
-    "ghost_pup": dict(kind="deco", height=17, anims={"idle": ("ghost_pup", 1, True, False)}),
+    # scene 4, the ride home: Jon 49px - fourteen, between Torren and Robb - the white pup,
+    # alone in the snow, 17px, and the direwolf with her five pups squirming, 64px.
+    "jon": dict(kind="frames", height=49, anims={"idle": ("jon_idle", 6, True, False)}),
+    "ghost_pup": dict(kind="deco", height=17, anims={"idle": ("ghost_pup_idle", 6, True, False)}),
+    "direwolf_pups": dict(kind="static", height=64, footprint=(96, 20), anims={"idle": ("direwolf_pups", 6, True, False)}),
+    # scene 5, the king comes north. Robert is enormous (60), the Hound bigger still (64);
+    # Tyrion 32; Joffrey, twelve, 44. Kneeling men are stills.
+    "robert": dict(kind="frames", height=60, anims={"idle": ("robert_idle", 6, True, False)}),
+    "jaime": dict(kind="frames", height=56, anims={"idle": ("jaime_idle", 6, True, False)}),
+    "kingsguard": dict(kind="static", height=57, footprint=(18, 8), anims={"idle": ("kingsguard_idle", 6, True, False)}),
+    "goldcloak": dict(kind="static", height=56, footprint=(18, 8), anims={"idle": ("goldcloak_idle", 6, True, False)}),
+    "tyrion": dict(kind="frames", height=32, anims={"idle": ("tyrion_idle", 6, True, False)}),
+    "joffrey": dict(kind="frames", height=44, anims={"idle": ("joffrey_idle", 6, True, False)}),
+    "sandor": dict(kind="frames", height=64, anims={"idle": ("sandor_idle", 6, True, False)}),
+    "wells": dict(kind="frames", height=55, anims={"idle": ("wells_idle", 6, True, False)}),
+    "nyra_covered": dict(kind="static", height=45, footprint=(16, 8), anims={"idle": ("nyra_covered_idle", 6, True, False)}),
+    "guard_kneel": dict(kind="static", height=40, footprint=(18, 8), anims={"idle": ("guard_kneel", 1, True, False)}),
+    "torren_kneel": dict(kind="frames", height=36, anims={"idle": ("torren_kneel", 1, True, False)}),
+    "banner_baratheon": dict(kind="deco", height=96, anims={"idle": ("banner_baratheon", 6, True, False)}),
+    "banner_lannister": dict(kind="deco", height=96, anims={"idle": ("banner_lannister", 6, True, False)}),
+    # scene 6, the crypts: Torren holding up a torch (the raised flame makes it 52)
+    "torren_torch": dict(kind="frames", height=52, anims={"idle": ("torren_torch_idle", 8, True, False)}),
+    # scene 7, the feast: the hearth, diners seated on benches (~40), the serving girl
+    "hearth": dict(kind="static", height=112, footprint=(100, 20), anims={"idle": ("hearth", 10, True, False)}),
+    "diner_ale": dict(kind="static", height=41, footprint=(20, 8), anims={"idle": ("diner_ale", 6, True, False)}),
+    "diner_bread": dict(kind="static", height=40, footprint=(20, 8), anims={"idle": ("diner_bread", 5, True, False)}),
+    "diner_woman": dict(kind="static", height=38, footprint=(20, 8), anims={"idle": ("diner_woman", 6, True, False)}),
+    "serving_girl": dict(kind="walker", height=45, anims={"walk_right": ("nyra_jug_walk", 8, True, False)}),
+    # scenes 8-11
+    "benjen": dict(kind="frames", height=56, anims={"idle": ("benjen_idle", 6, True, False)}),
+    "lannister_soldier": dict(kind="static", height=55, footprint=(18, 8), anims={"idle": ("lannister_soldier_idle", 6, True, False)}),
+    "catelyn": dict(kind="frames", height=52, anims={"idle": ("catelyn_idle", 6, True, False)}),
+    "torren_lances": dict(kind="frames", height=52, anims={"walk_right": ("torren_lances_walk", 8, True, False)}),
+    "pup_howl": dict(kind="static", height=24, footprint=(16, 6), anims={"idle": ("pup_howl", 8, True, False)}),
+    "nyra_trunk": dict(kind="frames", height=47, anims={"idle": ("nyra_trunk", 8, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene
     "bird": dict(kind="frames", height=18, anims={"fly": ("bird_fly", 12, True, False)}),
 }
