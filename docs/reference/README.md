@@ -14,3 +14,7 @@ See `docs/STYLE_GUIDE.md` section 0 for the measured spec derived from these.
 
 **Already uploaded to SpriteCook** (2026-09-24) as asset `5bebfe17-2ca4-413d-9b9a-0600fced3541`
 ("STYLE REF - target hero crop"). Pass that ID as `style_asset_ids` rather than re-uploading.
+
+`screen_scale_agreed.webp` - **the agreed on-screen scale** (2026-09-24): the user's 2560x1440
+screen with game pixels at 2x, Torren at his approved size, and a red box showing exactly what a
+1920x1080 player sees. Scenery is the reference world mirrored as filler, for scale only.

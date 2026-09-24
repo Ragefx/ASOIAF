@@ -54,13 +54,30 @@ is fixed by the viewport. Rejected: 24px tiles; 640×360 and 853×480 viewports.
 This supersedes "keep 16px tiles" in the table above and in section 3.
 (The earlier rejection of 48px tiles was of the *RPG Maker look*, not of bigger tiles as such.)
 
-**Other screens:** 1280×720 is an exact 2× on 1440p and 3× on 4K. On **1080p** it is 1.5×,
-which integer scaling rounds down to 1× — Torren would be 48px (1/22 of the screen) with a black
-border. If 1080p matters, the fix is to pick the viewport per screen (screen ÷ 2 on 1080p, i.e.
-960×540) rather than fix one size; decide when a 1080p player turns up.
+**Revised the same day — fixed pixel size, not a fixed viewport.** Every game pixel is always
+drawn **2×2** on screen; the screen size decides how much world fits around Torren. Torren and
+every tile and prop are the same on-screen size on every 1080p/1440p monitor — a smaller screen
+just shows less around him, with no black border:
 
-**A bigger view means more world to build per screen** — each area needs roughly 4× the ground
-of a 640×360 view. Levels should be designed for 40 × 22 tiles visible.
+| Screen | Game pixel | Torren on screen | World visible |
+|---|---|---|---|
+| 2560×1440 (the user's) | 2×2 | 96px | 1280×720 — ~40 × 22 tiles |
+| 1920×1080 | 2×2 | 96px | 960×540 — ~30 × 17 tiles |
+| 3840×2160 (4K) | 4×4 | 192px | 960×540 (integer scaling picks 4× there) |
+
+Confirmed against `docs/reference/screen_scale_agreed.webp`: the user's screen with a red box
+marking exactly what a 1080p player sees.
+
+In Godot this is settings only: base viewport **960×540** (the smallest area anyone sees),
+`window/stretch/aspect="expand"` so bigger screens reveal more world instead of adding borders,
+and the existing `scale_mode="integer"`.
+
+**Level-design rule that follows:** bigger screens see further, so nothing a player must notice
+should sit more than ~15 tiles sideways or ~8 tiles up/down from where the camera centres —
+that is all a 1080p screen shows.
+
+**A bigger view means more world to build per screen** — dress each area for 40 × 22 tiles
+visible (the user's screen), but keep what matters inside 30 × 17 (1080p).
 
 **Not applied to the game yet.** `project.godot` is still 384×216 and the level still uses 16px
 tiles and the old chibi sprites. Switching the viewport alone would shrink the current level into
