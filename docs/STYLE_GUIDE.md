@@ -6,6 +6,43 @@ commission or a free pack disagrees with this document, this document wins.
 
 ---
 
+## 0. The confirmed target (2026-09-24) — read this first
+
+The user confirmed one reference image as *the* target: `docs/reference/target_screenshot.webp`
+(hero cropped in `target_character_crop.png`). "A sprite RPG with a Pokémon look" — the **look**
+only; gameplay stays as built (free movement, real-time combat). Ignore the reference's HUD and
+explosion VFX; the user explicitly doesn't want those.
+
+**Measured from the reference, not eyeballed:**
+
+| | Target |
+|---|---|
+| Screen | Native **320×180** shown at 4×. The project's existing 384×216 @ 4× is effectively the same scale — **keep it**, and keep **16px tiles**. |
+| Character size | About **20×28 px** native. Small against the world: trees, logs, barrels dwarf the hero. That smallness is the "Pokémon" feel. |
+| Proportions | Big head + hair ≈ **40–45% of height**; tiny body, short legs. Hair mass carries the silhouette. |
+| Shading | **4–5 tones per material** (the hair runs dark red → red → orange → yellow highlight). Not flat 2-tone. |
+| Outlines | Dark, but tinted with the material's hue, not pure black. |
+| Face | A few pixels — one or two eye pixels, no drawn mouth. |
+| View | Three-quarter / slightly-from-above, soft dark ellipse shadow under the feet. |
+| World | Lush, saturated greens; large detailed props (trees ~2–3× hero height). |
+
+**What was tried and rejected, so nobody repeats it:**
+
+- *Flat chibi* (16×24, 2-tone, dot eyes, thick uniform outline) — right size, wrong rendering: read as a toy.
+- *Natural proportions, detailed cel-shading* (~5 heads, 48px frames) — "way too detailed and wrong size".
+- *Compact 3.5–4-head hero at ~77px source* — closer, but still too tall and too big.
+- *RPG Maker generator look* at 48×48 — "not it"; and bumping the whole game to 48px tiles was explicitly rejected.
+- **Describing the style in words alone never landed.** Next attempt must upload
+  `target_character_crop.png` to SpriteCook and pass it as a style reference
+  (`style_asset_ids` / `reference_asset_id` on `generate_game_art`), then generate **one** test
+  sprite and show it before anything else. The user wants to go slowly — one step, one check-in.
+
+Sections 2 and 3 below were written for the rejected flat-chibi pass. Where they conflict with
+this table (flat fills, 2–3 tones, 16×24 frames), **this table wins** until they're rewritten
+against an approved sprite.
+
+---
+
 ## 1. The tonal decision, stated on purpose
 
 **The art is bright. The story is not.** Chapter 1 ends with a man's head coming off in front of a

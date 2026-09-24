@@ -37,6 +37,14 @@ alternate POV.
 | 5 | The Sword in the Morning | Torren | Riverlands | Whispering Wood, Battle of the Camps, the crowning |
 
 The two protagonists pass each other **twice** in Act 1 and do not meet again in Chapter 1.
+
+> **Scope decision (2026-09-24):** the first release runs **up to Ned Stark's execution** — Acts 1–4.
+> Act 5 happens after Ned's death and is out of scope for now; its scene data stays in the repo but
+> isn't being built. Whether both original protagonists stay in the first release (the user described
+> "a made-up character, with more to follow") is still unconfirmed.
+>
+> **Art direction:** the confirmed target look is `docs/reference/target_screenshot.webp` —
+> see `docs/STYLE_GUIDE.md` §0 for the measured spec. Pokémon *look* only; gameplay unchanged.
 See [`docs/CHAPTER1_PERSPECTIVE_MAP.md`](docs/CHAPTER1_PERSPECTIVE_MAP.md).
 
 ## Design Principles
