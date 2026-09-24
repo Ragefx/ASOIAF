@@ -127,7 +127,7 @@ def training_yard() -> list[tuple]:
         ("life/horse", -238, 104), ("well", 286, 60), ("archery_target", 210, 110),
         ("life/hen", -236, -14), ("life/hen", -214, 8), ("life/hen", -250, 50),
         # life in the yard
-        ("life/guard_spar_r", -150, 160), ("life/guard_spar_l", -108, 160),
+        ("life/guard_spar_r", -162, 160), ("life/guard_spar_l", -98, 160),
         ("life/guard_idle", -300, -250), ("life/guard_idle", 300, -236),
         ("life/hound_sleeping", 132, -222), ("life/cat", 266, 80),
         ("life/crow", 70, 180), ("life/crow", -60, -214), ("life/crow", 180, 30),

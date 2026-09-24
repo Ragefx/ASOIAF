@@ -49,10 +49,12 @@ LIFE = {
                  props={"flees_by": '"run"', "wander_radius": 30.0, "flee_radius": 110.0}),
     "stag": dict(kind="critter", height=56, anims={"idle": ("stag", 6, True, False)},
                  props={"flees_by": '"run"', "wander_radius": 30.0, "flee_radius": 160.0}),
-    "guard_idle": dict(kind="static", height=48, footprint=(16, 8), anims={"idle": ("guard_idle", 6, True, False)}),
-    # a sparring pair: the same drill, one mirrored, placed facing each other
-    "guard_spar_r": dict(kind="static", height=48, footprint=(16, 8), anims={"idle": ("guard_spar", 9, True, False)}),
-    "guard_spar_l": dict(kind="static", height=48, footprint=(16, 8), anims={"idle": ("guard_spar", 9, True, True)}),
+    # grown men stand taller than Torren (45px idle, 48px walking)
+    "guard_idle": dict(kind="static", height=56, footprint=(18, 8), anims={"idle": ("guard_idle", 6, True, False)}),
+    # a sparring pair: the same drill, one mirrored, placed facing each other. Height counts
+    # the raised sword (frame 2); the body in its fighting crouch comes out ~53px.
+    "guard_spar_r": dict(kind="static", height=62, footprint=(18, 8), anims={"idle": ("guard_spar", 9, True, False)}),
+    "guard_spar_l": dict(kind="static", height=62, footprint=(18, 8), anims={"idle": ("guard_spar", 9, True, True)}),
     "stable_boy": dict(kind="walker", height=42, anims={"walk_right": ("stable_boy_walk", 8, True, False)}),
     # frames only: used by scripts/life/bird_flyover.gd, not placed as a scene
     "bird": dict(kind="frames", height=18, anims={"fly": ("bird_fly", 12, True, False)}),
