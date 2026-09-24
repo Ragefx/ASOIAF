@@ -14,7 +14,7 @@ collision_mask = 0
 texture_filter = 1
 sprite_frames = ExtResource("1_frames")
 animation = &"idle"
-offset = Vector2(0, -32)
+offset = Vector2(0, -38)
 script = ExtResource("2_script")
 anim = &"idle"
 

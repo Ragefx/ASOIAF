@@ -269,7 +269,7 @@ func _run() -> void:
 
 	# === Scene 5: The King Comes North (a scripted beat; Torren held in the line) =====
 	_check(SD.current_level == "winterfell_yard_arrival", "the column rides home to the king's arrival")
-	player = get_first_node_in_group("player")
+	player = _level_player()
 	var line_at := player.global_position
 	player.global_position = line_at + Vector2(-300, 0)
 	await _wait(0.2)
@@ -294,7 +294,7 @@ func _run() -> void:
 
 	# === Scene 6: Torchlight (the crypts) =============================================
 	await _until_level("winterfell_crypts")
-	player = get_first_node_in_group("player")
+	player = _level_player()
 	var torch_ok := String((player.get_node("AnimatedSprite2D") as AnimatedSprite2D).sprite_frames.resource_path).contains("torren_torch")
 	_check(torch_ok, "Torren holds a torch at the stair head")
 	var start_y := player.global_position.y
@@ -319,9 +319,11 @@ func _run() -> void:
 		player.global_position = girl.global_position + Vector2(0, 40)
 		player.facing = Vector2.UP
 		await _wait(0.05)
-		if DS.is_running:
+		if GM.has_flag("act1_encounter_feast"):
 			break
-	_check(DS.is_running and GM.has_flag("act1_encounter_feast"), "facing her as she passes: the first brief encounter")
+		if DS.is_running:   # something else spoke first; let it finish
+			await _finish_dialogue()
+	_check(GM.has_flag("act1_encounter_feast"), "facing her as she passes: the first brief encounter")
 	await _shot("the_feast")
 	await _finish_dialogue()
 	player.global_position = Vector2(0, 300)
@@ -391,14 +393,25 @@ func _run() -> void:
 		await _wait(0.1)
 	_check(GM.has_flag("act1_encounter_departure"), "the trunk, and the second brief encounter")
 	await _until_level("winterfell_walls")
-	await _wait(0.6)
-	await _finish_dialogue()
-	await _wait(10.0)
+	for i in 150:
+		if DS.is_running:
+			await _step_dialogue()
+		if GM.has_flag("act1_walls_done"):
+			break
+		await _wait(0.1)
 	await _shot("winter_is_coming")
 	_check(GM.has_flag("act1_complete"), "Act 1 is complete")
 
 	print("PLAYTEST %s (%d failure(s))" % ["PASS" if failures == 0 else "FAIL", failures])
 	quit(1 if failures else 0)
+
+
+## The player of the level now on screen (a level being freed can still hold one briefly).
+func _level_player() -> Node2D:
+	for p in get_nodes_in_group("player"):
+		if not p.is_queued_for_deletion() and p.is_inside_tree():
+			return p
+	return null
 
 
 func _step_dialogue() -> void:

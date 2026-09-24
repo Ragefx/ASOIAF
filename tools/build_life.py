@@ -38,14 +38,14 @@ LIFE = {
     "banner_stark": dict(kind="deco", height=96, anims={"idle": ("banner_stark", 7, True, False)}),
     "brazier": dict(kind="static", height=40, footprint=(20, 10), anims={"idle": ("brazier", 10, True, False)}),
     "hound_sleeping": dict(kind="static", height=26, footprint=(40, 12), anims={"idle": ("hound", 5, True, False)}),
-    "horse": dict(kind="static", height=58, footprint=(48, 14), anims={"idle": ("horse", 6, True, False)}),
-    "hen": dict(kind="critter", height=20, anims={"idle": ("hen", 8, True, False)},
+    "horse": dict(kind="static", height=68, footprint=(48, 14), anims={"idle": ("horse", 6, True, False)}),
+    "hen": dict(kind="critter", height=13, anims={"idle": ("hen", 8, True, False)},
                 props={"flees_by": '"run"', "wander_radius": 36.0}),
-    "crow": dict(kind="critter", height=16, anims={"idle": ("crow", 7, True, False)},
+    "crow": dict(kind="critter", height=11, anims={"idle": ("crow", 7, True, False)},
                  props={"flees_by": '"fly"', "wander_radius": 20.0, "flee_radius": 90.0}),
-    "cat": dict(kind="critter", height=20, anims={"idle": ("cat", 5, True, False)},
+    "cat": dict(kind="critter", height=13, anims={"idle": ("cat", 5, True, False)},
                 props={"flees_by": '"none"', "wander_radius": 0.0}),
-    "hare": dict(kind="critter", height=18, anims={"idle": ("hare", 8, True, False)},
+    "hare": dict(kind="critter", height=12, anims={"idle": ("hare", 8, True, False)},
                  props={"flees_by": '"run"', "wander_radius": 30.0, "flee_radius": 110.0}),
     "stag": dict(kind="critter", height=56, anims={"idle": ("stag", 6, True, False)},
                  props={"flees_by": '"run"', "wander_radius": 30.0, "flee_radius": 160.0}),
@@ -68,33 +68,33 @@ LIFE = {
     # Act 1 people, frames only: NPCs load these through data/npcs/npcs.json's sprite_frames.
     # Grown men 56px (Torren is 45 standing); Rodrik stout and a touch shorter; Hodor is
     # near seven feet in the books - 72px, a head and more over everyone - barrel included.
-    "rodrik": dict(kind="frames", height=55, anims={"idle": ("rodrik_idle", 6, True, False)}),
+    "rodrik": dict(kind="frames", height=53, anims={"idle": ("rodrik_idle", 6, True, False)}),
     "jory": dict(kind="frames", height=57, anims={"idle": ("jory_idle", 6, True, False)}),
     "hodor": dict(kind="frames", height=72, anims={"idle": ("hodor_idle", 6, True, False)}),
-    "stable_hand": dict(kind="frames", height=42, anims={"idle": ("stable_boy_idle", 8, True, False)}),
+    "stable_hand": dict(kind="frames", height=46, anims={"idle": ("stable_boy_idle", 8, True, False)}),
     # scene 3, the deserter: Lord Stark with Ice 57px, Hune 56, Theon (nineteen) 55,
     # Robb (fifteen) 50 - just over Torren's 45 - and Bran, seven, 36.
     "eddard": dict(kind="frames", height=57, anims={"idle": ("ned_idle", 6, True, False)}),
     "hune": dict(kind="frames", height=56, anims={"idle": ("hune_idle", 6, True, False)}),
     "theon": dict(kind="frames", height=55, anims={"idle": ("theon_idle", 6, True, False)}),
     "robb": dict(kind="frames", height=50, anims={"idle": ("robb_idle", 6, True, False)}),
-    "bran": dict(kind="frames", height=36, anims={"idle": ("bran_idle", 8, True, False)}),
+    "bran": dict(kind="frames", height=38, anims={"idle": ("bran_idle", 8, True, False)}),
     # the deserter, kneeling and bound; not someone you can talk to
     "gared": dict(kind="static", height=40, footprint=(28, 8), anims={"idle": ("gared_idle", 6, True, False)}),
     # scene 4, the ride home: Jon 49px - fourteen, between Torren and Robb - the white pup,
-    # alone in the snow, 17px, and the direwolf with her five pups squirming, 64px.
+    # alone in the snow, 12px, and the direwolf - the size of a pony, 84px long - with her five pups squirming.
     "jon": dict(kind="frames", height=49, anims={"idle": ("jon_idle", 6, True, False)}),
-    "ghost_pup": dict(kind="deco", height=17, anims={"idle": ("ghost_pup_idle", 6, True, False)}),
-    "direwolf_pups": dict(kind="static", height=64, footprint=(96, 20), anims={"idle": ("direwolf_pups", 6, True, False)}),
+    "ghost_pup": dict(kind="deco", height=12, anims={"idle": ("ghost_pup_idle", 6, True, False)}),
+    "direwolf_pups": dict(kind="static", height=48, footprint=(72, 16), anims={"idle": ("direwolf_pups", 6, True, False)}),
     # scene 5, the king comes north. Robert is enormous (60), the Hound bigger still (64);
     # Tyrion 32; Joffrey, twelve, 44. Kneeling men are stills.
-    "robert": dict(kind="frames", height=60, anims={"idle": ("robert_idle", 6, True, False)}),
-    "jaime": dict(kind="frames", height=56, anims={"idle": ("jaime_idle", 6, True, False)}),
+    "robert": dict(kind="frames", height=63, anims={"idle": ("robert_idle", 6, True, False)}),
+    "jaime": dict(kind="frames", height=58, anims={"idle": ("jaime_idle", 6, True, False)}),
     "kingsguard": dict(kind="static", height=57, footprint=(18, 8), anims={"idle": ("kingsguard_idle", 6, True, False)}),
     "goldcloak": dict(kind="static", height=56, footprint=(18, 8), anims={"idle": ("goldcloak_idle", 6, True, False)}),
-    "tyrion": dict(kind="frames", height=32, anims={"idle": ("tyrion_idle", 6, True, False)}),
-    "joffrey": dict(kind="frames", height=44, anims={"idle": ("joffrey_idle", 6, True, False)}),
-    "sandor": dict(kind="frames", height=64, anims={"idle": ("sandor_idle", 6, True, False)}),
+    "tyrion": dict(kind="frames", height=39, anims={"idle": ("tyrion_idle", 6, True, False)}),
+    "joffrey": dict(kind="frames", height=47, anims={"idle": ("joffrey_idle", 6, True, False)}),
+    "sandor": dict(kind="frames", height=67, anims={"idle": ("sandor_idle", 6, True, False)}),
     "wells": dict(kind="frames", height=55, anims={"idle": ("wells_idle", 6, True, False)}),
     "nyra_covered": dict(kind="static", height=45, footprint=(16, 8), anims={"idle": ("nyra_covered_idle", 6, True, False)}),
     "guard_kneel": dict(kind="static", height=40, footprint=(18, 8), anims={"idle": ("guard_kneel", 1, True, False)}),
@@ -110,7 +110,7 @@ LIFE = {
     "diner_woman": dict(kind="static", height=38, footprint=(20, 8), anims={"idle": ("diner_woman", 6, True, False)}),
     "serving_girl": dict(kind="walker", height=45, anims={"walk_right": ("nyra_jug_walk", 8, True, False)}),
     # scenes 8-11
-    "benjen": dict(kind="frames", height=56, anims={"idle": ("benjen_idle", 6, True, False)}),
+    "benjen": dict(kind="frames", height=58, anims={"idle": ("benjen_idle", 6, True, False)}),
     "lannister_soldier": dict(kind="static", height=55, footprint=(18, 8), anims={"idle": ("lannister_soldier_idle", 6, True, False)}),
     "catelyn": dict(kind="frames", height=52, anims={"idle": ("catelyn_idle", 6, True, False)}),
     # the player's look while carrying the lances: one side-on walk, mirrored for left, and

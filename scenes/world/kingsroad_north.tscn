@@ -13,8 +13,8 @@
 [ext_resource type="Script" path="res://scripts/world/camera_limits.gd" id="14_camera"]
 [ext_resource type="Script" path="res://scripts/world/trigger_zone.gd" id="15_zone"]
 [ext_resource type="PackedScene" path="res://scenes/props/boulder.tscn" id="prop_boulder"]
-[ext_resource type="PackedScene" path="res://scenes/props/direwolf_dead.tscn" id="prop_direwolf_dead"]
 [ext_resource type="PackedScene" path="res://scenes/life/crow.tscn" id="prop_life_crow"]
+[ext_resource type="PackedScene" path="res://scenes/life/direwolf_pups.tscn" id="prop_life_direwolf_pups"]
 [ext_resource type="PackedScene" path="res://scenes/life/ghost_pup.tscn" id="prop_life_ghost_pup"]
 [ext_resource type="PackedScene" path="res://scenes/life/guard_idle.tscn" id="prop_life_guard_idle"]
 [ext_resource type="PackedScene" path="res://scenes/life/hare.tscn" id="prop_life_hare"]
@@ -195,7 +195,7 @@ npc_id = "jon_snow"
 position = Vector2(-40, -300)
 npc_id = "jory_cassel"
 
-[node name="prop_000_direwolf_dead" parent="Actors" instance=ExtResource("prop_direwolf_dead")]
+[node name="prop_000_life_direwolf_pups" parent="Actors" instance=ExtResource("prop_life_direwolf_pups")]
 position = Vector2(-190, -230)
 
 [node name="prop_001_life_ghost_pup" parent="Actors" instance=ExtResource("prop_life_ghost_pup")]

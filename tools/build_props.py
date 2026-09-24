@@ -65,10 +65,10 @@ PROPS = {
     "tree_pine_snow": (16, 10),
     "tree_oak_snow": (28, 12),
     "holdfast": (80, 24),
-    "direwolf_dead": (96, 20),
+    "direwolf_dead": (72, 16),
     "bridge": None,
     # scenes 5-12
-    "wheelhouse": (130, 30),
+    "wheelhouse": (170, 34),
     "crypt_king": (56, 20),
     "lyanna_statue": (30, 14),
     "crypt_stair": (70, 24),
@@ -337,7 +337,7 @@ def kingsroad() -> list[tuple]:
     with the party around her (NPCs in the level scene). The white pup sits alone in
     the trees east of the road at (430, -60) - only found by leaving the road."""
     placed = [
-        ("direwolf_dead", -190, -230),
+        ("life/direwolf_pups", -190, -230),   # her pups squirm at her belly
         ("life/ghost_pup", 430, -60),
         ("log", -70, 372), ("log", 70, 372),
     ]

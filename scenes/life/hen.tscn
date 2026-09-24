@@ -7,7 +7,7 @@
 texture_filter = 1
 sprite_frames = ExtResource("1_frames")
 animation = &"idle"
-offset = Vector2(0, -10)
+offset = Vector2(0, -6)
 script = ExtResource("2_script")
 flees_by = "run"
 wander_radius = 36.0

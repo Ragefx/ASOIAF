@@ -307,7 +307,8 @@ def great_hall():
     lvl.actors.append('[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/ServingGirl/Glance"]\n'
                       'shape = SubResource("glance_shape")\n')
     lvl.zone("KitchenDoor", s, "n42", 560, 40, 60, 90, done_flag="act1_followed_her", requires=["act1_encounter_feast"])
-    lvl.zone("FarEnd", s, "n50", -420, 60, 220, 160, done_flag="act1_feast_observed")
+    # down by Jon and his uncle - clear of the serving girl's route (y 40)
+    lvl.zone("FarEnd", s, "n50", -440, 150, 220, 100, done_flag="act1_feast_observed")
     lvl.exit("ExitSouth", 0, 330, 96, 24, "winterfell_yard_visit", "training_yard_gate", ["act1_entered_feast"])
     lvl.write((-300, 290))
 

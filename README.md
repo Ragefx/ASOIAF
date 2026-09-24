@@ -151,3 +151,6 @@ In game, Esc pauses: Resume, New game (asks twice; forgets the autosave), Quit. 
 continues from the autosave taken at every level transition.
 
 What art is still to make, with costs, for approval in one pass: `docs/ART_BACKLOG.md`.
+
+Sizes: `python3 tools/check_proportions.py` checks every person, animal and prop against one
+real-world scale (a 1.78 m man = 56px) and draws them all on one ground line.

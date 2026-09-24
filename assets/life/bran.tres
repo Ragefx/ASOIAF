@@ -4,35 +4,35 @@
 
 [sub_resource type="AtlasTexture" id="a0_0"]
 atlas = ExtResource("t0")
-region = Rect2(0, 0, 40, 40)
+region = Rect2(0, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_1"]
 atlas = ExtResource("t0")
-region = Rect2(40, 0, 40, 40)
+region = Rect2(42, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_2"]
 atlas = ExtResource("t0")
-region = Rect2(80, 0, 40, 40)
+region = Rect2(84, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_3"]
 atlas = ExtResource("t0")
-region = Rect2(120, 0, 40, 40)
+region = Rect2(126, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_4"]
 atlas = ExtResource("t0")
-region = Rect2(160, 0, 40, 40)
+region = Rect2(168, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_5"]
 atlas = ExtResource("t0")
-region = Rect2(200, 0, 40, 40)
+region = Rect2(210, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_6"]
 atlas = ExtResource("t0")
-region = Rect2(240, 0, 40, 40)
+region = Rect2(252, 0, 42, 42)
 
 [sub_resource type="AtlasTexture" id="a0_7"]
 atlas = ExtResource("t0")
-region = Rect2(280, 0, 40, 40)
+region = Rect2(294, 0, 42, 42)
 
 [resource]
 animations = [{

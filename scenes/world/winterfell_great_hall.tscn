@@ -33,7 +33,7 @@ radius = 64.0
 size = Vector2(60, 90)
 
 [sub_resource type="RectangleShape2D" id="shape_FarEnd"]
-size = Vector2(220, 160)
+size = Vector2(220, 100)
 
 [sub_resource type="RectangleShape2D" id="shape_ExitSouth"]
 size = Vector2(96, 24)
@@ -111,7 +111,7 @@ done_flag = "act1_followed_her"
 shape = SubResource("shape_KitchenDoor")
 
 [node name="FarEnd" type="Area2D" parent="."]
-position = Vector2(-420, 60)
+position = Vector2(-440, 150)
 script = ExtResource("zone")
 scene_id = "s1_07_the_feast"
 node = "n50"

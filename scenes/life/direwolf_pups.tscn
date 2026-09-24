@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/life/idle_anim.gd" id="2_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
-size = Vector2(96, 20)
+size = Vector2(72, 16)
 
 [node name="direwolf_pups" type="StaticBody2D"]
 collision_layer = 1
@@ -14,10 +14,10 @@ collision_mask = 0
 texture_filter = 1
 sprite_frames = ExtResource("1_frames")
 animation = &"idle"
-offset = Vector2(0, -56)
+offset = Vector2(0, -43)
 script = ExtResource("2_script")
 anim = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_base")

@@ -58,13 +58,20 @@ def fit(src: pathlib.Path, out: pathlib.Path, frames: int, target: int, cell: in
         else:
             guess = round(raw.height * target / char_height(raw, frames))
             # Rounding can land a pixel either side of the target; try the neighbours.
+            # Tiny sprites can skip a height entirely; then take the nearest within 1px.
+            best = None
             for sheet_h in sorted(range(guess - 2, guess + 3), key=lambda h: abs(h - guess)):
                 prepare(src, sheet_h, 256, frames, shrunk_path, filter_name="majority")
-                shrunk = Image.open(shrunk_path).convert("RGBA")
-                if char_height(shrunk, frames) == target:
+                got = char_height(Image.open(shrunk_path), frames)
+                if got == target:
+                    best = sheet_h
                     break
-            else:
+                if abs(got - target) == 1 and best is None:
+                    best = sheet_h
+            if best is None:
                 sys.exit(f"{src}: could not hit a {target}px character height")
+            prepare(src, best, 256, frames, shrunk_path, filter_name="majority")
+            shrunk = Image.open(shrunk_path).convert("RGBA")
 
     parts = frames_of(shrunk, frames)
     boxes = [f.getbbox() for f in parts]

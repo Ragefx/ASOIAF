@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" path="res://assets/props/wheelhouse.png" id="1_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
-size = Vector2(130, 30)
+size = Vector2(170, 34)
 
 [node name="wheelhouse" type="StaticBody2D"]
 collision_layer = 1
@@ -12,8 +12,8 @@ collision_mask = 0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_tex")
-offset = Vector2(0, -57)
+offset = Vector2(0, -73)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15)
+position = Vector2(0, -17)
 shape = SubResource("RectangleShape2D_base")

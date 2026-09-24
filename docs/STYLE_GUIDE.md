@@ -65,6 +65,15 @@ just shows less around him, with no black border:
 | 1920×1080 | 2×2 | 96px | 960×540 — ~30 × 17 tiles |
 | 3840×2160 (4K) | 4×4 | 192px | 960×540 (integer scaling picks 4× there) |
 
+**Sizes of people and things (2026-09-24).** One scale for everything: a grown man of about
+1.78 m is **56px**, so 1 m ≈ 31.5px. Characters are *not* one height: children, women, Tyrion,
+Robert, the Hound and Hodor are sized from the books (Bran 38, Tyrion 39, Joffrey 47, Robb 50,
+Catelyn 51, men 54-58, Robert 63, the Hound 67, Hodor 71), and scaling keeps each one's own
+width, so the big men are wider too. Animals and things follow the same metres: a horse's ears
+are above a man's head (68px), a hen or a cat is ~13px, a barrel waist-high. Torren (45px) is
+the approved exception. **`tools/check_proportions.py` enforces all of it** - run it after any
+new or refitted art; it writes `docs/screenshots/proportions.png`, everyone on one ground line.
+
 **The target is `docs/reference/screen_target_1440p.webp`** — confirmed by the user as *the* look
 on their 2560×1440 screen. `screen_scale_agreed.webp` is the same screen with a red box marking
 what a 1080p player would see instead (for other players only; it changes nothing on 1440p).
