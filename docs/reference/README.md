@@ -11,3 +11,6 @@ exactly what the target look is. Nothing in this folder ships in the game.
 | `target_character_zoom.png` | Same crop at a further 4x, for looking at. |
 
 See `docs/STYLE_GUIDE.md` section 0 for the measured spec derived from these.
+
+**Already uploaded to SpriteCook** (2026-09-24) as asset `5bebfe17-2ca4-413d-9b9a-0600fced3541`
+("STYLE REF - target hero crop"). Pass that ID as `style_asset_ids` rather than re-uploading.
