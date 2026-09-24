@@ -22,13 +22,13 @@ AudioManager="*res://autoload/audio_manager.gd"
 
 [display]
 
-window/size/viewport_width=384
-window/size/viewport_height=216
-window/size/window_width_override=1536
-window/size/window_height_override=864
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/size/mode=3
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
 [input]

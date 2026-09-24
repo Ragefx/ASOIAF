@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var dialogue_scene: String = ""      ## scene_id in the current act file
 @export var dialogue_node: String = ""       ## entry node; blank uses the scene start
 @export var wander: bool = false
-@export var wander_radius: float = 24.0
+@export var wander_radius: float = 48.0
 
 ## Prioritized routing rules, most specific first. The first rule whose flags are
 ## satisfied wins. This is how the same Jory can say something different before

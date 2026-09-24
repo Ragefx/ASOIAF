@@ -11,7 +11,7 @@ const ATTACK_ACTIVE := 0.12
 const ATTACK_RECOVER := 0.22
 const DODGE_TIME := 0.28
 const DODGE_IFRAMES := 0.2
-const DODGE_SPEED := 210.0
+const DODGE_SPEED := 420.0
 const DODGE_COST := 25.0
 const HEAVY_COST := 30.0
 
@@ -137,7 +137,7 @@ func _start_attack() -> void:
 	_state_timer = ATTACK_ACTIVE
 	velocity = Vector2.ZERO
 	if hitbox != null:
-		hitbox.position = facing * 10.0
+		hitbox.position = facing * 20.0
 	set_hitbox_active(true)
 
 

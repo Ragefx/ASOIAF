@@ -9,8 +9,12 @@ that resource directly as text - no Godot editor or headless export needed,
 so it works in this sandbox and reproduces identically on a real machine.
 
 Usage:
-    python3 tools/build_spriteframes.py torren
-    python3 tools/build_spriteframes.py nyra
+    python3 tools/build_spriteframes.py torren/v7 nyra/v3     # current sets (see below)
+    python3 tools/build_spriteframes.py torren nyra           # the old 16x24 chibi set
+
+A versioned folder (torren/v7, nyra/v3) holds strips made by tools/fit_animation.py,
+named plainly (idle.png, walk_down.png, ...), and gets <character>.tres inside it.
+A bare character folder is the original layout: *_prepared.png strips, <char>.tres beside them.
 
 Reads assets/sprites/<char>/<anim>_prepared.png for each animation in ANIMATIONS
 below and writes assets/sprites/<char>/<char>.tres. Animation names match what
@@ -44,7 +48,9 @@ ANIMATIONS = [
 
 def build(char: str) -> pathlib.Path:
     char_dir = ROOT / "assets" / "sprites" / char
-    out_path = char_dir / f"{char}.tres"
+    name = char.split("/")[0]
+    out_path = char_dir / f"{name}.tres"
+    versioned = "/" in char
 
     ext_lines = []
     atlas_blocks = []
@@ -53,6 +59,8 @@ def build(char: str) -> pathlib.Path:
     load_steps = 1  # the [resource] block itself counts as one step
 
     for anim_name, stem, loop in ANIMATIONS:
+        if versioned:
+            stem = anim_name
         png_path = char_dir / f"{stem}.png"
         if not png_path.exists():
             print(f"warning: {png_path} missing, skipping animation '{anim_name}'", file=sys.stderr)

@@ -360,7 +360,23 @@ Spend for this batch after walk down: 232 credits (4,842 → 4,610).
 Walking left is a mirror, so Torren's sword swaps hips when he faces left. Standard for the genre;
 generate a real walk_left (~36 cr) if it ever bothers anyone.
 
-## Credits
+## Ground tileset — 32px grass / packed earth, 2026-09-24
+
+`generate_tileset`, pixel, top-down, `15-piece`, `tile_size: 32`, `edges: two_surfaces`,
+`style_asset_id` = an upload of the reference screenshot's grass and path
+(`cc4a212d-911a-4d0b-8879-06c5646bad7c`), 2 variations per call, 24 cr per call.
+
+- First call (`5be2c091…`, `02afa816…`): the "other surface" came out as a dark void / holes —
+  unusable as a yard floor.
+- Second call, prompt naming both surfaces and "no dark void": **`27c1a0ed-6797-4795-855e-773e8aab450d`
+  is the one in use** → `assets/tilesets/grass_dirt_32.png`; `fddef81c…` had transparent holes.
+
+It is a corner-matching autotile; `tools/build_ground.py` bakes a level's ground from a vertex
+layout into one PNG (`assets/tilesets/<level>_ground.png`), and `assets/tilesets/grass_dirt_32.tres`
+is the matching TileSet (terrain "Grass", match-corners) for painting in the editor later.
+The old 16px `grass_dirt.png` is no longer referenced.
+
+
 
 | | |
 |---|---|

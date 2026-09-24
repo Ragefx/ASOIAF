@@ -69,9 +69,12 @@ just shows less around him, with no black border:
 on their 2560×1440 screen. `screen_scale_agreed.webp` is the same screen with a red box marking
 what a 1080p player would see instead (for other players only; it changes nothing on 1440p).
 
-In Godot this is settings only: base viewport **960×540** (the smallest area anyone sees),
-`window/stretch/aspect="expand"` so bigger screens reveal more world instead of adding borders,
-and the existing `scale_mode="integer"`.
+In Godot: base viewport **960×540** (the smallest area anyone sees), `aspect="expand"`,
+`scale_mode="integer"` — **plus** `_fit_view()` in `scripts/ui/main.gd`. Settings alone do *not*
+do it: Godot 4.3's expand + integer scaling keeps the view at 960×540 and letterboxes the
+leftover (a 1440p screen got a 1920×1080 picture with black borders). `_fit_view()` picks the
+largest whole scale at which 960×540 fits and sizes the view to fill the window at that scale.
+Verified in the running game at 1920×1080, 2560×1440 and 3840×2160.
 
 **Level-design rule that follows:** bigger screens see further, so nothing a player must notice
 should sit more than ~15 tiles sideways or ~8 tiles up/down from where the camera centres —
@@ -80,9 +83,8 @@ that is all a 1080p screen shows.
 **A bigger view means more world to build per screen** — dress each area for 40 × 22 tiles
 visible (the user's screen), but keep what matters inside 30 × 17 (1080p).
 
-**Not applied to the game yet.** `project.godot` is still 384×216 and the level still uses 16px
-tiles and the old chibi sprites. Switching the viewport alone would shrink the current level into
-a corner, so the switch happens together with the first 32px tileset and the v7 animations.
+**Applied 2026-09-24.** The game runs this way now — see
+`docs/screenshots/2026-09-24_training_yard_1440p.png`, a real capture of the game at 2560×1440.
 
 **How it was made, so the next sprite can be made the same way:**
 
@@ -151,9 +153,10 @@ Every sprite and tile, no exceptions:
 | | |
 |---|---|
 | Tile | **32 × 32** as of 2026-09-24 (was 16 × 16; see §0) |
-| Character frame | **16 × 24** (a 16px footprint, headroom above) |
-| Large actors | 32 × 32 on a 16px footprint — mounted knights, the Hound, direwolves |
-| Sprite origin | The **feet**. `AnimatedSprite2D` offset `(0, -8)`. |
+| Character | **48px tall** in a **56 × 56** frame (`tools/fit_animation.py`); was 16 × 24 |
+| Large actors | Scale with the rest: roughly 96 × 96 for mounted knights, the Hound, direwolves |
+| Sprite origin | The **feet** (ground shadow). `AnimatedSprite2D` offset `(0, -26)`; was `(0, -8)`. |
+| Gameplay numbers | Everything that was in world pixels doubled with the art: walk 120, run 190, dodge 420, collision/hurt/talk shapes, hitbox reach, knockback, NPC wander radius, level positions and walls |
 
 ## 4. Palette
 
