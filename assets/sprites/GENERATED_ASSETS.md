@@ -307,6 +307,24 @@ The older `torren_base.png` / animations in `torren/` are the **rejected** flat-
 still what the game has wired in. They stay until v7's animations exist; nothing references the
 v7 files yet.
 
+### Torren v7 — walk down, approved 2026-09-24
+
+`animate_game_art` on the approved v7 base (`c5dacea6…`), default model, 8 frames,
+`output_format: spritesheet`, `colors: 64`, `auto_enhance_prompt: false`, 20 credits. Prompt asked
+for a looping walk toward the camera, on the spot, same size and shadow. Approved first try.
+
+| SpriteCook label | Asset ID | Goes to |
+|---|---|---|
+| `USE THIS 04 v7 - Torren WALK DOWN (approved …)` | `9d868b94-831b-49e3-8b23-ce6ca74ce119` | `torren/walk_down_v7.png` (untouched, 8 × 86×86) and `torren/walk_down_v7_65.png` (**8 × 56×56, the one to use**) |
+
+Download the `spritesheet_url` (the `…/raw` link), not the preview. Torren stands 74px in the
+86px frames — the same as the base — so the same 65% applies:
+`tools/prepare_sprite.py walk_down_v7.png --frames 8 --height 56 --filter majority --colors 256`,
+which leaves him exactly 48px tall in every frame, matching `torren_base_v7_65.png`.
+
+He faces three-quarters toward screen-right rather than straight at the camera, because the base
+sprite stands that way. The user saw this and approved it as is.
+
 ## Nyra v3 — the approved "reference look" base, 2026-09-24
 
 Made as an **edit of the approved Torren v7** (`c5dacea6…`), changing only identity (no style
