@@ -1,0 +1,322 @@
+[gd_scene load_steps=26 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/winterfell_great_hall_ground.png" id="ground"]
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/NPC.tscn" id="npc"]
+[ext_resource type="Script" path="res://scripts/world/camera_limits.gd" id="camera"]
+[ext_resource type="Script" path="res://scripts/world/scene_trigger.gd" id="trigger"]
+[ext_resource type="Script" path="res://scripts/world/glance_zone.gd" id="glance"]
+[ext_resource type="PackedScene" path="res://scenes/life/serving_girl.tscn" id="i_serving_girl"]
+[ext_resource type="Script" path="res://scripts/world/trigger_zone.gd" id="zone"]
+[ext_resource type="Script" path="res://scripts/world/exit_zone.gd" id="exit"]
+[ext_resource type="PackedScene" path="res://scenes/props/barrel.tscn" id="prop_barrel"]
+[ext_resource type="PackedScene" path="res://scenes/props/feast_table.tscn" id="prop_feast_table"]
+[ext_resource type="PackedScene" path="res://scenes/props/hall_wall.tscn" id="prop_hall_wall"]
+[ext_resource type="PackedScene" path="res://scenes/props/high_table.tscn" id="prop_high_table"]
+[ext_resource type="PackedScene" path="res://scenes/life/candelabra.tscn" id="prop_life_candelabra"]
+[ext_resource type="PackedScene" path="res://scenes/life/diner_ale.tscn" id="prop_life_diner_ale"]
+[ext_resource type="PackedScene" path="res://scenes/life/diner_bread.tscn" id="prop_life_diner_bread"]
+[ext_resource type="PackedScene" path="res://scenes/life/diner_woman.tscn" id="prop_life_diner_woman"]
+[ext_resource type="PackedScene" path="res://scenes/life/hearth.tscn" id="prop_life_hearth"]
+[ext_resource type="PackedScene" path="res://scenes/life/hound_sleeping.tscn" id="prop_life_hound_sleeping"]
+
+[sub_resource type="RectangleShape2D" id="wall_h"]
+size = Vector2(1420, 24)
+
+[sub_resource type="RectangleShape2D" id="wall_v"]
+size = Vector2(24, 764)
+
+[sub_resource type="CircleShape2D" id="glance_shape"]
+radius = 64.0
+
+[sub_resource type="RectangleShape2D" id="shape_KitchenDoor"]
+size = Vector2(60, 90)
+
+[sub_resource type="RectangleShape2D" id="shape_FarEnd"]
+size = Vector2(220, 100)
+
+[sub_resource type="RectangleShape2D" id="shape_ExitSouth"]
+size = Vector2(96, 24)
+
+[node name="WinterfellGreatHall" type="Node2D"]
+
+[node name="Light" type="CanvasModulate" parent="."]
+color = Color(1, 0.86, 0.68, 1)
+
+[node name="Ground" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("ground")
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("camera")
+rect = Rect2(-640, -380, 1280, 750)
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="WallNorth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0.0, -214)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallNorth"]
+shape = SubResource("wall_h")
+
+[node name="WallWest" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-610, 68.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallWest"]
+shape = SubResource("wall_v")
+
+[node name="WallEast" type="StaticBody2D" parent="Bounds"]
+position = Vector2(610, 68.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallEast"]
+shape = SubResource("wall_v")
+
+[node name="WallSouthWest" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-758.0, 350)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallSouthWest"]
+shape = SubResource("wall_h")
+
+[node name="WallSouthEast" type="StaticBody2D" parent="Bounds"]
+position = Vector2(758.0, 350)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallSouthEast"]
+shape = SubResource("wall_h")
+
+[node name="Intro" type="Node" parent="."]
+script = ExtResource("trigger")
+scene_id = "s1_07_the_feast"
+node = "n1"
+requires_flags = Array[String](["!act1_entered_feast"])
+
+[node name="KitchenDoor" type="Area2D" parent="."]
+position = Vector2(560, 40)
+script = ExtResource("zone")
+scene_id = "s1_07_the_feast"
+node = "n42"
+requires_flags = Array[String](["act1_encounter_feast"])
+done_flag = "act1_followed_her"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KitchenDoor"]
+shape = SubResource("shape_KitchenDoor")
+
+[node name="FarEnd" type="Area2D" parent="."]
+position = Vector2(-440, 150)
+script = ExtResource("zone")
+scene_id = "s1_07_the_feast"
+node = "n50"
+requires_flags = Array[String]([])
+done_flag = "act1_feast_observed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FarEnd"]
+shape = SubResource("shape_FarEnd")
+
+[node name="ExitSouth" type="Area2D" parent="."]
+position = Vector2(0, 330)
+script = ExtResource("exit")
+collision_layer = 0
+collision_mask = 2
+target_level = "winterfell_yard_visit"
+target_spawn = "training_yard_gate"
+requires_flags = Array[String](["act1_entered_feast"])
+unbuilt_card = "To be continued."
+card_only = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSouth"]
+shape = SubResource("shape_ExitSouth")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="lower_bench" type="Marker2D" parent="Markers"]
+position = Vector2(-300, 290)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("player")]
+position = Vector2(-300, 290)
+
+[node name="Robert" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-40, -248)
+npc_id = "robert_baratheon"
+z_index = 1
+
+[node name="Eddard" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(20, -248)
+npc_id = "eddard_stark"
+z_index = 1
+
+[node name="Joffrey" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(70, -248)
+npc_id = "joffrey_baratheon"
+z_index = 1
+
+[node name="Jon" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-470, 110)
+npc_id = "jon_snow"
+
+[node name="Benjen" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-430, 116)
+npc_id = "benjen_stark"
+
+[node name="Tyrion" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(420, -60)
+npc_id = "tyrion_lannister"
+
+[node name="Hune" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-210, 300)
+npc_id = "hune"
+dialogue_rules = Array[Dictionary]([{"requires_flags": ["!act1_feast_hune"], "scene_id": "s1_07_the_feast", "node": "n10"}])
+
+[node name="Jory" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-120, 262)
+npc_id = "jory_cassel"
+dialogue_rules = Array[Dictionary]([{"requires_flags": ["!act1_feast_jory"], "scene_id": "s1_07_the_feast", "node": "n20"}])
+
+[node name="Wells" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(240, 252)
+npc_id = "wells"
+dialogue_rules = Array[Dictionary]([{"requires_flags": ["act1_met_wells", "!act1_feast_wells"], "scene_id": "s1_07_the_feast", "node": "n30"}])
+
+[node name="Cley" parent="Actors" instance=ExtResource("npc")]
+position = Vector2(-360, 250)
+npc_id = "cley"
+
+[node name="ServingGirl" parent="Actors" instance=ExtResource("i_serving_girl")]
+position = Vector2(-520, 40)
+points = PackedVector2Array(0, 0, 1040, 0)
+speed = 30.0
+pause_range = Vector2(2, 5)
+
+[node name="Glance" type="Area2D" parent="Actors/ServingGirl"]
+script = ExtResource("glance")
+scene_id = "s1_07_the_feast"
+node = "n40"
+done_flag = "act1_encounter_feast"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/ServingGirl/Glance"]
+shape = SubResource("glance_shape")
+
+[node name="prop_000_high_table" parent="Actors" instance=ExtResource("prop_high_table")]
+position = Vector2(0, -150)
+
+[node name="prop_001_life_hearth" parent="Actors" instance=ExtResource("prop_life_hearth")]
+position = Vector2(-420, -206)
+
+[node name="prop_002_hall_wall" parent="Actors" instance=ExtResource("prop_hall_wall")]
+position = Vector2(-620, -214)
+
+[node name="prop_003_hall_wall" parent="Actors" instance=ExtResource("prop_hall_wall")]
+position = Vector2(-372, -214)
+
+[node name="prop_004_hall_wall" parent="Actors" instance=ExtResource("prop_hall_wall")]
+position = Vector2(-124, -214)
+
+[node name="prop_005_hall_wall" parent="Actors" instance=ExtResource("prop_hall_wall")]
+position = Vector2(124, -214)
+
+[node name="prop_006_hall_wall" parent="Actors" instance=ExtResource("prop_hall_wall")]
+position = Vector2(372, -214)
+
+[node name="prop_007_hall_wall" parent="Actors" instance=ExtResource("prop_hall_wall")]
+position = Vector2(620, -214)
+
+[node name="prop_008_feast_table" parent="Actors" instance=ExtResource("prop_feast_table")]
+position = Vector2(-250, -40)
+
+[node name="prop_009_feast_table" parent="Actors" instance=ExtResource("prop_feast_table")]
+position = Vector2(-250, 110)
+
+[node name="prop_010_feast_table" parent="Actors" instance=ExtResource("prop_feast_table")]
+position = Vector2(-250, 250)
+
+[node name="prop_011_feast_table" parent="Actors" instance=ExtResource("prop_feast_table")]
+position = Vector2(250, -40)
+
+[node name="prop_012_feast_table" parent="Actors" instance=ExtResource("prop_feast_table")]
+position = Vector2(250, 110)
+
+[node name="prop_013_feast_table" parent="Actors" instance=ExtResource("prop_feast_table")]
+position = Vector2(250, 250)
+
+[node name="prop_014_life_diner_ale" parent="Actors" instance=ExtResource("prop_life_diner_ale")]
+position = Vector2(-294, -104)
+
+[node name="prop_015_life_diner_bread" parent="Actors" instance=ExtResource("prop_life_diner_bread")]
+position = Vector2(-250, -104)
+
+[node name="prop_016_life_diner_woman" parent="Actors" instance=ExtResource("prop_life_diner_woman")]
+position = Vector2(-206, -104)
+
+[node name="prop_017_life_diner_ale" parent="Actors" instance=ExtResource("prop_life_diner_ale")]
+position = Vector2(-294, 46)
+
+[node name="prop_018_life_diner_bread" parent="Actors" instance=ExtResource("prop_life_diner_bread")]
+position = Vector2(-250, 46)
+
+[node name="prop_019_life_diner_woman" parent="Actors" instance=ExtResource("prop_life_diner_woman")]
+position = Vector2(-206, 46)
+
+[node name="prop_020_life_diner_ale" parent="Actors" instance=ExtResource("prop_life_diner_ale")]
+position = Vector2(-250, 186)
+
+[node name="prop_021_life_diner_bread" parent="Actors" instance=ExtResource("prop_life_diner_bread")]
+position = Vector2(-206, 186)
+
+[node name="prop_022_life_diner_woman" parent="Actors" instance=ExtResource("prop_life_diner_woman")]
+position = Vector2(206, -104)
+
+[node name="prop_023_life_diner_ale" parent="Actors" instance=ExtResource("prop_life_diner_ale")]
+position = Vector2(250, -104)
+
+[node name="prop_024_life_diner_bread" parent="Actors" instance=ExtResource("prop_life_diner_bread")]
+position = Vector2(294, -104)
+
+[node name="prop_025_life_diner_woman" parent="Actors" instance=ExtResource("prop_life_diner_woman")]
+position = Vector2(206, 46)
+
+[node name="prop_026_life_diner_ale" parent="Actors" instance=ExtResource("prop_life_diner_ale")]
+position = Vector2(250, 46)
+
+[node name="prop_027_life_diner_bread" parent="Actors" instance=ExtResource("prop_life_diner_bread")]
+position = Vector2(294, 46)
+
+[node name="prop_028_life_diner_woman" parent="Actors" instance=ExtResource("prop_life_diner_woman")]
+position = Vector2(206, 186)
+
+[node name="prop_029_life_diner_ale" parent="Actors" instance=ExtResource("prop_life_diner_ale")]
+position = Vector2(250, 186)
+
+[node name="prop_030_life_diner_bread" parent="Actors" instance=ExtResource("prop_life_diner_bread")]
+position = Vector2(294, 186)
+
+[node name="prop_031_life_candelabra" parent="Actors" instance=ExtResource("prop_life_candelabra")]
+position = Vector2(-120, -180)
+
+[node name="prop_032_life_candelabra" parent="Actors" instance=ExtResource("prop_life_candelabra")]
+position = Vector2(120, -180)
+
+[node name="prop_033_life_candelabra" parent="Actors" instance=ExtResource("prop_life_candelabra")]
+position = Vector2(-560, 200)
+
+[node name="prop_034_life_candelabra" parent="Actors" instance=ExtResource("prop_life_candelabra")]
+position = Vector2(560, 200)
+
+[node name="prop_035_barrel" parent="Actors" instance=ExtResource("prop_barrel")]
+position = Vector2(540, 300)
+
+[node name="prop_036_barrel" parent="Actors" instance=ExtResource("prop_barrel")]
+position = Vector2(566, 316)
+
+[node name="prop_037_life_hound_sleeping" parent="Actors" instance=ExtResource("prop_life_hound_sleeping")]
+position = Vector2(-520, 300)

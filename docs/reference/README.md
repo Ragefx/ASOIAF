@@ -1,0 +1,24 @@
+# Style references
+
+**Reference only - not game assets.** These are screenshots/crops from another game, kept so every
+session generating art for this project can see (and upload to SpriteCook as a style reference)
+exactly what the target look is. Nothing in this folder ships in the game.
+
+| File | What |
+|---|---|
+| `target_screenshot.webp` | The target look, confirmed by the user 2026-09-24. 1280x720, native 320x180 at 4x. Ignore the explosion/VFX and the HUD - the user explicitly doesn't want those; this is about perspective, graphics, proportions and sprites. |
+| `target_character_crop.png` | The hero from that screenshot, cropped at screenshot scale (4x native). Upload this as the style reference when generating characters. |
+| `target_character_zoom.png` | Same crop at a further 4x, for looking at. |
+
+See `docs/STYLE_GUIDE.md` section 0 for the measured spec derived from these.
+
+**Already uploaded to SpriteCook** (2026-09-24) as asset `5bebfe17-2ca4-413d-9b9a-0600fced3541`
+("STYLE REF - target hero crop"). Pass that ID as `style_asset_ids` rather than re-uploading.
+
+`screen_target_1440p.webp` - **THE confirmed target screen** (2026-09-24): exactly what the game
+should look like full screen on the user's 2560x1440 monitor - game pixels at 2x, Torren 96px tall,
+~40x22 tiles of world visible. Scenery is mirrored filler; judge sizes only.
+
+`screen_scale_agreed.webp` - the same scale (2026-09-24): the user's 2560x1440
+screen with game pixels at 2x, Torren at his approved size, and a red box showing exactly what a
+1920x1080 player sees. Scenery is the reference world mirrored as filler, for scale only.

@@ -9,6 +9,10 @@ const SAVE_DIR := "user://saves"
 const VERSION := 1
 const AUTOSAVE_SLOT := 0
 
+## Off while walking a world site outside the story (main.gd's --world), so a
+## preview never overwrites the player's real autosave.
+var autosave_enabled := true
+
 
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
@@ -43,7 +47,8 @@ func save_game(slot: int) -> bool:
 
 
 func autosave() -> void:
-	save_game(AUTOSAVE_SLOT)
+	if autosave_enabled:
+		save_game(AUTOSAVE_SLOT)
 
 
 func load_game(slot: int) -> bool:

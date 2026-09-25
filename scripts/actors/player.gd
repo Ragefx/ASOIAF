@@ -11,7 +11,7 @@ const ATTACK_ACTIVE := 0.12
 const ATTACK_RECOVER := 0.22
 const DODGE_TIME := 0.28
 const DODGE_IFRAMES := 0.2
-const DODGE_SPEED := 210.0
+const DODGE_SPEED := 420.0
 const DODGE_COST := 25.0
 const HEAVY_COST := 30.0
 
@@ -24,6 +24,31 @@ var _chain_step: int = 0
 var _chain_timer: float = 0.0
 var _state_timer: float = 0.0
 var _input_locked: bool = false
+
+
+## There is one Player node, reused across acts; only its look and combat
+## capability change with GameManager.current_pov. See _apply_protagonist().
+func _ready() -> void:
+	super._ready()
+	GameManager.pov_changed.connect(_apply_protagonist)
+	if GameManager.current_pov != "":
+		_apply_protagonist(GameManager.current_pov)
+
+
+## Data-driven from data/npcs/protagonists.json's "sprite_frames" and "combat"
+## fields, so a new protagonist - or a re-rolled sprite sheet - needs no script
+## change, only a data edit. Missing sprite_frames leaves whatever the sprite
+## already had rather than clearing it, since a blank frame is worse than a
+## stale one and _update_animation() already no-ops when sprite_frames is null.
+func _apply_protagonist(pov: String) -> void:
+	var record: Dictionary = GameManager.protagonists.get(pov, {})
+	if record.is_empty():
+		push_warning("Player: no protagonists.json entry for pov '%s'" % pov)
+		return
+	var frames_path := String(record.get("sprite_frames", ""))
+	if frames_path != "" and ResourceLoader.exists(frames_path):
+		sprite.sprite_frames = load(frames_path)
+	can_fight = bool(record.get("combat", true))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -112,8 +137,13 @@ func _start_attack() -> void:
 	_state_timer = ATTACK_ACTIVE
 	velocity = Vector2.ZERO
 	if hitbox != null:
-		hitbox.position = facing * 10.0
+		hitbox.position = facing * 20.0
 	set_hitbox_active(true)
+	# Every step of the chain uses the same directional swing, so restart it -
+	# otherwise the second swing of a chain plays nothing new.
+	if sprite != null and sprite.sprite_frames != null:
+		_update_animation()
+		sprite.set_frame_and_progress(0, 0.0)
 
 
 func _start_dodge() -> void:

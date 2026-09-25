@@ -1,0 +1,1508 @@
+[gd_scene load_steps=73 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="player"]
+[ext_resource type="Script" path="res://scripts/world/world_ground.gd" id="ground_script"]
+[ext_resource type="Texture2D" path="res://assets/world/winterfell_ground.png" id="ground_map"]
+[ext_resource type="Script" path="res://scripts/world/camera_limits.gd" id="camera"]
+[ext_resource type="Shader" path="res://shaders/moat_water.gdshader" id="water"]
+[ext_resource type="Script" path="res://scripts/world/blockout.gd" id="blockout"]
+[ext_resource type="PackedScene" path="res://scenes/props/stable.tscn" id="s_props_stable"]
+[ext_resource type="PackedScene" path="res://scenes/props/keep_gate.tscn" id="s_props_keep_gate"]
+[ext_resource type="PackedScene" path="res://scenes/props/crypt_stair.tscn" id="s_props_crypt_stair"]
+[ext_resource type="PackedScene" path="res://scenes/props/heart_tree.tscn" id="s_props_heart_tree"]
+[ext_resource type="PackedScene" path="res://scenes/props/black_pool.tscn" id="s_props_black_pool"]
+[ext_resource type="PackedScene" path="res://scenes/props/dummy.tscn" id="s_props_dummy"]
+[ext_resource type="PackedScene" path="res://scenes/props/weapon_rack.tscn" id="s_props_weapon_rack"]
+[ext_resource type="PackedScene" path="res://scenes/props/archery_target.tscn" id="s_props_archery_target"]
+[ext_resource type="PackedScene" path="res://scenes/life/guard_spar_l.tscn" id="s_life_guard_spar_l"]
+[ext_resource type="PackedScene" path="res://scenes/life/guard_spar_r.tscn" id="s_life_guard_spar_r"]
+[ext_resource type="PackedScene" path="res://scenes/props/barrel.tscn" id="s_props_barrel"]
+[ext_resource type="PackedScene" path="res://scenes/props/well.tscn" id="s_props_well"]
+[ext_resource type="PackedScene" path="res://scenes/props/wagon.tscn" id="s_props_wagon"]
+[ext_resource type="PackedScene" path="res://scenes/props/hay_cart.tscn" id="s_props_hay_cart"]
+[ext_resource type="PackedScene" path="res://scenes/life/horse.tscn" id="s_life_horse"]
+[ext_resource type="PackedScene" path="res://scenes/life/stable_boy.tscn" id="s_life_stable_boy"]
+[ext_resource type="PackedScene" path="res://scenes/props/hay_bale.tscn" id="s_props_hay_bale"]
+[ext_resource type="PackedScene" path="res://scenes/life/guard_idle.tscn" id="s_life_guard_idle"]
+[ext_resource type="PackedScene" path="res://scenes/life/brazier.tscn" id="s_life_brazier"]
+[ext_resource type="PackedScene" path="res://scenes/life/banner_stark.tscn" id="s_life_banner_stark"]
+[ext_resource type="PackedScene" path="res://scenes/life/forge.tscn" id="s_life_forge"]
+[ext_resource type="PackedScene" path="res://scenes/life/blacksmith.tscn" id="s_life_blacksmith"]
+[ext_resource type="PackedScene" path="res://scenes/life/laundry_line.tscn" id="s_life_laundry_line"]
+[ext_resource type="PackedScene" path="res://scenes/life/washerwoman.tscn" id="s_life_washerwoman"]
+[ext_resource type="PackedScene" path="res://scenes/life/hound_sleeping.tscn" id="s_life_hound_sleeping"]
+[ext_resource type="PackedScene" path="res://scenes/life/hen.tscn" id="s_life_hen"]
+[ext_resource type="PackedScene" path="res://scenes/props/trunks.tscn" id="s_props_trunks"]
+[ext_resource type="PackedScene" path="res://scenes/life/cat.tscn" id="s_life_cat"]
+[ext_resource type="PackedScene" path="res://scenes/props/boulder.tscn" id="s_props_boulder"]
+[ext_resource type="PackedScene" path="res://scenes/props/rock_pile.tscn" id="s_props_rock_pile"]
+[ext_resource type="PackedScene" path="res://scenes/life/crow.tscn" id="s_life_crow"]
+[ext_resource type="PackedScene" path="res://scenes/props/tree_pine.tscn" id="s_props_tree_pine"]
+[ext_resource type="PackedScene" path="res://scenes/props/tree_oak.tscn" id="s_props_tree_oak"]
+[ext_resource type="PackedScene" path="res://scenes/props/bush.tscn" id="s_props_bush"]
+[ext_resource type="PackedScene" path="res://scenes/props/stump.tscn" id="s_props_stump"]
+[ext_resource type="PackedScene" path="res://scenes/props/flowers.tscn" id="s_props_flowers"]
+[ext_resource type="Script" path="res://scripts/life/drifting_layer.gd" id="drift"]
+[ext_resource type="Texture2D" path="res://assets/fx/cloud_shadows.png" id="t_clouds"]
+[ext_resource type="Script" path="res://scripts/life/bird_flyover.gd" id="birds"]
+[ext_resource type="SpriteFrames" path="res://assets/life/bird.tres" id="bird"]
+
+[sub_resource type="ShaderMaterial" id="water_mat"]
+shader = ExtResource("water")
+
+[sub_resource type="RectangleShape2D" id="rect_4400x394"]
+size = Vector2(4400, 394)
+
+[sub_resource type="RectangleShape2D" id="rect_394x3506"]
+size = Vector2(394, 3506)
+
+[sub_resource type="RectangleShape2D" id="rect_2130x394"]
+size = Vector2(2130, 394)
+
+[sub_resource type="RectangleShape2D" id="rect_1736x394"]
+size = Vector2(1736, 394)
+
+[sub_resource type="RectangleShape2D" id="rect_394x1496"]
+size = Vector2(394, 1496)
+
+[sub_resource type="RectangleShape2D" id="rect_4880x40"]
+size = Vector2(4880, 40)
+
+[sub_resource type="RectangleShape2D" id="rect_40x4300"]
+size = Vector2(40, 4300)
+
+[sub_resource type="RectangleShape2D" id="rect_140x208"]
+size = Vector2(140.0, 208.0)
+
+[sub_resource type="RectangleShape2D" id="rect_120x136"]
+size = Vector2(120.0, 136.0)
+
+[sub_resource type="RectangleShape2D" id="rect_208x120"]
+size = Vector2(208.0, 120.0)
+
+[sub_resource type="RectangleShape2D" id="rect_600x460"]
+size = Vector2(600.0, 460.0)
+
+[sub_resource type="RectangleShape2D" id="rect_153x107"]
+size = Vector2(153.0, 107.1)
+
+[sub_resource type="RectangleShape2D" id="rect_320x240"]
+size = Vector2(320.0, 240.0)
+
+[sub_resource type="RectangleShape2D" id="rect_760x300"]
+size = Vector2(760.0, 300.0)
+
+[sub_resource type="RectangleShape2D" id="rect_360x240"]
+size = Vector2(360.0, 240.0)
+
+[sub_resource type="RectangleShape2D" id="rect_420x260"]
+size = Vector2(420.0, 260.0)
+
+[sub_resource type="RectangleShape2D" id="rect_136x95"]
+size = Vector2(136.0, 95.2)
+
+[sub_resource type="RectangleShape2D" id="rect_323x226"]
+size = Vector2(323.0, 226.1)
+
+[sub_resource type="RectangleShape2D" id="rect_204x142"]
+size = Vector2(204.0, 142.79999999999998)
+
+[sub_resource type="RectangleShape2D" id="rect_560x320"]
+size = Vector2(560.0, 320.0)
+
+[sub_resource type="RectangleShape2D" id="rect_260x200"]
+size = Vector2(260.0, 200.0)
+
+[sub_resource type="RectangleShape2D" id="rect_280x280"]
+size = Vector2(280.0, 280.0)
+
+[sub_resource type="RectangleShape2D" id="rect_460x240"]
+size = Vector2(460.0, 240.0)
+
+[sub_resource type="RectangleShape2D" id="rect_620x300"]
+size = Vector2(620.0, 300.0)
+
+[sub_resource type="RectangleShape2D" id="rect_700x240"]
+size = Vector2(700.0, 240.0)
+
+[node name="Winterfell" type="Node2D"]
+
+[node name="Light" type="CanvasModulate" parent="."]
+color = Color(1, 0.98, 0.95, 1)
+
+[node name="Ground" type="Node2D" parent="."]
+script = ExtResource("ground_script")
+material_map = ExtResource("ground_map")
+layers = Array[Dictionary]([{"tileset": "res://assets/tilesets/world/grass_dirt_32.tres", "upper": [0]}, {"tileset": "res://assets/tilesets/world/cobble_earth_32.tres", "upper": [2], "only_near": [2]}])
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("camera")
+rect = Rect2(0, 0, 4800, 4300)
+
+[node name="Moat" type="Node2D" parent="."]
+
+[node name="Water0" type="Polygon2D" parent="Moat"]
+material = SubResource("water_mat")
+polygon = PackedVector2Array(296, 296, 4504, 296, 4504, 466, 296, 466)
+
+[node name="Water1" type="Polygon2D" parent="Moat"]
+material = SubResource("water_mat")
+polygon = PackedVector2Array(296, 3834, 4504, 3834, 4504, 4004, 296, 4004)
+
+[node name="Water2" type="Polygon2D" parent="Moat"]
+material = SubResource("water_mat")
+polygon = PackedVector2Array(296, 466, 466, 466, 466, 3834, 296, 3834)
+
+[node name="Water3" type="Polygon2D" parent="Moat"]
+material = SubResource("water_mat")
+polygon = PackedVector2Array(4334, 466, 4504, 466, 4504, 3834, 4334, 3834)
+
+[node name="Bridge0" type="Polygon2D" parent="Moat"]
+color = Color(0.42, 0.3, 0.19, 1)
+polygon = PackedVector2Array(2330, 3834, 2470, 3834, 2470, 4004, 2330, 4004)
+
+[node name="Bridge1" type="Polygon2D" parent="Moat"]
+color = Color(0.42, 0.3, 0.19, 1)
+polygon = PackedVector2Array(296, 2090, 466, 2090, 466, 2210, 296, 2210)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Solid_001" type="StaticBody2D" parent="Walls"]
+position = Vector2(2400.0, 397.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Solid_001"]
+shape = SubResource("rect_4400x394")
+
+[node name="Solid_002" type="StaticBody2D" parent="Walls"]
+position = Vector2(4403.0, 2347.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Solid_002"]
+shape = SubResource("rect_394x3506")
+
+[node name="Solid_003" type="StaticBody2D" parent="Walls"]
+position = Vector2(1265.0, 3903.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Solid_003"]
+shape = SubResource("rect_2130x394")
+
+[node name="Solid_004" type="StaticBody2D" parent="Walls"]
+position = Vector2(3338.0, 3903.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Solid_004"]
+shape = SubResource("rect_1736x394")
+
+[node name="Solid_005" type="StaticBody2D" parent="Walls"]
+position = Vector2(397.0, 1342.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Solid_005"]
+shape = SubResource("rect_394x1496")
+
+[node name="Solid_006" type="StaticBody2D" parent="Walls"]
+position = Vector2(397.0, 2958.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Solid_006"]
+shape = SubResource("rect_394x1496")
+
+[node name="Edge_007" type="StaticBody2D" parent="Walls"]
+position = Vector2(2400.0, -20.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Edge_007"]
+shape = SubResource("rect_4880x40")
+
+[node name="Edge_008" type="StaticBody2D" parent="Walls"]
+position = Vector2(2400.0, 4320.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Edge_008"]
+shape = SubResource("rect_4880x40")
+
+[node name="Edge_009" type="StaticBody2D" parent="Walls"]
+position = Vector2(-20.0, 2150.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Edge_009"]
+shape = SubResource("rect_40x4300")
+
+[node name="Edge_010" type="StaticBody2D" parent="Walls"]
+position = Vector2(4820.0, 2150.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Edge_010"]
+shape = SubResource("rect_40x4300")
+
+[node name="HotPool" type="Polygon2D" parent="Moat"]
+material = SubResource("water_mat")
+polygon = PackedVector2Array(944, 1500, 938, 1518, 919, 1534, 892, 1544, 860, 1548, 828, 1544, 801, 1534, 782, 1518, 776, 1500, 782, 1482, 801, 1466, 828, 1456, 860, 1452, 892, 1456, 919, 1466, 938, 1482)
+
+[node name="CloudShadows" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.7)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("t_clouds")
+region_enabled = true
+region_rect = Rect2(0, 0, 5600, 5100)
+position = Vector2(2400.0, 2150.0)
+script = ExtResource("drift")
+drift = Vector2(-9, -3)
+
+[node name="BirdFlyover" type="Node2D" parent="."]
+script = ExtResource("birds")
+bird_frames = ExtResource("bird")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="main_gate" type="Marker2D" parent="Markers"]
+position = Vector2(2400, 3560)
+
+[node name="outside_gate" type="Marker2D" parent="Markers"]
+position = Vector2(2400, 4240)
+
+[node name="training_yard" type="Marker2D" parent="Markers"]
+position = Vector2(2390.0, 2180)
+
+[node name="godswood" type="Marker2D" parent="Markers"]
+position = Vector2(1130, 1320)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("player")]
+position = Vector2(2400, 3560)
+
+[node name="OuterWall_011" type="Node2D" parent="Actors"]
+position = Vector2(2400.0, 296)
+script = ExtResource("blockout")
+footprint = Vector2(4400, 96)
+height = 150.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = true
+
+[node name="OuterWall_012" type="Node2D" parent="Actors"]
+position = Vector2(1265.0, 4100)
+script = ExtResource("blockout")
+footprint = Vector2(2130, 96)
+height = 150.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = true
+
+[node name="OuterWall_013" type="Node2D" parent="Actors"]
+position = Vector2(3535.0, 4100)
+script = ExtResource("blockout")
+footprint = Vector2(2130, 96)
+height = 150.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = true
+
+[node name="OuterWall_014" type="Node2D" parent="Actors"]
+position = Vector2(4552.0, 4004)
+script = ExtResource("blockout")
+footprint = Vector2(96, 3708)
+height = 150.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = true
+
+[node name="OuterWall_015" type="Node2D" parent="Actors"]
+position = Vector2(248.0, 2090)
+script = ExtResource("blockout")
+footprint = Vector2(96, 1794)
+height = 150.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = true
+
+[node name="OuterWall_016" type="Node2D" parent="Actors"]
+position = Vector2(248.0, 4004)
+script = ExtResource("blockout")
+footprint = Vector2(96, 1794)
+height = 150.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = true
+
+[node name="InnerWall_017" type="Node2D" parent="Actors"]
+position = Vector2(2400.0, 594)
+script = ExtResource("blockout")
+footprint = Vector2(3868, 128)
+height = 190.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="InnerWall_018" type="Node2D" parent="Actors"]
+position = Vector2(1398.0, 3834)
+script = ExtResource("blockout")
+footprint = Vector2(1864, 128)
+height = 190.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="InnerWall_019" type="Node2D" parent="Actors"]
+position = Vector2(3402.0, 3834)
+script = ExtResource("blockout")
+footprint = Vector2(1864, 128)
+height = 190.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="InnerWall_020" type="Node2D" parent="Actors"]
+position = Vector2(4270.0, 3706)
+script = ExtResource("blockout")
+footprint = Vector2(128, 3112)
+height = 190.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="InnerWall_021" type="Node2D" parent="Actors"]
+position = Vector2(530.0, 2090)
+script = ExtResource("blockout")
+footprint = Vector2(128, 1496)
+height = 190.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="InnerWall_022" type="Node2D" parent="Actors"]
+position = Vector2(530.0, 3706)
+script = ExtResource("blockout")
+footprint = Vector2(128, 1496)
+height = 190.0
+round = false
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_023" type="Node2D" parent="Actors"]
+position = Vector2(466.0, 543.0)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_024" type="Node2D" parent="Actors"]
+position = Vector2(4334.0, 543.0)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_025" type="Node2D" parent="Actors"]
+position = Vector2(466.0, 3911.0)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_026" type="Node2D" parent="Actors"]
+position = Vector2(4334.0, 3911.0)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_027" type="Node2D" parent="Actors"]
+position = Vector2(1742.44, 543.0)
+script = ExtResource("blockout")
+footprint = Vector2(220.0, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_028" type="Node2D" parent="Actors"]
+position = Vector2(3018.88, 543.0)
+script = ExtResource("blockout")
+footprint = Vector2(220.0, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_029" type="Node2D" parent="Actors"]
+position = Vector2(4334.0, 1553.4)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_030" type="Node2D" parent="Actors"]
+position = Vector2(4334.0, 2900.6)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="WallTower_031" type="Node2D" parent="Actors"]
+position = Vector2(466.0, 1385.0)
+script = ExtResource("blockout")
+footprint = Vector2(220, 154.0)
+height = 250.0
+round = true
+roof_color = Color(0.46, 0.45, 0.43, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="MainGate_032" type="Node2D" parent="Actors"]
+position = Vector2(2260.0, 3874)
+script = ExtResource("blockout")
+footprint = Vector2(140, 208)
+height = 280.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/MainGate_032"]
+position = Vector2(0, -104.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/MainGate_032/Body"]
+shape = SubResource("rect_140x208")
+
+[node name="OuterGate_033" type="Node2D" parent="Actors"]
+position = Vector2(2260.0, 4120)
+script = ExtResource("blockout")
+footprint = Vector2(120, 136)
+height = 190.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/OuterGate_033"]
+position = Vector2(0, -68.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/OuterGate_033/Body"]
+shape = SubResource("rect_120x136")
+
+[node name="MainGate_034" type="Node2D" parent="Actors"]
+position = Vector2(2540.0, 3874)
+script = ExtResource("blockout")
+footprint = Vector2(140, 208)
+height = 280.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/MainGate_034"]
+position = Vector2(0, -104.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/MainGate_034/Body"]
+shape = SubResource("rect_140x208")
+
+[node name="OuterGate_035" type="Node2D" parent="Actors"]
+position = Vector2(2540.0, 4120)
+script = ExtResource("blockout")
+footprint = Vector2(120, 136)
+height = 190.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/OuterGate_035"]
+position = Vector2(0, -68.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/OuterGate_035/Body"]
+shape = SubResource("rect_120x136")
+
+[node name="HuntersGate_036" type="Node2D" parent="Actors"]
+position = Vector2(530.0, 2090)
+script = ExtResource("blockout")
+footprint = Vector2(208, 120)
+height = 250.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/HuntersGate_036"]
+position = Vector2(0, -60.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/HuntersGate_036/Body"]
+shape = SubResource("rect_208x120")
+
+[node name="HuntersGate_037" type="Node2D" parent="Actors"]
+position = Vector2(530.0, 2330)
+script = ExtResource("blockout")
+footprint = Vector2(208, 120)
+height = 250.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = false
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/HuntersGate_037"]
+position = Vector2(0, -60.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/HuntersGate_037/Body"]
+shape = SubResource("rect_208x120")
+
+[node name="GreatKeep_038" type="Node2D" parent="Actors"]
+position = Vector2(2450.0, 1120)
+script = ExtResource("blockout")
+footprint = Vector2(600, 460)
+height = 300.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/GreatKeep_038"]
+position = Vector2(0, -230.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/GreatKeep_038/Body"]
+shape = SubResource("rect_600x460")
+
+[node name="LibraryTower_039" type="Node2D" parent="Actors"]
+position = Vector2(2920.0, 863.0)
+script = ExtResource("blockout")
+footprint = Vector2(180, 126.0)
+height = 330.0
+round = true
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/LibraryTower_039"]
+position = Vector2(0, -63.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/LibraryTower_039/Body"]
+shape = SubResource("rect_153x107")
+
+[node name="MaestersTurret_040" type="Node2D" parent="Actors"]
+position = Vector2(1960.0, 803.0)
+script = ExtResource("blockout")
+footprint = Vector2(180, 126.0)
+height = 360.0
+round = true
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/MaestersTurret_040"]
+position = Vector2(0, -63.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/MaestersTurret_040/Body"]
+shape = SubResource("rect_153x107")
+
+[node name="Armory_041" type="Node2D" parent="Actors"]
+position = Vector2(1920.0, 1280)
+script = ExtResource("blockout")
+footprint = Vector2(320, 240)
+height = 150.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Armory_041"]
+position = Vector2(0, -120.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Armory_041/Body"]
+shape = SubResource("rect_320x240")
+
+[node name="GreatHall_042" type="Node2D" parent="Actors"]
+position = Vector2(2530.0, 1560)
+script = ExtResource("blockout")
+footprint = Vector2(760, 300)
+height = 170.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/GreatHall_042"]
+position = Vector2(0, -150.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/GreatHall_042/Body"]
+shape = SubResource("rect_760x300")
+
+[node name="Kitchens_043" type="Node2D" parent="Actors"]
+position = Vector2(3140.0, 1540)
+script = ExtResource("blockout")
+footprint = Vector2(360, 240)
+height = 120.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Kitchens_043"]
+position = Vector2(0, -120.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Kitchens_043/Body"]
+shape = SubResource("rect_360x240")
+
+[node name="GuardsHall_044" type="Node2D" parent="Actors"]
+position = Vector2(3250.0, 1940)
+script = ExtResource("blockout")
+footprint = Vector2(420, 260)
+height = 140.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/GuardsHall_044"]
+position = Vector2(0, -130.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/GuardsHall_044/Body"]
+shape = SubResource("rect_420x260")
+
+[node name="BellTower_045" type="Node2D" parent="Actors"]
+position = Vector2(3620.0, 1816.0)
+script = ExtResource("blockout")
+footprint = Vector2(160, 112.0)
+height = 300.0
+round = true
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/BellTower_045"]
+position = Vector2(0, -56.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/BellTower_045/Body"]
+shape = SubResource("rect_136x95")
+
+[node name="FirstKeep_046" type="Node2D" parent="Actors"]
+position = Vector2(3620.0, 1033.0)
+script = ExtResource("blockout")
+footprint = Vector2(380, 266.0)
+height = 260.0
+round = true
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = true
+battlements = true
+
+[node name="Body" type="StaticBody2D" parent="Actors/FirstKeep_046"]
+position = Vector2(0, -133.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/FirstKeep_046/Body"]
+shape = SubResource("rect_323x226")
+
+[node name="BrokenTower_047" type="Node2D" parent="Actors"]
+position = Vector2(4040.0, 784.0)
+script = ExtResource("blockout")
+footprint = Vector2(240, 168.0)
+height = 420.0
+round = true
+roof_color = Color(0.2, 0.18, 0.17, 1)
+wall_color = Color(0.44, 0.44, 0.42, 1)
+door = false
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/BrokenTower_047"]
+position = Vector2(0, -84.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/BrokenTower_047/Body"]
+shape = SubResource("rect_204x142")
+
+[node name="GuestHouse_048" type="Node2D" parent="Actors"]
+position = Vector2(3640.0, 2640)
+script = ExtResource("blockout")
+footprint = Vector2(560, 320)
+height = 150.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/GuestHouse_048"]
+position = Vector2(0, -160.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/GuestHouse_048/Body"]
+shape = SubResource("rect_560x320")
+
+[node name="Forge_049" type="Node2D" parent="Actors"]
+position = Vector2(1470.0, 2720)
+script = ExtResource("blockout")
+footprint = Vector2(260, 200)
+height = 100.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Forge_049"]
+position = Vector2(0, -100.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Forge_049/Body"]
+shape = SubResource("rect_260x200")
+
+[node name="Sept_050" type="Node2D" parent="Actors"]
+position = Vector2(1480.0, 3280)
+script = ExtResource("blockout")
+footprint = Vector2(280, 280)
+height = 150.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Sept_050"]
+position = Vector2(0, -140.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Sept_050/Body"]
+shape = SubResource("rect_280x280")
+
+[node name="Kennels_051" type="Node2D" parent="Actors"]
+position = Vector2(870.0, 2140)
+script = ExtResource("blockout")
+footprint = Vector2(460, 240)
+height = 80.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Kennels_051"]
+position = Vector2(0, -120.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Kennels_051/Body"]
+shape = SubResource("rect_460x240")
+
+[node name="Granary_052" type="Node2D" parent="Actors"]
+position = Vector2(3670.0, 3600)
+script = ExtResource("blockout")
+footprint = Vector2(620, 300)
+height = 140.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Granary_052"]
+position = Vector2(0, -150.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Granary_052/Body"]
+shape = SubResource("rect_620x300")
+
+[node name="Barracks_053" type="Node2D" parent="Actors"]
+position = Vector2(1030.0, 3620)
+script = ExtResource("blockout")
+footprint = Vector2(700, 240)
+height = 120.0
+round = false
+roof_color = Color(0.33, 0.35, 0.40, 1)
+wall_color = Color(0.52, 0.51, 0.49, 1)
+door = true
+battlements = false
+
+[node name="Body" type="StaticBody2D" parent="Actors/Barracks_053"]
+position = Vector2(0, -120.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/Barracks_053/Body"]
+shape = SubResource("rect_700x240")
+
+[node name="CoveredBridge_054" type="Node2D" parent="Actors"]
+position = Vector2(2160.0, 1150)
+script = ExtResource("blockout")
+footprint = Vector2(160, 40)
+height = 30.0
+round = false
+roof_color = Color(0.45, 0.34, 0.23, 1)
+wall_color = Color(0.40, 0.30, 0.2, 1)
+door = false
+battlements = false
+
+[node name="stable_055" parent="Actors" instance=ExtResource("s_props_stable")]
+position = Vector2(3530, 3160)
+
+[node name="stable_056" parent="Actors" instance=ExtResource("s_props_stable")]
+position = Vector2(3830, 3160)
+
+[node name="keep_gate_057" parent="Actors" instance=ExtResource("s_props_keep_gate")]
+position = Vector2(2450.0, 1150)
+
+[node name="crypt_stair_058" parent="Actors" instance=ExtResource("s_props_crypt_stair")]
+position = Vector2(3435.0, 1210)
+
+[node name="heart_tree_059" parent="Actors" instance=ExtResource("s_props_heart_tree")]
+position = Vector2(1130, 1150)
+
+[node name="black_pool_060" parent="Actors" instance=ExtResource("s_props_black_pool")]
+position = Vector2(1140, 1210)
+
+[node name="dummy_061" parent="Actors" instance=ExtResource("s_props_dummy")]
+position = Vector2(2040, 1820)
+
+[node name="dummy_062" parent="Actors" instance=ExtResource("s_props_dummy")]
+position = Vector2(2220, 1820)
+
+[node name="dummy_063" parent="Actors" instance=ExtResource("s_props_dummy")]
+position = Vector2(2400, 1820)
+
+[node name="dummy_064" parent="Actors" instance=ExtResource("s_props_dummy")]
+position = Vector2(2580, 1820)
+
+[node name="dummy_065" parent="Actors" instance=ExtResource("s_props_dummy")]
+position = Vector2(2760, 1820)
+
+[node name="weapon_rack_066" parent="Actors" instance=ExtResource("s_props_weapon_rack")]
+position = Vector2(1990, 1710)
+
+[node name="weapon_rack_067" parent="Actors" instance=ExtResource("s_props_weapon_rack")]
+position = Vector2(2790, 1710)
+
+[node name="archery_target_068" parent="Actors" instance=ExtResource("s_props_archery_target")]
+position = Vector2(2820, 2100)
+
+[node name="archery_target_069" parent="Actors" instance=ExtResource("s_props_archery_target")]
+position = Vector2(2820, 1940)
+
+[node name="guard_spar_l_070" parent="Actors" instance=ExtResource("s_life_guard_spar_l")]
+position = Vector2(2350.0, 2080)
+
+[node name="guard_spar_r_071" parent="Actors" instance=ExtResource("s_life_guard_spar_r")]
+position = Vector2(2430.0, 2080)
+
+[node name="barrel_072" parent="Actors" instance=ExtResource("s_props_barrel")]
+position = Vector2(1900, 2200)
+
+[node name="well_073" parent="Actors" instance=ExtResource("s_props_well")]
+position = Vector2(2750.0, 2980.0)
+
+[node name="wagon_074" parent="Actors" instance=ExtResource("s_props_wagon")]
+position = Vector2(1880, 3480)
+
+[node name="hay_cart_075" parent="Actors" instance=ExtResource("s_props_hay_cart")]
+position = Vector2(3000, 2740)
+
+[node name="barrel_076" parent="Actors" instance=ExtResource("s_props_barrel")]
+position = Vector2(1800, 2600)
+
+[node name="barrel_077" parent="Actors" instance=ExtResource("s_props_barrel")]
+position = Vector2(1840, 2600)
+
+[node name="barrel_078" parent="Actors" instance=ExtResource("s_props_barrel")]
+position = Vector2(3080, 2600)
+
+[node name="horse_079" parent="Actors" instance=ExtResource("s_life_horse")]
+position = Vector2(3420, 3250)
+
+[node name="horse_080" parent="Actors" instance=ExtResource("s_life_horse")]
+position = Vector2(3720, 3270)
+
+[node name="stable_boy_081" parent="Actors" instance=ExtResource("s_life_stable_boy")]
+position = Vector2(3560, 3240)
+
+[node name="hay_bale_082" parent="Actors" instance=ExtResource("s_props_hay_bale")]
+position = Vector2(3940, 3220)
+
+[node name="guard_idle_083" parent="Actors" instance=ExtResource("s_life_guard_idle")]
+position = Vector2(2290, 3640)
+
+[node name="brazier_084" parent="Actors" instance=ExtResource("s_life_brazier")]
+position = Vector2(2250, 3600)
+
+[node name="guard_idle_085" parent="Actors" instance=ExtResource("s_life_guard_idle")]
+position = Vector2(2510, 3640)
+
+[node name="brazier_086" parent="Actors" instance=ExtResource("s_life_brazier")]
+position = Vector2(2550, 3600)
+
+[node name="banner_stark_087" parent="Actors" instance=ExtResource("s_life_banner_stark")]
+position = Vector2(2310.0, 1122)
+
+[node name="banner_stark_088" parent="Actors" instance=ExtResource("s_life_banner_stark")]
+position = Vector2(2590.0, 1122)
+
+[node name="forge_089" parent="Actors" instance=ExtResource("s_life_forge")]
+position = Vector2(1670, 2730)
+
+[node name="blacksmith_090" parent="Actors" instance=ExtResource("s_life_blacksmith")]
+position = Vector2(1730, 2750)
+
+[node name="laundry_line_091" parent="Actors" instance=ExtResource("s_life_laundry_line")]
+position = Vector2(3180, 2440)
+
+[node name="washerwoman_092" parent="Actors" instance=ExtResource("s_life_washerwoman")]
+position = Vector2(3240, 2490)
+
+[node name="hound_sleeping_093" parent="Actors" instance=ExtResource("s_life_hound_sleeping")]
+position = Vector2(760, 2180)
+
+[node name="hound_sleeping_094" parent="Actors" instance=ExtResource("s_life_hound_sleeping")]
+position = Vector2(1020, 2200)
+
+[node name="hen_095" parent="Actors" instance=ExtResource("s_life_hen")]
+position = Vector2(3000, 1590)
+
+[node name="hen_096" parent="Actors" instance=ExtResource("s_life_hen")]
+position = Vector2(3070, 1620)
+
+[node name="hen_097" parent="Actors" instance=ExtResource("s_life_hen")]
+position = Vector2(3140, 1590)
+
+[node name="hen_098" parent="Actors" instance=ExtResource("s_life_hen")]
+position = Vector2(3210, 1620)
+
+[node name="hay_bale_099" parent="Actors" instance=ExtResource("s_props_hay_bale")]
+position = Vector2(3440, 3650)
+
+[node name="trunks_100" parent="Actors" instance=ExtResource("s_props_trunks")]
+position = Vector2(3560, 3640)
+
+[node name="cat_101" parent="Actors" instance=ExtResource("s_life_cat")]
+position = Vector2(3880, 3640)
+
+[node name="guard_idle_102" parent="Actors" instance=ExtResource("s_life_guard_idle")]
+position = Vector2(1300, 3660)
+
+[node name="guard_idle_103" parent="Actors" instance=ExtResource("s_life_guard_idle")]
+position = Vector2(3100, 1980)
+
+[node name="boulder_104" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(3480, 1400)
+
+[node name="rock_pile_105" parent="Actors" instance=ExtResource("s_props_rock_pile")]
+position = Vector2(3620, 1400)
+
+[node name="boulder_106" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(3760, 1400)
+
+[node name="rock_pile_107" parent="Actors" instance=ExtResource("s_props_rock_pile")]
+position = Vector2(3480, 1520)
+
+[node name="boulder_108" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(3620, 1520)
+
+[node name="rock_pile_109" parent="Actors" instance=ExtResource("s_props_rock_pile")]
+position = Vector2(3760, 1520)
+
+[node name="crow_110" parent="Actors" instance=ExtResource("s_life_crow")]
+position = Vector2(3800, 1360)
+
+[node name="tree_pine_111" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1046, 1709)
+
+[node name="tree_oak_112" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1316, 1649)
+
+[node name="bush_113" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1028, 763)
+
+[node name="bush_114" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1564, 1561)
+
+[node name="tree_oak_115" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(735, 913)
+
+[node name="tree_oak_116" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(850, 894)
+
+[node name="tree_pine_117" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1608, 1087)
+
+[node name="tree_oak_118" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1364, 932)
+
+[node name="tree_pine_119" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1389, 1252)
+
+[node name="tree_pine_120" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1648, 956)
+
+[node name="tree_pine_121" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1176, 1653)
+
+[node name="tree_pine_122" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(819, 1716)
+
+[node name="tree_pine_123" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(991, 1695)
+
+[node name="tree_oak_124" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(802, 979)
+
+[node name="bush_125" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1318, 1739)
+
+[node name="bush_126" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1562, 1185)
+
+[node name="tree_pine_127" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1234, 852)
+
+[node name="tree_pine_128" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1138, 1411)
+
+[node name="tree_pine_129" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1195, 918)
+
+[node name="tree_pine_130" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(740, 1664)
+
+[node name="tree_pine_131" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(888, 1635)
+
+[node name="tree_pine_132" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1504, 1588)
+
+[node name="tree_pine_133" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1293, 1510)
+
+[node name="tree_pine_134" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1524, 816)
+
+[node name="tree_pine_135" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(712, 1101)
+
+[node name="tree_oak_136" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(780, 807)
+
+[node name="tree_pine_137" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1081, 924)
+
+[node name="bush_138" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1451, 1067)
+
+[node name="tree_oak_139" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1304, 795)
+
+[node name="tree_pine_140" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(695, 1247)
+
+[node name="tree_oak_141" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1384, 1504)
+
+[node name="bush_142" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1514, 1708)
+
+[node name="tree_pine_143" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1324, 997)
+
+[node name="tree_oak_144" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1172, 1506)
+
+[node name="bush_145" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1353, 1574)
+
+[node name="tree_oak_146" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(694, 842)
+
+[node name="bush_147" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1589, 1240)
+
+[node name="bush_148" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1642, 1021)
+
+[node name="tree_pine_149" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1402, 860)
+
+[node name="bush_150" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1152, 865)
+
+[node name="tree_pine_151" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1496, 877)
+
+[node name="tree_oak_152" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1401, 1673)
+
+[node name="bush_153" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(837, 1223)
+
+[node name="tree_oak_154" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(986, 1428)
+
+[node name="bush_155" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1333, 840)
+
+[node name="tree_oak_156" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(776, 1245)
+
+[node name="tree_pine_157" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1637, 1147)
+
+[node name="bush_158" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1627, 1613)
+
+[node name="tree_pine_159" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1113, 1671)
+
+[node name="tree_pine_160" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1576, 1667)
+
+[node name="tree_oak_161" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1122, 980)
+
+[node name="tree_pine_162" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1116, 1713)
+
+[node name="bush_163" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1647, 1550)
+
+[node name="tree_pine_164" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1274, 1587)
+
+[node name="tree_oak_165" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(889, 954)
+
+[node name="tree_oak_166" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(687, 1644)
+
+[node name="tree_pine_167" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1420, 1154)
+
+[node name="tree_oak_168" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1512, 1125)
+
+[node name="bush_169" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1190, 974)
+
+[node name="bush_170" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(997, 881)
+
+[node name="tree_pine_171" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(873, 1093)
+
+[node name="tree_oak_172" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1521, 1246)
+
+[node name="bush_173" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(710, 978)
+
+[node name="tree_oak_174" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1513, 1437)
+
+[node name="tree_pine_175" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1010, 934)
+
+[node name="tree_pine_176" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(699, 1409)
+
+[node name="tree_pine_177" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(1390, 1078)
+
+[node name="bush_178" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1186, 766)
+
+[node name="tree_oak_179" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1120, 784)
+
+[node name="tree_oak_180" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(1183, 1700)
+
+[node name="tree_oak_181" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(4766, 126)
+
+[node name="tree_pine_182" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(108, 125)
+
+[node name="bush_183" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(49, 46)
+
+[node name="boulder_184" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(104, 1493)
+
+[node name="tree_oak_185" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(112, 2513)
+
+[node name="bush_186" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(76, 573)
+
+[node name="bush_187" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(75, 2987)
+
+[node name="bush_188" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(45, 854)
+
+[node name="boulder_189" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(81, 1748)
+
+[node name="tree_oak_190" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(59, 310)
+
+[node name="tree_oak_191" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(37, 464)
+
+[node name="tree_pine_192" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(43, 4222)
+
+[node name="tree_pine_193" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(48, 2804)
+
+[node name="tree_pine_194" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(73, 1203)
+
+[node name="tree_pine_195" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(69, 1007)
+
+[node name="boulder_196" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(112, 3775)
+
+[node name="bush_197" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(99, 3505)
+
+[node name="tree_oak_198" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(4721, 2588)
+
+[node name="bush_199" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4769, 1190)
+
+[node name="tree_oak_200" parent="Actors" instance=ExtResource("s_props_tree_oak")]
+position = Vector2(4686, 2041)
+
+[node name="bush_201" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4735, 3994)
+
+[node name="bush_202" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4775, 4096)
+
+[node name="boulder_203" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(4759, 921)
+
+[node name="tree_pine_204" parent="Actors" instance=ExtResource("s_props_tree_pine")]
+position = Vector2(4695, 3609)
+
+[node name="boulder_205" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(4709, 3110)
+
+[node name="bush_206" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4778, 3477)
+
+[node name="bush_207" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4737, 3763)
+
+[node name="bush_208" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4720, 2782)
+
+[node name="bush_209" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4765, 2490)
+
+[node name="boulder_210" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(4738, 1579)
+
+[node name="boulder_211" parent="Actors" instance=ExtResource("s_props_boulder")]
+position = Vector2(4693, 3193)
+
+[node name="stump_212" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(3591, 2843)
+
+[node name="bush_213" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(3970, 1711)
+
+[node name="stump_214" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(1704, 752)
+
+[node name="flowers_215" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(928, 2313)
+
+[node name="flowers_216" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(3061, 2098)
+
+[node name="flowers_217" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(1519, 1965)
+
+[node name="flowers_218" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(3904, 2764)
+
+[node name="stump_219" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(1364, 2103)
+
+[node name="bush_220" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(3978, 1623)
+
+[node name="stump_221" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(1089, 2376)
+
+[node name="bush_222" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(3065, 2250)
+
+[node name="bush_223" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(883, 2385)
+
+[node name="bush_224" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1568, 3397)
+
+[node name="stump_225" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(3081, 1078)
+
+[node name="bush_226" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4008, 2110)
+
+[node name="bush_227" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1998, 1437)
+
+[node name="bush_228" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1394, 2220)
+
+[node name="flowers_229" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(3568, 1928)
+
+[node name="flowers_230" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(3551, 2014)
+
+[node name="bush_231" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(3703, 2987)
+
+[node name="stump_232" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(3712, 2010)
+
+[node name="flowers_233" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(3454, 2914)
+
+[node name="stump_234" parent="Actors" instance=ExtResource("s_props_stump")]
+position = Vector2(4016, 2733)
+
+[node name="bush_235" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1547, 2328)
+
+[node name="bush_236" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(1522, 2195)
+
+[node name="flowers_237" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(3575, 2095)
+
+[node name="flowers_238" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(4096, 1432)
+
+[node name="bush_239" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(3354, 2990)
+
+[node name="bush_240" parent="Actors" instance=ExtResource("s_props_bush")]
+position = Vector2(4022, 1911)
+
+[node name="flowers_241" parent="Actors" instance=ExtResource("s_props_flowers")]
+position = Vector2(1883, 1413)

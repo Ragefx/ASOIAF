@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/cley/v1/idle.png" id="tex_idle"]
+
+[sub_resource type="AtlasTexture" id="atlas_idle_0"]
+atlas = ExtResource("tex_idle")
+region = Rect2(0, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_1"]
+atlas = ExtResource("tex_idle")
+region = Rect2(56, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_2"]
+atlas = ExtResource("tex_idle")
+region = Rect2(112, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_3"]
+atlas = ExtResource("tex_idle")
+region = Rect2(168, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_4"]
+atlas = ExtResource("tex_idle")
+region = Rect2(224, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_5"]
+atlas = ExtResource("tex_idle")
+region = Rect2(280, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_6"]
+atlas = ExtResource("tex_idle")
+region = Rect2(336, 0, 56, 56)
+
+[sub_resource type="AtlasTexture" id="atlas_idle_7"]
+atlas = ExtResource("tex_idle")
+region = Rect2(392, 0, 56, 56)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_idle_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_idle_7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]

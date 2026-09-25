@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/props/flowers.png" id="1_tex"]
+[ext_resource type="Shader" path="res://shaders/wind_sway.gdshader" id="2_sway"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sway"]
+shader = ExtResource("2_sway")
+shader_parameter/strength = 1.2
+
+[node name="flowers" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_sway")
+texture = ExtResource("1_tex")
+offset = Vector2(0, -6)

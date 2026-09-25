@@ -1,0 +1,466 @@
+{
+  "id": "winterfell",
+  "name": "Winterfell",
+  "about": "Layout proposal for the whole castle as one walkable site (docs/WORLD_DESIGN.md, milestone 1). Game pixels, north up, origin at the site's top-left. Site scale is about 1:4 of canon distance; people stay true size (56 px man).",
+  "size": [
+    4800,
+    4300
+  ],
+  "walls": [
+    {
+      "id": "outer_wall",
+      "rect": [
+        200,
+        200,
+        4400,
+        3900
+      ],
+      "thick": 96,
+      "height_m": 24,
+      "note": "outer curtain, about 80 ft"
+    },
+    {
+      "id": "moat",
+      "rect": [
+        296,
+        296,
+        4208,
+        3708
+      ],
+      "thick": 170,
+      "kind": "moat"
+    },
+    {
+      "id": "inner_wall",
+      "rect": [
+        466,
+        466,
+        3868,
+        3368
+      ],
+      "thick": 128,
+      "height_m": 30,
+      "note": "inner curtain, about 100 ft; the wall-walk (scene 12) runs along it"
+    }
+  ],
+  "gates": [
+    {
+      "id": "main_gate",
+      "name": "Main gate",
+      "at": [
+        2400,
+        4100
+      ],
+      "side": "south",
+      "note": "gatehouse through both walls, drawbridge over the moat; the Kingsroad and Winter Town lie beyond (the 'south gate' of scene 9)"
+    },
+    {
+      "id": "hunters_gate",
+      "name": "Hunter's Gate",
+      "at": [
+        200,
+        2150
+      ],
+      "side": "west",
+      "note": "by the kennels, out to the fields and the Wolfswood"
+    }
+  ],
+  "areas": [
+    {
+      "id": "godswood",
+      "name": "Godswood",
+      "rect": [
+        640,
+        640,
+        1060,
+        1120
+      ],
+      "kind": "wood",
+      "note": "old sentinels, soldier pines, oaks; hot pools"
+    },
+    {
+      "id": "heart_tree",
+      "name": "Heart tree + black pool",
+      "circle": [
+        1130,
+        1150,
+        70
+      ],
+      "kind": "tree"
+    },
+    {
+      "id": "hot_pools",
+      "name": "Hot pools",
+      "circle": [
+        860,
+        1500,
+        60
+      ],
+      "kind": "water"
+    },
+    {
+      "id": "training_yard",
+      "name": "Training yard (inner ward)",
+      "rect": [
+        1840,
+        1620,
+        1100,
+        640
+      ],
+      "kind": "yard"
+    },
+    {
+      "id": "castle_yard",
+      "name": "Castle yard (main ward)",
+      "rect": [
+        1700,
+        2480,
+        1500,
+        1200
+      ],
+      "kind": "yard"
+    },
+    {
+      "id": "lichyard",
+      "name": "Lichyard",
+      "rect": [
+        3420,
+        1300,
+        440,
+        300
+      ],
+      "kind": "graves"
+    },
+    {
+      "id": "glass_gardens",
+      "name": "Glass gardens",
+      "rect": [
+        680,
+        2500,
+        700,
+        760
+      ],
+      "kind": "glass"
+    }
+  ],
+  "buildings": [
+    {
+      "id": "great_keep",
+      "name": "Great Keep",
+      "rect": [
+        2150,
+        660,
+        600,
+        460
+      ],
+      "note": "the Starks' own rooms; hot water in the walls"
+    },
+    {
+      "id": "library_tower",
+      "name": "Library Tower",
+      "circle": [
+        2920,
+        800,
+        90
+      ]
+    },
+    {
+      "id": "maesters_turret",
+      "name": "Maester's Turret + rookery",
+      "circle": [
+        1960,
+        740,
+        90
+      ]
+    },
+    {
+      "id": "armory",
+      "name": "Armory",
+      "rect": [
+        1760,
+        1040,
+        320,
+        240
+      ],
+      "note": "backs onto the godswood; Bran climbs to its roof from a sentinel"
+    },
+    {
+      "id": "covered_bridge",
+      "name": "Covered bridge",
+      "rect": [
+        2080,
+        1110,
+        160,
+        40
+      ],
+      "kind": "bridge",
+      "note": "armory to the Great Keep"
+    },
+    {
+      "id": "great_hall",
+      "name": "Great Hall",
+      "rect": [
+        2150,
+        1260,
+        760,
+        300
+      ],
+      "note": "the feast (scene 7) is inside"
+    },
+    {
+      "id": "kitchens",
+      "name": "Kitchens + brewhouse",
+      "rect": [
+        2960,
+        1300,
+        360,
+        240
+      ]
+    },
+    {
+      "id": "guards_hall",
+      "name": "Guards Hall",
+      "rect": [
+        3040,
+        1680,
+        420,
+        260
+      ]
+    },
+    {
+      "id": "bell_tower",
+      "name": "Bell Tower",
+      "circle": [
+        3620,
+        1760,
+        80
+      ]
+    },
+    {
+      "id": "first_keep",
+      "name": "First Keep (disused)",
+      "circle": [
+        3620,
+        900,
+        190
+      ],
+      "note": "round, gargoyles; the crypt stair is at its foot"
+    },
+    {
+      "id": "crypt_stair",
+      "name": "Crypt stair",
+      "rect": [
+        3380,
+        1130,
+        110,
+        80
+      ],
+      "kind": "stair",
+      "note": "the crypts (scene 6) run under the castle"
+    },
+    {
+      "id": "broken_tower",
+      "name": "Broken Tower",
+      "circle": [
+        4040,
+        700,
+        120
+      ],
+      "note": "burnt top, abandoned; looks down on the godswood and the First Keep"
+    },
+    {
+      "id": "guest_house",
+      "name": "Guest house",
+      "rect": [
+        3360,
+        2320,
+        560,
+        320
+      ],
+      "note": "the king's party lodges here (scene 8)"
+    },
+    {
+      "id": "stables",
+      "name": "Stables",
+      "rect": [
+        3360,
+        2860,
+        620,
+        300
+      ]
+    },
+    {
+      "id": "forge",
+      "name": "Forge (Mikken)",
+      "rect": [
+        1340,
+        2520,
+        260,
+        200
+      ]
+    },
+    {
+      "id": "sept",
+      "name": "Sept",
+      "rect": [
+        1340,
+        3000,
+        280,
+        280
+      ],
+      "note": "built for Lady Catelyn"
+    },
+    {
+      "id": "kennels",
+      "name": "Kennels",
+      "rect": [
+        640,
+        1900,
+        460,
+        240
+      ]
+    },
+    {
+      "id": "granary",
+      "name": "Granary + storehouses",
+      "rect": [
+        3360,
+        3300,
+        620,
+        300
+      ]
+    },
+    {
+      "id": "barracks",
+      "name": "Barracks",
+      "rect": [
+        680,
+        3380,
+        700,
+        240
+      ]
+    },
+    {
+      "id": "main_gatehouse",
+      "name": "Gatehouse",
+      "rect": [
+        2250,
+        3680,
+        300,
+        520
+      ],
+      "kind": "gatehouse"
+    },
+    {
+      "id": "hunters_gatehouse",
+      "name": "Hunter's gatehouse",
+      "rect": [
+        160,
+        2060,
+        480,
+        180
+      ],
+      "kind": "gatehouse"
+    }
+  ],
+  "beats": [
+    {
+      "scene": 1,
+      "at": [
+        2390,
+        1940
+      ],
+      "what": "Drill on the straw man"
+    },
+    {
+      "scene": 2,
+      "at": [
+        3000,
+        3000
+      ],
+      "what": "Preparing for a King"
+    },
+    {
+      "scene": 5,
+      "at": [
+        2450,
+        2900
+      ],
+      "what": "The king rides up the yard"
+    },
+    {
+      "scene": 6,
+      "at": [
+        3435,
+        1170
+      ],
+      "what": "Torchlight: crypt stair"
+    },
+    {
+      "scene": 7,
+      "at": [
+        2530,
+        1500
+      ],
+      "what": "The feast"
+    },
+    {
+      "scene": 8,
+      "at": [
+        3050,
+        2500
+      ],
+      "what": "Days of feasting"
+    },
+    {
+      "scene": 9,
+      "at": [
+        2400,
+        3600
+      ],
+      "what": "Lances to the gate; the Broken Tower"
+    },
+    {
+      "scene": 10,
+      "at": [
+        1130,
+        1150
+      ],
+      "what": "Aftermath: the heart tree"
+    },
+    {
+      "scene": 11,
+      "at": [
+        2250,
+        3350
+      ],
+      "what": "The departure"
+    },
+    {
+      "scene": 12,
+      "at": [
+        4330,
+        2400
+      ],
+      "what": "Winter is coming: the wall-walk"
+    }
+  ],
+  "outside": [
+    {
+      "name": "Winter Town, the Kingsroad",
+      "at": [
+        2900,
+        4260
+      ],
+      "dir": "south-east"
+    },
+    {
+      "name": "Wolfswood",
+      "at": [
+        60,
+        1700
+      ],
+      "dir": "west"
+    }
+  ]
+}

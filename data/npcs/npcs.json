@@ -6,28 +6,32 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "ned",
-      "voice": "Says the fewest words that will do. Never explains himself twice. Never says 'winter is coming'."
+      "voice": "Says the fewest words that will do. Never explains himself twice. Never says 'winter is coming'.",
+      "sprite_frames": "res://assets/life/eddard.tres"
     },
     "catelyn_stark": {
       "name": "Catelyn Stark",
       "origin": "canon",
       "house": "Tully",
       "portrait_set": "catelyn",
-      "voice": "Southern manners over northern iron. Politest when most dangerous."
+      "voice": "Southern manners over northern iron. Politest when most dangerous.",
+      "sprite_frames": "res://assets/life/catelyn.tres"
     },
     "robb_stark": {
       "name": "Robb Stark",
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "robb",
-      "voice": "Fifteen. Learns to sound certain about three weeks before he is."
+      "voice": "Fifteen. Learns to sound certain about three weeks before he is.",
+      "sprite_frames": "res://assets/life/robb.tres"
     },
     "bran_stark": {
       "name": "Bran Stark",
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "bran",
-      "voice": "Repeats things when frightened. 'I don't fall.'"
+      "voice": "Repeats things when frightened. 'I don't fall.'",
+      "sprite_frames": "res://assets/life/bran.tres"
     },
     "arya_stark": {
       "name": "Arya Stark",
@@ -48,28 +52,32 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "jon",
-      "voice": "Act 1 only. Two lines. Leaves the frame."
+      "voice": "Act 1 only. Two lines. Leaves the frame.",
+      "sprite_frames": "res://assets/life/jon.tres"
     },
     "theon_greyjoy": {
       "name": "Theon Greyjoy",
       "origin": "canon",
       "house": "Greyjoy",
       "portrait_set": "theon",
-      "voice": "Jokes first, and one beat too early, every time."
+      "voice": "Jokes first, and one beat too early, every time.",
+      "sprite_frames": "res://assets/life/theon.tres"
     },
     "jory_cassel": {
       "name": "Jory Cassel",
       "origin": "canon",
       "house": "Cassel",
       "portrait_set": "jory",
-      "voice": "Practical kindness with no sentiment on it. The player must like him; Act 2 depends on it."
+      "voice": "Practical kindness with no sentiment on it. The player must like him; Act 2 depends on it.",
+      "sprite_frames": "res://assets/life/jory.tres"
     },
     "robert_baratheon": {
       "name": "Robert Baratheon",
       "origin": "canon",
       "house": "Baratheon",
       "portrait_set": "robert",
-      "voice": "Enormous and grieving and never introduced with a fat joke."
+      "voice": "Enormous and grieving and never introduced with a fat joke.",
+      "sprite_frames": "res://assets/life/robert.tres"
     },
     "cersei_lannister": {
       "name": "Cersei Lannister",
@@ -83,7 +91,8 @@
       "origin": "canon",
       "house": "Baratheon",
       "portrait_set": "joffrey",
-      "voice": "Delighted. Twelve. Not evil so much as unsupervised."
+      "voice": "Delighted. Twelve. Not evil so much as unsupervised.",
+      "sprite_frames": "res://assets/life/joffrey.tres"
     },
     "petyr_baelish": {
       "name": "Petyr Baelish",
@@ -111,7 +120,8 @@
       "origin": "canon",
       "house": "Clegane",
       "portrait_set": "hound",
-      "voice": "Silent in Chapter 1. Acts instead."
+      "voice": "Silent in Chapter 1. Acts instead.",
+      "sprite_frames": "res://assets/life/sandor.tres"
     },
     "meryn_trant": {
       "name": "Ser Meryn Trant",
@@ -195,7 +205,8 @@
       "origin": "invented",
       "house": null,
       "portrait_set": "hune",
-      "voice": "Blunt, fair, never sentimental. Dies in the Whispering Wood with no cutscene."
+      "voice": "Blunt, fair, never sentimental. Dies in the Whispering Wood with no cutscene.",
+      "sprite_frames": "res://assets/life/hune.tres"
     },
     "mabb": {
       "name": "Old Mabb",
@@ -216,14 +227,16 @@
       "origin": "invented",
       "house": "Wells",
       "portrait_set": "wells",
-      "voice": "Southron contempt that slowly turns into respect he is embarrassed about."
+      "voice": "Southron contempt that slowly turns into respect he is embarrassed about.",
+      "sprite_frames": "res://assets/life/wells.tres"
     },
     "cley": {
       "name": "Ser Cley Stout",
       "origin": "canon-house, invented character",
       "house": "Stout",
       "portrait_set": "cley",
-      "voice": "Torren's own age and rank, and unbothered by both. Jokes first, works last, sees more than he admits. The only person Torren is not performing for."
+      "voice": "Torren's own age and rank, and unbothered by both. Jokes first, works last, sees more than he admits. The only person Torren is not performing for.",
+      "sprite_frames": "res://assets/sprites/cley/v1/cley.tres"
     },
     "stranger": {
       "name": "An old man",
@@ -237,7 +250,8 @@
       "origin": "canon",
       "house": "Cassel",
       "portrait_set": "rodrik",
-      "voice": "Master-at-arms. Bellows. Whiskers. Fair, and entirely out of patience."
+      "voice": "Master-at-arms. Bellows. Whiskers. Fair, and entirely out of patience.",
+      "sprite_frames": "res://assets/life/rodrik.tres"
     },
     "maester_luwin": {
       "name": "Maester Luwin",
@@ -251,28 +265,32 @@
       "origin": "canon",
       "house": "Stark",
       "portrait_set": "benjen",
-      "voice": "Talks about the Wall the way a man talks about a debt nobody else believes in."
+      "voice": "Talks about the Wall the way a man talks about a debt nobody else believes in.",
+      "sprite_frames": "res://assets/life/benjen.tres"
     },
     "tyrion_lannister": {
       "name": "Tyrion Lannister",
       "origin": "canon",
       "house": "Lannister",
       "portrait_set": "tyrion",
-      "voice": "Tests everyone with a joke and reads the answer. Never self-pitying on screen."
+      "voice": "Tests everyone with a joke and reads the answer. Never self-pitying on screen.",
+      "sprite_frames": "res://assets/life/tyrion.tres"
     },
     "hodor": {
       "name": "Hodor",
       "origin": "canon",
       "house": null,
       "portrait_set": "hodor",
-      "voice": "Hodor."
+      "voice": "Hodor.",
+      "sprite_frames": "res://assets/life/hodor.tres"
     },
     "stable_hand": {
       "name": "Stable Hand",
       "origin": "invented",
       "house": null,
       "portrait_set": "stablehand",
-      "voice": "Has never been past the winter town and says so."
+      "voice": "Has never been past the winter town and says so.",
+      "sprite_frames": "res://assets/life/stable_hand.tres"
     },
     "winterfell_guard": {
       "name": "Winterfell Guard",
@@ -280,6 +298,21 @@
       "house": null,
       "portrait_set": "guard",
       "voice": "Generic household guard. Panics usefully."
+    },
+    "jaime_lannister": {
+      "name": "Ser Jaime Lannister",
+      "origin": "canon",
+      "house": "Lannister",
+      "portrait_set": "jaime",
+      "voice": "Charming, bored, and the only person in the yard who is enjoying himself. Never explains a joke.",
+      "sprite_frames": "res://assets/life/jaime.tres"
+    },
+    "serving_girl": {
+      "name": "A serving girl",
+      "origin": "invented",
+      "house": null,
+      "portrait_set": "servant",
+      "voice": "Never speaks to Torren. Eyes down."
     }
   }
 }

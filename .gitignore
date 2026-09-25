@@ -1,6 +1,6 @@
 # Godot 4
 .godot/
-.import/
+*.import
 export.cfg
 export_presets.cfg
 *.translation
@@ -21,3 +21,7 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# Claude Code personal settings
+.claude/settings.local.json
+docs/world/shots/

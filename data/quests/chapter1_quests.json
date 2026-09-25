@@ -8,6 +8,11 @@
       "ordered": true,
       "objectives": [
         {
+          "id": "o0",
+          "text": "Finish your drill",
+          "flag": "act1_drill_done"
+        },
+        {
           "id": "o1",
           "text": "Hear Ser Cley's news",
           "flag": "act1_heard_king_coming"
@@ -25,7 +30,7 @@
         {
           "id": "o4",
           "text": "Ride out with Lord Stark's party",
-          "flag": "act1_ring_formed"
+          "flag": "act1_deserter_executed"
         },
         {
           "id": "o5",

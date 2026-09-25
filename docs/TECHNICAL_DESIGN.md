@@ -8,11 +8,11 @@ Godot **4.x** (4.2+). GDScript. 2D top-down. Target: desktop (Windows/Linux/macO
 
 | Setting | Value | Why |
 |---|---|---|
-| Base viewport | 384 × 216 | 16:9, divides cleanly, fits 24 × 13.5 tiles at 16px |
-| Window override | 1536 × 864 (×4) | Integer scale only |
+| Base viewport | **960 × 540**, grown to fill the window by `_fit_view()` in `scripts/ui/main.gd` (see STYLE_GUIDE §0) | Fixed 2× pixel size on 1080p and 1440p: 1080p shows 960 × 540 of world, 1440p 1280 × 720, 4K 960 × 540 at 4×. Same on-screen size, no borders |
+| Window mode | Fullscreen (`window/size/mode=3`) | Full-screen game; the 1920 × 1080 override only applies if it is ever run windowed |
 | Stretch mode | `viewport` | Renders at base res, scales the whole frame |
-| Stretch aspect | `keep` | No letterbox distortion |
-| Integer scaling | on | Never a half-pixel |
+| Stretch aspect | `expand` | A larger screen shows more world instead of letterboxing — with `_fit_view()`, since expand alone letterboxes under integer scaling |
+| Integer scaling | on (`window/stretch/scale_mode="integer"`) | Never a half-pixel. Scales by the largest whole number that fits the screen; `_fit_view()` then fills the leftover with more world. Was documented as on but never actually set until 2026-09-24 |
 | Texture filter | `Nearest` (project default) | Set in Rendering → Textures → Canvas Textures |
 | Mipmaps | off | |
 | Snap 2D transforms to pixel | on | Kills sub-pixel shimmer on the camera |
@@ -73,6 +73,19 @@ Main (Node)
 `Main` is the only persistent scene. Levels are instanced into `World` and freed on transition, so
 autoload state is the single source of truth for anything that must survive a level change.
 
+**A `TileMap` needs a modular tileset — a real one isn't built yet.** The one atlas generated so
+far (`assets/tilesets/grass_dirt.png`, see `assets/sprites/GENERATED_ASSETS.md`) turned out, once
+inspected at the tile grid, to be one continuous painted scene sliced into a 4×4 grid rather than
+a set of tiles designed to recombine against each other in arbitrary layouts — the dirt path
+enters and exits particular tile edges, so placing them in any order but the one they were painted
+in shows the seams. `scenes/world/winterfell_training_yard.tscn`, the first level built, uses the
+whole 64×64 image as one fixed `Sprite2D` background instead of a `TileMap`, scaled ×6 and boxed
+in by plain `StaticBody2D` walls rather than tile collision. That is a stopgap for this one small,
+static yard, not the pattern for every level — a level with more than one open area, or that needs
+to reuse ground pieces in new combinations, needs an actual modular 16px tile atlas (true edge and
+corner variants, each one tileable against its neighbours) before a real `TileMap` here is worth
+building.
+
 ---
 
 ## 4. Autoloads (Singletons)
@@ -87,6 +100,7 @@ Registered in `project.godot` in this order — later ones may depend on earlier
 | 4 | `QuestSystem` | `autoload/quest_system.gd` | Objectives, completion, journal |
 | 5 | `SceneDirector` | `autoload/scene_director.gd` | Level transitions, act boundaries, cutscene sequencing |
 | 6 | `AudioManager` | `autoload/audio_manager.gd` | Music beds, crossfades, SFX pool |
+| 7 | `WorldState` | `autoload/world_state.gd` | Story-driven state of every region and place (open, guarded, closed, contested, sealed), derived from flags; see `docs/WORLD_DESIGN.md` §3 |
 
 ### 4.1 GameManager
 
@@ -196,6 +210,28 @@ JSON, human-readable, multiple slots at `user://saves/slot_<n>.json`.
 Autosave fires on act change and level transition, into a reserved slot 0.
 
 ---
+
+### 4.6 Level scripting (Act 1 onward)
+
+Scenes are played in levels by small data-driven nodes rather than per-level scripts
+(`scripts/world/`):
+
+| Node | What it does |
+|---|---|
+| `scene_trigger.gd` | plays a scene node once on arrival (an establishing line) |
+| `trigger_zone.gd` | plays a node when the player walks in (finding the direwolf) |
+| `interact_point.gd` | an inspectable thing (the stables, the ring place); can move the camera to a focus |
+| `exit_zone.gd` | the way out, once flags allow; an end card while the next level is unbuilt |
+| `sequence.gd` | a scripted run of steps - play, wait, await a flag, move a node, swap the player's look, show/hide groups, fade, zoom, go to the next level |
+| `tether.gd` | holds the player near a point (the honour guard line) |
+| `flag_move.gd` | moves a node when a flag is set (a step down the crypt stair per choice) |
+| `glance_zone.gd` | a brief encounter: fires only when the player is near *and facing* someone |
+| `flag_visibility.gd`, `camera_limits.gd` | hide/show on a flag; keep the camera inside the level |
+
+SceneDirector plays each level's music as the latest scene set there whose flags are met; a
+dialogue node's `"music"` key can change it mid-scene (`"none"` = the scripted silences).
+Levels for scenes 5-12 are written by `tools/build_act1_levels.py`; the castle yard is four
+levels there (arrival, visit, fall, departure) over one ground.
 
 ## 5. NPC System
 

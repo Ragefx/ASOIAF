@@ -100,6 +100,11 @@ func _goto(node_id: String) -> void:
 			_finish()
 		return
 
+	# A line can change the score as it is spoken: "none" is the scripted silence at
+	# the execution and at the carcass.
+	if node.has("music"):
+		AudioManager.play_music(String(node["music"]))
+
 	line_shown.emit(
 		String(node.get("speaker", "narrator")),
 		String(node.get("portrait", "")),

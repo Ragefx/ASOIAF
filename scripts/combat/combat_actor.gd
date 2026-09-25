@@ -14,8 +14,8 @@ enum State { IDLE, MOVE, ATTACK, RECOVER, HURT, DODGE, DEAD }
 @export var poise: int = 2
 @export var max_stamina: float = 100.0
 @export var stamina_regen: float = 22.0
-@export var walk_speed: float = 60.0
-@export var run_speed: float = 95.0
+@export var walk_speed: float = 120.0
+@export var run_speed: float = 190.0
 
 var hp: int
 var stamina: float
@@ -78,7 +78,7 @@ func take_damage(amount: int, from: Node = null) -> void:
 	if dealt > poise:
 		state = State.HURT
 		if from is Node2D:
-			velocity = (global_position - (from as Node2D).global_position).normalized() * 90.0
+			velocity = (global_position - (from as Node2D).global_position).normalized() * 180.0
 
 
 func heal(amount: int) -> void:

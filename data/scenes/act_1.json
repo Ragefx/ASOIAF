@@ -30,6 +30,7 @@
       "spawn": "dummy_line",
       "time_of_day": "dawn",
       "mode": "explore",
+      "autostart": false,
       "music": "winterfell_morning",
       "stage_directions": "Opening scene. Mist on the training yard. Torren has been at a straw dummy since before light, which tells the player everything about him before he speaks. Ser Cley Stout watches from a fence rail eating an apple, which tells them everything about Cley. This is the movement and interact tutorial, and it carries the act's inciting news: Jon Arryn is dead and the king is riding north. CANON: Jon Arryn's death and Robert's journey to Winterfell to name Ned his Hand.",
       "objectives": [
@@ -38,6 +39,7 @@
       ],
       "requires_flags": [],
       "sets_flags": [
+        "act1_drill_done",
         "act1_started",
         "act1_heard_arryn_dead",
         "act1_heard_king_coming"
@@ -218,7 +220,10 @@
           "n1": {
             "speaker": "narrator",
             "text": "Every banner in the North is being beaten, every hearth swept, every barrel of anything drinkable counted twice. Winterfell has not been this frightened of a guest in living memory.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_yard_arrived"
+            ]
           },
           "n10": {
             "speaker": "rodrik_cassel",
@@ -425,9 +430,18 @@
               "act1_winterfell_prepared"
             ],
             "end": true
+          },
+          "n51": {
+            "speaker": "narrator",
+            "text": "Grooms are mucking out every stall at once and nobody has told you where to stand. Ser Rodrik will know.",
+            "requires_flags": [
+              "!act1_talked_rodrik"
+            ],
+            "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_03_the_deserter",
@@ -446,6 +460,8 @@
         "act1_winterfell_prepared"
       ],
       "sets_flags": [
+        "act1_deserter_executed",
+        "act1_ring_formed",
         "act1_started"
       ],
       "dialogue": {
@@ -721,9 +737,54 @@
               "honest": 1
             },
             "end": true
+          },
+          "n50": {
+            "speaker": "narrator",
+            "text": "You take your place at the left of the ring, between Jory's horse and a pine shedding snow. Nobody speaks. Somewhere behind you a horse blows and stamps.",
+            "requires_flags": [
+              "act1_ring_formed",
+              "!act1_deserter_executed"
+            ],
+            "direction": "The camera leaves Torren here and drifts to Bran. It stays on Bran until the scene ends. It never frames the block.",
+            "next": "n51",
+            "music": "none"
+          },
+          "n51": {
+            "speaker": "eddard_stark",
+            "portrait": "ned_grave",
+            "text": "You swore an oath, and you broke it. I have heard what you had to say for yourself. The sentence is mine, and so is the sword.",
+            "next": "n52"
+          },
+          "n52": {
+            "speaker": "narrator",
+            "text": "You don't watch the sword. You watch the boy, as Jory told you to. Bran's hands are fists at his sides. He does not look away, and nobody makes him.",
+            "next": "n53"
+          },
+          "n53": {
+            "speaker": "narrator",
+            "text": "One stroke. The sound is smaller than you thought it would be, and the snow takes the rest of it.",
+            "direction": "No music. Wind, and twenty horses breathing.",
+            "next": "n54"
+          },
+          "n54": {
+            "speaker": "narrator",
+            "text": "Lord Stark cleans the blade in the snow, then goes to his son and says something to him. You are too far away to hear it, which is how it should be.",
+            "sets_flags": [
+              "act1_deserter_executed"
+            ],
+            "end": true
+          },
+          "n55": {
+            "speaker": "narrator",
+            "text": "Serjeant Hune wants you at the left of the ring. He has not finished with you yet.",
+            "requires_flags": [
+              "!act1_ring_formed"
+            ],
+            "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_04_the_ride_home",
@@ -756,15 +817,23 @@
           "n2": {
             "speaker": "narrator",
             "text": "It is not a fallen horse.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_road_arrived"
+            ]
           },
           "n10": {
             "speaker": "narrator",
             "text": "A direwolf, dead in the snow, larger than any wolf has a right to be. A shard of antler in her throat. Five pups blind against her cold flank, still trying.",
             "sets_flags": [
-              "act1_saw_direwolf"
+              "act1_saw_direwolf",
+              "act1_found_pups"
             ],
-            "next": "n11"
+            "next": "n11",
+            "requires_flags": [
+              "!act1_saw_direwolf"
+            ],
+            "music": "none"
           },
           "n11": {
             "speaker": "theon_greyjoy",
@@ -843,15 +912,19 @@
             "traits": {
               "bold": 1
             },
-            "end": true
+            "end": true,
+            "requires_flags": [
+              "!act1_found_ghost"
+            ]
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_05_the_arrival",
       "title": "The King Comes North",
-      "level": "winterfell_yard",
+      "level": "winterfell_yard_arrival",
       "spawn": "honour_guard_left",
       "time_of_day": "afternoon",
       "mode": "fixed",
@@ -947,7 +1020,8 @@
             "speaker": "narrator",
             "text": "The king is enormous and he is not what the songs said. He takes Lord Stark by the shoulders in front of everyone, and then he says something quiet, and they go down into the ground together.",
             "sets_flags": [
-              "act1_saw_robert"
+              "act1_saw_robert",
+              "act1_king_arrived"
             ],
             "end": true
           },
@@ -978,7 +1052,8 @@
             "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_06_the_crypts",
@@ -1079,15 +1154,22 @@
             "speaker": "torren",
             "portrait": "torren_flat",
             "text": "That wasn't mine to have.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_crypts"
+            ]
           },
           "n8": {
             "speaker": "narrator",
             "text": "You hold the torch until your arm shakes, and you hear only the shape of it, and not one word.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_crypts"
+            ]
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_07_the_feast",
@@ -1114,7 +1196,10 @@
           "n1": {
             "speaker": "narrator",
             "text": "Winterfell has not been this loud in living memory and will not be again.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_entered_feast"
+            ]
           },
           "n10": {
             "speaker": "hune",
@@ -1370,12 +1455,13 @@
             "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_08_days_of_feasting",
       "title": "Days of Feasting",
-      "level": "winterfell_yard",
+      "level": "winterfell_yard_visit",
       "spawn": "training_yard_gate",
       "time_of_day": "day",
       "mode": "explore",
@@ -1398,7 +1484,10 @@
             "speaker": "cley",
             "portrait": "cley_dry",
             "text": "Nine days they have been here. Nine. The king has hunted four times, drunk through the cellar, and has not once been seen before noon. I have never admired a man so much.",
-            "end": true
+            "end": true,
+            "sets_flags": [
+              "act1_visit_arrived"
+            ]
           },
           "n10": {
             "speaker": "robb_stark",
@@ -1645,12 +1734,13 @@
             "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_09_the_fall",
       "title": "The Broken Tower",
-      "level": "winterfell_yard",
+      "level": "winterfell_yard_fall",
       "spawn": "armoury_door",
       "time_of_day": "morning",
       "mode": "explore",
@@ -1717,7 +1807,8 @@
           "n21": {
             "speaker": "narrator",
             "text": "You reach him first. You are the first man there and you will think about that for the rest of your life, because there is nothing at all that being first gets you.",
-            "next": "n22"
+            "end": true,
+            "direction": "The sequence fades here, puts Torren at the boy and plays n22 on."
           },
           "n22": {
             "speaker": "torren",
@@ -1750,7 +1841,8 @@
             "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_10_aftermath",
@@ -1902,12 +1994,13 @@
             "end": true
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_11_the_departure",
       "title": "The Road South",
-      "level": "winterfell_yard",
+      "level": "winterfell_yard_departure",
       "spawn": "gate",
       "time_of_day": "dawn",
       "mode": "cutscene",
@@ -1984,7 +2077,8 @@
             ]
           }
         }
-      }
+      },
+      "autostart": false
     },
     {
       "scene_id": "s1_12_winter_is_coming",
@@ -2073,7 +2167,8 @@
             "end": true
           }
         }
-      }
+      },
+      "autostart": false
     }
   ]
 }

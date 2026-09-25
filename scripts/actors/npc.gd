@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var dialogue_scene: String = ""      ## scene_id in the current act file
 @export var dialogue_node: String = ""       ## entry node; blank uses the scene start
 @export var wander: bool = false
-@export var wander_radius: float = 24.0
+@export var wander_radius: float = 48.0
 
 ## Prioritized routing rules, most specific first. The first rule whose flags are
 ## satisfied wins. This is how the same Jory can say something different before
@@ -29,6 +29,17 @@ func _ready() -> void:
 	portrait_set = String(record.get("portrait_set", npc_id))
 	if record.is_empty() and npc_id != "":
 		push_warning("NPC: no data/npcs entry for %s" % npc_id)
+	# Look comes from data/npcs/npcs.json's optional "sprite_frames", like the
+	# protagonists'. An NPC without one stays invisible rather than erroring.
+	var frames_path := String(record.get("sprite_frames", ""))
+	if sprite != null and frames_path != "" and ResourceLoader.exists(frames_path):
+		sprite.sprite_frames = load(frames_path)
+		if sprite.sprite_frames.has_animation("idle"):
+			sprite.play("idle")
+			# Frames are square cells with the feet 2px above the bottom edge (see
+			# tools/fit_animation.py), so a taller character just needs a taller offset.
+			var cell := sprite.sprite_frames.get_frame_texture("idle", 0).get_height()
+			sprite.offset.y = -cell / 2.0 + 2.0
 
 
 static func _load_data() -> void:

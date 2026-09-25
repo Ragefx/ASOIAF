@@ -8,6 +8,33 @@ extends CanvasLayer
 @onready var detection_group: Control = $Detection
 @onready var detection_bar: ProgressBar = $Detection/DetectionBar
 @onready var objective_label: Label = $ObjectiveLabel
+@onready var hint_label: Label = $HintLabel
+
+## Control hints for the opening scene, which is the movement / attack / talk
+## tutorial. First entry for the current level whose flags hold wins; hidden while
+## dialogue is up. (Scene-level "sets_flags" in the act files are documentation and
+## never set at runtime, so hints key off the level plus real flags.)
+const HINTS := [
+	{"level": "winterfell_training_yard", "flags": ["act1_heard_king_coming"], "text": "Follow the track south"},
+	{"level": "winterfell_training_yard", "flags": ["act1_drill_done"], "text": "E  to talk   ·   Ser Cley is by the fence"},
+	{"level": "winterfell_training_yard", "flags": [], "text": "WASD  to move   ·   Left mouse  to swing"},
+	{"level": "winterfell_yard", "flags": ["act1_winterfell_prepared"], "text": "Take the track south, out of the yard"},
+	{"level": "winterfell_yard", "flags": ["act1_talked_rodrik"], "text": "E  at the stable doors   ·   Jory is by the horses"},
+	{"level": "winterfell_yard", "flags": [], "text": "Ser Rodrik is at the keep door"},
+	{"level": "wolfswood_holdfast", "flags": ["act1_deserter_executed"], "text": "The road home runs east"},
+	{"level": "wolfswood_holdfast", "flags": ["act1_ring_formed"], "text": "E  at your place, left of the ring   ·   or speak with the men first"},
+	{"level": "wolfswood_holdfast", "flags": [], "text": "Serjeant Hune is waiting"},
+	{"level": "kingsroad_north", "flags": ["act1_found_pups"], "text": "The column rides on north   ·   the woods are yours to look at first"},
+	{"level": "kingsroad_north", "flags": [], "text": "Walk up the road to the head of the column"},
+	{"level": "winterfell_yard_arrival", "flags": [], "text": "Hold the line"},
+	{"level": "winterfell_crypts", "flags": [], "text": "Hold the torch"},
+	{"level": "winterfell_great_hall", "flags": [], "text": "E  to talk   ·   the door south goes out to the yard"},
+	{"level": "winterfell_yard_visit", "flags": ["act1_talked_robb_yard"], "text": ""},
+	{"level": "winterfell_yard_visit", "flags": [], "text": "Robb is at the dummies   ·   E  to talk"},
+	{"level": "winterfell_yard_fall", "flags": ["act1_bran_fell"], "text": ""},
+	{"level": "winterfell_yard_fall", "flags": [], "text": "Take the lances out through the south gate"},
+	{"level": "winterfell_godswood", "flags": ["act1_aftermath"], "text": "The heart tree is north"},
+]
 
 var _player: CombatActor = null
 var _detection: Detection = null
@@ -18,12 +45,26 @@ func _ready() -> void:
 	QuestSystem.objective_completed.connect(_refresh_objective)
 	QuestSystem.quest_started.connect(_refresh_objective.bind(""))
 	SceneDirector.level_changed.connect(_on_level_changed)
+	GameManager.flag_changed.connect(func(_f: String, _v: bool) -> void: _refresh_hint())
+	DialogueSystem.dialogue_started.connect(func(_a: String, _s: String) -> void: _refresh_hint())
+	DialogueSystem.dialogue_ended.connect(func(_a: String, _s: String) -> void: _refresh_hint())
 	_on_pov_changed(GameManager.current_pov)
 
 
 func _on_level_changed(_level_id: String) -> void:
 	_bind_player()
 	_refresh_objective("", "")
+	_refresh_hint()
+
+
+func _refresh_hint() -> void:
+	hint_label.text = ""
+	if DialogueSystem.is_running:
+		return
+	for hint in HINTS:
+		if hint["level"] == SceneDirector.current_level and GameManager.check_flags(hint["flags"]):
+			hint_label.text = String(hint["text"])
+			return
 
 
 func _bind_player() -> void:

@@ -1,0 +1,622 @@
+[gd_scene load_steps=33 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilesets/wolfswood_holdfast_ground.png" id="1_ground"]
+[ext_resource type="PackedScene" path="res://scenes/actors/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/NPC.tscn" id="3_npc"]
+[ext_resource type="Script" path="res://scripts/world/exit_zone.gd" id="4_exit"]
+[ext_resource type="Script" path="res://scripts/life/drifting_layer.gd" id="5_drift"]
+[ext_resource type="Texture2D" path="res://assets/fx/snow_far.png" id="6_snow_far"]
+[ext_resource type="Texture2D" path="res://assets/fx/snow_near.png" id="7_snow_near"]
+[ext_resource type="Texture2D" path="res://assets/fx/cloud_shadows.png" id="8_clouds"]
+[ext_resource type="Script" path="res://scripts/life/bird_flyover.gd" id="10_birds"]
+[ext_resource type="SpriteFrames" path="res://assets/life/bird.tres" id="11_bird"]
+[ext_resource type="Script" path="res://scripts/world/interact_point.gd" id="12_interact"]
+[ext_resource type="Script" path="res://scripts/world/scene_trigger.gd" id="13_trigger"]
+[ext_resource type="Script" path="res://scripts/world/camera_limits.gd" id="14_camera"]
+[ext_resource type="Script" path="res://scripts/world/flag_visibility.gd" id="15_flagvis"]
+[ext_resource type="PackedScene" path="res://scenes/props/boulder.tscn" id="prop_boulder"]
+[ext_resource type="PackedScene" path="res://scenes/props/holdfast.tscn" id="prop_holdfast"]
+[ext_resource type="PackedScene" path="res://scenes/life/crow.tscn" id="prop_life_crow"]
+[ext_resource type="PackedScene" path="res://scenes/life/gared.tscn" id="prop_life_gared"]
+[ext_resource type="PackedScene" path="res://scenes/life/guard_idle.tscn" id="prop_life_guard_idle"]
+[ext_resource type="PackedScene" path="res://scenes/life/hare.tscn" id="prop_life_hare"]
+[ext_resource type="PackedScene" path="res://scenes/life/horse.tscn" id="prop_life_horse"]
+[ext_resource type="PackedScene" path="res://scenes/life/stag.tscn" id="prop_life_stag"]
+[ext_resource type="PackedScene" path="res://scenes/props/log.tscn" id="prop_log"]
+[ext_resource type="PackedScene" path="res://scenes/props/rock_pile.tscn" id="prop_rock_pile"]
+[ext_resource type="PackedScene" path="res://scenes/props/sticks.tscn" id="prop_sticks"]
+[ext_resource type="PackedScene" path="res://scenes/props/stump.tscn" id="prop_stump"]
+[ext_resource type="PackedScene" path="res://scenes/props/tree_oak_snow.tscn" id="prop_tree_oak_snow"]
+[ext_resource type="PackedScene" path="res://scenes/props/tree_pine_snow.tscn" id="prop_tree_pine_snow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(1400, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(24, 900)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(24, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_place"]
+size = Vector2(64, 48)
+
+[node name="WolfswoodHoldfast" type="Node2D"]
+
+[node name="ColdLight" type="CanvasModulate" parent="."]
+color = Color(0.86, 0.9, 1, 1)
+
+[node name="Ground" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ground")
+
+[node name="CloudShadows" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.6)
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("8_clouds")
+region_enabled = true
+region_rect = Rect2(0, 0, 2400, 1700)
+script = ExtResource("5_drift")
+drift = Vector2(-12, -4)
+
+[node name="BirdFlyover" type="Node2D" parent="."]
+script = ExtResource("10_birds")
+bird_frames = ExtResource("11_bird")
+
+[node name="CameraLimits" type="Node2D" parent="."]
+script = ExtResource("14_camera")
+rect = Rect2(-704, -470, 1408, 930)
+
+[node name="Intro" type="Node" parent="."]
+script = ExtResource("13_trigger")
+scene_id = "s1_03_the_deserter"
+node = "n1"
+requires_flags = Array[String](["act1_winterfell_prepared", "!act1_briefed_by_hune"])
+
+[node name="GaredGone" type="Node" parent="."]
+script = ExtResource("15_flagvis")
+target = NodePath("../Actors/prop_001_life_gared")
+flag = "act1_deserter_executed"
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="WallNorth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0, -380)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallNorth"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WallSouth" type="StaticBody2D" parent="Bounds"]
+position = Vector2(0, 410)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallSouth"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WallWest" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-650, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallWest"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="WallEast" type="StaticBody2D" parent="Bounds"]
+position = Vector2(650, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/WallEast"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="treeline" type="Marker2D" parent="Markers"]
+position = Vector2(-470, 280)
+
+[node name="ExitEast" type="Area2D" parent="."]
+position = Vector2(610, -48)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_exit")
+target_level = "kingsroad_north"
+target_spawn = "bridge"
+requires_flags = Array[String](["act1_deserter_executed"])
+unbuilt_card = "On the road home, the column stops for something dead in the snow.
+
+End of the third scene - the kingsroad is still being built."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitEast"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="RingPlace" type="Node2D" parent="."]
+position = Vector2(-190, -10)
+script = ExtResource("12_interact")
+scene_id = "s1_03_the_deserter"
+node = "n50"
+requires_flags = Array[String](["act1_ring_formed"])
+done_flag = "act1_deserter_executed"
+not_yet_node = "n55"
+focus = NodePath("../Actors/Bran")
+
+[node name="Area2D" type="Area2D" parent="RingPlace"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RingPlace/Area2D"]
+shape = SubResource("RectangleShape2D_place")
+
+[node name="Snow" type="Node2D" parent="."]
+z_index = 60
+
+[node name="SnowFar" type="Sprite2D" parent="Snow"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("6_snow_far")
+region_enabled = true
+region_rect = Rect2(0, 0, 2400, 1700)
+script = ExtResource("5_drift")
+drift = Vector2(4, -20)
+
+[node name="SnowNear" type="Sprite2D" parent="Snow"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("7_snow_near")
+region_enabled = true
+region_rect = Rect2(0, 0, 2400, 1700)
+script = ExtResource("5_drift")
+drift = Vector2(-7, -34)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("2_player")]
+position = Vector2(-470, 280)
+
+[node name="Hune" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(-420, 250)
+npc_id = "hune"
+
+[node name="Eddard" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(0, -104)
+npc_id = "eddard_stark"
+
+[node name="Bran" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(64, -118)
+npc_id = "bran_stark"
+
+[node name="Robb" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(110, -122)
+npc_id = "robb_stark"
+dialogue_rules = Array[Dictionary]([{
+"requires_flags": ["!act1_talked_to_robb"],
+"scene_id": "s1_03_the_deserter",
+"node": "n30"
+}])
+
+[node name="Theon" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(180, -96)
+npc_id = "theon_greyjoy"
+dialogue_rules = Array[Dictionary]([{
+"requires_flags": ["!act1_talked_to_theon"],
+"scene_id": "s1_03_the_deserter",
+"node": "n20"
+}])
+
+[node name="Jory" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(-120, -104)
+npc_id = "jory_cassel"
+dialogue_rules = Array[Dictionary]([{
+"requires_flags": ["!act1_talked_to_jory"],
+"scene_id": "s1_03_the_deserter",
+"node": "n10"
+}])
+
+[node name="Cley" parent="Actors" instance=ExtResource("3_npc")]
+position = Vector2(-250, 30)
+npc_id = "cley"
+dialogue_rules = Array[Dictionary]([{
+"requires_flags": ["!act1_deserter_cley"],
+"scene_id": "s1_03_the_deserter",
+"node": "n40"
+}])
+
+[node name="prop_000_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(0, -58)
+
+[node name="prop_001_life_gared" parent="Actors" instance=ExtResource("prop_life_gared")]
+position = Vector2(0, -40)
+
+[node name="prop_002_holdfast" parent="Actors" instance=ExtResource("prop_holdfast")]
+position = Vector2(250, -250)
+
+[node name="prop_003_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(320, -214)
+
+[node name="prop_004_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(180, -210)
+
+[node name="prop_005_life_horse" parent="Actors" instance=ExtResource("prop_life_horse")]
+position = Vector2(-188, -101)
+modulate = Color(1, 1, 1, 1)
+
+[node name="prop_006_life_horse" parent="Actors" instance=ExtResource("prop_life_horse")]
+position = Vector2(-141, -145)
+modulate = Color(0.55, 0.5, 0.48, 1)
+
+[node name="prop_007_life_horse" parent="Actors" instance=ExtResource("prop_life_horse")]
+position = Vector2(-68, -173)
+modulate = Color(1.1, 1.05, 1, 1)
+
+[node name="prop_008_life_horse" parent="Actors" instance=ExtResource("prop_life_horse")]
+position = Vector2(68, -173)
+modulate = Color(0.4, 0.36, 0.34, 1)
+
+[node name="prop_009_life_horse" parent="Actors" instance=ExtResource("prop_life_horse")]
+position = Vector2(141, -145)
+modulate = Color(0.85, 0.8, 0.75, 1)
+
+[node name="prop_010_life_horse" parent="Actors" instance=ExtResource("prop_life_horse")]
+position = Vector2(188, -101)
+modulate = Color(1, 0.95, 0.9, 1)
+
+[node name="prop_011_life_guard_idle" parent="Actors" instance=ExtResource("prop_life_guard_idle")]
+position = Vector2(-150, -150)
+
+[node name="prop_012_life_guard_idle" parent="Actors" instance=ExtResource("prop_life_guard_idle")]
+position = Vector2(150, -150)
+
+[node name="prop_013_life_guard_idle" parent="Actors" instance=ExtResource("prop_life_guard_idle")]
+position = Vector2(-236, -60)
+
+[node name="prop_014_life_guard_idle" parent="Actors" instance=ExtResource("prop_life_guard_idle")]
+position = Vector2(236, -60)
+
+[node name="prop_015_life_crow" parent="Actors" instance=ExtResource("prop_life_crow")]
+position = Vector2(60, 60)
+
+[node name="prop_016_life_crow" parent="Actors" instance=ExtResource("prop_life_crow")]
+position = Vector2(-340, -200)
+
+[node name="prop_017_life_stag" parent="Actors" instance=ExtResource("prop_life_stag")]
+position = Vector2(560, 260)
+
+[node name="prop_018_life_hare" parent="Actors" instance=ExtResource("prop_life_hare")]
+position = Vector2(-560, -120)
+
+[node name="prop_019_life_hare" parent="Actors" instance=ExtResource("prop_life_hare")]
+position = Vector2(420, 330)
+
+[node name="prop_020_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-258, -439)
+
+[node name="prop_021_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-450, -42)
+
+[node name="prop_022_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(490, 360)
+
+[node name="prop_023_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(439, -240)
+
+[node name="prop_024_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-106, 472)
+
+[node name="prop_025_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-452, -282)
+
+[node name="prop_026_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-531, -257)
+
+[node name="prop_027_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(587, 420)
+
+[node name="prop_028_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-408, 508)
+
+[node name="prop_029_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-440, -417)
+
+[node name="prop_030_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-662, 90)
+
+[node name="prop_031_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(137, -452)
+
+[node name="prop_032_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(78, -370)
+
+[node name="prop_033_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(218, 469)
+
+[node name="prop_034_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-395, 418)
+
+[node name="prop_035_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(637, 261)
+
+[node name="prop_036_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-432, -115)
+
+[node name="prop_037_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(45, 464)
+
+[node name="prop_038_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-349, -290)
+
+[node name="prop_039_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-293, 465)
+
+[node name="prop_040_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(314, -290)
+
+[node name="prop_041_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-512, -358)
+
+[node name="prop_042_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-263, -213)
+
+[node name="prop_043_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-361, 335)
+
+[node name="prop_044_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(385, -341)
+
+[node name="prop_045_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(543, -172)
+
+[node name="prop_046_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-587, 101)
+
+[node name="prop_047_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-542, 157)
+
+[node name="prop_048_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-699, 453)
+
+[node name="prop_049_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-580, -52)
+
+[node name="prop_050_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(409, 418)
+
+[node name="prop_051_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(485, -320)
+
+[node name="prop_052_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(186, -382)
+
+[node name="prop_053_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(273, -445)
+
+[node name="prop_054_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-127, -261)
+
+[node name="prop_055_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(331, 504)
+
+[node name="prop_056_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(38, 257)
+
+[node name="prop_057_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-678, -69)
+
+[node name="prop_058_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(665, -287)
+
+[node name="prop_059_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(245, 350)
+
+[node name="prop_060_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(696, 44)
+
+[node name="prop_061_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-717, -204)
+
+[node name="prop_062_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-695, 316)
+
+[node name="prop_063_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-706, -287)
+
+[node name="prop_064_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(701, 164)
+
+[node name="prop_065_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(676, 462)
+
+[node name="prop_066_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-691, -417)
+
+[node name="prop_067_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(492, -105)
+
+[node name="prop_068_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(-208, -258)
+
+[node name="prop_069_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(694, 334)
+
+[node name="prop_070_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(588, -108)
+
+[node name="prop_071_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-49, 237)
+
+[node name="prop_072_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-64, -350)
+
+[node name="prop_073_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(479, 47)
+
+[node name="prop_074_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(329, 90)
+
+[node name="prop_075_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(399, 130)
+
+[node name="prop_076_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(684, -464)
+
+[node name="prop_077_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-53, -470)
+
+[node name="prop_078_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-217, 331)
+
+[node name="prop_079_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(562, -259)
+
+[node name="prop_080_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-650, 5)
+
+[node name="prop_081_tree_oak_snow" parent="Actors" instance=ExtResource("prop_tree_oak_snow")]
+position = Vector2(191, 244)
+
+[node name="prop_082_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-186, 239)
+
+[node name="prop_083_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-606, -318)
+
+[node name="prop_084_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(-566, 234)
+
+[node name="prop_085_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(311, 413)
+
+[node name="prop_086_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(592, -378)
+
+[node name="prop_087_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(537, 488)
+
+[node name="prop_088_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(509, -391)
+
+[node name="prop_089_tree_pine_snow" parent="Actors" instance=ExtResource("prop_tree_pine_snow")]
+position = Vector2(252, 194)
+
+[node name="prop_090_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(73, -285)
+
+[node name="prop_091_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(213, -321)
+
+[node name="prop_092_log" parent="Actors" instance=ExtResource("prop_log")]
+position = Vector2(345, -45)
+
+[node name="prop_093_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(357, 440)
+
+[node name="prop_094_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-182, 284)
+
+[node name="prop_095_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(484, 317)
+
+[node name="prop_096_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-358, 249)
+
+[node name="prop_097_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(75, -213)
+
+[node name="prop_098_log" parent="Actors" instance=ExtResource("prop_log")]
+position = Vector2(-57, 308)
+
+[node name="prop_099_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-227, 459)
+
+[node name="prop_100_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-536, 417)
+
+[node name="prop_101_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(444, 86)
+
+[node name="prop_102_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(103, 308)
+
+[node name="prop_103_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-523, 317)
+
+[node name="prop_104_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(-149, 231)
+
+[node name="prop_105_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(273, -59)
+
+[node name="prop_106_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-464, 233)
+
+[node name="prop_107_log" parent="Actors" instance=ExtResource("prop_log")]
+position = Vector2(-463, -378)
+
+[node name="prop_108_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(-565, -389)
+
+[node name="prop_109_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(240, 31)
+
+[node name="prop_110_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(-490, 5)
+
+[node name="prop_111_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(-287, -330)
+
+[node name="prop_112_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(-324, 371)
+
+[node name="prop_113_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(-146, 374)
+
+[node name="prop_114_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(-429, -245)
+
+[node name="prop_115_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(-228, 250)
+
+[node name="prop_116_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(-119, -402)
+
+[node name="prop_117_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(-191, -438)
+
+[node name="prop_118_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(286, 264)
+
+[node name="prop_119_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(-82, 175)
+
+[node name="prop_120_stump" parent="Actors" instance=ExtResource("prop_stump")]
+position = Vector2(-637, -285)
+
+[node name="prop_121_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(-102, -202)
+
+[node name="prop_122_log" parent="Actors" instance=ExtResource("prop_log")]
+position = Vector2(-119, 138)
+
+[node name="prop_123_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(386, -112)
+
+[node name="prop_124_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(-528, 214)
+
+[node name="prop_125_sticks" parent="Actors" instance=ExtResource("prop_sticks")]
+position = Vector2(554, -333)
+
+[node name="prop_126_log" parent="Actors" instance=ExtResource("prop_log")]
+position = Vector2(-267, 214)
+
+[node name="prop_127_log" parent="Actors" instance=ExtResource("prop_log")]
+position = Vector2(-586, 278)
+
+[node name="prop_128_boulder" parent="Actors" instance=ExtResource("prop_boulder")]
+position = Vector2(-392, 357)
+
+[node name="prop_129_rock_pile" parent="Actors" instance=ExtResource("prop_rock_pile")]
+position = Vector2(-270, 410)

@@ -16,8 +16,8 @@ var current_level: String = ""
 var current_spawn: String = ""
 var is_transitioning: bool = false
 
-var world_root: Node2D = null            ## set by Main on _ready
-var transition_layer: CanvasLayer = null ## set by Main on _ready
+var world_root: Node2D = null          ## set by Main on _ready
+var transition_layer: ColorRect = null ## the fade ColorRect, set by Main on _ready
 
 
 func goto_level(level_id: String, spawn: String = "") -> void:
@@ -47,6 +47,7 @@ func goto_level(level_id: String, spawn: String = "") -> void:
 	_place_player(level, spawn)
 
 	level_changed.emit(level_id)
+	_play_level_music(level_id)
 	await _fade_in()
 	is_transitioning = false
 	transition_finished.emit()
@@ -82,7 +83,26 @@ func begin_act(act_id: String) -> void:
 		return
 	var first: Dictionary = scenes[0]
 	await goto_level(String(first.get("level", "")), String(first.get("spawn", "")))
-	DialogueSystem.start_scene(act_id, String(first["scene_id"]))
+	# A scene with "autostart": false is played, not watched: its dialogue is
+	# started by the level (an NPC's dialogue_rules, a trigger) once the player
+	# has done what it asks. Act 1's opening drill works this way.
+	if bool(first.get("autostart", true)):
+		DialogueSystem.start_scene(act_id, String(first["scene_id"]))
+
+
+## The music bed of the scene now playing out on this level: the latest scene in the
+## act that takes place here and whose requires_flags are met (the castle yard is
+## scene 2's before the pups are found and scene 5's after). Dialogue nodes can
+## override it with their own "music" key - see DialogueSystem._goto().
+func _play_level_music(level_id: String) -> void:
+	if GameManager.current_act == "":
+		return
+	var track := ""
+	for scene in DialogueSystem.get_act(GameManager.current_act).get("scenes", []):
+		if scene.get("level") == level_id and GameManager.check_flags(scene.get("requires_flags", [])):
+			track = String(scene.get("music", ""))
+	if track != "":
+		AudioManager.play_music(track)
 
 
 ## Enters a scene's graph part-way, for trigger volumes and the wave director.

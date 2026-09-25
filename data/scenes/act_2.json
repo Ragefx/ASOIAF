@@ -694,7 +694,7 @@
           },
           "n21": {
             "speaker": "narrator",
-            "text": "At the door you stop. You are eighteen years old and you have been careful your entire life and you are so extremely tired of it.",
+            "text": "At the door you stop. You are twenty years old and you have been careful your entire life and you are so extremely tired of it.",
             "direction": "Second chance. The refusal path loops back once. If refused again the flag is unset and Act 4's interrogation scene is a different, colder version.",
             "choices": [
               {
