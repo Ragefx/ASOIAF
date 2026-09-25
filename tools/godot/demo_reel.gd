@@ -94,7 +94,7 @@ func _run() -> void:
 	await _read_all(99, 1.8)
 	await _walk_to(Vector2(40, -200), 5.0, true)
 	await _walk_to(Vector2(-85, -300), 4.0, true)
-	await _walk_dir("move_up", 1.5)
+	await _walk_to(Vector2(-85, -428), 4.0, true)   # into the exit at the head of the road
 	await _until_level("winterfell_yard_arrival")
 
 	# 5-6. The King Comes North, Torchlight (scripted) ------------------------------
@@ -295,9 +295,11 @@ func _play_scripted(level: String, hold := READ_AFTER) -> void:
 
 
 func _until_level(level: String) -> void:
-	for i in 400:
+	for i in 1200:
 		if SD.current_level == level and not SD.is_transitioning:
 			break
+		if i == 1199:
+			print("DEMO stuck waiting for ", level, " in ", SD.current_level)
 		if DS.is_running:
 			await _read_line(QUICK_AFTER)
 		await _wait(0.1)
