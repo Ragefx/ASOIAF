@@ -139,6 +139,10 @@ Scenes 5 to 12 finish the act:
 - **Aftermath** - the godswood and the heart tree.
 - **The Departure** and **Winter Is Coming** - the trunk, the column leaving, the wall.
 
+**Walking the whole castle** (the new one-world build, `docs/WORLD_DESIGN.md`): run
+`godot --path . -- --world=winterfell` to walk all of Winterfell outside the story. Buildings
+are grey placeholders until the Winterfell art kit is approved (`docs/ART_KIT_WINTERFELL.md`).
+
 The later levels are generated from data: `tools/build_act1_levels.py` (people, scripted
 beats as `scripts/world/sequence.gd` steps) plus `tools/build_props.py place <level>`.
 

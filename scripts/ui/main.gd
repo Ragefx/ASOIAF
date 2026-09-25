@@ -24,6 +24,14 @@ func _ready() -> void:
 	get_tree().root.size_changed.connect(_fit_view)
 	_fit_view()
 
+	# `-- --world=winterfell` opens a world site to walk freely, outside the story
+	# (docs/WORLD_DESIGN.md milestone 1); nothing is saved from it.
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--world="):
+			SaveSystem.autosave_enabled = false
+			GameManager.current_pov = "torren"
+			SceneDirector.goto_level(arg.trim_prefix("--world="), "main_gate")
+			return
 	# Continue from the autosave if there is one, otherwise open Chapter 1.
 	if SaveSystem.has_save(SaveSystem.AUTOSAVE_SLOT):
 		SaveSystem.load_game(SaveSystem.AUTOSAVE_SLOT)

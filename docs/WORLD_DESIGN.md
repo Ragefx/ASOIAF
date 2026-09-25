@@ -13,6 +13,7 @@ flags and scripted beats carry over; where they happen changes.
 | 2 | How much world? | **All of Westeros**, from the Wall down to Dorne. Essos and beyond the Wall come later. |
 | 3 | Art approval | **Kits are approved as kits.** A building kit, a tileset or a crowd of background people is approved once and reused everywhere. Named characters are still approved one by one. |
 | 4 | Distances | **Shortened, not 1:1**, but with a lot of space left between places for optional fights, side quests and discoveries. |
+| 5 | Winterfell layout | **Approved** as drawn in `docs/world/winterfell_layout.png` (data: `data/world/sites/winterfell.json`). |
 
 Earlier decisions that still stand: people are true to size (§2), and canon is fixed while the
 player's relationship to it is not (README, Design Principles).
@@ -167,11 +168,27 @@ Crownlands, then the rest.
 - **Tests**: the Act 1 playtest keeps passing as each scene moves into the world; the world gets
   its own tests (streaming, stamping, state rules) in `tools/godot/`.
 
+### How the pieces work now
+
+- `tools/build_world_tilesets.py` turns each 32 px corner-match ground set into a streaming
+  tileset (`assets/tilesets/world/`), with a plain full tile and eight turns of each uniform tile.
+- `scripts/world/world_ground.gd` streams the ground in 1024 px chunks around the camera from a
+  material map (one pixel per grid vertex), in as many tileset layers as the area needs.
+- `tools/build_site.py <site>` builds a site's scene and material map from its approved layout.
+  Buildings without art are `scripts/world/blockout.gd` massings at their true footprint and
+  height, until their kit replaces them.
+- Walk a site outside the story: `godot --path . -- --world=winterfell` (nothing is saved).
+- Tests: `tools/godot/test_world_state.gd` (the story's access rules) and
+  `tools/godot/test_world_site.gd` (walks the castle's routes, checks the streaming);
+  `tools/godot/world_shots.gd` writes review screenshots to `docs/world/shots/`.
+
 ## 8. Build order
 
 Each milestone is playable on its own, and each one is shown before the next starts.
 
-1. **Winterfell, whole** - one walkable castle: both walls and the moat, the yards, the Great Keep,
+1. **Winterfell, whole** *(layout approved 2026-09-25; the castle is walkable as grey placeholder
+   buildings, `scenes/world/winterfell.tscn`, and the art kit waits for approval in
+   `docs/ART_KIT_WINTERFELL.md`)* - one walkable castle: both walls and the moat, the yards, the Great Keep,
    the Great Hall, the Broken Tower, the First Keep, the godswood, the kennels, the forge, the
    stables, the crypts. Populated, with day and night. Act 1 moved into it and still passing its
    playtest. Starts with a layout for approval (`docs/world/winterfell_layout.png`).

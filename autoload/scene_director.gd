@@ -95,6 +95,8 @@ func begin_act(act_id: String) -> void:
 ## scene 2's before the pups are found and scene 5's after). Dialogue nodes can
 ## override it with their own "music" key - see DialogueSystem._goto().
 func _play_level_music(level_id: String) -> void:
+	if GameManager.current_act == "":
+		return
 	var track := ""
 	for scene in DialogueSystem.get_act(GameManager.current_act).get("scenes", []):
 		if scene.get("level") == level_id and GameManager.check_flags(scene.get("requires_flags", [])):
