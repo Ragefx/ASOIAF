@@ -100,6 +100,7 @@ Registered in `project.godot` in this order — later ones may depend on earlier
 | 4 | `QuestSystem` | `autoload/quest_system.gd` | Objectives, completion, journal |
 | 5 | `SceneDirector` | `autoload/scene_director.gd` | Level transitions, act boundaries, cutscene sequencing |
 | 6 | `AudioManager` | `autoload/audio_manager.gd` | Music beds, crossfades, SFX pool |
+| 7 | `WorldState` | `autoload/world_state.gd` | Story-driven state of every region and place (open, guarded, closed, contested, sealed), derived from flags; see `docs/WORLD_DESIGN.md` §3 |
 
 ### 4.1 GameManager
 

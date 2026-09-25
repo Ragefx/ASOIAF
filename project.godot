@@ -19,6 +19,7 @@ DialogueSystem="*res://autoload/dialogue_system.gd"
 QuestSystem="*res://autoload/quest_system.gd"
 SceneDirector="*res://autoload/scene_director.gd"
 AudioManager="*res://autoload/audio_manager.gd"
+WorldState="*res://autoload/world_state.gd"
 
 [display]
 

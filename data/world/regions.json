@@ -1,0 +1,110 @@
+{
+  "about": "Story-driven state of every region, site and road in Westeros. See docs/WORLD_DESIGN.md section 3. A phase is reached when any of its flags is set; each place takes the state of the latest phase it names that has been reached, or 'open' before any.",
+  "states": ["open", "guarded", "closed", "contested", "sealed"],
+  "phases": [
+    {"id": "hand_dies",       "month": 1, "flags": ["act1_started"]},
+    {"id": "king_north",      "month": 2, "flags": ["act1_king_arrived"]},
+    {"id": "court_south",     "month": 3, "flags": ["act1_complete", "act2_arrived"]},
+    {"id": "tourney",         "month": 4, "flags": ["act2_tourney"]},
+    {"id": "tyrion_taken",    "month": 5, "flags": ["act2_heard_jory_died"]},
+    {"id": "robert_dead",     "month": 5, "flags": ["act2_robert_died", "act2_complete"]},
+    {"id": "ned_arrested",    "month": 6, "flags": ["act3_heard_of_arrest", "act4_ned_arrested"]},
+    {"id": "banners_called",  "month": 6, "flags": ["act3_banners_called"]},
+    {"id": "host_marches",    "month": 6, "flags": ["act3_moat_cailin"]},
+    {"id": "ned_executed",    "month": 7, "flags": ["act4_ned_executed", "act5_ned_news_arrived"]},
+    {"id": "king_in_north",   "month": 7, "flags": ["act5_robb_crowned"]}
+  ],
+  "regions": [
+    {
+      "id": "beyond_wall", "name": "Beyond the Wall", "later": true,
+      "states": [{"from": "hand_dies", "state": "sealed", "why": "The Night's Watch lets no one north of the Wall."}],
+      "sites": []
+    },
+    {
+      "id": "the_gift", "name": "The Wall and the Gift", "seat": "Castle Black",
+      "states": [],
+      "sites": ["castle_black", "moles_town", "eastwatch", "shadow_tower", "the_wall"]
+    },
+    {
+      "id": "the_north", "name": "The North", "seat": "Winterfell",
+      "states": [
+        {"from": "king_north", "state": "open", "why": "The king's column fills the roads north."},
+        {"from": "banners_called", "state": "guarded", "why": "The North is mustering; every road has its bannermen."}
+      ],
+      "sites": ["winterfell", "winter_town", "wolfswood", "barrow_of_the_first_king", "barrowton",
+                "white_harbor", "deepwood_motte", "last_hearth", "karhold", "the_dreadfort",
+                "torrhens_square", "bear_island", "greywater_watch", "moat_cailin", "blackpool"]
+    },
+    {
+      "id": "iron_islands", "name": "The Iron Islands", "seat": "Pyke",
+      "states": [],
+      "sites": ["pyke", "lordsport", "great_wyk", "old_wyk"]
+    },
+    {
+      "id": "the_vale", "name": "The Vale of Arryn", "seat": "The Eyrie",
+      "states": [
+        {"from": "hand_dies", "state": "guarded", "why": "Lysa has fled home; the Vale watches the high road."},
+        {"from": "tyrion_taken", "state": "sealed", "why": "The Bloody Gate is shut; the Vale takes no side and no visitors."}
+      ],
+      "sites": ["the_eyrie", "bloody_gate", "gulltown", "runestone", "high_road", "mountains_of_the_moon"]
+    },
+    {
+      "id": "riverlands", "name": "The Riverlands", "seat": "Riverrun",
+      "states": [
+        {"from": "tyrion_taken", "state": "contested", "why": "Lannister raiders burn the riverlands after Catelyn takes Tyrion."}
+      ],
+      "sites": ["riverrun", "the_twins", "harrenhal", "inn_at_the_crossroads", "darry",
+                "stone_mill", "whispering_wood", "the_trident", "seagard", "raventree_hall"]
+    },
+    {
+      "id": "westerlands", "name": "The Westerlands", "seat": "Casterly Rock",
+      "states": [
+        {"from": "tyrion_taken", "state": "guarded", "why": "Tywin calls his banners."},
+        {"from": "banners_called", "state": "closed", "why": "The west is at war with the North."}
+      ],
+      "sites": ["casterly_rock", "lannisport", "the_golden_tooth", "ashemark", "the_crag"]
+    },
+    {
+      "id": "crownlands", "name": "The Crownlands", "seat": "King's Landing",
+      "states": [
+        {"from": "robert_dead", "state": "guarded", "why": "The king is dead; the gold cloaks watch the gates."}
+      ],
+      "sites": ["kings_landing", "duskendale", "rosby", "dragonstone", "kingswood"]
+    },
+    {
+      "id": "the_reach", "name": "The Reach", "seat": "Highgarden",
+      "states": [],
+      "sites": ["highgarden", "oldtown", "bitterbridge", "horn_hill", "the_arbor"]
+    },
+    {
+      "id": "stormlands", "name": "The Stormlands", "seat": "Storm's End",
+      "states": [
+        {"from": "ned_executed", "state": "guarded", "why": "Renly's claim; the stormlords are gathering."}
+      ],
+      "sites": ["storms_end", "tarth", "griffins_roost", "bronzegate", "rainwood"]
+    },
+    {
+      "id": "dorne", "name": "Dorne", "seat": "Sunspear",
+      "states": [],
+      "sites": ["sunspear", "the_water_gardens", "starfall", "the_boneway", "the_princes_pass", "yronwood"]
+    }
+  ],
+  "places": [
+    {"id": "kings_landing", "states": [
+      {"from": "robert_dead", "state": "guarded", "why": "Gold cloaks question everyone at the gates."},
+      {"from": "ned_arrested", "state": "closed", "why": "The gates are shut while the Stark household is hunted."}
+    ]},
+    {"id": "moat_cailin", "states": [
+      {"from": "host_marches", "state": "sealed", "why": "The northern host holds the causeway; nobody else passes."}
+    ]},
+    {"id": "the_twins", "states": [
+      {"from": "host_marches", "state": "guarded", "why": "Walder Frey is bargaining for his crossing."}
+    ]},
+    {"id": "riverrun", "states": [
+      {"from": "ned_arrested", "state": "contested", "why": "Jaime's host lays siege to Riverrun."}
+    ]},
+    {"id": "castle_black", "states": [
+      {"from": "hand_dies", "state": "guarded", "why": "The Watch takes in men, not visitors."}
+    ]}
+  ]
+}

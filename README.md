@@ -54,19 +54,22 @@ See [`docs/CHAPTER1_PERSPECTIVE_MAP.md`](docs/CHAPTER1_PERSPECTIVE_MAP.md).
 2. **Canon is fixed; the player's relationship to it is not.** Choices move personality traits and
    NPC relationships. They never change what happens to Ned Stark.
 3. **Original dialogue.** Written in the characters' voices. No verbatim book quotes.
-4. **Scope discipline.** Three location clusters in Chapter 1. No Essos, no Wall, no Riverlands
-   interior beyond the marching camp.
+4. **One world, not a chain of levels.** The whole of Westeros, from the Wall to Dorne, is one
+   continuous world to walk through; the story happens inside it, and the story decides where you
+   can go (a shut city is shut to you too). Essos comes later. See
+   [`docs/WORLD_DESIGN.md`](docs/WORLD_DESIGN.md).
 
 ## Repository Layout
 
 ```
 project.godot            Godot 4.x project file
-autoload/                Singletons: GameManager, DialogueSystem, QuestSystem, SaveSystem, SceneDirector
+autoload/                Singletons: GameManager, DialogueSystem, QuestSystem, SaveSystem, SceneDirector, WorldState
 scripts/                 Gameplay code (actors, combat, systems, UI)
 scenes/                  Godot .tscn scenes
 data/scenes/             Act scene files — dialogue, stage directions, choices, flags (JSON)
 data/npcs/               NPC + protagonist definitions
 data/quests/             Quest and objective definitions
+data/world/              Regions, story-driven access rules, site layouts
 docs/                    Design documentation (start here)
 tools/                   Validation scripts
 ```
@@ -75,6 +78,7 @@ tools/                   Validation scripts
 
 | Document | What it is |
 |---|---|
+| [`docs/WORLD_DESIGN.md`](docs/WORLD_DESIGN.md) | The one-world plan: scale, story-driven access, kits, build order |
 | [`docs/TECHNICAL_DESIGN.md`](docs/TECHNICAL_DESIGN.md) | Godot architecture, systems, data contracts |
 | [`docs/BOOK1_TIMELINE.md`](docs/BOOK1_TIMELINE.md) | Month-by-month canonical events, Spring–Autumn 298 AC |
 | [`docs/CHAPTER1_PERSPECTIVE_MAP.md`](docs/CHAPTER1_PERSPECTIVE_MAP.md) | Which protagonist witnesses what, act by act |
